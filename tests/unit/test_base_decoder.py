@@ -9,16 +9,16 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder
+from omero_marshal import get_encoder, get_decoder
 
 
-class TestBaseEncoder(object):
+class TestBaseDecoder(object):
 
-    def test_base_encoder(self, roi):
+    def test_base_decoder(self, roi):
         encoder = get_encoder(roi.__class__)()
+        decoder = get_decoder(encoder.TYPE)()
         v = encoder.encode(roi)
-        assert v == {
-            '@id': 1L,
-            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
-            'Name': 'the_name',
-        }
+        v = decoder.decode(v)
+        assert v.__class__ == roi.__class__
+        assert v.id.val == 1L
+        assert v.description.val == 'the_name'
