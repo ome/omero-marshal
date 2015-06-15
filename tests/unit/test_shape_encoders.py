@@ -14,6 +14,12 @@ from omero_marshal import get_encoder
 
 class TestShapeEncoder(object):
 
+    def assert_roi(self, roi):
+        assert roi['@id'] == 1L
+        assert roi['Name'] == 'the_name'
+        assert roi['@type'] == \
+            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
+
     def assert_shape(self, shape):
         assert shape['FillColor'] == 0xffffffff
         assert shape['FillRule'] == 'solid'
@@ -31,44 +37,50 @@ class TestShapeEncoder(object):
         assert shape['TheT'] == 2
         assert shape['TheC'] == 1
 
+    def assert_ellipse(self, ellipse):
+        self.assert_shape(ellipse)
+        assert ellipse['@id'] == 1L
+        assert ellipse['@type'] == \
+            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Ellipse'
+        assert ellipse['X'] == 1.0
+        assert ellipse['Y'] == 2.0
+        assert ellipse['RadiusX'] == 3.0
+        assert ellipse['RadiusY'] == 4.0
+
+    def assert_rectangle(self, rectangle):
+        self.assert_shape(rectangle)
+        assert rectangle['@id'] == 2L
+        assert rectangle['@type'] == \
+            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
+        assert rectangle['X'] == 1.0
+        assert rectangle['Y'] == 2.0
+        assert rectangle['Width'] == 3.0
+        assert rectangle['Height'] == 4.0
+
 
 class TestEllipseEncoder(TestShapeEncoder):
 
     def test_encoder(self, ellipse):
-        encoder = get_encoder(ellipse.__class__)()
+        encoder = get_encoder(ellipse.__class__)
         v = encoder.encode(ellipse)
-        self.assert_shape(v)
-        assert v['@id'] == 1L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Ellipse'
-        assert v['X'] == 1.0
-        assert v['Y'] == 2.0
-        assert v['RadiusX'] == 3.0
-        assert v['RadiusY'] == 4.0
+        self.assert_ellipse(v)
 
 
 class TestRectangeEncoder(TestShapeEncoder):
 
     def test_encoder(self, rectangle):
-        encoder = get_encoder(rectangle.__class__)()
+        encoder = get_encoder(rectangle.__class__)
         v = encoder.encode(rectangle)
-        self.assert_shape(v)
-        assert v['@id'] == 1L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
-        assert v['X'] == 1.0
-        assert v['Y'] == 2.0
-        assert v['Width'] == 3.0
-        assert v['Height'] == 4.0
+        self.assert_rectangle(v)
 
 
 class TestPointEncoder(TestShapeEncoder):
 
     def test_encoder(self, point):
-        encoder = get_encoder(point.__class__)()
+        encoder = get_encoder(point.__class__)
         v = encoder.encode(point)
         self.assert_shape(v)
-        assert v['@id'] == 1L
+        assert v['@id'] == 3L
         assert v['@type'] == \
             'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
         assert v['X'] == 1.0
@@ -78,10 +90,10 @@ class TestPointEncoder(TestShapeEncoder):
 class TestPolylineEncoder(TestShapeEncoder):
 
     def test_encoder(self, polyline):
-        encoder = get_encoder(polyline.__class__)()
+        encoder = get_encoder(polyline.__class__)
         v = encoder.encode(polyline)
         self.assert_shape(v)
-        assert v['@id'] == 1L
+        assert v['@id'] == 4L
         assert v['@type'] == \
             'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polyline'
         assert v['Points'] == '0,0 1,2 3,5'
@@ -90,10 +102,22 @@ class TestPolylineEncoder(TestShapeEncoder):
 class TestPolygonEncoder(TestShapeEncoder):
 
     def test_encoder(self, polygon):
-        encoder = get_encoder(polygon.__class__)()
+        encoder = get_encoder(polygon.__class__)
         v = encoder.encode(polygon)
         self.assert_shape(v)
-        assert v['@id'] == 1L
+        assert v['@id'] == 5L
         assert v['@type'] == \
             'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polygon'
         assert v['Points'] == '0,0 1,2 3,5'
+
+
+class TestRoiEncoder(TestShapeEncoder):
+
+    def test_roi_with_shapes(self, roi_with_shapes):
+        encoder = get_encoder(roi_with_shapes.__class__)
+        v = encoder.encode(roi_with_shapes)
+        self.assert_roi(v)
+        assert len(v['shapes']) == 2
+        ellipse, rectangle = v['shapes']
+        self.assert_ellipse(ellipse)
+        self.assert_rectangle(rectangle)

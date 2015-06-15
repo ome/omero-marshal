@@ -31,12 +31,26 @@ def get_decoder(t):
     return DECODERS.get(t)
 
 
+class MarshallingCtx(object):
+
+    def __init__(self, encoders, decoders):
+        self.encoders = encoders
+        self.decoders = decoders
+
+    def get_encoder(self, t):
+        return self.encoders.get(t)
+
+    def get_decoder(self, t):
+        return self.decoders.get(t)
+
+_ctx = MarshallingCtx(ENCODERS, DECODERS)
+
 packages = pkgutil.walk_packages(encoders.__path__, encoders.__name__ + '.')
 for module_loader, name, ispkg in packages:
     m = importlib.import_module(name)
     try:
         t, encoder = m.encoder
-        ENCODERS[t] = encoder
+        ENCODERS[t] = encoder(_ctx)
     except AttributeError:
         pass
 
@@ -45,6 +59,6 @@ for module_loader, name, ispkg in packages:
     m = importlib.import_module(name)
     try:
         t, decoder = m.decoder
-        DECODERS[t] = decoder
+        DECODERS[t] = decoder(_ctx)
     except AttributeError:
         pass

@@ -20,6 +20,12 @@ class RoiEncoder(Encoder):
     def encode(self, obj):
         v = super(RoiEncoder, self).encode(obj)
         self.set_if_not_none(v, 'Name', obj.description)
+        if obj.isShapesLoaded() and obj.sizeOfShapes() > 0:
+            shapes = list()
+            for shape in obj.copyShapes():
+                shape_encoder = self.ctx.get_encoder(shape.__class__)
+                shapes.append(shape_encoder.encode(shape))
+            v['shapes'] = shapes
         return v
 
 encoder = (RoiI, RoiEncoder)

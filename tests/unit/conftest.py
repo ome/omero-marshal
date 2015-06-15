@@ -23,6 +23,13 @@ def roi():
     return o
 
 
+@pytest.fixture()
+def roi_with_shapes(roi, ellipse, rectangle):
+    roi.addShape(ellipse)
+    roi.addShape(rectangle)
+    return roi
+
+
 def populate_shape(o):
     o.fillColor = rint(0xffffffff)
     o.fillRule = rstring('solid')
@@ -39,7 +46,6 @@ def populate_shape(o):
     o.theT = rint(2)
     o.theZ = rint(3)
     o.visibility = rbool(True)
-    o.id = rlong(1L)
     return o
 
 
@@ -51,6 +57,7 @@ def ellipse():
     o.cy = rdouble(2.0)
     o.rx = rdouble(3.0)
     o.ry = rdouble(4.0)
+    o.id = rlong(1L)
     return o
 
 
@@ -62,6 +69,7 @@ def rectangle():
     o.y = rdouble(2.0)
     o.width = rdouble(3.0)
     o.height = rdouble(4.0)
+    o.id = rlong(2L)
     return o
 
 
@@ -71,6 +79,7 @@ def point():
     populate_shape(o)
     o.cx = rdouble(1.0)
     o.cy = rdouble(2.0)
+    o.id = rlong(3L)
     return o
 
 
@@ -79,6 +88,7 @@ def polyline():
     o = PolylineI()
     populate_shape(o)
     o.points = rstring('0,0 1,2 3,5')
+    o.id = rlong(4L)
     return o
 
 
@@ -87,4 +97,5 @@ def polygon():
     o = PolygonI()
     populate_shape(o)
     o.points = rstring('0,0 1,2 3,5')
+    o.id = rlong(5L)
     return o

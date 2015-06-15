@@ -16,6 +16,9 @@ class Encoder(object):
 
     TYPE = ''
 
+    def __init__(self, ctx):
+        self.ctx = ctx
+
     def set_if_not_none(self, v, key, value):
         if value is not None:
             v[key] = value.getValue()

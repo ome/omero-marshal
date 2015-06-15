@@ -15,8 +15,8 @@ from omero_marshal import get_encoder, get_decoder
 class TestBaseDecoder(object):
 
     def test_base_decoder(self, roi):
-        encoder = get_encoder(roi.__class__)()
-        decoder = get_decoder(encoder.TYPE)()
+        encoder = get_encoder(roi.__class__)
+        decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(roi)
         v = decoder.decode(v)
         assert v.__class__ == roi.__class__

@@ -16,5 +16,8 @@ class Decoder(object):
 
     OMERO_CLASS = None
 
+    def __init__(self, ctx):
+        self.ctx = ctx
+
     def decode(self, data):
         return self.OMERO_CLASS(data.get('@id'))

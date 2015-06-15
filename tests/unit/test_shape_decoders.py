@@ -14,6 +14,10 @@ from omero_marshal import get_encoder, get_decoder
 
 class TestShapeDecoder(object):
 
+    def assert_roi(self, roi):
+        assert roi.id.val == 1L
+        assert roi.description.val == 'the_name'
+
     def assert_shape(self, shape):
         assert shape.fillColor.val == 0xffffffff
         assert shape.fillRule.val == 'solid'
@@ -31,46 +35,52 @@ class TestShapeDecoder(object):
         assert shape.theT.val == 2
         assert shape.theC.val == 1
 
+    def assert_ellipse(self, ellipse):
+        self.assert_shape(ellipse)
+        assert ellipse.id.val == 1L
+        assert ellipse.cx.val == 1.0
+        assert ellipse.cy.val == 2.0
+        assert ellipse.rx.val == 3.0
+        assert ellipse.ry.val == 4.0
+
+    def assert_rectangle(self, rectangle):
+        self.assert_shape(rectangle)
+        assert rectangle.id.val == 2L
+        assert rectangle.x.val == 1.0
+        assert rectangle.y.val == 2.0
+        assert rectangle.width.val == 3.0
+        assert rectangle.height.val == 4.0
+
 
 class TestEllipseDecoder(TestShapeDecoder):
 
     def test_decoder(self, ellipse):
-        encoder = get_encoder(ellipse.__class__)()
-        decoder = get_decoder(encoder.TYPE)()
+        encoder = get_encoder(ellipse.__class__)
+        decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(ellipse)
         v = decoder.decode(v)
-        self.assert_shape(v)
-        assert v.id.val == 1L
-        assert v.cx.val == 1.0
-        assert v.cy.val == 2.0
-        assert v.rx.val == 3.0
-        assert v.ry.val == 4.0
+        self.assert_ellipse(v)
 
 
 class TestRectangeDecoder(TestShapeDecoder):
 
     def test_decoder(self, rectangle):
-        encoder = get_encoder(rectangle.__class__)()
-        decoder = get_decoder(encoder.TYPE)()
+        encoder = get_encoder(rectangle.__class__)
+        decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(rectangle)
         v = decoder.decode(v)
-        self.assert_shape(v)
-        assert v.id.val == 1L
-        assert v.x.val == 1.0
-        assert v.y.val == 2.0
-        assert v.width.val == 3.0
-        assert v.height.val == 4.0
+        self.assert_rectangle(rectangle)
 
 
 class TestPointDecoder(TestShapeDecoder):
 
     def test_decoder(self, point):
-        encoder = get_encoder(point.__class__)()
-        decoder = get_decoder(encoder.TYPE)()
+        encoder = get_encoder(point.__class__)
+        decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(point)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 1L
+        assert v.id.val == 3L
         assert v.cx.val == 1.0
         assert v.cy.val == 2.0
 
@@ -78,22 +88,36 @@ class TestPointDecoder(TestShapeDecoder):
 class TestPolylineDecoder(TestShapeDecoder):
 
     def test_decoder(self, polyline):
-        encoder = get_encoder(polyline.__class__)()
-        decoder = get_decoder(encoder.TYPE)()
+        encoder = get_encoder(polyline.__class__)
+        decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(polyline)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 1L
+        assert v.id.val == 4L
         assert v.points.val == '0,0 1,2 3,5'
 
 
 class TestPolygonDecoder(TestShapeDecoder):
 
     def test_decoder(self, polygon):
-        encoder = get_encoder(polygon.__class__)()
-        decoder = get_decoder(encoder.TYPE)()
+        encoder = get_encoder(polygon.__class__)
+        decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(polygon)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 1L
+        assert v.id.val == 5L
         assert v.points.val == '0,0 1,2 3,5'
+
+
+class TestRoiDecoder(TestShapeDecoder):
+
+    def test_roi_with_shapes(self, roi_with_shapes):
+        encoder = get_encoder(roi_with_shapes.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(roi_with_shapes)
+        v = decoder.decode(v)
+        self.assert_roi(v)
+        assert v.sizeOfShapes() == 2
+        ellipse, rectangle = v.copyShapes()
+        self.assert_ellipse(ellipse)
+        self.assert_rectangle(rectangle)

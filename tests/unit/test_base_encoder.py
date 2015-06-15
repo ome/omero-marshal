@@ -15,7 +15,7 @@ from omero_marshal import get_encoder
 class TestBaseEncoder(object):
 
     def test_base_encoder(self, roi):
-        encoder = get_encoder(roi.__class__)()
+        encoder = get_encoder(roi.__class__)
         v = encoder.encode(roi)
         assert v == {
             '@id': 1L,

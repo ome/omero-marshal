@@ -23,6 +23,9 @@ class RoiDecoder(Decoder):
     def decode(self, data):
         v = super(RoiDecoder, self).decode(data)
         v.description = rtype(data.get('Name'))
+        for shape in data.get('shapes', list()):
+            shape_decoder = self.ctx.get_decoder(shape['@type'])
+            v.addShape(shape_decoder.decode(shape))
         return v
 
 decoder = (RoiDecoder.TYPE, RoiDecoder)
