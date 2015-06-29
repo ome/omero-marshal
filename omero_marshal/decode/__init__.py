@@ -22,6 +22,8 @@ class Decoder(object):
         self.ctx = ctx
 
     def to_rtype(self, v):
+        if isinstance(v, unicode):
+            v = v.encode('utf-8')
         return rtype(v)
 
     def decode(self, data):
