@@ -11,6 +11,7 @@
 
 from .shape import ShapeDecoder
 from omero.model import EllipseI
+from omero.rtypes import RDoubleI
 
 
 class EllipseDecoder(ShapeDecoder):
@@ -21,10 +22,10 @@ class EllipseDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(EllipseDecoder, self).decode(data)
-        v.cx = self.to_rtype(data.get('X'))
-        v.cy = self.to_rtype(data.get('Y'))
-        v.rx = self.to_rtype(data.get('RadiusX'))
-        v.ry = self.to_rtype(data.get('RadiusY'))
+        v.cx = RDoubleI(data.get('X'))
+        v.cy = RDoubleI(data.get('Y'))
+        v.rx = RDoubleI(data.get('RadiusX'))
+        v.ry = RDoubleI(data.get('RadiusY'))
         return v
 
 decoder = (EllipseDecoder.TYPE, EllipseDecoder)
