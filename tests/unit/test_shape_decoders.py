@@ -10,6 +10,7 @@
 #
 
 from omero_marshal import get_encoder, get_decoder
+from omero.rtypes import RDoubleI
 
 
 class TestShapeDecoder(object):
@@ -38,17 +39,25 @@ class TestShapeDecoder(object):
     def assert_ellipse(self, ellipse):
         self.assert_shape(ellipse)
         assert ellipse.id.val == 1L
+        assert ellipse.cx.__class__ is RDoubleI
         assert ellipse.cx.val == 1.0
+        assert ellipse.cy.__class__ is RDoubleI
         assert ellipse.cy.val == 2.0
+        assert ellipse.rx.__class__ is RDoubleI
         assert ellipse.rx.val == 3.0
+        assert ellipse.ry.__class__ is RDoubleI
         assert ellipse.ry.val == 4.0
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
         assert rectangle.id.val == 2L
+        assert rectangle.x.__class__ is RDoubleI
         assert rectangle.x.val == 1.0
+        assert rectangle.y.__class__ is RDoubleI
         assert rectangle.y.val == 2.0
+        assert rectangle.width.__class__ is RDoubleI
         assert rectangle.width.val == 3.0
+        assert rectangle.height.__class__ is RDoubleI
         assert rectangle.height.val == 4.0
 
 
@@ -81,7 +90,9 @@ class TestPointDecoder(TestShapeDecoder):
         v = decoder.decode(v)
         self.assert_shape(v)
         assert v.id.val == 3L
+        assert v.cx.__class__ is RDoubleI
         assert v.cx.val == 1.0
+        assert v.cy.__class__ is RDoubleI
         assert v.cy.val == 2.0
 
 
