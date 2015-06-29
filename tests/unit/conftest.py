@@ -11,8 +11,22 @@
 
 import pytest
 
-from omero.model import RoiI, EllipseI, RectI, PointI, PolylineI, PolygonI
+from omero.model import RoiI, EllipseI, RectI, PointI, PolylineI, PolygonI, \
+    ExperimenterI
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool
+
+
+@pytest.fixture()
+def experimenter():
+    o = ExperimenterI()
+    o.id = rlong(1L)
+    o.email = rstring('the_email')
+    o.firstName = rstring('the_firstName')
+    o.institution = rstring('the_institution')
+    o.lastName = rstring('the_lastName')
+    o.middleName = rstring('the_middleName')
+    o.omeName = rstring('the_omeName')
+    return o
 
 
 @pytest.fixture()

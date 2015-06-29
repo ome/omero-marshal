@@ -22,3 +22,22 @@ class TestBaseEncoder(object):
             '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
             'Name': 'the_name',
         }
+
+
+class TestExperimenterEncoder(object):
+
+    def test_encoder(self, experimenter):
+        encoder = get_encoder(experimenter.__class__)
+        v = encoder.encode(experimenter)
+        assert v == {
+            '@id': 1L,
+            '@type':
+                'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                '#Experimenter',
+            'FirstName': 'the_firstName',
+            'MiddleName': 'the_middleName',
+            'LastName': 'the_lastName',
+            'Email': 'the_email',
+            'Institution': 'the_institution',
+            'UserName': 'the_omeName'
+        }
