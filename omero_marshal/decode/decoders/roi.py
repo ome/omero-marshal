@@ -11,7 +11,6 @@
 
 from .. import Decoder
 from omero.model import RoiI
-from omero.rtypes import rtype
 
 
 class RoiDecoder(Decoder):
@@ -22,7 +21,7 @@ class RoiDecoder(Decoder):
 
     def decode(self, data):
         v = super(RoiDecoder, self).decode(data)
-        v.description = rtype(data.get('Name'))
+        v.description = self.to_rtype(data.get('Name'))
         for shape in data.get('shapes', list()):
             shape_decoder = self.ctx.get_decoder(shape['@type'])
             v.addShape(shape_decoder.decode(shape))

@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import RectI
-from omero.rtypes import rtype
 
 
 class RectDecoder(ShapeDecoder):
@@ -22,10 +21,10 @@ class RectDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(RectDecoder, self).decode(data)
-        v.x = rtype(data.get('X'))
-        v.y = rtype(data.get('Y'))
-        v.width = rtype(data.get('Width'))
-        v.height = rtype(data.get('Height'))
+        v.x = self.to_rtype(data.get('X'))
+        v.y = self.to_rtype(data.get('Y'))
+        v.width = self.to_rtype(data.get('Width'))
+        v.height = self.to_rtype(data.get('Height'))
         return v
 
 decoder = (RectDecoder.TYPE, RectDecoder)

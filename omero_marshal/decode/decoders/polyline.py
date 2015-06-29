@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import PolylineI
-from omero.rtypes import rtype
 
 
 class PolylineDecoder(ShapeDecoder):
@@ -22,7 +21,7 @@ class PolylineDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(PolylineDecoder, self).decode(data)
-        v.points = rtype(data.get('Points'))
+        v.points = self.to_rtype(data.get('Points'))
         return v
 
 decoder = (PolylineDecoder.TYPE, PolylineDecoder)

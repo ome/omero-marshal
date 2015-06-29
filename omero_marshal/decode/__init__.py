@@ -9,6 +9,8 @@
 # jason@glencoesoftware.com.
 #
 
+from omero.rtypes import rtype
+
 
 class Decoder(object):
 
@@ -18,6 +20,9 @@ class Decoder(object):
 
     def __init__(self, ctx):
         self.ctx = ctx
+
+    def to_rtype(self, v):
+        return rtype(v)
 
     def decode(self, data):
         return self.OMERO_CLASS(data.get('@id'))

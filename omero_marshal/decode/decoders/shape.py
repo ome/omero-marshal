@@ -11,7 +11,6 @@
 
 from .. import Decoder
 from omero.model import Shape
-from omero.rtypes import rtype
 
 
 class ShapeDecoder(Decoder):
@@ -22,21 +21,21 @@ class ShapeDecoder(Decoder):
 
     def decode(self, data):
         v = super(ShapeDecoder, self).decode(data)
-        v.fillColor = rtype(data.get('FillColor'))
-        v.fillRule = rtype(data.get('FillRule'))
-        v.fontFamily = rtype(data.get('FontFamily'))
-        v.fontSize = rtype(data.get('FontSize'))
-        v.fontStyle = rtype(data.get('FontStyle'))
-        v.strokeLineCap = rtype(data.get('LineCap'))
-        v.locked = rtype(data.get('Locked'))
-        v.strokeColor = rtype(data.get('StrokeColor'))
-        v.strokeDashArray = rtype(data.get('StrokeDashArray'))
-        v.strokeWidth = rtype(data.get('StrokeWidth'))
-        v.textValue = rtype(data.get('Text'))
-        v.theC = rtype(data.get('TheC'))
-        v.theT = rtype(data.get('TheT'))
-        v.theZ = rtype(data.get('TheZ'))
-        v.visibility = rtype(data.get('Visible'))
+        v.fillColor = self.to_rtype(data.get('FillColor'))
+        v.fillRule = self.to_rtype(data.get('FillRule'))
+        v.fontFamily = self.to_rtype(data.get('FontFamily'))
+        v.fontSize = self.to_rtype(data.get('FontSize'))
+        v.fontStyle = self.to_rtype(data.get('FontStyle'))
+        v.strokeLineCap = self.to_rtype(data.get('LineCap'))
+        v.locked = self.to_rtype(data.get('Locked'))
+        v.strokeColor = self.to_rtype(data.get('StrokeColor'))
+        v.strokeDashArray = self.to_rtype(data.get('StrokeDashArray'))
+        v.strokeWidth = self.to_rtype(data.get('StrokeWidth'))
+        v.textValue = self.to_rtype(data.get('Text'))
+        v.theC = self.to_rtype(data.get('TheC'))
+        v.theT = self.to_rtype(data.get('TheT'))
+        v.theZ = self.to_rtype(data.get('TheZ'))
+        v.visibility = self.to_rtype(data.get('Visible'))
         return v
 
 decoder = (ShapeDecoder.TYPE, ShapeDecoder)

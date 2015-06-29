@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import PolygonI
-from omero.rtypes import rtype
 
 
 class PolygonDecoder(ShapeDecoder):
@@ -22,7 +21,7 @@ class PolygonDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(PolygonDecoder, self).decode(data)
-        v.points = rtype(data.get('Points'))
+        v.points = self.to_rtype(data.get('Points'))
         return v
 
 decoder = (PolygonDecoder.TYPE, PolygonDecoder)

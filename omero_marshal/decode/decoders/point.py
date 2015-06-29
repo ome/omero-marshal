@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import PointI
-from omero.rtypes import rtype
 
 
 class PointDecoder(ShapeDecoder):
@@ -22,8 +21,8 @@ class PointDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(PointDecoder, self).decode(data)
-        v.cx = rtype(data.get('X'))
-        v.cy = rtype(data.get('Y'))
+        v.cx = self.to_rtype(data.get('X'))
+        v.cy = self.to_rtype(data.get('Y'))
         return v
 
 decoder = (PointDecoder.TYPE, PointDecoder)
