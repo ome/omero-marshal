@@ -12,7 +12,7 @@
 import pytest
 
 from omero.model import RoiI, EllipseI, RectI, PointI, PolylineI, PolygonI, \
-    ExperimenterI
+    ExperimenterI, ExperimenterGroupI, PermissionsI, DetailsI
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool
 
 
@@ -26,6 +26,30 @@ def experimenter():
     o.lastName = rstring('the_lastName')
     o.middleName = rstring('the_middleName')
     o.omeName = rstring('the_omeName')
+    return o
+
+
+@pytest.fixture()
+def experimenter_group():
+    o = ExperimenterGroupI()
+    o.id = rlong(1L)
+    o.name = rstring('the_name')
+    o.description = rstring('the_description')
+    return o
+
+
+@pytest.fixture()
+def permissions():
+    o = PermissionsI()
+    return o
+
+
+@pytest.fixture()
+def details():
+    o = DetailsI()
+    o.owner = experimenter()
+    o.group = experimenter_group()
+    o.permissions = permissions()
     return o
 
 

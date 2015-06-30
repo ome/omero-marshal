@@ -24,8 +24,9 @@ class Encoder(object):
             v[key] = value.getValue()
 
     def encode(self, obj):
-        obj_id = unwrap(obj.id)
         v = {'@type': self.TYPE}
-        if obj_id is not None:
-            v['@id'] = obj_id
+        if hasattr(obj, 'id'):
+            obj_id = unwrap(obj.id)
+            if obj_id is not None:
+                v['@id'] = obj_id
         return v

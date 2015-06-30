@@ -24,12 +24,10 @@ class TestBaseEncoder(object):
         }
 
 
-class TestExperimenterEncoder(object):
+class TestDetailsEncoder(object):
 
-    def test_encoder(self, experimenter):
-        encoder = get_encoder(experimenter.__class__)
-        v = encoder.encode(experimenter)
-        assert v == {
+    def experimenter_json(self):
+        return {
             '@id': 1L,
             '@type':
                 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
@@ -40,4 +38,49 @@ class TestExperimenterEncoder(object):
             'Email': 'the_email',
             'Institution': 'the_institution',
             'UserName': 'the_omeName'
+        }
+
+    def test_experimenter_encoder(self, experimenter):
+        encoder = get_encoder(experimenter.__class__)
+        v = encoder.encode(experimenter)
+        assert v == self.experimenter_json()
+
+    def experimenter_group_json(self):
+        return {
+            '@id': 1L,
+            '@type':
+                'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                '#ExperimenterGroup',
+            'Name': 'the_name',
+            'Description': 'the_description',
+        }
+
+    def test_experimenter_group_encoder(self, experimenter_group):
+        encoder = get_encoder(experimenter_group.__class__)
+        v = encoder.encode(experimenter_group)
+        assert v == self.experimenter_group_json()
+
+    def permissions_json(self):
+        return {
+            '@type': 'TBD#Permissions',
+            'perm': 'rwrwrw',
+            'canAnnotate': True,
+            'canDelete': True,
+            'canEdit': True,
+            'canLink': True
+        }
+
+    def test_permissions_encoder(self, permissions):
+        encoder = get_encoder(permissions.__class__)
+        v = encoder.encode(permissions)
+        assert v == self.permissions_json()
+
+    def test_details_encoder(self, details):
+        encoder = get_encoder(details.__class__)
+        v = encoder.encode(details)
+        assert v == {
+            '@type': 'TBD#Details',
+            'permissions': self.permissions_json(),
+            'owner': self.experimenter_json(),
+            'group': self.experimenter_group_json()
         }
