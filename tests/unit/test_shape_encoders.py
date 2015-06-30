@@ -19,6 +19,7 @@ class TestShapeEncoder(object):
         assert roi['Name'] == 'the_name'
         assert roi['@type'] == \
             'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
+        assert roi['omero:details'] == {'@type': 'TBD#Details'}
 
     def assert_shape(self, shape):
         assert shape['FillColor'] == 0xffffffff
@@ -36,6 +37,7 @@ class TestShapeEncoder(object):
         assert shape['TheZ'] == 3
         assert shape['TheT'] == 2
         assert shape['TheC'] == 1
+        assert shape['omero:details'] == {'@type': 'TBD#Details'}
 
     def assert_ellipse(self, ellipse):
         self.assert_shape(ellipse)

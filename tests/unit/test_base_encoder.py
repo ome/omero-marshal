@@ -21,6 +21,7 @@ class TestBaseEncoder(object):
             '@id': 1L,
             '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
             'Name': 'the_name',
+            'omero:details': {'@type': 'TBD#Details'}
         }
 
 
@@ -37,7 +38,8 @@ class TestDetailsEncoder(object):
             'LastName': 'the_lastName',
             'Email': 'the_email',
             'Institution': 'the_institution',
-            'UserName': 'the_omeName'
+            'UserName': 'the_omeName',
+            'omero:details': {'@type': 'TBD#Details'}
         }
 
     def test_experimenter_encoder(self, experimenter):
@@ -53,6 +55,7 @@ class TestDetailsEncoder(object):
                 '#ExperimenterGroup',
             'Name': 'the_name',
             'Description': 'the_description',
+            'omero:details': {'@type': 'TBD#Details'}
         }
 
     def test_experimenter_group_encoder(self, experimenter_group):

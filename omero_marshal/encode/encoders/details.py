@@ -19,12 +19,15 @@ class DetailsEncoder(Encoder):
 
     def encode(self, obj):
         v = super(DetailsEncoder, self).encode(obj)
-        encoder = self.ctx.get_encoder(obj.owner.__class__)
-        v['owner'] = encoder.encode(obj.owner)
-        encoder = self.ctx.get_encoder(obj.group.__class__)
-        v['group'] = encoder.encode(obj.group)
-        encoder = self.ctx.get_encoder(obj.permissions.__class__)
-        v['permissions'] = encoder.encode(obj.permissions)
+        if obj.owner is not None:
+            encoder = self.ctx.get_encoder(obj.owner.__class__)
+            v['owner'] = encoder.encode(obj.owner)
+        if obj.group is not None:
+            encoder = self.ctx.get_encoder(obj.group.__class__)
+            v['group'] = encoder.encode(obj.group)
+        if obj.permissions is not None:
+            encoder = self.ctx.get_encoder(obj.permissions.__class__)
+            v['permissions'] = encoder.encode(obj.permissions)
         return v
 
 encoder = (DetailsI, DetailsEncoder)
