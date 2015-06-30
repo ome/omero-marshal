@@ -16,7 +16,7 @@ from omero.model import ExperimenterGroupI
 class ExperimenterGroupEncoder(Encoder):
 
     TYPE = \
-    	'http://www.openmicroscopy.org/Schemas/OME/2015-01#ExperimenterGroup'
+        'http://www.openmicroscopy.org/Schemas/OME/2015-01#ExperimenterGroup'
 
     def encode(self, obj):
         v = super(ExperimenterGroupEncoder, self).encode(obj)
