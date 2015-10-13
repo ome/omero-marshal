@@ -33,12 +33,13 @@ class Encoder(object):
         unit_name = value.getUnit().__class__.__name__
         v[key] = {
             '@type': 'TBD#%s' % value.__class__.__name__,
-            'unit': {
+            'Unit': {
                 '@type': 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
                          '#%s' % unit_name,
-                '@id': value.getSymbol()
+                '@id': value.getSymbol(),
+                'Name': value.getUnit().name
             },
-            'value': value.getValue()
+            'Value': value.getValue()
         }
 
     def encode(self, obj):
