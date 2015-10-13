@@ -30,7 +30,7 @@ class ShapeDecoder(Decoder):
         v.locked = self.to_rtype(data.get('Locked'))
         v.strokeColor = self.to_rtype(data.get('StrokeColor'))
         v.strokeDashArray = self.to_rtype(data.get('StrokeDashArray'))
-        v.strokeWidth = self.to_rtype(data.get('StrokeWidth'))
+        v.strokeWidth = self.to_unit(data.get('StrokeWidth'))
         v.textValue = self.to_rtype(data.get('Text'))
         v.theC = self.to_rtype(data.get('TheC'))
         v.theT = self.to_rtype(data.get('TheT'))

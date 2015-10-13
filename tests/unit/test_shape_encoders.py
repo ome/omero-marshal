@@ -27,17 +27,26 @@ class TestShapeEncoder(object):
         assert shape['FillRule'] == 'solid'
         assert shape['StrokeColor'] == 0xffff0000
         assert shape['StrokeDashArray'] == 'inherit'
-        assert shape['StrokeWidth'] == 4
+        assert shape['StrokeWidth'] == {
+            '@type': 'TBD#LengthI', 'Unit': {
+                '@type': 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                         '#UnitsLength',
+                '@id': 'pixel',
+                'Name': 'PIXEL'
+            },
+            'Value': 4
+        }
         assert shape['LineCap'] == 'round'
         assert shape['Text'] == 'the_text'
         assert shape['FontFamily'] == 'cursive'
         assert shape['FontSize'] == {
-            '@type': 'TBD#LengthI', 'unit': {
+            '@type': 'TBD#LengthI', 'Unit': {
                 '@type': 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
                          '#UnitsLength',
-                '@id': 'pt'
+                '@id': 'pt',
+                'Name': 'POINT'
             },
-            'value': 12
+            'Value': 12
         }
         assert shape['FontStyle'] == 'italic'
         assert shape['Visible'] is True

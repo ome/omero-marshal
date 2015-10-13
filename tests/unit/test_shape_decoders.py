@@ -10,6 +10,7 @@
 #
 
 from omero_marshal import get_encoder, get_decoder
+from omero.model.enums import UnitsLength
 from omero.rtypes import RDoubleI
 from omero.model import LengthI
 
@@ -26,11 +27,14 @@ class TestShapeDecoder(object):
         assert shape.fillRule.val == 'solid'
         assert shape.strokeColor.val == 0xffff0000
         assert shape.strokeDashArray.val == 'inherit'
-        assert shape.strokeWidth.val == 4
+        assert shape.strokeWidth.__class__ is LengthI
+        assert shape.strokeWidth.getUnit() == UnitsLength.PIXEL
+        assert shape.strokeWidth.getValue() == 4
         assert shape.strokeLineCap.val == 'round'
         assert shape.textValue.val == 'the_text'
         assert shape.fontFamily.val == 'cursive'
         assert shape.fontSize.__class__ is LengthI
+        assert shape.fontSize.getUnit() == UnitsLength.POINT
         assert shape.fontSize.getValue() == 12
         assert shape.fontStyle.val == 'italic'
         assert shape.visibility.val is True

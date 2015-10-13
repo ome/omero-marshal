@@ -80,7 +80,7 @@ def populate_shape(o):
     o.strokeColor = rint(0xffff0000)
     o.strokeDashArray = rstring('inherit')
     o.strokeLineCap = rstring('round')
-    o.strokeWidth = rint(4)
+    o.strokeWidth = LengthI(4, UnitsLength.PIXEL)
     o.textValue = rstring('the_text')
     o.theC = rint(1)
     o.theT = rint(2)
