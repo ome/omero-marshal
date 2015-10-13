@@ -11,6 +11,7 @@
 
 from omero_marshal import get_encoder, get_decoder
 from omero.rtypes import RDoubleI
+from omero.model import LengthI
 
 
 class TestShapeDecoder(object):
@@ -29,7 +30,8 @@ class TestShapeDecoder(object):
         assert shape.strokeLineCap.val == 'round'
         assert shape.textValue.val == 'the_text'
         assert shape.fontFamily.val == 'cursive'
-        assert shape.fontSize.val == 12
+        assert shape.fontSize.__class__ is LengthI
+        assert shape.fontSize.getValue() == 12
         assert shape.fontStyle.val == 'italic'
         assert shape.visibility.val is True
         assert shape.locked.val is False

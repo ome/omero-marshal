@@ -24,7 +24,7 @@ class ShapeDecoder(Decoder):
         v.fillColor = self.to_rtype(data.get('FillColor'))
         v.fillRule = self.to_rtype(data.get('FillRule'))
         v.fontFamily = self.to_rtype(data.get('FontFamily'))
-        v.fontSize = self.to_rtype(data.get('FontSize'))
+        v.fontSize = self.to_unit(data.get('FontSize'))
         v.fontStyle = self.to_rtype(data.get('FontStyle'))
         v.strokeLineCap = self.to_rtype(data.get('LineCap'))
         v.locked = self.to_rtype(data.get('Locked'))

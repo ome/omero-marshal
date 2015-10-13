@@ -12,7 +12,8 @@
 import pytest
 
 from omero.model import RoiI, EllipseI, RectI, PointI, PolylineI, PolygonI, \
-    ExperimenterI, ExperimenterGroupI, PermissionsI, DetailsI
+    ExperimenterI, ExperimenterGroupI, PermissionsI, DetailsI, LengthI
+from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool
 
 
@@ -73,7 +74,7 @@ def populate_shape(o):
     o.fillColor = rint(0xffffffff)
     o.fillRule = rstring('solid')
     o.fontFamily = rstring('cursive')
-    o.fontSize = rint(12)
+    o.fontSize = LengthI(12, UnitsLength.POINT)
     o.fontStyle = rstring('italic')
     o.locked = rbool(False)
     o.strokeColor = rint(0xffff0000)

@@ -31,7 +31,14 @@ class TestShapeEncoder(object):
         assert shape['LineCap'] == 'round'
         assert shape['Text'] == 'the_text'
         assert shape['FontFamily'] == 'cursive'
-        assert shape['FontSize'] == 12
+        assert shape['FontSize'] == {
+            '@type': 'TBD#LengthI', 'unit': {
+                '@type': 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                         '#UnitsLength',
+                '@id': 'pt'
+            },
+            'value': 12
+        }
         assert shape['FontStyle'] == 'italic'
         assert shape['Visible'] is True
         assert shape['Locked'] is False
