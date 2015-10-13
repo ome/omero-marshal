@@ -34,3 +34,4 @@ Using py.test to run the unit tests:
 Reference
 =========
 
+* http://www.openmicroscopy.org/Schemas/Documentation/Generated/OME-2015-01/ome.html
