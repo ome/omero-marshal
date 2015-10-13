@@ -6,7 +6,7 @@ Marshaling code to transform OMERO ROI objects into JSON.
 Requirements
 ============
 
-* OMERO.py 5.x
+* OMERO.py 5.1.x
 * Python 2.6+
 
 Development Installation
