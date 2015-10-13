@@ -57,7 +57,8 @@ def details():
 def roi():
     o = RoiI()
     o.id = rlong(1L)
-    o.description = rstring('the_name')
+    o.name = rstring('the_name')
+    o.description = rstring('the_description')
     return o
 
 

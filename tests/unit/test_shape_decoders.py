@@ -17,7 +17,8 @@ class TestShapeDecoder(object):
 
     def assert_roi(self, roi):
         assert roi.id.val == 1L
-        assert roi.description.val == 'the_name'
+        assert roi.description.val == 'the_description'
+        assert roi.name.val == 'the_name'
 
     def assert_shape(self, shape):
         assert shape.fillColor.val == 0xffffffff

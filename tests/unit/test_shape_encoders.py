@@ -17,6 +17,7 @@ class TestShapeEncoder(object):
     def assert_roi(self, roi):
         assert roi['@id'] == 1L
         assert roi['Name'] == 'the_name'
+        assert roi['Description'] == 'the_description'
         assert roi['@type'] == \
             'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
         assert roi['omero:details'] == {'@type': 'TBD#Details'}

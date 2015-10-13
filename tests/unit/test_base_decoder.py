@@ -20,7 +20,8 @@ class TestBaseDecoder(object):
     def assert_roi(self, roi):
         assert roi.__class__ == RoiI
         assert roi.id.val == 1L
-        assert roi.description.val == 'the_name'
+        assert roi.name.val == 'the_name'
+        assert roi.description.val == 'the_description'
 
     def test_base_decoder(self, roi):
         encoder = get_encoder(roi.__class__)
@@ -33,7 +34,8 @@ class TestBaseDecoder(object):
         data_as_string = """{
     "@type": "http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI",
     "@id": 1,
-    "Name": "the_name"
+    "Name": "the_name",
+    "Description": "the_description"
 }"""
         data = json.loads(data_as_string)
         decoder = get_decoder(data['@type'])

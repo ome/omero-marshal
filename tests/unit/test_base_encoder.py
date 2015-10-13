@@ -21,6 +21,7 @@ class TestBaseEncoder(object):
             '@id': 1L,
             '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
             'Name': 'the_name',
+            'Description': 'the_description',
             'omero:details': {'@type': 'TBD#Details'}
         }
 
