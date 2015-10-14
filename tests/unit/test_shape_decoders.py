@@ -54,7 +54,7 @@ class TestShapeDecoder(object):
         else:
             self.assert_annotations(roi)
 
-    def assert_shape(self, shape):
+    def assert_shape(self, shape, has_annotations=False):
         assert shape.fillColor.val == 0xffffffff
         assert shape.fillRule.val == 'solid'
         assert shape.strokeColor.val == 0xffff0000
@@ -74,9 +74,13 @@ class TestShapeDecoder(object):
         assert shape.theZ.val == 3
         assert shape.theT.val == 2
         assert shape.theC.val == 1
+        if not has_annotations:
+            assert not shape.annotationLinksLoaded
+        else:
+            self.assert_annotations(shape)
 
-    def assert_ellipse(self, ellipse):
-        self.assert_shape(ellipse)
+    def assert_ellipse(self, ellipse, has_annotations=False):
+        self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse.id.val == 1L
         assert ellipse.cx.__class__ is RDoubleI
         assert ellipse.cx.val == 1.0
@@ -117,7 +121,7 @@ class TestRectangeDecoder(TestShapeDecoder):
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(rectangle)
         v = decoder.decode(v)
-        self.assert_rectangle(rectangle)
+        self.assert_rectangle(v)
 
 
 class TestPointDecoder(TestShapeDecoder):

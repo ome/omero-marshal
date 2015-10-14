@@ -9,11 +9,11 @@
 # jason@glencoesoftware.com.
 #
 
-from .. import Decoder
+from .annotation import AnnotatableDecoder
 from omero.model import Shape
 
 
-class ShapeDecoder(Decoder):
+class ShapeDecoder(AnnotatableDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Shape'
 
