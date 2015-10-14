@@ -17,11 +17,13 @@ from omero_marshal import get_encoder, get_decoder
 
 class TestBaseDecoder(object):
 
-    def assert_roi(self, roi):
+    def assert_roi(self, roi, has_annotations=False):
         assert roi.__class__ == RoiI
         assert roi.id.val == 1L
         assert roi.name.val == 'the_name'
         assert roi.description.val == 'the_description'
+        if not has_annotations:
+            assert roi.annotationLinksLoaded is False
 
     def test_base_decoder(self, roi):
         encoder = get_encoder(roi.__class__)
