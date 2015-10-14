@@ -17,10 +17,42 @@ from omero.model import LengthI
 
 class TestShapeDecoder(object):
 
-    def assert_roi(self, roi):
+    def assert_annotations(self, o):
+        assert o.annotationLinksLoaded
+        boolean_annotation, comment_annotation, double_annotation, \
+            long_annotation, tag_annotation, term_annotation, \
+            timestamp_annotation, xml_annotation = \
+            [v.child for v in o.copyAnnotationLinks()]
+        assert boolean_annotation.ns.val == 'boolean_annotation'
+        assert boolean_annotation.description.val == 'the_description'
+        assert boolean_annotation.boolValue.val
+        assert comment_annotation.ns.val == 'comment_annotation'
+        assert comment_annotation.description.val == 'the_description'
+        assert comment_annotation.textValue.val == 'text_value'
+        assert double_annotation.ns.val == 'double_annotation'
+        assert double_annotation.description.val == 'the_description'
+        assert double_annotation.doubleValue.val == 1.0
+        assert long_annotation.ns.val == 'long_annotation'
+        assert long_annotation.description.val == 'the_description'
+        assert long_annotation.longValue.val == 1L
+        assert tag_annotation.ns.val == 'tag_annotation'
+        assert tag_annotation.description.val == 'the_description'
+        assert tag_annotation.textValue.val == 'tag_value'
+        assert term_annotation.ns.val == 'term_annotation'
+        assert term_annotation.description.val == 'the_description'
+        assert term_annotation.termValue.val == 'term_value'
+        assert timestamp_annotation.ns.val == 'timestamp_annotation'
+        assert timestamp_annotation.description.val == 'the_description'
+        assert timestamp_annotation.timeValue.val == 1L
+
+    def assert_roi(self, roi, has_annotations=False):
         assert roi.id.val == 1L
         assert roi.description.val == 'the_description'
         assert roi.name.val == 'the_name'
+        if not has_annotations:
+            assert not roi.annotationLinksLoaded
+        else:
+            self.assert_annotations(roi)
 
     def assert_shape(self, shape):
         assert shape.fillColor.val == 0xffffffff
@@ -129,13 +161,24 @@ class TestPolygonDecoder(TestShapeDecoder):
 
 class TestRoiDecoder(TestShapeDecoder):
 
+    def assert_roi_with_shapes(self, v, has_annotations=False):
+        self.assert_roi(v, has_annotations=has_annotations)
+        assert v.sizeOfShapes() == 2
+        ellipse, rectangle = v.copyShapes()
+        self.assert_ellipse(ellipse)
+        self.assert_rectangle(rectangle)
+
     def test_roi_with_shapes(self, roi_with_shapes):
         encoder = get_encoder(roi_with_shapes.__class__)
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(roi_with_shapes)
         v = decoder.decode(v)
-        self.assert_roi(v)
-        assert v.sizeOfShapes() == 2
-        ellipse, rectangle = v.copyShapes()
-        self.assert_ellipse(ellipse)
-        self.assert_rectangle(rectangle)
+        self.assert_roi_with_shapes(v)
+
+    def test_roi_with_shapes_and_annotations(
+            self, roi_with_shapes_and_annotations):
+        encoder = get_encoder(roi_with_shapes_and_annotations.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(roi_with_shapes_and_annotations)
+        v = decoder.decode(v)
+        self.assert_roi_with_shapes(v, has_annotations=True)

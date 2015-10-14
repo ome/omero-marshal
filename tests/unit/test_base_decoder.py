@@ -23,7 +23,7 @@ class TestBaseDecoder(object):
         assert roi.name.val == 'the_name'
         assert roi.description.val == 'the_description'
         if not has_annotations:
-            assert roi.annotationLinksLoaded is False
+            assert not roi.annotationLinksLoaded
 
     def test_base_decoder(self, roi):
         encoder = get_encoder(roi.__class__)

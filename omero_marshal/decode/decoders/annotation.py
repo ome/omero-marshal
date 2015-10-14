@@ -17,15 +17,20 @@ class AnnotationDecoder(Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#Annotation'
 
+    OMERO_CLASS = Annotation
+
     def decode(self, data):
         v = super(AnnotationDecoder, self).decode(data)
         v.description = self.to_rtype(data.get('Description'))
         v.ns = self.to_rtype(data.get('Namespace'))
+        return v
 
 
 class AnnotatableDecoder(Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#AnnotationRef'
+
+    OMERO_CLASS = Annotation
 
     def decode(self, data):
         v = super(AnnotatableDecoder, self).decode(data)
