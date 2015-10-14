@@ -11,10 +11,13 @@
 
 import pytest
 
-from omero.model import RoiI, EllipseI, RectI, PointI, PolylineI, PolygonI, \
-    ExperimenterI, ExperimenterGroupI, PermissionsI, DetailsI, LengthI
+from omero.model import BooleanAnnotationI, CommentAnnotationI, \
+    DoubleAnnotationI, LongAnnotationI, TagAnnotationI, TermAnnotationI, \
+    TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, RectI, PointI, \
+    PolylineI, PolygonI, ExperimenterI, ExperimenterGroupI, PermissionsI, \
+    DetailsI, LengthI
 from omero.model.enums import UnitsLength
-from omero.rtypes import rlong, rint, rstring, rdouble, rbool
+from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
 
 @pytest.fixture()
@@ -61,6 +64,80 @@ def roi():
     o.name = rstring('the_name')
     o.description = rstring('the_description')
     return o
+
+
+@pytest.fixture()
+def roi_with_annotations(roi):
+    '''
+    Annotation
+        BasicAnnotation
+            BooleanAnnotation
+                BooleanAnnotationI
+            NumericAnnotation
+                DoubleAnnotation
+                    DoubleAnnotationI
+                LongAnnotation
+                    LongAnnotationI
+            TermAnnotation
+                TermAnnotationI
+            TimestampAnnotation
+                TimestampAnnotationI
+        ListAnnotation
+            ListAnnotationI
+        MapAnnotation
+            MapAnnotationI
+        TextAnnotation
+            CommentAnnotation
+                CommentAnnotationI
+            TagAnnotation
+                TagAnnotationI
+            XmlAnnotation
+                XmlAnnotationI
+        TypeAnnotation
+            FileAnnotation
+                FileAnnotationI
+    '''
+    annotation = BooleanAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('boolean_annotation')
+    annotation.boolValue = rbool(True)
+    roi.linkAnnotation(annotation)
+    annotation = CommentAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('comment_annotation')
+    annotation.textValue = rstring('text_value')
+    roi.linkAnnotation(annotation)
+    annotation = DoubleAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('double_annotation')
+    annotation.doubleValue = rdouble(1.0)
+    roi.linkAnnotation(annotation)
+    annotation = LongAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('long_annotation')
+    annotation.longValue = rlong(1L)
+    roi.linkAnnotation(annotation)
+    annotation = TagAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('tag_annotation')
+    annotation.textValue = rstring('tag_value')
+    roi.linkAnnotation(annotation)
+    annotation = TermAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('term_annotation')
+    annotation.termValue = rstring('term_value')
+    roi.linkAnnotation(annotation)
+    annotation = TimestampAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('timestamp_annotation')
+    annotation.timeValue = rtime(1)
+    roi.linkAnnotation(annotation)
+    annotation = XmlAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('xml_annotation')
+    annotation.textValue = rstring('<xml_value></xml_value>')
+    roi.linkAnnotation(annotation)
+    return roi
 
 
 @pytest.fixture()

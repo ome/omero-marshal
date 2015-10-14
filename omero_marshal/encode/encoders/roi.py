@@ -27,6 +27,15 @@ class RoiEncoder(Encoder):
                 shape_encoder = self.ctx.get_encoder(shape.__class__)
                 shapes.append(shape_encoder.encode(shape))
             v['shapes'] = shapes
+        if obj.isAnnotationLinksLoaded() and obj.sizeOfAnnotationLinks() > 0:
+            annotations = list()
+            for annotation_link in obj.copyAnnotationLinks():
+                annotation = annotation_link.child
+                annotation_encoder = self.ctx.get_encoder(annotation.__class__)
+                annotations.append(
+                    annotation_encoder.encode(annotation)
+                )
+            v['annotations'] = annotations
         return v
 
 encoder = (RoiI, RoiEncoder)
