@@ -20,8 +20,8 @@ class TestShapeDecoder(object):
     def assert_annotations(self, o):
         assert o.annotationLinksLoaded
         boolean_annotation, comment_annotation, double_annotation, \
-            long_annotation, tag_annotation, term_annotation, \
-            timestamp_annotation, xml_annotation = \
+            long_annotation, map_annotation, tag_annotation, \
+            term_annotation, timestamp_annotation, xml_annotation = \
             [v.child for v in o.copyAnnotationLinks()]
         assert boolean_annotation.ns.val == 'boolean_annotation'
         assert boolean_annotation.description.val == 'the_description'
@@ -35,6 +35,9 @@ class TestShapeDecoder(object):
         assert long_annotation.ns.val == 'long_annotation'
         assert long_annotation.description.val == 'the_description'
         assert long_annotation.longValue.val == 1L
+        assert map_annotation.ns.val == 'map_annotation'
+        assert map_annotation.description.val == 'the_description'
+        assert map_annotation.getMapValueAsMap() == {'a': '1', 'b': '2'}
         assert tag_annotation.ns.val == 'tag_annotation'
         assert tag_annotation.description.val == 'the_description'
         assert tag_annotation.textValue.val == 'tag_value'
