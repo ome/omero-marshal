@@ -14,84 +14,16 @@ from omero_marshal import get_encoder
 
 class TestBaseEncoder(object):
 
-    def roi_data(self):
-        return {
+    def test_base_encoder(self, roi):
+        encoder = get_encoder(roi.__class__)
+        v = encoder.encode(roi)
+        assert v == {
             '@id': 1L,
             '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'TBD#Details'}
         }
-
-    def test_base_encoder(self, roi):
-        encoder = get_encoder(roi.__class__)
-        v = encoder.encode(roi)
-        assert v == self.roi_data()
-
-    def test_base_encoder_with_annotations(self, roi_with_annotations):
-        encoder = get_encoder(roi_with_annotations.__class__)
-        v = encoder.encode(roi_with_annotations)
-        roi_data = self.roi_data()
-        roi_data.update({
-            'annotations': [{
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#BooleanAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'boolean_annotation',
-                'Value': True,
-                'omero:details': {'@type': 'TBD#Details'}
-            }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#CommentAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'comment_annotation',
-                'Value': 'text_value',
-                'omero:details': {'@type': 'TBD#Details'}
-            }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#DoubleAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'double_annotation',
-                'Value': 1.0,
-                'omero:details': {'@type': 'TBD#Details'}
-            }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#LongAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'long_annotation',
-                'Value': 1L,
-                'omero:details': {'@type': 'TBD#Details'}
-            }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TagAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'tag_annotation',
-                'Value': 'tag_value',
-                'omero:details': {'@type': 'TBD#Details'}
-            }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TermAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'term_annotation',
-                'Value': 'term_value',
-                'omero:details': {'@type': 'TBD#Details'}
-            }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TimestampAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'timestamp_annotation',
-                'Value': 1L,
-                'omero:details': {'@type': 'TBD#Details'}
-            }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#XmlAnnotation',
-                'Description': 'the_description',
-                'Namespace': 'xml_annotation',
-                'Value': '<xml_value></xml_value>',
-                'omero:details': {'@type': 'TBD#Details'}
-            }]
-        })
-        assert v == roi_data
 
 
 class TestDetailsEncoder(object):
