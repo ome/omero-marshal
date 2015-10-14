@@ -113,6 +113,13 @@ class TestEllipseDecoder(TestShapeDecoder):
         v = decoder.decode(v)
         self.assert_ellipse(v)
 
+    def test_encoder_with_annotations(self, ellipse_with_annotations):
+        encoder = get_encoder(ellipse_with_annotations.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(ellipse_with_annotations)
+        v = decoder.decode(v)
+        self.assert_ellipse(v, has_annotations=True)
+
 
 class TestRectangeDecoder(TestShapeDecoder):
 
