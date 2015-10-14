@@ -12,10 +12,10 @@
 import pytest
 
 from omero.model import BooleanAnnotationI, CommentAnnotationI, \
-    DoubleAnnotationI, LongAnnotationI, TagAnnotationI, TermAnnotationI, \
-    TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, RectI, PointI, \
-    PolylineI, PolygonI, ExperimenterI, ExperimenterGroupI, PermissionsI, \
-    DetailsI, LengthI
+    DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
+    TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
+    RectI, PointI, PolylineI, PolygonI, ExperimenterI, ExperimenterGroupI, \
+    PermissionsI, DetailsI, LengthI, NamedValue
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -69,6 +69,11 @@ def add_annotations(o):
     annotation.description = rstring('the_description')
     annotation.ns = rstring('long_annotation')
     annotation.longValue = rlong(1L)
+    o.linkAnnotation(annotation)
+    annotation = MapAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('map_annotation')
+    annotation.setMapValue([NamedValue('a', '1'), NamedValue('b', '2')])
     o.linkAnnotation(annotation)
     annotation = TagAnnotationI()
     annotation.description = rstring('the_description')

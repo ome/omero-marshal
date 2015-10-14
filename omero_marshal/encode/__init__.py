@@ -26,8 +26,10 @@ class Encoder(object):
             return
         if isinstance(value, RType):
             v[key] = value.getValue()
-        if isinstance(value, UnitBase):
+        elif isinstance(value, UnitBase):
             self.encode_unit(v, key, value)
+        else:
+            v[key] = value
 
     def encode_unit(self, v, key, value):
         unit_name = value.getUnit().__class__.__name__

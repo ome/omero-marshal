@@ -46,6 +46,13 @@ class TestShapeEncoder(object):
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
+                         '#MapAnnotation',
+                'Description': 'the_description',
+                'Namespace': 'map_annotation',
+                'Value': {'a': '1', 'b': '2'},
+                'omero:details': {'@type': 'TBD#Details'}
+            }, {
+                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
                          '#TagAnnotation',
                 'Description': 'the_description',
                 'Namespace': 'tag_annotation',
