@@ -36,3 +36,4 @@ Reference
 
 * http://www.openmicroscopy.org/Schemas/Documentation/Generated/OME-2015-01/ome.html
 * http://www.openmicroscopy.org/site/support/omero5.1/developers/Model/Units.html
+* https://www.openmicroscopy.org/site/support/omero5.1/developers/Model/KeyValuePairs.html
