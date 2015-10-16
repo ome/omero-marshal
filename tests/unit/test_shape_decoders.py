@@ -10,34 +10,80 @@
 #
 
 from omero_marshal import get_encoder, get_decoder
+from omero.model.enums import UnitsLength
 from omero.rtypes import RDoubleI
+from omero.model import LengthI
 
 
 class TestShapeDecoder(object):
 
-    def assert_roi(self, roi):
-        assert roi.id.val == 1L
-        assert roi.description.val == 'the_name'
+    def assert_annotations(self, o):
+        assert o.annotationLinksLoaded
+        boolean_annotation, comment_annotation, double_annotation, \
+            long_annotation, map_annotation, tag_annotation, \
+            term_annotation, timestamp_annotation, xml_annotation = \
+            [v.child for v in o.copyAnnotationLinks()]
+        assert boolean_annotation.ns.val == 'boolean_annotation'
+        assert boolean_annotation.description.val == 'the_description'
+        assert boolean_annotation.boolValue.val
+        assert comment_annotation.ns.val == 'comment_annotation'
+        assert comment_annotation.description.val == 'the_description'
+        assert comment_annotation.textValue.val == 'text_value'
+        assert double_annotation.ns.val == 'double_annotation'
+        assert double_annotation.description.val == 'the_description'
+        assert double_annotation.doubleValue.val == 1.0
+        assert long_annotation.ns.val == 'long_annotation'
+        assert long_annotation.description.val == 'the_description'
+        assert long_annotation.longValue.val == 1L
+        assert map_annotation.ns.val == 'map_annotation'
+        assert map_annotation.description.val == 'the_description'
+        assert map_annotation.getMapValueAsMap() == {'a': '1', 'b': '2'}
+        assert tag_annotation.ns.val == 'tag_annotation'
+        assert tag_annotation.description.val == 'the_description'
+        assert tag_annotation.textValue.val == 'tag_value'
+        assert term_annotation.ns.val == 'term_annotation'
+        assert term_annotation.description.val == 'the_description'
+        assert term_annotation.termValue.val == 'term_value'
+        assert timestamp_annotation.ns.val == 'timestamp_annotation'
+        assert timestamp_annotation.description.val == 'the_description'
+        assert timestamp_annotation.timeValue.val == 1L
 
-    def assert_shape(self, shape):
+    def assert_roi(self, roi, has_annotations=False):
+        assert roi.id.val == 1L
+        assert roi.description.val == 'the_description'
+        assert roi.name.val == 'the_name'
+        if not has_annotations:
+            assert not roi.annotationLinksLoaded
+        else:
+            self.assert_annotations(roi)
+
+    def assert_shape(self, shape, has_annotations=False):
         assert shape.fillColor.val == 0xffffffff
         assert shape.fillRule.val == 'solid'
         assert shape.strokeColor.val == 0xffff0000
         assert shape.strokeDashArray.val == 'inherit'
-        assert shape.strokeWidth.val == 4
+        assert shape.strokeWidth.__class__ is LengthI
+        assert shape.strokeWidth.getUnit() == UnitsLength.PIXEL
+        assert shape.strokeWidth.getValue() == 4
         assert shape.strokeLineCap.val == 'round'
         assert shape.textValue.val == 'the_text'
         assert shape.fontFamily.val == 'cursive'
-        assert shape.fontSize.val == 12
+        assert shape.fontSize.__class__ is LengthI
+        assert shape.fontSize.getUnit() == UnitsLength.POINT
+        assert shape.fontSize.getValue() == 12
         assert shape.fontStyle.val == 'italic'
         assert shape.visibility.val is True
         assert shape.locked.val is False
         assert shape.theZ.val == 3
         assert shape.theT.val == 2
         assert shape.theC.val == 1
+        if not has_annotations:
+            assert not shape.annotationLinksLoaded
+        else:
+            self.assert_annotations(shape)
 
-    def assert_ellipse(self, ellipse):
-        self.assert_shape(ellipse)
+    def assert_ellipse(self, ellipse, has_annotations=False):
+        self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse.id.val == 1L
         assert ellipse.cx.__class__ is RDoubleI
         assert ellipse.cx.val == 1.0
@@ -70,6 +116,13 @@ class TestEllipseDecoder(TestShapeDecoder):
         v = decoder.decode(v)
         self.assert_ellipse(v)
 
+    def test_encoder_with_annotations(self, ellipse_with_annotations):
+        encoder = get_encoder(ellipse_with_annotations.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(ellipse_with_annotations)
+        v = decoder.decode(v)
+        self.assert_ellipse(v, has_annotations=True)
+
 
 class TestRectangeDecoder(TestShapeDecoder):
 
@@ -78,7 +131,7 @@ class TestRectangeDecoder(TestShapeDecoder):
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(rectangle)
         v = decoder.decode(v)
-        self.assert_rectangle(rectangle)
+        self.assert_rectangle(v)
 
 
 class TestPointDecoder(TestShapeDecoder):
@@ -122,13 +175,24 @@ class TestPolygonDecoder(TestShapeDecoder):
 
 class TestRoiDecoder(TestShapeDecoder):
 
+    def assert_roi_with_shapes(self, v, has_annotations=False):
+        self.assert_roi(v, has_annotations=has_annotations)
+        assert v.sizeOfShapes() == 2
+        ellipse, rectangle = v.copyShapes()
+        self.assert_ellipse(ellipse)
+        self.assert_rectangle(rectangle)
+
     def test_roi_with_shapes(self, roi_with_shapes):
         encoder = get_encoder(roi_with_shapes.__class__)
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(roi_with_shapes)
         v = decoder.decode(v)
-        self.assert_roi(v)
-        assert v.sizeOfShapes() == 2
-        ellipse, rectangle = v.copyShapes()
-        self.assert_ellipse(ellipse)
-        self.assert_rectangle(rectangle)
+        self.assert_roi_with_shapes(v)
+
+    def test_roi_with_shapes_and_annotations(
+            self, roi_with_shapes_and_annotations):
+        encoder = get_encoder(roi_with_shapes_and_annotations.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(roi_with_shapes_and_annotations)
+        v = decoder.decode(v)
+        self.assert_roi_with_shapes(v, has_annotations=True)

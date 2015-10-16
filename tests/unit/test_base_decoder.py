@@ -17,10 +17,13 @@ from omero_marshal import get_encoder, get_decoder
 
 class TestBaseDecoder(object):
 
-    def assert_roi(self, roi):
+    def assert_roi(self, roi, has_annotations=False):
         assert roi.__class__ == RoiI
         assert roi.id.val == 1L
-        assert roi.description.val == 'the_name'
+        assert roi.name.val == 'the_name'
+        assert roi.description.val == 'the_description'
+        if not has_annotations:
+            assert not roi.annotationLinksLoaded
 
     def test_base_decoder(self, roi):
         encoder = get_encoder(roi.__class__)
@@ -33,7 +36,8 @@ class TestBaseDecoder(object):
         data_as_string = """{
     "@type": "http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI",
     "@id": 1,
-    "Name": "the_name"
+    "Name": "the_name",
+    "Description": "the_description"
 }"""
         data = json.loads(data_as_string)
         decoder = get_decoder(data['@type'])

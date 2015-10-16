@@ -9,6 +9,9 @@
 # jason@glencoesoftware.com.
 #
 
+import omero.model
+import omero.model.enums
+
 from omero.rtypes import rtype
 
 
@@ -20,6 +23,16 @@ class Decoder(object):
 
     def __init__(self, ctx):
         self.ctx = ctx
+
+    def to_unit(self, v):
+        unit = v['@type'][v['@type'].rfind('#') + 1:]
+        unit = getattr(omero.model, unit)
+        unit_unit = v['Unit']['@type'][v['Unit']['@type'].rfind('#') + 1:]
+        unit_unit = getattr(omero.model.enums, unit_unit)
+        return unit(
+            float(v['Value']),
+            getattr(unit_unit, v['Unit']['Name'])
+        )
 
     def to_rtype(self, v):
         if isinstance(v, unicode):

@@ -9,17 +9,18 @@
 # jason@glencoesoftware.com.
 #
 
-from .. import Encoder
+from .annotation import AnnotatableEncoder
 from omero.model import RoiI
 
 
-class RoiEncoder(Encoder):
+class RoiEncoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
 
     def encode(self, obj):
         v = super(RoiEncoder, self).encode(obj)
-        self.set_if_not_none(v, 'Name', obj.description)
+        self.set_if_not_none(v, 'Name', obj.name)
+        self.set_if_not_none(v, 'Description', obj.description)
         if obj.isShapesLoaded() and obj.sizeOfShapes() > 0:
             shapes = list()
             for shape in obj.copyShapes():

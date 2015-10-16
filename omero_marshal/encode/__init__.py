@@ -9,6 +9,8 @@
 # jason@glencoesoftware.com.
 #
 
+from omero import RType
+from omero_model_UnitBase import UnitBase
 from omero.rtypes import unwrap
 
 
@@ -20,8 +22,27 @@ class Encoder(object):
         self.ctx = ctx
 
     def set_if_not_none(self, v, key, value):
-        if value is not None:
+        if value is None:
+            return
+        if isinstance(value, RType):
             v[key] = value.getValue()
+        elif isinstance(value, UnitBase):
+            self.encode_unit(v, key, value)
+        else:
+            v[key] = value
+
+    def encode_unit(self, v, key, value):
+        unit_name = value.getUnit().__class__.__name__
+        v[key] = {
+            '@type': 'TBD#%s' % value.__class__.__name__,
+            'Unit': {
+                '@type': 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                         '#%s' % unit_name,
+                '@id': value.getSymbol(),
+                'Name': value.getUnit().name
+            },
+            'Value': value.getValue()
+        }
 
     def encode(self, obj):
         v = {'@type': self.TYPE}

@@ -9,11 +9,11 @@
 # jason@glencoesoftware.com.
 #
 
-from .. import Decoder
+from .annotation import AnnotatableDecoder
 from omero.model import Shape
 
 
-class ShapeDecoder(Decoder):
+class ShapeDecoder(AnnotatableDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Shape'
 
@@ -24,13 +24,13 @@ class ShapeDecoder(Decoder):
         v.fillColor = self.to_rtype(data.get('FillColor'))
         v.fillRule = self.to_rtype(data.get('FillRule'))
         v.fontFamily = self.to_rtype(data.get('FontFamily'))
-        v.fontSize = self.to_rtype(data.get('FontSize'))
+        v.fontSize = self.to_unit(data.get('FontSize'))
         v.fontStyle = self.to_rtype(data.get('FontStyle'))
         v.strokeLineCap = self.to_rtype(data.get('LineCap'))
         v.locked = self.to_rtype(data.get('Locked'))
         v.strokeColor = self.to_rtype(data.get('StrokeColor'))
         v.strokeDashArray = self.to_rtype(data.get('StrokeDashArray'))
-        v.strokeWidth = self.to_rtype(data.get('StrokeWidth'))
+        v.strokeWidth = self.to_unit(data.get('StrokeWidth'))
         v.textValue = self.to_rtype(data.get('Text'))
         v.theC = self.to_rtype(data.get('TheC'))
         v.theT = self.to_rtype(data.get('TheT'))

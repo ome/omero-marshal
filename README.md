@@ -6,7 +6,7 @@ Marshaling code to transform OMERO ROI objects into JSON.
 Requirements
 ============
 
-* OMERO.py 5.x
+* OMERO.py 5.1.x
 * Python 2.6+
 
 Development Installation
@@ -34,3 +34,6 @@ Using py.test to run the unit tests:
 Reference
 =========
 
+* http://www.openmicroscopy.org/Schemas/Documentation/Generated/OME-2015-01/ome.html
+* http://www.openmicroscopy.org/site/support/omero5.1/developers/Model/Units.html
+* https://www.openmicroscopy.org/site/support/omero5.1/developers/Model/KeyValuePairs.html

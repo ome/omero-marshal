@@ -9,11 +9,11 @@
 # jason@glencoesoftware.com.
 #
 
-from .. import Decoder
+from .annotation import AnnotatableDecoder
 from omero.model import RoiI
 
 
-class RoiDecoder(Decoder):
+class RoiDecoder(AnnotatableDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
 
@@ -21,7 +21,8 @@ class RoiDecoder(Decoder):
 
     def decode(self, data):
         v = super(RoiDecoder, self).decode(data)
-        v.description = self.to_rtype(data.get('Name'))
+        v.name = self.to_rtype(data.get('Name'))
+        v.description = self.to_rtype(data.get('Description'))
         for shape in data.get('shapes', list()):
             shape_decoder = self.ctx.get_decoder(shape['@type'])
             v.addShape(shape_decoder.decode(shape))

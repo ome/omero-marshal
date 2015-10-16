@@ -11,9 +11,90 @@
 
 import pytest
 
-from omero.model import RoiI, EllipseI, RectI, PointI, PolylineI, PolygonI, \
-    ExperimenterI, ExperimenterGroupI, PermissionsI, DetailsI
-from omero.rtypes import rlong, rint, rstring, rdouble, rbool
+from omero.model import BooleanAnnotationI, CommentAnnotationI, \
+    DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
+    TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
+    RectI, PointI, PolylineI, PolygonI, ExperimenterI, ExperimenterGroupI, \
+    PermissionsI, DetailsI, LengthI, NamedValue
+from omero.model.enums import UnitsLength
+from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
+
+
+def add_annotations(o):
+    '''
+    Annotation
+        BasicAnnotation
+            BooleanAnnotation
+                BooleanAnnotationI
+            NumericAnnotation
+                DoubleAnnotation
+                    DoubleAnnotationI
+                LongAnnotation
+                    LongAnnotationI
+            TermAnnotation
+                TermAnnotationI
+            TimestampAnnotation
+                TimestampAnnotationI
+        ListAnnotation
+            ListAnnotationI
+        MapAnnotation
+            MapAnnotationI
+        TextAnnotation
+            CommentAnnotation
+                CommentAnnotationI
+            TagAnnotation
+                TagAnnotationI
+            XmlAnnotation
+                XmlAnnotationI
+        TypeAnnotation
+            FileAnnotation
+                FileAnnotationI
+    '''
+    annotation = BooleanAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('boolean_annotation')
+    annotation.boolValue = rbool(True)
+    o.linkAnnotation(annotation)
+    annotation = CommentAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('comment_annotation')
+    annotation.textValue = rstring('text_value')
+    o.linkAnnotation(annotation)
+    annotation = DoubleAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('double_annotation')
+    annotation.doubleValue = rdouble(1.0)
+    o.linkAnnotation(annotation)
+    annotation = LongAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('long_annotation')
+    annotation.longValue = rlong(1L)
+    o.linkAnnotation(annotation)
+    annotation = MapAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('map_annotation')
+    annotation.setMapValue([NamedValue('a', '1'), NamedValue('b', '2')])
+    o.linkAnnotation(annotation)
+    annotation = TagAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('tag_annotation')
+    annotation.textValue = rstring('tag_value')
+    o.linkAnnotation(annotation)
+    annotation = TermAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('term_annotation')
+    annotation.termValue = rstring('term_value')
+    o.linkAnnotation(annotation)
+    annotation = TimestampAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('timestamp_annotation')
+    annotation.timeValue = rtime(1)
+    o.linkAnnotation(annotation)
+    annotation = XmlAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('xml_annotation')
+    annotation.textValue = rstring('<xml_value></xml_value>')
+    o.linkAnnotation(annotation)
 
 
 @pytest.fixture()
@@ -57,7 +138,8 @@ def details():
 def roi():
     o = RoiI()
     o.id = rlong(1L)
-    o.description = rstring('the_name')
+    o.name = rstring('the_name')
+    o.description = rstring('the_description')
     return o
 
 
@@ -68,17 +150,25 @@ def roi_with_shapes(roi, ellipse, rectangle):
     return roi
 
 
+@pytest.fixture()
+def roi_with_shapes_and_annotations(roi, ellipse, rectangle):
+    roi.addShape(ellipse)
+    roi.addShape(rectangle)
+    add_annotations(roi)
+    return roi
+
+
 def populate_shape(o):
     o.fillColor = rint(0xffffffff)
     o.fillRule = rstring('solid')
     o.fontFamily = rstring('cursive')
-    o.fontSize = rint(12)
+    o.fontSize = LengthI(12, UnitsLength.POINT)
     o.fontStyle = rstring('italic')
     o.locked = rbool(False)
     o.strokeColor = rint(0xffff0000)
     o.strokeDashArray = rstring('inherit')
     o.strokeLineCap = rstring('round')
-    o.strokeWidth = rint(4)
+    o.strokeWidth = LengthI(4, UnitsLength.PIXEL)
     o.textValue = rstring('the_text')
     o.theC = rint(1)
     o.theT = rint(2)
@@ -91,6 +181,19 @@ def populate_shape(o):
 def ellipse():
     o = EllipseI()
     populate_shape(o)
+    o.cx = rdouble(1.0)
+    o.cy = rdouble(2.0)
+    o.rx = rdouble(3.0)
+    o.ry = rdouble(4.0)
+    o.id = rlong(1L)
+    return o
+
+
+@pytest.fixture()
+def ellipse_with_annotations():
+    o = EllipseI()
+    populate_shape(o)
+    add_annotations(o)
     o.cx = rdouble(1.0)
     o.cy = rdouble(2.0)
     o.rx = rdouble(3.0)
