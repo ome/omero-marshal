@@ -50,14 +50,14 @@ def read(fname):
 
 setup(name='omero_marshal',
       version=version,
-      description='OMERO ROI to JSON',
+      description='OMERO Marshal',
       long_description=read('README.md'),
       classifiers=[],  # Get strings from
                        # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       keywords='',
       author='Glencoe Software, Inc.',
       author_email='',
-      url='https://github.com/glencoesoftware/roi-to-json',
+      url='https://github.com/openmicroscopy/omero-marshal',
       license='',
       packages=find_packages(),
       zip_safe=True,

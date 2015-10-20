@@ -1,7 +1,9 @@
-OMERO ROI to JSON project
-=========================
+OMERO Marshal
+=============
 
-Marshaling code to transform OMERO ROI objects into JSON.
+Extensible marshaling code to transform various OMERO objects into
+dictionaries which can then be marshalled using JSON or alternative
+encodings.
 
 Requirements
 ============
@@ -14,13 +16,13 @@ Development Installation
 
 1. Clone the repository
 
-        git clone git@github.com:glencoesoftware/roi-to-json.git
+        git clone git@github.com:openmicroscopy/omero-marshal.git
 
 2. Set up a virtualenv (http://www.pip-installer.org/) and activate it
 
         curl -O -k https://raw.github.com/pypa/virtualenv/master/virtualenv.py
-        python virtualenv.py roi-to-json
-        source roi-to-json/bin/activate
+        python virtualenv.py omero-marshal
+        source omero-marshal/bin/activate
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
 
