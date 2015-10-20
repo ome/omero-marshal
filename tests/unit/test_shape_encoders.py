@@ -103,24 +103,18 @@ class TestShapeEncoder(object):
         assert shape['StrokeColor'] == 0xffff0000
         assert shape['StrokeDashArray'] == 'inherit'
         assert shape['StrokeWidth'] == {
-            '@type': 'TBD#LengthI', 'Unit': {
-                '@type': 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                         '#UnitsLength',
-                '@id': 'pixel',
-                'Name': 'PIXEL'
-            },
+            '@type': 'TBD#LengthI',
+            'Unit': 'PIXEL',
+            'Symbol': 'pixel',
             'Value': 4
         }
         assert shape['LineCap'] == 'round'
         assert shape['Text'] == 'the_text'
         assert shape['FontFamily'] == 'cursive'
         assert shape['FontSize'] == {
-            '@type': 'TBD#LengthI', 'Unit': {
-                '@type': 'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                         '#UnitsLength',
-                '@id': 'pt',
-                'Name': 'POINT'
-            },
+            '@type': 'TBD#LengthI',
+            'Unit': 'POINT',
+            'Symbol': 'pt',
             'Value': 12
         }
         assert shape['FontStyle'] == 'italic'
