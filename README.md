@@ -33,6 +33,12 @@ Using py.test to run the unit tests:
 
     	py.test tests/unit/
 
+License
+=======
+
+This project, similar to many Open Microscopy Environment (OME) projects, is
+licensed under the terms of the GNU General Public License (GPL) v2 or later.
+
 Reference
 =========
 
