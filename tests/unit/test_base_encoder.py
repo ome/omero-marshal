@@ -25,6 +25,32 @@ class TestBaseEncoder(object):
             'omero:details': {'@type': 'TBD#Details'}
         }
 
+    def test_base_encoder_with_unloaded_details_children(
+            self, roi_with_unloaded_details_children):
+        encoder = get_encoder(roi_with_unloaded_details_children.__class__)
+        v = encoder.encode(roi_with_unloaded_details_children)
+        assert v == {
+            '@id': 1L,
+            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
+            'Name': 'the_name',
+            'Description': 'the_description',
+            'omero:details': {
+                '@type': 'TBD#Details',
+                'owner': {
+                    '@id': 1L,
+                    '@type':
+                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                        '#Experimenter'
+                },
+                'group': {
+                    '@id': 1L,
+                    '@type':
+                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                        '#ExperimenterGroup'
+                }
+            }
+        }
+
 
 class TestDetailsEncoder(object):
 
