@@ -144,6 +144,13 @@ def roi():
 
 
 @pytest.fixture()
+def roi_with_unloaded_details_children(roi):
+    roi.details.owner = ExperimenterI(1L, False)
+    roi.details.group = ExperimenterGroupI(1L, False)
+    return roi
+
+
+@pytest.fixture()
 def roi_with_shapes(roi, ellipse, rectangle):
     roi.addShape(ellipse)
     roi.addShape(rectangle)
