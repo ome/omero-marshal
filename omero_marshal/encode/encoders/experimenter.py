@@ -19,6 +19,8 @@ class ExperimenterEncoder(Encoder):
 
     def encode(self, obj):
         v = super(ExperimenterEncoder, self).encode(obj)
+        if not obj.isLoaded():
+            return v
         self.set_if_not_none(v, 'FirstName', obj.firstName)
         self.set_if_not_none(v, 'MiddleName', obj.middleName)
         self.set_if_not_none(v, 'LastName', obj.lastName)

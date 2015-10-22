@@ -20,6 +20,8 @@ class ExperimenterGroupEncoder(Encoder):
 
     def encode(self, obj):
         v = super(ExperimenterGroupEncoder, self).encode(obj)
+        if not obj.isLoaded():
+            return v
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Name', obj.name)
         return v
