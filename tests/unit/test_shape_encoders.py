@@ -163,7 +163,7 @@ class TestEllipseEncoder(TestShapeEncoder):
         self.assert_ellipse(v, has_annotations=True)
 
 
-class TestRectangeEncoder(TestShapeEncoder):
+class TestRectangleEncoder(TestShapeEncoder):
 
     def test_encoder(self, rectangle):
         encoder = get_encoder(rectangle.__class__)

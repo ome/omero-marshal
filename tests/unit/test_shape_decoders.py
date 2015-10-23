@@ -124,7 +124,7 @@ class TestEllipseDecoder(TestShapeDecoder):
         self.assert_ellipse(v, has_annotations=True)
 
 
-class TestRectangeDecoder(TestShapeDecoder):
+class TestRectangleDecoder(TestShapeDecoder):
 
     def test_decoder(self, rectangle):
         encoder = get_encoder(rectangle.__class__)
