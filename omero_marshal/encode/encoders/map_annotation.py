@@ -22,7 +22,11 @@ class MapAnnotationEncoder(AnnotationEncoder):
         v = super(MapAnnotationEncoder, self).encode(obj)
         if obj.mapValue is None:
             return None
-        self.set_if_not_none(v, 'Value', obj.getMapValueAsMap())
+        self.set_if_not_none(
+            v, 'Value', [
+                [nv.name, nv.value] for nv in obj.getMapValue()
+            ]
+        )
         return v
 
 encoder = (MapAnnotationI, MapAnnotationEncoder)

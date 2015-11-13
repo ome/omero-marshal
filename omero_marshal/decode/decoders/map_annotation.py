@@ -23,7 +23,7 @@ class MapAnnotationDecoder(AnnotationDecoder):
         v = super(MapAnnotationDecoder, self).decode(data)
         map_value = data.get('Value', list())
         map_value = [
-            NamedValue(key, value) for key, value in map_value.items()
+            NamedValue(key, value) for key, value in map_value
         ]
         v.setMapValue(map_value)
         return v

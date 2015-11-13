@@ -37,7 +37,11 @@ class TestShapeDecoder(object):
         assert long_annotation.longValue.val == 1L
         assert map_annotation.ns.val == 'map_annotation'
         assert map_annotation.description.val == 'the_description'
-        assert map_annotation.getMapValueAsMap() == {'a': '1', 'b': '2'}
+        map_value_a, map_value_b = map_annotation.getMapValue()
+        assert map_value_a.name == 'a'
+        assert map_value_a.value == '1'
+        assert map_value_b.name == 'b'
+        assert map_value_b.value == '2'
         assert tag_annotation.ns.val == 'tag_annotation'
         assert tag_annotation.description.val == 'the_description'
         assert tag_annotation.textValue.val == 'tag_value'
