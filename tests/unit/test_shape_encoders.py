@@ -49,7 +49,7 @@ class TestShapeEncoder(object):
                          '#MapAnnotation',
                 'Description': 'the_description',
                 'Namespace': 'map_annotation',
-                'Value': {'a': '1', 'b': '2'},
+                'Value': [['a', '1'], ['b', '2']],
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
