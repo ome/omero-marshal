@@ -91,7 +91,39 @@ class TestShapeEncoder(object):
         assert roi['Description'] == 'the_description'
         assert roi['@type'] == \
             'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
-        assert roi['omero:details'] == {'@type': 'TBD#Details'}
+        assert roi['omero:details'] == {
+            '@type': 'TBD#Details',
+            'group': {
+                '@id': 1L,
+                '@type':
+                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                    '#ExperimenterGroup',
+                'Description': 'the_description',
+                'Name': 'the_name',
+                'omero:details': {'@type': 'TBD#Details'}
+            },
+            'owner': {
+                '@id': 1L,
+                '@type':
+                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                    '#Experimenter',
+                'Email': 'the_email',
+                'FirstName': 'the_firstName',
+                'Institution': 'the_institution',
+                'LastName': 'the_lastName',
+                'MiddleName': 'the_middleName',
+                'UserName': 'the_omeName',
+                'omero:details': {'@type': 'TBD#Details'}
+            },
+            'permissions': {
+                '@type': 'TBD#Permissions',
+                'canAnnotate': True,
+                'canDelete': True,
+                'canEdit': True,
+                'canLink': True,
+                'perm': 'rwrwrw'
+            }
+        }
         if not has_annotations:
             assert roi.get('Annotations') is None
         else:
