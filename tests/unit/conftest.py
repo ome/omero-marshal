@@ -126,20 +126,23 @@ def permissions():
 
 
 @pytest.fixture()
-def details():
+def details(experimenter, experimenter_group, permissions):
     o = DetailsI()
-    o.owner = experimenter()
-    o.group = experimenter_group()
-    o.permissions = permissions()
+    o.owner = experimenter
+    o.group = experimenter_group
+    o.permissions = permissions
     return o
 
 
 @pytest.fixture()
-def roi():
+def roi(experimenter, experimenter_group, permissions):
     o = RoiI()
     o.id = rlong(1L)
     o.name = rstring('the_name')
     o.description = rstring('the_description')
+    o.details.owner = experimenter
+    o.details.group = experimenter_group
+    o.details.permissions = permissions
     return o
 
 

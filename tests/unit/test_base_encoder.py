@@ -22,7 +22,39 @@ class TestBaseEncoder(object):
             '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
             'Name': 'the_name',
             'Description': 'the_description',
-            'omero:details': {'@type': 'TBD#Details'}
+            'omero:details': {
+                '@type': 'TBD#Details',
+                'group': {
+                    '@id': 1L,
+                    '@type':
+                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                        '#ExperimenterGroup',
+                    'Description': 'the_description',
+                    'Name': 'the_name',
+                    'omero:details': {'@type': 'TBD#Details'}
+                },
+                'owner': {
+                    '@id': 1L,
+                    '@type':
+                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
+                        '#Experimenter',
+                    'Email': 'the_email',
+                    'FirstName': 'the_firstName',
+                    'Institution': 'the_institution',
+                    'LastName': 'the_lastName',
+                    'MiddleName': 'the_middleName',
+                    'UserName': 'the_omeName',
+                    'omero:details': {'@type': 'TBD#Details'}
+                },
+                'permissions': {
+                    '@type': 'TBD#Permissions',
+                    'canAnnotate': True,
+                    'canDelete': True,
+                    'canEdit': True,
+                    'canLink': True,
+                    'perm': 'rwrwrw'
+                }
+            }
         }
 
     def test_base_encoder_with_unloaded_details_children(
@@ -47,6 +79,14 @@ class TestBaseEncoder(object):
                     '@type':
                         'http://www.openmicroscopy.org/Schemas/OME/2015-01'
                         '#ExperimenterGroup'
+                },
+                'permissions': {
+                    '@type': 'TBD#Permissions',
+                    'canAnnotate': True,
+                    'canDelete': True,
+                    'canEdit': True,
+                    'canLink': True,
+                    'perm': 'rwrwrw'
                 }
             }
         }
