@@ -20,14 +20,19 @@ class DetailsDecoder(Decoder):
     OMERO_CLASS = DetailsI
 
     def decode(self, data):
-        print data
         v = DetailsI()
-        decoder = self.ctx.get_decoder(data['owner']['@type'])
-        v.owner = decoder.decode(data['owner'])
-        decoder = self.ctx.get_decoder(data['group']['@type'])
-        v.group = decoder.decode(data['group'])
-        decoder = self.ctx.get_decoder(data['permissions']['@type'])
-        v.permissions = decoder.decode(data['permissions'])
+        owner = data.get('owner')
+        if owner is not None:
+            decoder = self.ctx.get_decoder(owner['@type'])
+            v.owner = decoder.decode(owner)
+        group = data.get('group')
+        if group is not None:
+            decoder = self.ctx.get_decoder(group['@type'])
+            v.group = decoder.decode(group)
+        permissions = data.get('permissions')
+        if permissions is not None:
+            decoder = self.ctx.get_decoder(permissions['@type'])
+            v.permissions = decoder.decode(permissions)
         return v
 
 decoder = (DetailsDecoder.TYPE, DetailsDecoder)
