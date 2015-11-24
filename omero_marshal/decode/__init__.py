@@ -38,7 +38,7 @@ class Decoder(object):
         return rtype(v)
 
     def decode(self, data):
-        details = data.get('details')
+        details = data.get('omero:details')
         if details is not None:
             decoder = self.ctx.get_decoder(details['@type'])
             data.details = decoder.decode(details)
