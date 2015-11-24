@@ -20,6 +20,8 @@ class PermissionsDecoder(Decoder):
     OMERO_CLASS = PermissionsI
 
     def decode(self, data):
-        return PermissionsI.from_string(data['perm'])
+        o = PermissionsI()
+        o.from_string(data['perm'])
+        return o
 
 decoder = (PermissionsDecoder.TYPE, PermissionsDecoder)
