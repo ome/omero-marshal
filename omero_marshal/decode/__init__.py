@@ -40,7 +40,7 @@ class Decoder(object):
     def decode(self, data):
         o = self.OMERO_CLASS(data.get('@id'))
         details = data.get('omero:details')
-        if details is not None and hasattr(o, 'setDetails'):
+        if details is not None:
             decoder = self.ctx.get_decoder(details['@type'])
-            o.details = decoder.decode(details)
+            o._details = decoder.decode(details)
         return o
