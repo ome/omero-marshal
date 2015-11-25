@@ -126,6 +126,30 @@ def permissions():
 
 
 @pytest.fixture()
+def permissions_cannot_link(permissions):
+    permissions._restrictions = [True, False, False, False]
+    return permissions
+
+
+@pytest.fixture()
+def permissions_cannot_edit(permissions):
+    permissions._restrictions = [False, True, False, False]
+    return permissions
+
+
+@pytest.fixture()
+def permissions_cannot_delete(permissions):
+    permissions._restrictions = [False, False, True, False]
+    return permissions
+
+
+@pytest.fixture()
+def permissions_cannot_annotate(permissions):
+    permissions._restrictions = [False, False, False, True]
+    return permissions
+
+
+@pytest.fixture()
 def details(experimenter, experimenter_group, permissions):
     o = DetailsI()
     o.owner = experimenter

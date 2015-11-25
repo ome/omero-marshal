@@ -22,6 +22,10 @@ class PermissionsDecoder(Decoder):
     def decode(self, data):
         o = PermissionsI()
         o.from_string(data['perm'])
+        o._restrictions = [
+            not data['canLink'], not data['canEdit'],
+            not data['canDelete'], not data['canAnnotate']
+        ]
         return o
 
 decoder = (PermissionsDecoder.TYPE, PermissionsDecoder)

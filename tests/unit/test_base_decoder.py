@@ -43,3 +43,56 @@ class TestBaseDecoder(object):
         decoder = get_decoder(data['@type'])
         v = decoder.decode(data)
         self.assert_roi(v)
+
+
+class TestPermissionsDecoder(object):
+
+    def test_permissions(self, permissions):
+        encoder = get_encoder(permissions.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(permissions)
+        v = decoder.decode(v)
+        assert v.canLink()
+        assert v.canEdit()
+        assert v.canDelete()
+        assert v.canAnnotate()
+
+    def test_permissions_cannot_link(self, permissions_cannot_link):
+        encoder = get_encoder(permissions_cannot_link.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(permissions_cannot_link)
+        v = decoder.decode(v)
+        assert not v.canLink()
+        assert v.canEdit()
+        assert v.canDelete()
+        assert v.canAnnotate()
+
+    def test_permissions_cannot_edit(self, permissions_cannot_edit):
+        encoder = get_encoder(permissions_cannot_edit.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(permissions_cannot_edit)
+        v = decoder.decode(v)
+        assert v.canLink()
+        assert not v.canEdit()
+        assert v.canDelete()
+        assert v.canAnnotate()
+
+    def test_permissions_cannot_delete(self, permissions_cannot_delete):
+        encoder = get_encoder(permissions_cannot_delete.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(permissions_cannot_delete)
+        v = decoder.decode(v)
+        assert v.canLink()
+        assert v.canEdit()
+        assert not v.canDelete()
+        assert v.canAnnotate()
+
+    def test_permissions_cannot_annotate(self, permissions_cannot_annotate):
+        encoder = get_encoder(permissions_cannot_annotate.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(permissions_cannot_annotate)
+        v = decoder.decode(v)
+        assert v.canLink()
+        assert v.canEdit()
+        assert v.canDelete()
+        assert not v.canAnnotate()
