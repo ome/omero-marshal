@@ -15,7 +15,8 @@ from omero.model import ExperimenterGroupI
 
 class ExperimenterGroupDecoder(Decoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#ExperimenterGroup'
+    TYPE = \
+        'http://www.openmicroscopy.org/Schemas/OME/2015-01#ExperimenterGroup'
 
     OMERO_CLASS = ExperimenterGroupI
 
