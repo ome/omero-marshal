@@ -17,6 +17,27 @@ from omero.model import LengthI
 
 class TestShapeDecoder(object):
 
+    def assert_experimenter(self, experimenter):
+        assert experimenter.id.val == 1L
+        assert experimenter.email.val == 'the_email'
+        assert experimenter.firstName.val == 'the_firstName'
+        assert experimenter.lastName.val == 'the_lastName'
+        assert experimenter.middleName.val == 'the_middleName'
+        assert experimenter.omeName.val == 'the_omeName'
+
+    def assert_experimenter_group(self, experimenter_group):
+        assert experimenter_group.id.val == 1L
+        assert experimenter_group.name.val == 'the_name'
+        assert experimenter_group.description.val == 'the_description'
+
+    def assert_permissions(self, permissions):
+        assert str(permissions) == 'rwrwrw'
+
+    def assert_details(self, details):
+        self.assert_experimenter(details.owner)
+        self.assert_experimenter_group(details.group)
+        self.assert_permissions(details.permissions)
+
     def assert_annotations(self, o):
         assert o.annotationLinksLoaded
         boolean_annotation, comment_annotation, double_annotation, \
@@ -60,6 +81,7 @@ class TestShapeDecoder(object):
             assert not roi.annotationLinksLoaded
         else:
             self.assert_annotations(roi)
+        self.assert_details(roi.details)
 
     def assert_shape(self, shape, has_annotations=False):
         assert shape.fillColor.val == 0xffffffff

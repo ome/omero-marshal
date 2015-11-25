@@ -10,23 +10,29 @@
 #
 
 from .. import Decoder
-from omero.model import Details
+from omero.model import DetailsI
 
 
 class DetailsDecoder(Decoder):
 
     TYPE = 'TBD#Details'
 
-    OMERO_CLASS = Details
+    OMERO_CLASS = DetailsI
 
     def decode(self, data):
-        v = Details()
-        decoder = self.ctx.get_decoder(data['owner']['@type'])
-        v.owner = decoder.decode(data['owner'])
-        decoder = self.ctx.get_decoder(data['group']['@type'])
-        v.group = decoder.decode(data['group'])
-        decoder = self.ctx.get_decoder(data['details']['@type'])
-        v.details = decoder.decode(data['details'])
+        v = DetailsI()
+        owner = data.get('owner')
+        if owner is not None:
+            decoder = self.ctx.get_decoder(owner['@type'])
+            v.owner = decoder.decode(owner)
+        group = data.get('group')
+        if group is not None:
+            decoder = self.ctx.get_decoder(group['@type'])
+            v.group = decoder.decode(group)
+        permissions = data.get('permissions')
+        if permissions is not None:
+            decoder = self.ctx.get_decoder(permissions['@type'])
+            v.permissions = decoder.decode(permissions)
         return v
 
 decoder = (DetailsDecoder.TYPE, DetailsDecoder)
