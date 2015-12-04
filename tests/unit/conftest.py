@@ -11,13 +11,33 @@
 
 import pytest
 
-from omero.model import BooleanAnnotationI, CommentAnnotationI, \
+from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
-    RectI, PointI, PolylineI, PolygonI, ExperimenterI, ExperimenterGroupI, \
-    PermissionsI, DetailsI, LengthI, NamedValue
+    RectI, PointI, PolylineI, PolygonI, ProjectI, ExperimenterI, \
+    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, NamedValue
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
+
+
+@pytest.fixture()
+def project():
+    o = ProjectI()
+    o.id = rlong(1L)
+    o.name = rstring('the_name')
+    o.description = rstring('the_description')
+    return o
+
+
+@pytest.fixture()
+def project_with_datasets(project):
+    for dataset_id in range(1, 3):
+        o = DatasetI()
+        o.id = rlong(dataset_id)
+        o.name = rstring('dataset_name_%d' % dataset_id)
+        o.description = rstring('dataset_description_%d' % dataset_id)
+        project.linkDataset(o)
+    return project
 
 
 def add_annotations(o):
