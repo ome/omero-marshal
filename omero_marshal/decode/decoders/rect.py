@@ -10,7 +10,7 @@
 #
 
 from .shape import ShapeDecoder
-from omero.model import RectI
+from omero.model import RectangleI
 from omero.rtypes import RDoubleI
 
 
@@ -18,7 +18,7 @@ class RectDecoder(ShapeDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
 
-    OMERO_CLASS = RectI
+    OMERO_CLASS = RectangleI
 
     def decode(self, data):
         v = super(RectDecoder, self).decode(data)

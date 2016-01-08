@@ -10,7 +10,7 @@
 #
 
 from .shape import ShapeEncoder
-from omero.model import RectI
+from omero.model import RectangleI
 
 
 class RectEncoder(ShapeEncoder):
@@ -25,4 +25,4 @@ class RectEncoder(ShapeEncoder):
         self.set_if_not_none(v, 'Height', obj.height)
         return v
 
-encoder = (RectI, RectEncoder)
+encoder = (RectangleI, RectEncoder)

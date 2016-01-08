@@ -14,7 +14,7 @@ import pytest
 from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
-    RectI, PointI, PolylineI, PolygonI, ProjectI, ExperimenterI, \
+    RectangleI, PointI, PolylineI, PolygonI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, NamedValue
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
@@ -258,7 +258,7 @@ def ellipse_with_annotations():
 
 @pytest.fixture()
 def rectangle():
-    o = RectI()
+    o = RectangleI()
     populate_shape(o)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
