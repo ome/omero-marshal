@@ -175,6 +175,25 @@ class TestPointDecoder(TestShapeDecoder):
         assert v.cy.val == 2.0
 
 
+class TestLineDecoder(TestShapeDecoder):
+
+    def test_decoder(self, line):
+        encoder = get_encoder(line.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(line)
+        v = decoder.decode(v)
+        self.assert_shape(v)
+        assert v.id.val == 6L
+        assert v.x1.__class__ is RDoubleI
+        assert v.x1.val == 0.0
+        assert v.y1.__class__ is RDoubleI
+        assert v.y1.val == 0.0
+        assert v.x2.__class__ is RDoubleI
+        assert v.x2.val == 1.0
+        assert v.y2.__class__ is RDoubleI
+        assert v.y2.val == 2.0
+
+
 class TestPolylineDecoder(TestShapeDecoder):
 
     def test_decoder(self, polyline):

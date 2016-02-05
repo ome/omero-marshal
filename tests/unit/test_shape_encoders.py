@@ -240,6 +240,20 @@ class TestPolygonEncoder(TestShapeEncoder):
         assert v['Points'] == '0,0 1,2 3,5'
 
 
+class TestLineEncoder(TestShapeEncoder):
+
+    def test_encoder(self, line):
+        encoder = get_encoder(line.__class__)
+        v = encoder.encode(line)
+        self.assert_shape(v)
+        assert v['@id'] == 6L
+        assert v['@type'] == \
+            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Line'
+        assert v['X1'] == 0.0
+        assert v['Y1'] == 0.0
+        assert v['X2'] == 1.0
+        assert v['Y2'] == 2.0
+
 class TestRoiEncoder(TestShapeEncoder):
 
     def assert_roi_with_shapes(self, v, has_annotations=False):
