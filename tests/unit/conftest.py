@@ -15,7 +15,7 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
     RectI, PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
-    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, NamedValue
+    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -275,6 +275,16 @@ def point():
     o.cx = rdouble(1.0)
     o.cy = rdouble(2.0)
     o.id = rlong(3L)
+    return o
+
+
+@pytest.fixture()
+def label():
+    o = LabelI()
+    populate_shape(o)
+    o.x = rdouble(1.0)
+    o.y = rdouble(2.0)
+    o.id = rlong(7L)
     return o
 
 
