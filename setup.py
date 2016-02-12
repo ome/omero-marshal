@@ -12,7 +12,7 @@ from setuptools.command.test import test as TestCommand
 import multiprocessing
 assert multiprocessing  # silence flake8
 
-version = '0.1'
+version = '0.2'
 
 
 def get_requirements(suffix=''):
