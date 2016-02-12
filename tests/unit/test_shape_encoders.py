@@ -216,6 +216,19 @@ class TestPointEncoder(TestShapeEncoder):
         assert v['Y'] == 2.0
 
 
+class TestLabelEncoder(TestShapeEncoder):
+
+    def test_encoder(self, label):
+        encoder = get_encoder(label.__class__)
+        v = encoder.encode(label)
+        self.assert_shape(v)
+        assert v['@id'] == 7L
+        assert v['@type'] == \
+            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Label'
+        assert v['X'] == 1.0
+        assert v['Y'] == 2.0
+
+
 class TestPolylineEncoder(TestShapeEncoder):
 
     def test_encoder(self, polyline):
@@ -238,6 +251,21 @@ class TestPolygonEncoder(TestShapeEncoder):
         assert v['@type'] == \
             'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polygon'
         assert v['Points'] == '0,0 1,2 3,5'
+
+
+class TestLineEncoder(TestShapeEncoder):
+
+    def test_encoder(self, line):
+        encoder = get_encoder(line.__class__)
+        v = encoder.encode(line)
+        self.assert_shape(v)
+        assert v['@id'] == 6L
+        assert v['@type'] == \
+            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Line'
+        assert v['X1'] == 0.0
+        assert v['Y1'] == 0.0
+        assert v['X2'] == 1.0
+        assert v['Y2'] == 2.0
 
 
 class TestRoiEncoder(TestShapeEncoder):

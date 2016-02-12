@@ -14,8 +14,8 @@ import pytest
 from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
-    RectI, PointI, PolylineI, PolygonI, ProjectI, ExperimenterI, \
-    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, NamedValue
+    RectI, PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
+    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -279,6 +279,16 @@ def point():
 
 
 @pytest.fixture()
+def label():
+    o = LabelI()
+    populate_shape(o)
+    o.x = rdouble(1.0)
+    o.y = rdouble(2.0)
+    o.id = rlong(7L)
+    return o
+
+
+@pytest.fixture()
 def polyline():
     o = PolylineI()
     populate_shape(o)
@@ -293,4 +303,16 @@ def polygon():
     populate_shape(o)
     o.points = rstring('0,0 1,2 3,5')
     o.id = rlong(5L)
+    return o
+
+
+@pytest.fixture()
+def line():
+    o = LineI()
+    populate_shape(o)
+    o.setX1(0)
+    o.setY1(0)
+    o.setX2(1)
+    o.setY2(2)
+    o.id = rlong(6L)
     return o
