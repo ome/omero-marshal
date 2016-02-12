@@ -11,8 +11,12 @@
 
 import importlib
 import pkgutil
+import logging
 from encode import encoders
 from decode import decoders
+
+
+logger = logging.getLogger('omero-marshal')
 
 
 ENCODERS = dict()
@@ -24,11 +28,19 @@ def dumps(obj):
 
 
 def get_encoder(t):
-    return ENCODERS.get(t)
+    try:
+        return ENCODERS[t]
+    except KeyError:
+        logger.warn('Requested unknown encoder %s' % t, exc_info=True)
+        return None
 
 
 def get_decoder(t):
-    return DECODERS.get(t)
+    try:
+        return DECODERS[t]
+    except KeyError:
+        logger.warn('Requested unknown decoder %s' % t, exc_info=True)
+        return None
 
 
 class MarshallingCtx(object):
@@ -38,10 +50,19 @@ class MarshallingCtx(object):
         self.decoders = decoders
 
     def get_encoder(self, t):
-        return self.encoders.get(t)
+        try:
+            return self.encoders[t]
+        except KeyError:
+            logger.warn('Requested unknown encoder %s' % t, exc_info=True)
+            return None
 
     def get_decoder(self, t):
-        return self.decoders.get(t)
+        try:
+            return self.decoders[t]
+        except KeyError:
+            logger.warn('Requested unknown decoder %s' % t, exc_info=True)
+            return None
+
 
 _ctx = MarshallingCtx(ENCODERS, DECODERS)
 
