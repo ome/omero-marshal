@@ -10,22 +10,29 @@
 #
 
 from .shape import ShapeDecoder
-from omero.model import RectI
 from omero.rtypes import RDoubleI
 
+# Handle differences in class naming between OMERO 5.1.x and 5.2.x
+try:
+    # OMERO 5.1.x
+    from omero.model import RectI as RectangleI
+except ImportError:
+    # OMERO 5.2.x
+    from omero.model import RectangleI
 
-class RectDecoder(ShapeDecoder):
+
+class RectangleDecoder(ShapeDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
 
-    OMERO_CLASS = RectI
+    OMERO_CLASS = RectangleI
 
     def decode(self, data):
-        v = super(RectDecoder, self).decode(data)
+        v = super(RectangleDecoder, self).decode(data)
         v.x = RDoubleI(data.get('X'))
         v.y = RDoubleI(data.get('Y'))
         v.width = RDoubleI(data.get('Width'))
         v.height = RDoubleI(data.get('Height'))
         return v
 
-decoder = (RectDecoder.TYPE, RectDecoder)
+decoder = (RectangleDecoder.TYPE, RectangleDecoder)

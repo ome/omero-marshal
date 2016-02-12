@@ -14,10 +14,18 @@ import pytest
 from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
-    RectI, PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
+    PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
+
+# Handle differences in class naming between OMERO 5.1.x and 5.2.x
+try:
+    # OMERO 5.1.x
+    from omero.model import RectI as RectangleI
+except ImportError:
+    # OMERO 5.2.x
+    from omero.model import RectangleI
 
 
 @pytest.fixture()
@@ -258,7 +266,7 @@ def ellipse_with_annotations():
 
 @pytest.fixture()
 def rectangle():
-    o = RectI()
+    o = RectangleI()
     populate_shape(o)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
