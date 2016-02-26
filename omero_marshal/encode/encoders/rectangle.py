@@ -10,19 +10,26 @@
 #
 
 from .shape import ShapeEncoder
-from omero.model import RectI
+
+# Handle differences in class naming between OMERO 5.1.x and 5.2.x
+try:
+    # OMERO 5.1.x
+    from omero.model import RectI as RectangleI
+except ImportError:
+    # OMERO 5.2.x
+    from omero.model import RectangleI
 
 
-class RectEncoder(ShapeEncoder):
+class RectangleEncoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
 
     def encode(self, obj):
-        v = super(RectEncoder, self).encode(obj)
+        v = super(RectangleEncoder, self).encode(obj)
         self.set_if_not_none(v, 'X', obj.x)
         self.set_if_not_none(v, 'Y', obj.y)
         self.set_if_not_none(v, 'Width', obj.width)
         self.set_if_not_none(v, 'Height', obj.height)
         return v
 
-encoder = (RectI, RectEncoder)
+encoder = (RectangleI, RectangleEncoder)
