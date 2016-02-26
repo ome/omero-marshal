@@ -25,6 +25,8 @@ before_install:
 
 install:
     - omego download --release ${OMERO_VERSION} py
+    - rm OMERO.py*.zip
+    - mv OMERO.py* OMERO.py
 
 script:
     - PYTHONPATH=$PYTHONPATH:~/OMERO.py/lib/python py.test tests/unit
