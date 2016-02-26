@@ -8,6 +8,8 @@ sudo: false
 env:
   global:
     - ICE=Ice-3.5.1-b1-ubuntu1204-amd64
+    - LD_LIBRARY_PATH=$(pwd)/${ICE}/lib
+    - PYTHONPATH=$(pwd)/${ICE}/python:$(pwd)/OMERO.py/lib/python
   matrix:
     - OMERO_VERSION=5.1
     - OMERO_VERSION=5.2
@@ -23,4 +25,4 @@ install:
     - mv OMERO.py* OMERO.py
 
 script:
-    - PYTHONPATH=./${ICE}/python:./OMERO.py/lib/python py.test tests/unit
+    - py.test tests/unit
