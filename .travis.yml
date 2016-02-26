@@ -18,15 +18,13 @@ env:
     - OMERO_VERSION=5.2
 
 before_install:
-  - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz
-  - tar -xvf ${ICE}.tar.xz
+  - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz -O /tmp/${ICE}.tar.xz
+  - tar -xvf /tmp/${ICE}.tar.xz -C /tmp
   - pip install omego pytest flake8
-
-install:
-    - omego download --release ${OMERO_VERSION} py
-    - rm OMERO.py*.zip
-    - mv OMERO.py* OMERO.py
+  - omego download --release ${OMERO_VERSION} py
+  - rm OMERO.py*.zip
+  - mv OMERO.py* /tmp/OMERO.py
 
 script:
     - flake8 .
-    - LD_LIBRARY_PATH=./${ICE}/lib PYTHONPATH=./${ICE}/python:./OMERO.py/lib/python:. py.test tests/unit
+    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=./${ICE}/python:/tmp/OMERO.py/lib/python:. py.test tests/unit
