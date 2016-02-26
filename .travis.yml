@@ -6,16 +6,19 @@ language: python
 sudo: false
 
 env:
-  - OMERO_VERSION=5.1
-  - OMERO_VERSION=5.2
+  global:
+    - ICE=Ice-3.5.1-b1-ubuntu1204-amd64
+  matrix:
+    - OMERO_VERSION=5.1
+    - OMERO_VERSION=5.2
 
 before_install:
   - mkdir -p download
   - cd download
-  - wget http://downloads.openmicroscopy.org/ice/experimental/Ice-3.5.1-b1-ubuntu1204-amd64.tar.xz
+  - wget "http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz"
   - cd ..
-  - tar -xvf "download/Ice-3.5.1-b1-ubuntu1204-amd64.tar.xz"
-  - ICE_HOME="$(pwd)/Ice-3.5.1-b1-ubuntu1204-amd64"
+  - tar -xvf "download/${ICE}.tar.xz"
+  - ICE_HOME="$(pwd)/${ICE}"
   - export SLICEPATH="${ICE_HOME}/slice"
   - export PATH="${ICE_HOME}/bin:$PATH"
   - export LD_LIBRARY_PATH="${ICE_HOME}/lib:$LD_LIBRARY_PATH"
