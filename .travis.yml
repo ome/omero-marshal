@@ -5,6 +5,11 @@ language: python
 # http://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: false
 
+addons:
+  apt:
+    packages:
+     - zeroc-ice34
+
 env:
   global:
     - ICE=Ice-3.5.1-b1-ubuntu1204-amd64
