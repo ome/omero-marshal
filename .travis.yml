@@ -28,4 +28,4 @@ install:
     - mv OMERO.py* OMERO.py
 
 script:
-    - LD_LIBRARY_PATH=./${ICE}/lib PYTHONPATH=./${ICE}/python:./OMERO.py/lib/python py.test tests/unit
+    - LD_LIBRARY_PATH=./${ICE}/lib PYTHONPATH=./${ICE}/python:./OMERO.py/lib/python:. py.test tests/unit
