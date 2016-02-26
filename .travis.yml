@@ -13,15 +13,9 @@ env:
     - OMERO_VERSION=5.2
 
 before_install:
-  - mkdir -p download
-  - cd download
-  - wget "http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz"
-  - cd ..
-  - tar -xvf "download/${ICE}.tar.xz"
-  - ICE_HOME="$(pwd)/${ICE}"
-  - export PYTHONPATH="${ICE_HOME}/python:$PYTHONPATH"
+  - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz
+  - tar -xvf download/${ICE}.tar.xz
   - pip install omego pytest
-
 
 install:
     - omego download --release ${OMERO_VERSION} py
@@ -29,4 +23,4 @@ install:
     - mv OMERO.py* OMERO.py
 
 script:
-    - PYTHONPATH=$PYTHONPATH:~/OMERO.py/lib/python py.test tests/unit
+    - PYTHONPATH=./${ICE}/python:./OMERO.py/lib/python py.test tests/unit
