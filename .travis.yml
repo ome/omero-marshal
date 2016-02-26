@@ -14,7 +14,7 @@ env:
 
 before_install:
   - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz
-  - tar -xvf download/${ICE}.tar.xz
+  - tar -xvf ${ICE}.tar.xz
   - pip install omego pytest
 
 install:
