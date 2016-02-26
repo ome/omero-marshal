@@ -27,4 +27,4 @@ before_install:
 
 script:
     - flake8 .
-    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=./${ICE}/python:/tmp/OMERO.py/lib/python:. py.test tests/unit
+    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python:. py.test tests/unit
