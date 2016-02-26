@@ -19,15 +19,12 @@ before_install:
   - cd ..
   - tar -xvf "download/${ICE}.tar.xz"
   - ICE_HOME="$(pwd)/${ICE}"
-  - export SLICEPATH="${ICE_HOME}/slice"
-  - export PATH="${ICE_HOME}/bin:$PATH"
-  - export LD_LIBRARY_PATH="${ICE_HOME}/lib:$LD_LIBRARY_PATH"
   - export PYTHONPATH="${ICE_HOME}/python:$PYTHONPATH"
   - pip install omego pytest
 
 
 install:
-    - omego download --release OMERO_VERSION py
+    - omego download --release ${OMERO_VERSION} py
 
 script:
     - PYTHONPATH=$PYTHONPATH:~/OMERO.py/lib/python py.test tests/unit
