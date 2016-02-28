@@ -1,0 +1,30 @@
+language: python
+
+# This (sudo: false) is needed to "run on container-based infrastructure" on
+# which cache: is available
+# http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+
+addons:
+  apt:
+    packages:
+     - zeroc-ice34
+
+env:
+  global:
+    - ICE=Ice-3.5.1-b1-ubuntu1204-amd64
+  matrix:
+    - OMERO_VERSION=5.1
+    - OMERO_VERSION=5.2
+
+before_install:
+  - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz -O /tmp/${ICE}.tar.xz
+  - tar -xvf /tmp/${ICE}.tar.xz -C /tmp
+  - pip install omego pytest flake8
+  - omego download --release ${OMERO_VERSION} py
+  - rm OMERO.py*.zip
+  - mv OMERO.py* /tmp/OMERO.py
+
+script:
+    - flake8 .
+    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python:. py.test tests/unit

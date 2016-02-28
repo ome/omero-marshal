@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/openmicroscopy/omero-marshal.png)](http://travis-ci.org/openmicroscopy/omero-marshal)
+
 OMERO Marshal
 =============
 
