@@ -12,7 +12,7 @@ from setuptools.command.test import test as TestCommand
 import multiprocessing
 assert multiprocessing  # silence flake8
 
-version = '0.2'
+VERSION = '0.3.0'
 
 
 def get_requirements(suffix=''):
@@ -48,26 +48,36 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-setup(name='omero_marshal',
-      version=version,
-      description='OMERO Marshal',
-      long_description=read('README.md'),
-      classifiers=[],  # Get strings from
-                       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='',
-      author='Glencoe Software, Inc.',
-      author_email='',
-      url='https://github.com/openmicroscopy/omero-marshal',
-      license='',
-      packages=find_packages(),
-      zip_safe=True,
-      include_package_data=True,
-      platforms='any',
-      setup_requires=['flake8'],
-      install_requires=get_requirements(),
-      tests_require=get_requirements('-dev'),
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
-      cmdclass={'test': PyTest},
-      )
+setup(
+    name='omero_marshal',
+    version=VERSION,
+    description='OMERO Marshal',
+    long_description=read('README.md'),
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU General Public License v2 '
+        'or later (GPLv2+)',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 2',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ],  # Get strings from
+        # http://pypi.python.org/pypi?%3Aaction=list_classifiers
+    keywords='',
+    author='The Open Microscopy Team, Glencoe Software, Inc.',
+    author_email='ome-devel@lists.openmicroscopy.org.uk',
+    url='https://github.com/openmicroscopy/omero-marshal',
+    license='GPLv2+',
+    packages=find_packages(),
+    zip_safe=True,
+    include_package_data=True,
+    platforms='any',
+    setup_requires=['flake8'],
+    install_requires=get_requirements(),
+    tests_require=get_requirements('-dev'),
+    entry_points="""
+    # -*- Entry points: -*-
+    """,
+    cmdclass={'test': PyTest},
+)
