@@ -28,3 +28,5 @@ before_install:
 script:
     - python setup.py flake8
     - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python setup.py test
+    - python setup.py sdist install
+    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python -m 'omero_marshal.encode'
