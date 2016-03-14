@@ -16,6 +16,7 @@ env:
   matrix:
     - OMERO_VERSION=5.1
     - OMERO_VERSION=5.2
+    - OMERO_VERSION=5.3
 
 before_install:
   - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz -O /tmp/${ICE}.tar.xz
