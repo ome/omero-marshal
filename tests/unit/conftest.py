@@ -245,10 +245,10 @@ def populate_shape(o, set_unit_attributes=True):
 def ellipse():
     o = EllipseI()
     populate_shape(o)
-    o.cx = rdouble(1.0)
-    o.cy = rdouble(2.0)
-    o.rx = rdouble(3.0)
-    o.ry = rdouble(4.0)
+    o.x = rdouble(1.0)
+    o.y = rdouble(2.0)
+    o.radiusx = rdouble(3.0)
+    o.radiusy = rdouble(4.0)
     o.id = rlong(1L)
     return o
 
@@ -258,10 +258,10 @@ def ellipse_with_annotations():
     o = EllipseI()
     populate_shape(o)
     add_annotations(o)
-    o.cx = rdouble(1.0)
-    o.cy = rdouble(2.0)
-    o.rx = rdouble(3.0)
-    o.ry = rdouble(4.0)
+    o.x = rdouble(1.0)
+    o.y = rdouble(2.0)
+    o.radiusx = rdouble(3.0)
+    o.radiusy = rdouble(4.0)
     o.id = rlong(1L)
     return o
 
@@ -282,8 +282,8 @@ def rectangle():
 def point():
     o = PointI()
     populate_shape(o)
-    o.cx = rdouble(1.0)
-    o.cy = rdouble(2.0)
+    o.x = rdouble(1.0)
+    o.y = rdouble(2.0)
     o.id = rlong(3L)
     return o
 

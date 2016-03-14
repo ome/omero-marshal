@@ -19,8 +19,8 @@ class PointEncoder(ShapeEncoder):
 
     def encode(self, obj):
         v = super(PointEncoder, self).encode(obj)
-        self.set_if_not_none(v, 'X', obj.cx)
-        self.set_if_not_none(v, 'Y', obj.cy)
+        self.set_if_not_none(v, 'X', obj.x)
+        self.set_if_not_none(v, 'Y', obj.y)
         return v
 
 encoder = (PointI, PointEncoder)

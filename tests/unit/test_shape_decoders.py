@@ -118,14 +118,14 @@ class TestShapeDecoder(object):
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse.id.val == 1L
-        assert ellipse.cx.__class__ is RDoubleI
-        assert ellipse.cx.val == 1.0
-        assert ellipse.cy.__class__ is RDoubleI
-        assert ellipse.cy.val == 2.0
-        assert ellipse.rx.__class__ is RDoubleI
-        assert ellipse.rx.val == 3.0
-        assert ellipse.ry.__class__ is RDoubleI
-        assert ellipse.ry.val == 4.0
+        assert ellipse.x.__class__ is RDoubleI
+        assert ellipse.x.val == 1.0
+        assert ellipse.y.__class__ is RDoubleI
+        assert ellipse.y.val == 2.0
+        assert ellipse.radiusx.__class__ is RDoubleI
+        assert ellipse.radiusx.val == 3.0
+        assert ellipse.radiusy.__class__ is RDoubleI
+        assert ellipse.radiusy.val == 4.0
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
@@ -176,10 +176,10 @@ class TestPointDecoder(TestShapeDecoder):
         v = decoder.decode(v)
         self.assert_shape(v)
         assert v.id.val == 3L
-        assert v.cx.__class__ is RDoubleI
-        assert v.cx.val == 1.0
-        assert v.cy.__class__ is RDoubleI
-        assert v.cy.val == 2.0
+        assert v.x.__class__ is RDoubleI
+        assert v.x.val == 1.0
+        assert v.y.__class__ is RDoubleI
+        assert v.y.val == 2.0
 
 
 class TestLabelDecoder(TestShapeDecoder):
