@@ -247,8 +247,8 @@ def ellipse():
     populate_shape(o)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
-    o.radiusx = rdouble(3.0)
-    o.radiusy = rdouble(4.0)
+    o.radiusX = rdouble(3.0)
+    o.radiusY = rdouble(4.0)
     o.id = rlong(1L)
     return o
 
@@ -260,8 +260,8 @@ def ellipse_with_annotations():
     add_annotations(o)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
-    o.radiusx = rdouble(3.0)
-    o.radiusy = rdouble(4.0)
+    o.radiusX = rdouble(3.0)
+    o.radiusY = rdouble(4.0)
     o.id = rlong(1L)
     return o
 

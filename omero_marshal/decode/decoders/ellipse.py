@@ -24,8 +24,8 @@ class EllipseDecoder(ShapeDecoder):
         v = super(EllipseDecoder, self).decode(data)
         v.x = RDoubleI(data.get('X'))
         v.y = RDoubleI(data.get('Y'))
-        v.radiusx = RDoubleI(data.get('RadiusX'))
-        v.radiusy = RDoubleI(data.get('RadiusY'))
+        v.radiusX = RDoubleI(data.get('RadiusX'))
+        v.radiusY = RDoubleI(data.get('RadiusY'))
         return v
 
 decoder = (EllipseDecoder.TYPE, EllipseDecoder)

@@ -21,8 +21,8 @@ class EllipseEncoder(ShapeEncoder):
         v = super(EllipseEncoder, self).encode(obj)
         self.set_if_not_none(v, 'X', obj.x)
         self.set_if_not_none(v, 'Y', obj.cy)
-        self.set_if_not_none(v, 'RadiusX', obj.radiusx)
-        self.set_if_not_none(v, 'RadiusY', obj.radiusy)
+        self.set_if_not_none(v, 'RadiusX', obj.radiusX)
+        self.set_if_not_none(v, 'RadiusY', obj.radiusY)
         return v
 
 encoder = (EllipseI, EllipseEncoder)

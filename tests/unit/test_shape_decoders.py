@@ -122,10 +122,10 @@ class TestShapeDecoder(object):
         assert ellipse.x.val == 1.0
         assert ellipse.y.__class__ is RDoubleI
         assert ellipse.y.val == 2.0
-        assert ellipse.radiusx.__class__ is RDoubleI
-        assert ellipse.radiusx.val == 3.0
-        assert ellipse.radiusy.__class__ is RDoubleI
-        assert ellipse.radiusy.val == 4.0
+        assert ellipse.radiusX.__class__ is RDoubleI
+        assert ellipse.radiusX.val == 3.0
+        assert ellipse.radiusY.__class__ is RDoubleI
+        assert ellipse.radiusY.val == 4.0
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
