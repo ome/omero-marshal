@@ -83,20 +83,27 @@ class TestShapeDecoder(object):
             self.assert_annotations(roi)
         self.assert_details(roi.details)
 
-    def assert_shape(self, shape, has_annotations=False):
+    def assert_shape(self, shape, has_annotations=False, has_unit_information=True):
         assert shape.fillColor.val == 0xffffffff
         assert shape.fillRule.val == 'solid'
         assert shape.strokeColor.val == 0xffff0000
         assert shape.strokeDashArray.val == 'inherit'
-        assert shape.strokeWidth.__class__ is LengthI
-        assert shape.strokeWidth.getUnit() == UnitsLength.PIXEL
-        assert shape.strokeWidth.getValue() == 4
+        if has_unit_information:
+            assert shape.strokeWidth.__class__ is LengthI
+            assert shape.strokeWidth.getUnit() == UnitsLength.PIXEL
+            assert shape.strokeWidth.getValue() == 4
+        else:
+            assert shape.strokeWidth is None
+
         assert shape.strokeLineCap.val == 'round'
         assert shape.textValue.val == 'the_text'
         assert shape.fontFamily.val == 'cursive'
-        assert shape.fontSize.__class__ is LengthI
-        assert shape.fontSize.getUnit() == UnitsLength.POINT
-        assert shape.fontSize.getValue() == 12
+        if has_unit_information:
+            assert shape.fontSize.__class__ is LengthI
+            assert shape.fontSize.getUnit() == UnitsLength.POINT
+            assert shape.fontSize.getValue() == 12
+        else:
+            assert shape.fontSize is None
         assert shape.fontStyle.val == 'italic'
         assert shape.visibility.val is True
         assert shape.locked.val is False
@@ -256,3 +263,17 @@ class TestRoiDecoder(TestShapeDecoder):
         v = encoder.encode(roi_with_shapes_and_annotations)
         v = decoder.decode(v)
         self.assert_roi_with_shapes(v, has_annotations=True)
+
+class TestOptionalUnitInformation(TestShapeDecoder):
+
+    def test_decoder(self, opt_unit_label):
+        encoder = get_encoder(opt_unit_label.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(opt_unit_label)
+        v = decoder.decode(v)
+        self.assert_shape(v, has_unit_information=False)
+        assert v.id.val == 7L
+        assert v.x.__class__ is RDoubleI
+        assert v.x.val == 1.0
+        assert v.y.__class__ is RDoubleI
+        assert v.y.val == 2.0

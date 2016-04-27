@@ -25,6 +25,8 @@ class Decoder(object):
         self.ctx = ctx
 
     def to_unit(self, v):
+        if v is None:
+            return None
         unit = v['@type'][v['@type'].rfind('#') + 1:]
         unit = getattr(omero.model, unit)
         return unit(
