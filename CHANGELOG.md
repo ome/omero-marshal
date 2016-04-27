@@ -5,6 +5,10 @@ Features:
   - Support both OMERO 5.1.x and 5.2.x (#2)
   - Activate Travis for omero-marshal (#3)
 
+Bugfixes:
+
+  - Fix for non existing (optional) unit type attributes (#6)
+
 ## 0.2 (2016-02-12)
 
 Features:
