@@ -220,17 +220,19 @@ def roi_with_shapes_and_annotations(roi, ellipse, rectangle):
     return roi
 
 
-def populate_shape(o):
+def populate_shape(o, set_unit_attributes=True):
     o.fillColor = rint(0xffffffff)
     o.fillRule = rstring('solid')
     o.fontFamily = rstring('cursive')
-    o.fontSize = LengthI(12, UnitsLength.POINT)
+    if set_unit_attributes:
+        o.fontSize = LengthI(12, UnitsLength.POINT)
     o.fontStyle = rstring('italic')
     o.locked = rbool(False)
     o.strokeColor = rint(0xffff0000)
     o.strokeDashArray = rstring('inherit')
     o.strokeLineCap = rstring('round')
-    o.strokeWidth = LengthI(4, UnitsLength.PIXEL)
+    if set_unit_attributes:
+        o.strokeWidth = LengthI(4, UnitsLength.PIXEL)
     o.textValue = rstring('the_text')
     o.theC = rint(1)
     o.theT = rint(2)
@@ -323,4 +325,14 @@ def line():
     o.setX2(1)
     o.setY2(2)
     o.id = rlong(6L)
+    return o
+
+
+@pytest.fixture()
+def opt_unit_label():
+    o = LabelI()
+    populate_shape(o, False)
+    o.x = rdouble(1.0)
+    o.y = rdouble(2.0)
+    o.id = rlong(7L)
     return o
