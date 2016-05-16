@@ -11,7 +11,7 @@
 
 from omero_marshal import get_encoder, get_decoder
 from omero.model.enums import UnitsLength
-from omero.rtypes import RDoubleI
+from omero.rtypes import RDoubleI, RStringI
 from omero.model import LengthI
 
 
@@ -110,6 +110,8 @@ class TestShapeDecoder(object):
         assert shape.theZ.val == 3
         assert shape.theT.val == 2
         assert shape.theC.val == 1
+        assert shape.transform.__class__ is RStringI
+        assert shape.transform.getValue() == 'matrix(1 0 0 1 0 0)'
         if not has_annotations:
             assert not shape.annotationLinksLoaded
         else:

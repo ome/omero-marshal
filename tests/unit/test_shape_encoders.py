@@ -155,6 +155,7 @@ class TestShapeEncoder(object):
         assert shape['TheZ'] == 3
         assert shape['TheT'] == 2
         assert shape['TheC'] == 1
+        assert shape['Transform'] == 'matrix(1 0 0 1 0 0)'
         assert shape['omero:details'] == {'@type': 'TBD#Details'}
         if not has_annotations:
             assert shape.get('annotations') is None

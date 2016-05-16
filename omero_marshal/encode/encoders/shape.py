@@ -33,6 +33,7 @@ class ShapeEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'TheC', obj.theC)
         self.set_if_not_none(v, 'TheT', obj.theT)
         self.set_if_not_none(v, 'TheZ', obj.theZ)
+        self.set_if_not_none(v, 'Transform', obj.transform)
         self.set_if_not_none(v, 'Visible', obj.visibility)
         return v
 
