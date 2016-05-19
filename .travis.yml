@@ -21,7 +21,7 @@ before_install:
   - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz -O /tmp/${ICE}.tar.xz
   - tar -xvf /tmp/${ICE}.tar.xz -C /tmp
   - pip install omego
-  - omego download --release ${OMERO_VERSION} py
+  - omego download --ice 3.5 --release ${OMERO_VERSION} py
   - rm OMERO.py*.zip
   - mv OMERO.py* /tmp/OMERO.py
 
