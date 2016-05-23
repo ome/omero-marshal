@@ -36,7 +36,21 @@ class ShapeDecoder(AnnotatableDecoder):
         v.theT = self.to_rtype(data.get('TheT'))
         v.theZ = self.to_rtype(data.get('TheZ'))
         v.visibility = self.to_rtype(data.get('Visible'))
-        v.transform = self.to_rtype(data.get('Transform'))
+        v.transform = self.to_rtype(self.decode_transform(data.get('Transform')))
         return v
+
+    @staticmethod
+    def decode_transform(transform):
+        if not transform:
+            return 'none'
+        return 'matrix(%s)' % ' '.join(map(str, [
+            transform['A00'],
+            transform['A10'],
+            transform['A01'],
+            transform['A11'],
+            transform['A02'],
+            transform['A12'],
+        ]))
+
 
 decoder = (ShapeDecoder.TYPE, ShapeDecoder)

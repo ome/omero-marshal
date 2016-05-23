@@ -10,6 +10,7 @@
 #
 
 from omero_marshal import get_encoder
+import pytest
 
 
 class TestShapeEncoder(object):
@@ -155,7 +156,15 @@ class TestShapeEncoder(object):
         assert shape['TheZ'] == 3
         assert shape['TheT'] == 2
         assert shape['TheC'] == 1
-        assert shape['Transform'] == 'matrix(1 0 0 1 0 0)'
+        assert shape['Transform'] == {
+            '@type': 'TBD#AffineTransform',
+            'A00': 1.0,
+            'A10': 0.0,
+            'A01': 0.0,
+            'A11': 1.0,
+            'A02': 0.0,
+            'A12': 0.0,
+        }
         assert shape['omero:details'] == {'@type': 'TBD#Details'}
         if not has_annotations:
             assert shape.get('annotations') is None
@@ -288,3 +297,84 @@ class TestRoiEncoder(TestShapeEncoder):
         encoder = get_encoder(roi_with_shapes_and_annotations.__class__)
         v = encoder.encode(roi_with_shapes_and_annotations)
         self.assert_roi_with_shapes(v, has_annotations=True)
+
+
+TRANSFORMATIONS = [
+    (
+        'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
+        {
+            '@type': 'TBD#AffineTransform',
+            'A00': 1.0,
+            'A10': 0.0,
+            'A01': 0.0,
+            'A11': 1.0,
+            'A02': 0.0,
+            'A12': 0.0,
+        }
+    ),
+    (
+        'none',
+        None
+    ),
+    (
+        'translate(3 4)',
+        {
+            '@type': 'TBD#AffineTransform',
+            'A00': 1.0,
+            'A10': 0.0,
+            'A01': 0.0,
+            'A11': 1.0,
+            'A02': 3.0,
+            'A12': 4.0,
+        }
+    ),
+    (
+        'translate(5)',
+        {
+            '@type': 'TBD#AffineTransform',
+            'A00': 1.0,
+            'A10': 0.0,
+            'A01': 0.0,
+            'A11': 1.0,
+            'A02': 5.0,
+            'A12': 0.0,
+        }
+    ),
+    (
+        'scale(1.5 2.5)',
+        {
+            '@type': 'TBD#AffineTransform',
+            'A00': 1.5,
+            'A10': 0.0,
+            'A01': 0.0,
+            'A11': 2.5,
+            'A02': 0.0,
+            'A12': 0.0,
+        }
+    ),
+    (
+        'scale(1.5)',
+        {
+            '@type': 'TBD#AffineTransform',
+            'A00': 1.5,
+            'A10': 0.0,
+            'A01': 0.0,
+            'A11': 1.5,
+            'A02': 0.0,
+            'A12': 0.0,
+        }
+    ),
+]
+
+
+class TestTransformEncoder():
+
+    @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
+    def test_transforms(self, point, transform_s, transform_o):
+        point.transform = transform_s
+        encoder = get_encoder(point.__class__)
+        v = encoder.encode(point)
+        if not transform_o:
+            assert 'Transform' not in v
+        else:
+            assert v['Transform'] == transform_o

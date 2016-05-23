@@ -33,8 +33,36 @@ class ShapeEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'TheC', obj.theC)
         self.set_if_not_none(v, 'TheT', obj.theT)
         self.set_if_not_none(v, 'TheZ', obj.theZ)
-        self.set_if_not_none(v, 'Transform', obj.transform)
+        self.set_if_not_none(v, 'Transform', self.encode_transform(obj.transform))
         self.set_if_not_none(v, 'Visible', obj.visibility)
         return v
+
+    @staticmethod
+    def encode_transform(transform):
+        if not transform or transform == 'none':
+            return
+
+        tr, args = transform[:-1].split('(')
+        a = map(float, args.split(' '))
+
+        if tr == 'matrix':
+            pass
+        elif tr == 'translate':
+            a = [1.0, 0.0, 0.0, 1.0, a[0], a[1] if len(a) > 1 else 0.0]
+        elif tr == 'scale':
+            a = [a[0], 0.0, 0.0, a[-1], 0.0, 0.0]
+        else:
+            raise ValueError('Unknown transformation "%s"' % transform)
+
+        return {
+            '@type': 'TBD#AffineTransform',
+            'A00': a[0],
+            'A10': a[1],
+            'A01': a[2],
+            'A11': a[3],
+            'A02': a[4],
+            'A12': a[5],
+        }
+
 
 encoder = (Shape, ShapeEncoder)
