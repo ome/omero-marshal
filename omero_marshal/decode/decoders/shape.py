@@ -36,7 +36,8 @@ class ShapeDecoder(AnnotatableDecoder):
         v.theT = self.to_rtype(data.get('TheT'))
         v.theZ = self.to_rtype(data.get('TheZ'))
         v.visibility = self.to_rtype(data.get('Visible'))
-        v.transform = self.to_rtype(self.decode_transform(data.get('Transform')))
+        v.transform = self.to_rtype(
+            self.decode_transform(data.get('Transform')))
         return v
 
     @staticmethod
