@@ -13,6 +13,7 @@ from .annotation import AnnotatableEncoder
 from omero import RType
 from omero.model import Shape
 from omero.rtypes import unwrap
+from math import sin, cos
 
 
 class ShapeEncoder(AnnotatableEncoder):
@@ -55,6 +56,19 @@ class ShapeEncoder(AnnotatableEncoder):
             a = [1.0, 0.0, 0.0, 1.0, a[0], a[1] if len(a) > 1 else 0.0]
         elif tr == 'scale':
             a = [a[0], 0.0, 0.0, a[-1], 0.0, 0.0]
+        elif tr == 'rotate':
+            x = a[1] if len(a) > 1 else 0.0
+            y = a[2] if len(a) > 1 else 0.0
+            s = sin(a[0])
+            c = cos(a[0])
+            a = [
+                c,
+                s,
+                -s,
+                c,
+                x * (1 - c) + y * s,
+                -x * s + y * (1 - c),
+            ]
         else:
             raise ValueError('Unknown transformation "%s"' % transform)
 
