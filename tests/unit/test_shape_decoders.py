@@ -111,8 +111,7 @@ class TestShapeDecoder(object):
         assert shape.theZ.val == 3
         assert shape.theT.val == 2
         assert shape.theC.val == 1
-        assert shape.transform.__class__ is RStringI
-        assert shape.transform.getValue() == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
+        assert shape.transform.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
         if not has_annotations:
             assert not shape.annotationLinksLoaded
         else:
@@ -320,5 +319,4 @@ class TestTransformDecoder():
         point.transform = transform_s
         v = encoder.encode(point)
         v = decoder.decode(v)
-        assert v.transform.__class__ is RStringI
-        assert v.transform.getValue() == transform_o
+        assert v.transform.val == transform_o
