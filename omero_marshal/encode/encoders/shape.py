@@ -12,6 +12,7 @@
 from .annotation import AnnotatableEncoder
 from omero import RType
 from omero.model import Shape
+from omero.rtypes import unwrap
 
 
 class ShapeEncoder(AnnotatableEncoder):
@@ -41,11 +42,8 @@ class ShapeEncoder(AnnotatableEncoder):
 
     @staticmethod
     def encode_transform(transform):
-        if not transform:
-            return
-        if isinstance(transform, RType):
-            transform = transform.getValue()
-        if transform == 'none':
+        transform = unwrap(transform)
+        if not transform or transform == 'none':
             return
 
         tr, args = transform[:-1].split('(')
