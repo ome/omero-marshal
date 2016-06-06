@@ -73,7 +73,8 @@ class ShapeEncoder(AnnotatableEncoder):
             raise ValueError('Unknown transformation "%s"' % transform)
 
         return {
-            '@type': 'TBD#AffineTransform',
+            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01'
+                     '#AffineTransform',
             'A00': a[0],
             'A10': a[1],
             'A01': a[2],

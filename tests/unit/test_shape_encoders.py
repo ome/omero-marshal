@@ -157,7 +157,7 @@ class TestShapeEncoder(object):
         assert shape['TheT'] == 2
         assert shape['TheC'] == 1
         assert shape['Transform'] == {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 1.0,
             'A10': 0.0,
             'A01': 0.0,
@@ -299,11 +299,14 @@ class TestRoiEncoder(TestShapeEncoder):
         self.assert_roi_with_shapes(v, has_annotations=True)
 
 
+TRANSFORMATION_TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01' \
+    '#AffineTransform'
+
 TRANSFORMATIONS = [
     (
         'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
         {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 1.0,
             'A10': 0.0,
             'A01': 0.0,
@@ -319,7 +322,7 @@ TRANSFORMATIONS = [
     (
         'translate(3 4)',
         {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 1.0,
             'A10': 0.0,
             'A01': 0.0,
@@ -331,7 +334,7 @@ TRANSFORMATIONS = [
     (
         'translate(5)',
         {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 1.0,
             'A10': 0.0,
             'A01': 0.0,
@@ -343,7 +346,7 @@ TRANSFORMATIONS = [
     (
         'scale(1.5 2.5)',
         {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 1.5,
             'A10': 0.0,
             'A01': 0.0,
@@ -355,7 +358,7 @@ TRANSFORMATIONS = [
     (
         'scale(1.5)',
         {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 1.5,
             'A10': 0.0,
             'A01': 0.0,
@@ -367,7 +370,7 @@ TRANSFORMATIONS = [
     (
         'rotate(0.785398163397448)',
         {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 0.7071067811865478,
             'A10': 0.7071067811865472,
             'A01': -0.7071067811865472,
@@ -379,7 +382,7 @@ TRANSFORMATIONS = [
     (
         'rotate(0.785398163397448 50 100)',
         {
-            '@type': 'TBD#AffineTransform',
+            '@type': TRANSFORMATION_TYPE,
             'A00': 0.7071067811865478,
             'A10': 0.7071067811865472,
             'A01': -0.7071067811865472,
