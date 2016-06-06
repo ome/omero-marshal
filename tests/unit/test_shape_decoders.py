@@ -11,7 +11,7 @@
 
 from omero_marshal import get_encoder, get_decoder
 from omero.model.enums import UnitsLength
-from omero.rtypes import RDoubleI, RStringI
+from omero.rtypes import RDoubleI
 from omero.model import LengthI
 import pytest
 
@@ -84,7 +84,8 @@ class TestShapeDecoder(object):
             self.assert_annotations(roi)
         self.assert_details(roi.details)
 
-    def assert_shape(self, shape, has_annotations=False, has_unit_information=True):
+    def assert_shape(self, shape, has_annotations=False,
+                     has_unit_information=True):
         assert shape.fillColor.val == 0xffffffff
         assert shape.fillRule.val == 'solid'
         assert shape.strokeColor.val == 0xffff0000

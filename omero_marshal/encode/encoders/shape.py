@@ -10,7 +10,6 @@
 #
 
 from .annotation import AnnotatableEncoder
-from omero import RType
 from omero.model import Shape
 from omero.rtypes import unwrap
 from math import sin, cos
