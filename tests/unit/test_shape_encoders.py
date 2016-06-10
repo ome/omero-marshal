@@ -123,7 +123,17 @@ class TestShapeEncoder(object):
                 'canEdit': True,
                 'canLink': True,
                 'perm': 'rwrwrw'
-            }
+            },
+            'externalInfo': {
+                '@type': 'TBD#ExternalInfo',
+                'EntityId': 123,
+                'EntityType': 'test',
+                'Lsid': 456,
+                'Uuid': 789,
+                'omero:details': {
+                    '@type': 'TBD#Details'
+                },
+            },
         }
         if not has_annotations:
             assert roi.get('Annotations') is None

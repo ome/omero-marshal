@@ -34,10 +34,17 @@ class TestShapeDecoder(object):
     def assert_permissions(self, permissions):
         assert str(permissions) == 'rwrwrw'
 
+    def assert_externalInfo(self, externalInfo):
+        assert externalInfo.entityId.val == 123
+        assert externalInfo.entityType.val == 'test'
+        assert externalInfo.lsid.val == 456
+        assert externalInfo.uuid.val == 789
+
     def assert_details(self, details):
         self.assert_experimenter(details.owner)
         self.assert_experimenter_group(details.group)
         self.assert_permissions(details.permissions)
+        self.assert_externalInfo(details.externalInfo)
 
     def assert_annotations(self, o):
         assert o.annotationLinksLoaded

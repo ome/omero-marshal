@@ -15,7 +15,8 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
     PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
-    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue
+    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
+    ExternalInfoI
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -154,6 +155,16 @@ def permissions():
 
 
 @pytest.fixture()
+def externalInfo():
+    o = ExternalInfoI()
+    o.entityId = rlong(123L)
+    o.entityType = rstring('test')
+    o.lsid = rlong(456L)
+    o.uuid = rlong(789L)
+    return o
+
+
+@pytest.fixture()
 def permissions_cannot_link(permissions):
     permissions._restrictions = [True, False, False, False]
     return permissions
@@ -178,16 +189,17 @@ def permissions_cannot_annotate(permissions):
 
 
 @pytest.fixture()
-def details(experimenter, experimenter_group, permissions):
+def details(experimenter, experimenter_group, permissions, externalInfo):
     o = DetailsI()
     o.owner = experimenter
     o.group = experimenter_group
     o.permissions = permissions
+    o.externalInfo = externalInfo
     return o
 
 
 @pytest.fixture()
-def roi(experimenter, experimenter_group, permissions):
+def roi(experimenter, experimenter_group, permissions, externalInfo):
     o = RoiI()
     o.id = rlong(1L)
     o.name = rstring('the_name')
@@ -195,6 +207,7 @@ def roi(experimenter, experimenter_group, permissions):
     o.details.owner = experimenter
     o.details.group = experimenter_group
     o.details.permissions = permissions
+    o.details.externalInfo = externalInfo
     return o
 
 
