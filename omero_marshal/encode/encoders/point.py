@@ -11,16 +11,32 @@
 
 from .shape import ShapeEncoder
 from omero.model import PointI
+from omero_marshal import get_schema_version
 
 
 class PointEncoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
 
+
+class Point201606Encoder(PointEncoder):
+
     def encode(self, obj):
-        v = super(PointEncoder, self).encode(obj)
+        v = super(Point201606Encoder, self).encode(obj)
         self.set_if_not_none(v, 'X', obj.x)
         self.set_if_not_none(v, 'Y', obj.y)
         return v
 
-encoder = (PointI, PointEncoder)
+
+class Point201501Encoder(PointEncoder):
+
+    def encode(self, obj):
+        v = super(Point201501Encoder, self).encode(obj)
+        self.set_if_not_none(v, 'X', obj.cx)
+        self.set_if_not_none(v, 'Y', obj.cy)
+        return v
+
+if get_schema_version() == '2015-01':
+    encoder = (PointI, Point201501Encoder)
+elif get_schema_version() == '2016-06':
+    encoder = (PointI, Point201606Encoder)

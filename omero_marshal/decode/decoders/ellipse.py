@@ -12,6 +12,7 @@
 from .shape import ShapeDecoder
 from omero.model import EllipseI
 from omero.rtypes import RDoubleI
+from omero_marshal import get_schema_version
 
 
 class EllipseDecoder(ShapeDecoder):
@@ -20,12 +21,30 @@ class EllipseDecoder(ShapeDecoder):
 
     OMERO_CLASS = EllipseI
 
+
+class Ellipse201501Decoder(EllipseDecoder):
+
     def decode(self, data):
-        v = super(EllipseDecoder, self).decode(data)
+        v = super(Ellipse201501Decoder, self).decode(data)
+        v.cx = RDoubleI(data.get('X'))
+        v.cy = RDoubleI(data.get('Y'))
+        v.rx = RDoubleI(data.get('RadiusX'))
+        v.ry = RDoubleI(data.get('RadiusY'))
+        return v
+
+
+class Ellipse201606Decoder(EllipseDecoder):
+
+    def decode(self, data):
+        v = super(Ellipse201606Decoder, self).decode(data)
         v.x = RDoubleI(data.get('X'))
         v.y = RDoubleI(data.get('Y'))
         v.radiusX = RDoubleI(data.get('RadiusX'))
         v.radiusY = RDoubleI(data.get('RadiusY'))
         return v
 
-decoder = (EllipseDecoder.TYPE, EllipseDecoder)
+
+if get_schema_version() == '2015-01':
+    decoder = (Ellipse201501Decoder.TYPE, Ellipse201501Decoder)
+elif get_schema_version() == '2016-06':
+    decoder = (Ellipse201606Decoder.TYPE, Ellipse201606Decoder)

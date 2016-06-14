@@ -12,6 +12,7 @@
 from .shape import ShapeDecoder
 from omero.model import PointI
 from omero.rtypes import RDoubleI
+from omero_marshal import get_schema_version
 
 
 class PointDecoder(ShapeDecoder):
@@ -20,10 +21,26 @@ class PointDecoder(ShapeDecoder):
 
     OMERO_CLASS = PointI
 
+
+class Point201501Decoder(PointDecoder):
+
+    def decode(self, data):
+        v = super(PointDecoder, self).decode(data)
+        v.cx = RDoubleI(data.get('X'))
+        v.cy = RDoubleI(data.get('Y'))
+        return v
+
+
+class Point201606Decoder(PointDecoder):
+
     def decode(self, data):
         v = super(PointDecoder, self).decode(data)
         v.x = RDoubleI(data.get('X'))
         v.y = RDoubleI(data.get('Y'))
         return v
 
-decoder = (PointDecoder.TYPE, PointDecoder)
+
+if get_schema_version() == '2015-01':
+    decoder = (Point201501Decoder.TYPE, Point201501Decoder)
+elif get_schema_version() == '2016-06':
+    decoder = (Point201606Decoder.TYPE, Point201606Decoder)

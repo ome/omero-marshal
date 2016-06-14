@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, get_decoder
+from omero_marshal import get_encoder, get_decoder, get_schema_version
 from omero.model.enums import UnitsLength
 from omero.rtypes import RDoubleI
 from omero.model import LengthI
@@ -83,7 +83,8 @@ class TestShapeDecoder(object):
             self.assert_annotations(roi)
         self.assert_details(roi.details)
 
-    def assert_shape(self, shape, has_annotations=False, has_unit_information=True):
+    def assert_shape(self, shape, has_annotations=False,
+                     has_unit_information=True):
         assert shape.fillColor.val == 0xffffffff
         assert shape.fillRule.val == 'solid'
         assert shape.strokeColor.val == 0xffff0000
@@ -118,14 +119,24 @@ class TestShapeDecoder(object):
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse.id.val == 1L
-        assert ellipse.x.__class__ is RDoubleI
-        assert ellipse.x.val == 1.0
-        assert ellipse.y.__class__ is RDoubleI
-        assert ellipse.y.val == 2.0
-        assert ellipse.radiusX.__class__ is RDoubleI
-        assert ellipse.radiusX.val == 3.0
-        assert ellipse.radiusY.__class__ is RDoubleI
-        assert ellipse.radiusY.val == 4.0
+        if get_schema_version() == '2016-06':
+            assert ellipse.x.__class__ is RDoubleI
+            assert ellipse.x.val == 1.0
+            assert ellipse.y.__class__ is RDoubleI
+            assert ellipse.y.val == 2.0
+            assert ellipse.radiusX.__class__ is RDoubleI
+            assert ellipse.radiusX.val == 3.0
+            assert ellipse.radiusY.__class__ is RDoubleI
+            assert ellipse.radiusY.val == 4.0
+        else:
+            assert ellipse.cx.__class__ is RDoubleI
+            assert ellipse.cx.val == 1.0
+            assert ellipse.cy.__class__ is RDoubleI
+            assert ellipse.cy.val == 2.0
+            assert ellipse.rx.__class__ is RDoubleI
+            assert ellipse.rx.val == 3.0
+            assert ellipse.ry.__class__ is RDoubleI
+            assert ellipse.ry.val == 4.0
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
@@ -176,10 +187,16 @@ class TestPointDecoder(TestShapeDecoder):
         v = decoder.decode(v)
         self.assert_shape(v)
         assert v.id.val == 3L
-        assert v.x.__class__ is RDoubleI
-        assert v.x.val == 1.0
-        assert v.y.__class__ is RDoubleI
-        assert v.y.val == 2.0
+        if get_schema_version() == '2016-06':
+            assert v.x.__class__ is RDoubleI
+            assert v.x.val == 1.0
+            assert v.y.__class__ is RDoubleI
+            assert v.y.val == 2.0
+        else:
+            assert v.cx.__class__ is RDoubleI
+            assert v.cx.val == 1.0
+            assert v.cy.__class__ is RDoubleI
+            assert v.cy.val == 2.0
 
 
 class TestLabelDecoder(TestShapeDecoder):
@@ -263,6 +280,7 @@ class TestRoiDecoder(TestShapeDecoder):
         v = encoder.encode(roi_with_shapes_and_annotations)
         v = decoder.decode(v)
         self.assert_roi_with_shapes(v, has_annotations=True)
+
 
 class TestOptionalUnitInformation(TestShapeDecoder):
 
