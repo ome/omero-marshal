@@ -104,7 +104,7 @@ class TestShapeDecoder(object):
         else:
             assert shape.fontSize is None
         assert shape.fontStyle.val == 'italic'
-        if get_schema_version() == '2016-06':
+        if get_schema_version() == '2015-01':
             assert shape.visibility.val is True
             assert shape.strokeLineCap.val == 'round'
         assert shape.locked.val is False
