@@ -11,6 +11,7 @@
 
 from .annotation import AnnotatableDecoder
 from omero.model import Shape
+from omero_marshal import get_schema_version
 
 
 class ShapeDecoder(AnnotatableDecoder):
@@ -26,7 +27,6 @@ class ShapeDecoder(AnnotatableDecoder):
         v.fontFamily = self.to_rtype(data.get('FontFamily'))
         v.fontSize = self.to_unit(data.get('FontSize'))
         v.fontStyle = self.to_rtype(data.get('FontStyle'))
-        v.strokeLineCap = self.to_rtype(data.get('LineCap'))
         v.locked = self.to_rtype(data.get('Locked'))
         v.strokeColor = self.to_rtype(data.get('StrokeColor'))
         v.strokeDashArray = self.to_rtype(data.get('StrokeDashArray'))
@@ -35,7 +35,9 @@ class ShapeDecoder(AnnotatableDecoder):
         v.theC = self.to_rtype(data.get('TheC'))
         v.theT = self.to_rtype(data.get('TheT'))
         v.theZ = self.to_rtype(data.get('TheZ'))
-        v.visibility = self.to_rtype(data.get('Visible'))
+        if get_schema_version() == '2015-01':
+            v.strokeLineCap = self.to_rtype(data.get('LineCap'))
+            v.visibility = self.to_rtype(data.get('Visible'))
         return v
 
 decoder = (ShapeDecoder.TYPE, ShapeDecoder)

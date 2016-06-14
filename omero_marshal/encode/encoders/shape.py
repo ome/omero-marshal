@@ -11,6 +11,7 @@
 
 from .annotation import AnnotatableEncoder
 from omero.model import Shape
+from omero_marshal import get_schema_version
 
 
 class ShapeEncoder(AnnotatableEncoder):
@@ -24,7 +25,6 @@ class ShapeEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'FontFamily', obj.fontFamily)
         self.set_if_not_none(v, 'FontSize', obj.fontSize)
         self.set_if_not_none(v, 'FontStyle', obj.fontStyle)
-        self.set_if_not_none(v, 'LineCap', obj.strokeLineCap)
         self.set_if_not_none(v, 'Locked', obj.locked)
         self.set_if_not_none(v, 'StrokeColor', obj.strokeColor)
         self.set_if_not_none(v, 'StrokeDashArray', obj.strokeDashArray)
@@ -33,7 +33,9 @@ class ShapeEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'TheC', obj.theC)
         self.set_if_not_none(v, 'TheT', obj.theT)
         self.set_if_not_none(v, 'TheZ', obj.theZ)
-        self.set_if_not_none(v, 'Visible', obj.visibility)
+        if get_schema_version() == '2015-01':
+            self.set_if_not_none(v, 'LineCap', obj.strokeLineCap)
+            self.set_if_not_none(v, 'Visible', obj.visibility)
         return v
 
 encoder = (Shape, ShapeEncoder)

@@ -232,14 +232,15 @@ def populate_shape(o, set_unit_attributes=True):
     o.locked = rbool(False)
     o.strokeColor = rint(0xffff0000)
     o.strokeDashArray = rstring('inherit')
-    o.strokeLineCap = rstring('round')
+    if get_schema_version() == '2015-01':
+        o.visibility = rbool(True)
+        o.strokeLineCap = rstring('round')
     if set_unit_attributes:
         o.strokeWidth = LengthI(4, UnitsLength.PIXEL)
     o.textValue = rstring('the_text')
     o.theC = rint(1)
     o.theT = rint(2)
     o.theZ = rint(3)
-    o.visibility = rbool(True)
     return o
 
 

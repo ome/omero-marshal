@@ -95,8 +95,6 @@ class TestShapeDecoder(object):
             assert shape.strokeWidth.getValue() == 4
         else:
             assert shape.strokeWidth is None
-
-        assert shape.strokeLineCap.val == 'round'
         assert shape.textValue.val == 'the_text'
         assert shape.fontFamily.val == 'cursive'
         if has_unit_information:
@@ -106,7 +104,9 @@ class TestShapeDecoder(object):
         else:
             assert shape.fontSize is None
         assert shape.fontStyle.val == 'italic'
-        assert shape.visibility.val is True
+        if get_schema_version() == '2016-06':
+            assert shape.visibility.val is True
+            assert shape.strokeLineCap.val == 'round'
         assert shape.locked.val is False
         assert shape.theZ.val == 3
         assert shape.theT.val == 2
