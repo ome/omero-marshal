@@ -14,6 +14,7 @@ import pkgutil
 import logging
 from encode import encoders
 from decode import decoders
+from omero_version import omero_version
 
 
 logger = logging.getLogger('omero-marshal')
@@ -41,6 +42,15 @@ def get_decoder(t):
     except KeyError:
         logger.warn('Requested unknown decoder %s' % t, exc_info=True)
         return None
+
+
+def get_schema_version():
+    if omero_version.startswith('5.1') or omero_version.startswith('5.2'):
+        return '2015-01'
+    elif omero_version.startswith('5.3'):
+        return '2016-06'
+    else:
+        raise Exception('Unsupported schema version')
 
 
 class MarshallingCtx(object):
