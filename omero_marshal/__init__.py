@@ -12,10 +12,11 @@
 import importlib
 import pkgutil
 import logging
+import re
 from encode import encoders
 from decode import decoders
+from distutils.version import StrictVersion
 from omero_version import omero_version
-
 
 logger = logging.getLogger('omero-marshal')
 
@@ -44,10 +45,15 @@ def get_decoder(t):
         return None
 
 
-def get_schema_version():
-    if omero_version.startswith('5.1') or omero_version.startswith('5.2'):
+def get_schema_version(version=omero_version):
+    p = re.compile('^(\d+\.\d+\.\d+).*')
+    m = p.match(version)
+    if m is None:
+        raise Exception("")
+    v = StrictVersion(m.group(1))
+    if (v >= '5.1' and v < '5.3'):
         return '2015-01'
-    elif omero_version.startswith('5.3'):
+    elif v >= '5.3':
         return '2016-06'
     else:
         raise Exception('Unsupported schema version')
