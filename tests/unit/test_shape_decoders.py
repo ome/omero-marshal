@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, get_decoder, get_schema_version
+from omero_marshal import get_encoder, get_decoder, SCHEMA_VERSION
 from omero.model.enums import UnitsLength
 from omero.rtypes import RDoubleI
 from omero.model import LengthI
@@ -104,7 +104,7 @@ class TestShapeDecoder(object):
         else:
             assert shape.fontSize is None
         assert shape.fontStyle.val == 'italic'
-        if get_schema_version() == '2015-01':
+        if SCHEMA_VERSION == '2015-01':
             assert shape.visibility.val is True
             assert shape.strokeLineCap.val == 'round'
         assert shape.locked.val is False
@@ -119,7 +119,7 @@ class TestShapeDecoder(object):
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse.id.val == 1L
-        if get_schema_version() == '2016-06':
+        if SCHEMA_VERSION == '2016-06':
             assert ellipse.x.__class__ is RDoubleI
             assert ellipse.x.val == 1.0
             assert ellipse.y.__class__ is RDoubleI
@@ -187,7 +187,7 @@ class TestPointDecoder(TestShapeDecoder):
         v = decoder.decode(v)
         self.assert_shape(v)
         assert v.id.val == 3L
-        if get_schema_version() == '2016-06':
+        if SCHEMA_VERSION == '2016-06':
             assert v.x.__class__ is RDoubleI
             assert v.x.val == 1.0
             assert v.y.__class__ is RDoubleI

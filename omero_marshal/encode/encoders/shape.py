@@ -11,7 +11,7 @@
 
 from .annotation import AnnotatableEncoder
 from omero.model import Shape
-from omero_marshal import get_schema_version
+from omero_marshal import SCHEMA_VERSION
 
 
 class ShapeEncoder(AnnotatableEncoder):
@@ -33,7 +33,7 @@ class ShapeEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'TheC', obj.theC)
         self.set_if_not_none(v, 'TheT', obj.theT)
         self.set_if_not_none(v, 'TheZ', obj.theZ)
-        if get_schema_version() == '2015-01':
+        if SCHEMA_VERSION == '2015-01':
             self.set_if_not_none(v, 'LineCap', obj.strokeLineCap)
             self.set_if_not_none(v, 'Visible', obj.visibility)
         return v

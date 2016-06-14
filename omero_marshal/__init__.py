@@ -45,11 +45,11 @@ def get_decoder(t):
         return None
 
 
-def get_schema_version(version=omero_version):
+def get_schema_version(version):
     p = re.compile('^(\d+\.\d+\.\d+).*')
     m = p.match(version)
     if m is None:
-        raise Exception("")
+        raise Exception("Invalid OMERO version number")
     v = StrictVersion(m.group(1))
     if (v >= '5.1' and v < '5.3'):
         return '2015-01'
@@ -57,6 +57,8 @@ def get_schema_version(version=omero_version):
         return '2016-06'
     else:
         raise Exception('Unsupported schema version')
+
+SCHEMA_VERSION = get_schema_version(omero_version)
 
 
 class MarshallingCtx(object):

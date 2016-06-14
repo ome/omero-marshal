@@ -27,7 +27,7 @@ except ImportError:
     # OMERO 5.2.x
     from omero.model import RectangleI
 
-from omero_marshal import get_schema_version
+from omero_marshal import SCHEMA_VERSION
 
 
 @pytest.fixture()
@@ -232,7 +232,7 @@ def populate_shape(o, set_unit_attributes=True):
     o.locked = rbool(False)
     o.strokeColor = rint(0xffff0000)
     o.strokeDashArray = rstring('inherit')
-    if get_schema_version() == '2015-01':
+    if SCHEMA_VERSION == '2015-01':
         o.visibility = rbool(True)
         o.strokeLineCap = rstring('round')
     if set_unit_attributes:
@@ -248,7 +248,7 @@ def populate_shape(o, set_unit_attributes=True):
 def ellipse():
     o = EllipseI()
     populate_shape(o)
-    if get_schema_version() == '2015-01':
+    if SCHEMA_VERSION == '2015-01':
         o.cx = rdouble(1.0)
         o.cy = rdouble(2.0)
         o.rx = rdouble(3.0)
@@ -285,7 +285,7 @@ def rectangle():
 def point():
     o = PointI()
     populate_shape(o)
-    if get_schema_version() == '2015-01':
+    if SCHEMA_VERSION == '2015-01':
         o.cx = rdouble(1.0)
         o.cy = rdouble(2.0)
     else:

@@ -11,7 +11,7 @@
 
 from .annotation import AnnotatableDecoder
 from omero.model import Shape
-from omero_marshal import get_schema_version
+from omero_marshal import SCHEMA_VERSION
 
 
 class ShapeDecoder(AnnotatableDecoder):
@@ -35,7 +35,7 @@ class ShapeDecoder(AnnotatableDecoder):
         v.theC = self.to_rtype(data.get('TheC'))
         v.theT = self.to_rtype(data.get('TheT'))
         v.theZ = self.to_rtype(data.get('TheZ'))
-        if get_schema_version() == '2015-01':
+        if SCHEMA_VERSION == '2015-01':
             v.strokeLineCap = self.to_rtype(data.get('LineCap'))
             v.visibility = self.to_rtype(data.get('Visible'))
         return v

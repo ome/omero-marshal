@@ -11,7 +11,7 @@
 
 from .shape import ShapeEncoder
 from omero.model import PointI
-from omero_marshal import get_schema_version
+from omero_marshal import SCHEMA_VERSION
 
 
 class PointEncoder(ShapeEncoder):
@@ -36,7 +36,7 @@ class Point201501Encoder(PointEncoder):
         self.set_if_not_none(v, 'Y', obj.cy)
         return v
 
-if get_schema_version() == '2015-01':
+if SCHEMA_VERSION == '2015-01':
     encoder = (PointI, Point201501Encoder)
-elif get_schema_version() == '2016-06':
+elif SCHEMA_VERSION == '2016-06':
     encoder = (PointI, Point201606Encoder)

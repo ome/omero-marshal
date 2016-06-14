@@ -12,7 +12,7 @@
 from .shape import ShapeDecoder
 from omero.model import EllipseI
 from omero.rtypes import RDoubleI
-from omero_marshal import get_schema_version
+from omero_marshal import SCHEMA_VERSION
 
 
 class EllipseDecoder(ShapeDecoder):
@@ -44,7 +44,7 @@ class Ellipse201606Decoder(EllipseDecoder):
         return v
 
 
-if get_schema_version() == '2015-01':
+if SCHEMA_VERSION == '2015-01':
     decoder = (Ellipse201501Decoder.TYPE, Ellipse201501Decoder)
-elif get_schema_version() == '2016-06':
+elif SCHEMA_VERSION == '2016-06':
     decoder = (Ellipse201606Decoder.TYPE, Ellipse201606Decoder)

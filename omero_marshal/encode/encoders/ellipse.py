@@ -11,7 +11,7 @@
 
 from .shape import ShapeEncoder
 from omero.model import EllipseI
-from omero_marshal import get_schema_version
+from omero_marshal import SCHEMA_VERSION
 
 
 class EllipseEncoder(ShapeEncoder):
@@ -40,7 +40,7 @@ class Ellipse201501Encoder(EllipseEncoder):
         self.set_if_not_none(v, 'RadiusY', obj.ry)
         return v
 
-if get_schema_version() == '2015-01':
+if SCHEMA_VERSION == '2015-01':
     encoder = (EllipseI, Ellipse201501Encoder)
-elif get_schema_version() == '2016-06':
+elif SCHEMA_VERSION == '2016-06':
     encoder = (EllipseI, Ellipse201606Encoder)

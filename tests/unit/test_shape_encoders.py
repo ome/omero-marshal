@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, get_schema_version
+from omero_marshal import get_encoder, SCHEMA_VERSION
 
 
 class TestShapeEncoder(object):
@@ -149,7 +149,7 @@ class TestShapeEncoder(object):
             'Value': 12
         }
         assert shape['FontStyle'] == 'italic'
-        if get_schema_version() == '2015-01':
+        if SCHEMA_VERSION == '2015-01':
             assert shape['LineCap'] == 'round'
             assert shape['Visible'] is True
         assert shape['Locked'] is False

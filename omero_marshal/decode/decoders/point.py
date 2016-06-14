@@ -12,7 +12,7 @@
 from .shape import ShapeDecoder
 from omero.model import PointI
 from omero.rtypes import RDoubleI
-from omero_marshal import get_schema_version
+from omero_marshal import SCHEMA_VERSION
 
 
 class PointDecoder(ShapeDecoder):
@@ -40,7 +40,7 @@ class Point201606Decoder(PointDecoder):
         return v
 
 
-if get_schema_version() == '2015-01':
+if SCHEMA_VERSION == '2015-01':
     decoder = (Point201501Decoder.TYPE, Point201501Decoder)
-elif get_schema_version() == '2016-06':
+elif SCHEMA_VERSION == '2016-06':
     decoder = (Point201606Decoder.TYPE, Point201606Decoder)
