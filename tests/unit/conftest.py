@@ -238,6 +238,7 @@ def populate_shape(o, set_unit_attributes=True):
     o.theT = rint(2)
     o.theZ = rint(3)
     o.visibility = rbool(True)
+    o.transform = 'matrix(1 0 0 1 0 0)'
     return o
 
 
