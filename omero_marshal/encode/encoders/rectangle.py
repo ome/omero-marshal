@@ -9,6 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeEncoder
 
 # Handle differences in class naming between OMERO 5.1.x and 5.2.x
@@ -20,16 +21,26 @@ except ImportError:
     from omero.model import RectangleI
 
 
-class RectangleEncoder(ShapeEncoder):
+class Rectangle201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
 
     def encode(self, obj):
-        v = super(RectangleEncoder, self).encode(obj)
+        v = super(Rectangle201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'X', obj.x)
         self.set_if_not_none(v, 'Y', obj.y)
         self.set_if_not_none(v, 'Width', obj.width)
         self.set_if_not_none(v, 'Height', obj.height)
         return v
 
-encoder = (RectangleI, RectangleEncoder)
+
+class Rectangle201606Encoder(Rectangle201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Rectangle'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (RectangleI, Rectangle201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (RectangleI, Rectangle201606Encoder)
+RectangleEncoder = encoder[1]

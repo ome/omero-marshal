@@ -90,8 +90,7 @@ class TestShapeEncoder(object):
         assert roi['@id'] == 1L
         assert roi['Name'] == 'the_name'
         assert roi['Description'] == 'the_description'
-        assert roi['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
+        assert roi['@type'] == '%s#ROI' % ROI_SCHEMA_URL
         assert roi['omero:details'] == {
             '@type': 'TBD#Details',
             'group': {
@@ -184,8 +183,7 @@ class TestShapeEncoder(object):
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
         assert rectangle['@id'] == 2L
-        assert rectangle['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
+        assert rectangle['@type'] == '%s#Rectangle' % ROI_SCHEMA_URL
         assert rectangle['X'] == 1.0
         assert rectangle['Y'] == 2.0
         assert rectangle['Width'] == 3.0

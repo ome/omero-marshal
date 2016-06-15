@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder
+from omero_marshal import get_encoder, ROI_SCHEMA_URL
 
 
 class TestBaseEncoder(object):
@@ -19,7 +19,7 @@ class TestBaseEncoder(object):
         v = encoder.encode(roi)
         assert v == {
             '@id': 1L,
-            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
+            '@type': '%s#ROI' % ROI_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
@@ -63,7 +63,7 @@ class TestBaseEncoder(object):
         v = encoder.encode(roi_with_unloaded_details_children)
         assert v == {
             '@id': 1L,
-            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
+            '@type': '%s#ROI' % ROI_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {

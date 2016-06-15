@@ -9,13 +9,11 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_decoder
+from omero_marshal import get_decoder, ROI_SCHEMA_URL
 
 
 class TestRegisterDecoder(object):
 
     def test_roi_decoder_registered(self):
-        decoder = get_decoder(
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
-        )
+        decoder = get_decoder('%s#ROI' % ROI_SCHEMA_URL)
         assert decoder is not None
