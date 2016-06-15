@@ -12,7 +12,7 @@
 from .annotation import AnnotatableEncoder
 from omero.model import Shape
 from omero.rtypes import unwrap
-from math import sin, cos
+from math import sin, cos, radians
 
 
 class ShapeEncoder(AnnotatableEncoder):
@@ -58,8 +58,9 @@ class ShapeEncoder(AnnotatableEncoder):
         elif tr == 'rotate':
             x = a[1] if len(a) > 1 else 0.0
             y = a[2] if len(a) > 1 else 0.0
-            s = sin(a[0])
-            c = cos(a[0])
+            rad = radians(a[0])
+            s = sin(rad)
+            c = cos(rad)
             a = [
                 c,
                 s,
