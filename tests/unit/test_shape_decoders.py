@@ -158,7 +158,6 @@ class TestEllipseDecoder(TestShapeDecoder):
     def test_decoder(self, ellipse):
         encoder = get_encoder(ellipse.__class__)
         decoder = get_decoder(encoder.TYPE)
-        print encoder.TYPE
         v = encoder.encode(ellipse)
         v = decoder.decode(v)
         self.assert_ellipse(v)
