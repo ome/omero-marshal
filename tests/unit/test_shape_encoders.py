@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, SCHEMA_VERSION
+from omero_marshal import get_encoder, SCHEMA_VERSION, ROI_SCHEMA_URL
 import pytest
 
 
@@ -175,8 +175,7 @@ class TestShapeEncoder(object):
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse['@id'] == 1L
-        assert ellipse['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Ellipse'
+        assert ellipse['@type'] == '%s#Ellipse' % ROI_SCHEMA_URL
         assert ellipse['X'] == 1.0
         assert ellipse['Y'] == 2.0
         assert ellipse['RadiusX'] == 3.0
@@ -221,8 +220,7 @@ class TestPointEncoder(TestShapeEncoder):
         v = encoder.encode(point)
         self.assert_shape(v)
         assert v['@id'] == 3L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
+        assert v['@type'] == '%s#Point' % ROI_SCHEMA_URL
         assert v['X'] == 1.0
         assert v['Y'] == 2.0
 

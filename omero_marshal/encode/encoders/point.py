@@ -14,29 +14,40 @@ from .shape import ShapeEncoder
 from omero.model import PointI
 
 
-class PointEncoder(ShapeEncoder):
+class Point201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
 
-
-class Point201606Encoder(PointEncoder):
-
-    def encode(self, obj):
-        v = super(Point201606Encoder, self).encode(obj)
-        self.set_if_not_none(v, 'X', obj.x)
-        self.set_if_not_none(v, 'Y', obj.y)
-        return v
-
-
-class Point201501Encoder(PointEncoder):
-
     def encode(self, obj):
         v = super(Point201501Encoder, self).encode(obj)
-        self.set_if_not_none(v, 'X', obj.cx)
-        self.set_if_not_none(v, 'Y', obj.cy)
+        self.set_if_not_none(v, 'X', self.get_x(obj))
+        self.set_if_not_none(v, 'Y', self.get_y(obj))
         return v
+
+    @staticmethod
+    def get_x(obj):
+        return obj.cx
+
+    @staticmethod
+    def get_y(obj):
+        return obj.cy
+
+
+class Point201606Encoder(Point201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Point'
+
+    @staticmethod
+    def get_x(obj):
+        return obj.x
+
+    @staticmethod
+    def get_y(obj):
+        return obj.y
+
 
 if SCHEMA_VERSION == '2015-01':
     encoder = (PointI, Point201501Encoder)
 elif SCHEMA_VERSION == '2016-06':
     encoder = (PointI, Point201606Encoder)
+PointEncoder = encoder[1]

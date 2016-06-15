@@ -16,12 +16,12 @@ from omero.rtypes import unwrap
 from math import sin, cos, radians
 
 
-class ShapeEncoder(AnnotatableEncoder):
+class Shape201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Shape'
 
     def encode(self, obj):
-        v = super(ShapeEncoder, self).encode(obj)
+        v = super(Shape201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'FillColor', obj.fillColor)
         self.set_if_not_none(v, 'FillRule', obj.fillRule)
         self.set_if_not_none(v, 'FontFamily', obj.fontFamily)
@@ -37,10 +37,15 @@ class ShapeEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'TheZ', obj.theZ)
         self.set_if_not_none(
             v, 'Transform', self.encode_transform(obj.transform))
-        if SCHEMA_VERSION == '2015-01':
-            self.set_if_not_none(v, 'LineCap', obj.strokeLineCap)
-            self.set_if_not_none(v, 'Visible', obj.visibility)
+        self.set_linecap(v, obj)
+        self.set_visible(v, obj)
         return v
+
+    def set_linecap(self, v, obj):
+        self.set_if_not_none(v, 'LineCap', obj.strokeLineCap)
+
+    def set_visible(self, v, obj):
+        self.set_if_not_none(v, 'Visible', obj.visibility)
 
     @staticmethod
     def encode_transform(transform):
@@ -86,4 +91,19 @@ class ShapeEncoder(AnnotatableEncoder):
         }
 
 
-encoder = (Shape, ShapeEncoder)
+class Shape201606Encoder(Shape201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Shape'
+
+    def set_linecap(self, v, obj):
+        pass
+
+    def set_visible(self, v, obj):
+        pass
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (Shape, Shape201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (Shape, Shape201606Encoder)
+ShapeEncoder = encoder[1]
