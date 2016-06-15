@@ -9,9 +9,9 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableDecoder
 from omero.model import Shape
-from omero_marshal import SCHEMA_VERSION
 
 
 class ShapeDecoder(AnnotatableDecoder):

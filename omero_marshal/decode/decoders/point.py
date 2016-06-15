@@ -9,10 +9,10 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 from omero.model import PointI
 from omero.rtypes import RDoubleI
-from omero_marshal import SCHEMA_VERSION
 
 
 class PointDecoder(ShapeDecoder):

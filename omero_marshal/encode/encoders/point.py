@@ -9,9 +9,9 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeEncoder
 from omero.model import PointI
-from omero_marshal import SCHEMA_VERSION
 
 
 class PointEncoder(ShapeEncoder):

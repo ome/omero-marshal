@@ -9,9 +9,9 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import Shape
-from omero_marshal import SCHEMA_VERSION
 from omero.rtypes import unwrap
 from math import sin, cos, radians
 
