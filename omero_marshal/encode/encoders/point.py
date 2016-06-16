@@ -24,12 +24,10 @@ class Point201501Encoder(ShapeEncoder):
         self.set_if_not_none(v, 'Y', self.get_y(obj))
         return v
 
-    @staticmethod
-    def get_x(obj):
+    def get_x(self, obj):
         return obj.cx
 
-    @staticmethod
-    def get_y(obj):
+    def get_y(self, obj):
         return obj.cy
 
 
@@ -37,12 +35,10 @@ class Point201606Encoder(Point201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Point'
 
-    @staticmethod
-    def get_x(obj):
+    def get_x(self, obj):
         return obj.x
 
-    @staticmethod
-    def get_y(obj):
+    def get_y(self, obj):
         return obj.y
 
 

@@ -27,12 +27,10 @@ class Point201501Decoder(ShapeDecoder):
         self.set_y(v, RDoubleI(data.get('Y')))
         return v
 
-    @staticmethod
-    def set_x(obj, value):
+    def set_x(self, obj, value):
         obj.cx = value
 
-    @staticmethod
-    def set_y(obj, value):
+    def set_y(self, obj, value):
         obj.cy = value
 
 
@@ -40,12 +38,10 @@ class Point201606Decoder(Point201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Point'
 
-    @staticmethod
-    def set_x(obj, value):
+    def set_x(self, obj, value):
         obj.x = value
 
-    @staticmethod
-    def set_y(obj, value):
+    def set_y(self, obj, value):
         obj.y = value
 
 

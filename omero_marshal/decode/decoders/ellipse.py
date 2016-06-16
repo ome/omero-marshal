@@ -29,20 +29,16 @@ class Ellipse201501Decoder(ShapeDecoder):
         self.set_radiusY(v, RDoubleI(data.get('RadiusY')))
         return v
 
-    @staticmethod
-    def set_x(obj, value):
+    def set_x(self, obj, value):
         obj.cx = value
 
-    @staticmethod
-    def set_y(obj, value):
+    def set_y(self, obj, value):
         obj.cy = value
 
-    @staticmethod
-    def set_radiusX(obj, value):
+    def set_radiusX(self, obj, value):
         obj.rx = value
 
-    @staticmethod
-    def set_radiusY(obj, value):
+    def set_radiusY(self, obj, value):
         obj.ry = value
 
 
@@ -50,20 +46,16 @@ class Ellipse201606Decoder(Ellipse201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Ellipse'
 
-    @staticmethod
-    def set_x(obj, value):
+    def set_x(self, obj, value):
         obj.x = value
 
-    @staticmethod
-    def set_y(obj, value):
+    def set_y(self, obj, value):
         obj.y = value
 
-    @staticmethod
-    def set_radiusX(obj, value):
+    def set_radiusX(self, obj, value):
         obj.radiusX = value
 
-    @staticmethod
-    def set_radiusY(obj, value):
+    def set_radiusY(self, obj, value):
         obj.radiusY = value
 
 

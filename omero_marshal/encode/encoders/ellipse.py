@@ -26,20 +26,16 @@ class Ellipse201501Encoder(ShapeEncoder):
         self.set_if_not_none(v, 'RadiusY', self.get_radiusY(obj))
         return v
 
-    @staticmethod
-    def get_x(obj):
+    def get_x(self, obj):
         return obj.cx
 
-    @staticmethod
-    def get_y(obj):
+    def get_y(self, obj):
         return obj.cy
 
-    @staticmethod
-    def get_radiusX(obj):
+    def get_radiusX(self, obj):
         return obj.rx
 
-    @staticmethod
-    def get_radiusY(obj):
+    def get_radiusY(self, obj):
         return obj.ry
 
 
@@ -47,20 +43,16 @@ class Ellipse201606Encoder(Ellipse201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Ellipse'
 
-    @staticmethod
-    def get_x(obj):
+    def get_x(self, obj):
         return obj.x
 
-    @staticmethod
-    def get_y(obj):
+    def get_y(self, obj):
         return obj.y
 
-    @staticmethod
-    def get_radiusX(obj):
+    def get_radiusX(self, obj):
         return obj.radiusX
 
-    @staticmethod
-    def get_radiusY(obj):
+    def get_radiusY(self, obj):
         return obj.radiusY
 
 
