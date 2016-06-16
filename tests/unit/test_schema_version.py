@@ -31,3 +31,15 @@ SFS = (SchemaFixture("5.1.0-ice35-b40", "2015-01"),
 @pytest.mark.parametrize("f", SFS, ids=[x.omero_version for x in SFS])
 def test_schema_version(f):
     assert get_schema_version(f.omero_version) == f.schema_version
+
+
+def test_invalid_omero_version():
+    with pytest.raises(Exception) as excinfo:
+        get_schema_version("5.0")
+    assert str(excinfo.value) == "Invalid OMERO version number 5.0"
+
+
+def test_invalid_schema_version():
+    with pytest.raises(Exception) as excinfo:
+        get_schema_version("5.0.0")
+    assert str(excinfo.value) == "Unsupported schema version"
