@@ -50,14 +50,14 @@ VERSION_REGEXP = re.compile('^(\d+\.\d+\.\d+)')
 def get_schema_version(version):
     m = VERSION_REGEXP.search(version)
     if m is None:
-        raise Exception("Invalid OMERO version number " + version)
+        raise Exception("Invalid OMERO version number: " + version)
     v = StrictVersion(m.group(1))
     if v >= StrictVersion('5.1.0') and v < StrictVersion('5.3.0'):
         return '2015-01'
-    elif v >= StrictVersion('5.3.0'):
+    elif v == StrictVersion('5.3.0'):
         return '2016-06'
     else:
-        raise Exception('Unsupported schema version')
+        raise Exception("Unsupported OMERO version: " + version)
 
 SCHEMA_VERSION = get_schema_version(omero_version)
 BASE_URL = 'http://www.openmicroscopy.org/Schemas'
