@@ -37,8 +37,8 @@ class TestShapeDecoder(object):
     def assert_externalInfo(self, externalInfo):
         assert externalInfo.entityId.val == 123
         assert externalInfo.entityType.val == 'test'
-        assert externalInfo.lsid.val == 456
-        assert externalInfo.uuid.val == 789
+        assert externalInfo.lsid.val == 'ABCDEF'
+        assert externalInfo.uuid.val == 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de'
 
     def assert_details(self, details):
         self.assert_experimenter(details.owner)

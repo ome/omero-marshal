@@ -159,8 +159,8 @@ def externalInfo():
     o = ExternalInfoI()
     o.entityId = rlong(123L)
     o.entityType = rstring('test')
-    o.lsid = rlong(456L)
-    o.uuid = rlong(789L)
+    o.lsid = rstring('ABCDEF')
+    o.uuid = rstring('f90a1fd5-275c-4d14-82b3-87b5ef0f07de')
     return o
 
 

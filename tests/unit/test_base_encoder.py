@@ -58,8 +58,8 @@ class TestBaseEncoder(object):
                     '@type': 'TBD#ExternalInfo',
                     'EntityId': 123,
                     'EntityType': 'test',
-                    'Lsid': 456,
-                    'Uuid': 789,
+                    'Lsid': 'ABCDEF',
+                    'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
                     'omero:details': {
                         '@type': 'TBD#Details'
                     },
@@ -102,8 +102,8 @@ class TestBaseEncoder(object):
                     '@type': 'TBD#ExternalInfo',
                     'EntityId': 123,
                     'EntityType': 'test',
-                    'Lsid': 456,
-                    'Uuid': 789,
+                    'Lsid': 'ABCDEF',
+                    'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
                     'omero:details': {
                         '@type': 'TBD#Details'
                     },
@@ -170,8 +170,8 @@ class TestDetailsEncoder(object):
             '@type': 'TBD#ExternalInfo',
             'EntityId': 123,
             'EntityType': 'test',
-            'Lsid': 456,
-            'Uuid': 789,
+            'Lsid': 'ABCDEF',
+            'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
             'omero:details': {
                 '@type': 'TBD#Details'
             },

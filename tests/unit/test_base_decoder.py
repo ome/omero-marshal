@@ -28,8 +28,8 @@ class TestBaseDecoder(object):
     def assert_externalInfo(self, externalInfo):
         assert 123 == externalInfo.entityId.val
         assert 'test' == externalInfo.entityType.val
-        assert 456 == externalInfo.lsid.val
-        assert 789 == externalInfo.uuid.val
+        assert 'ABCDEF' == externalInfo.lsid.val
+        assert 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de' == externalInfo.uuid.val
 
     def test_base_decoder(self, roi):
         encoder = get_encoder(roi.__class__)
