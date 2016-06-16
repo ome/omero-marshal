@@ -33,6 +33,10 @@ class DetailsDecoder(Decoder):
         if permissions is not None:
             decoder = self.ctx.get_decoder(permissions['@type'])
             v.permissions = decoder.decode(permissions)
+        externalInfo = data.get('externalInfo')
+        if externalInfo is not None:
+            decoder = self.ctx.get_decoder(externalInfo['@type'])
+            v.externalInfo = decoder.decode(externalInfo)
         return v
 
 decoder = (DetailsDecoder.TYPE, DetailsDecoder)
