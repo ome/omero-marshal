@@ -230,8 +230,7 @@ class TestLabelEncoder(TestShapeEncoder):
         v = encoder.encode(label)
         self.assert_shape(v)
         assert v['@id'] == 7L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Label'
+        assert v['@type'] == '%s#Label' % ROI_SCHEMA_URL
         assert v['X'] == 1.0
         assert v['Y'] == 2.0
 
@@ -243,8 +242,7 @@ class TestPolylineEncoder(TestShapeEncoder):
         v = encoder.encode(polyline)
         self.assert_shape(v)
         assert v['@id'] == 4L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polyline'
+        assert v['@type'] == '%s#Polyline' % ROI_SCHEMA_URL
         assert v['Points'] == '0,0 1,2 3,5'
 
 
@@ -255,8 +253,7 @@ class TestPolygonEncoder(TestShapeEncoder):
         v = encoder.encode(polygon)
         self.assert_shape(v)
         assert v['@id'] == 5L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polygon'
+        assert v['@type'] == '%s#Polygon' % ROI_SCHEMA_URL
         assert v['Points'] == '0,0 1,2 3,5'
 
 
@@ -267,8 +264,7 @@ class TestLineEncoder(TestShapeEncoder):
         v = encoder.encode(line)
         self.assert_shape(v)
         assert v['@id'] == 6L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Line'
+        assert v['@type'] == '%s#Line' % ROI_SCHEMA_URL
         assert v['X1'] == 0.0
         assert v['Y1'] == 0.0
         assert v['X2'] == 1.0

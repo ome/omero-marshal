@@ -32,6 +32,7 @@ SFS = (SchemaFixture("5.1.0-ice35-b40", "2015-01"),
 def test_schema_version(f):
     assert get_schema_version(f.omero_version) == f.schema_version
 
+
 @pytest.mark.parametrize('version', ('5', '5.1', 'v5.1.0'))
 def test_invalid_omero_version(version):
     with pytest.raises(Exception) as excinfo:

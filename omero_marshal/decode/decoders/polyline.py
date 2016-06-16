@@ -9,19 +9,30 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 from omero.model import PolylineI
 
 
-class PolylineDecoder(ShapeDecoder):
+class Polyline201501Decoder(ShapeDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polyline'
 
     OMERO_CLASS = PolylineI
 
     def decode(self, data):
-        v = super(PolylineDecoder, self).decode(data)
+        v = super(Polyline201501Decoder, self).decode(data)
         v.points = self.to_rtype(data.get('Points'))
         return v
 
-decoder = (PolylineDecoder.TYPE, PolylineDecoder)
+
+class Polyline201606Decoder(Polyline201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Polyline'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Polyline201501Decoder.TYPE, Polyline201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Polyline201606Decoder.TYPE, Polyline201606Decoder)
+PolylineDecoder = decoder[1]
