@@ -9,19 +9,33 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotationDecoder
 from omero.model import DoubleAnnotationI
 
 
-class DoubleAnnotationDecoder(AnnotationDecoder):
+class DoubleAnnotation201501Decoder(AnnotationDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#DoubleAnnotation'
 
     OMERO_CLASS = DoubleAnnotationI
 
     def decode(self, data):
-        v = super(DoubleAnnotationDecoder, self).decode(data)
+        v = super(DoubleAnnotation201501Decoder, self).decode(data)
         v.doubleValue = self.to_rtype(data.get('Value'))
         return v
 
-decoder = (DoubleAnnotationDecoder.TYPE, DoubleAnnotationDecoder)
+
+class DoubleAnnotation201606Decoder(DoubleAnnotation201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#' \
+        'DoubleAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (DoubleAnnotation201501Decoder.TYPE,
+               DoubleAnnotation201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (DoubleAnnotation201606Decoder.TYPE,
+               DoubleAnnotation201606Decoder)
+DoubleAnnotationDecoder = decoder[1]

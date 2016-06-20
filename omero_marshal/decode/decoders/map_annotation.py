@@ -9,18 +9,19 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotationDecoder
 from omero.model import MapAnnotationI, NamedValue
 
 
-class MapAnnotationDecoder(AnnotationDecoder):
+class MapAnnotation201501Decoder(AnnotationDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#MapAnnotation'
 
     OMERO_CLASS = MapAnnotationI
 
     def decode(self, data):
-        v = super(MapAnnotationDecoder, self).decode(data)
+        v = super(MapAnnotation201501Decoder, self).decode(data)
         map_value = data.get('Value', list())
         map_value = [
             NamedValue(key, value) for key, value in map_value
@@ -28,4 +29,16 @@ class MapAnnotationDecoder(AnnotationDecoder):
         v.setMapValue(map_value)
         return v
 
-decoder = (MapAnnotationDecoder.TYPE, MapAnnotationDecoder)
+
+class MapAnnotation201606Decoder(MapAnnotation201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#MapAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (MapAnnotation201501Decoder.TYPE,
+               MapAnnotation201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (MapAnnotation201606Decoder.TYPE,
+               MapAnnotation201606Decoder)
+MapAnnotationDecoder = decoder[1]

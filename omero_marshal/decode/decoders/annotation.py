@@ -9,31 +9,37 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .. import Decoder
 from omero.model import Annotation
 
 
-class AnnotationDecoder(Decoder):
+class Annotation201501Decoder(Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#Annotation'
 
     OMERO_CLASS = Annotation
 
     def decode(self, data):
-        v = super(AnnotationDecoder, self).decode(data)
+        v = super(Annotation201501Decoder, self).decode(data)
         v.description = self.to_rtype(data.get('Description'))
         v.ns = self.to_rtype(data.get('Namespace'))
         return v
 
 
-class AnnotatableDecoder(Decoder):
+class Annotation201606Decoder(Annotation201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Annotation'
+
+
+class Annotatable201501Decoder(Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#AnnotationRef'
 
     OMERO_CLASS = Annotation
 
     def decode(self, data):
-        v = super(AnnotatableDecoder, self).decode(data)
+        v = super(Annotatable201501Decoder, self).decode(data)
         if 'Annotations' in data:
             for annotation in data['Annotations']:
                 annotation_decoder = self.ctx.get_decoder(annotation['@type'])
@@ -43,4 +49,15 @@ class AnnotatableDecoder(Decoder):
         return v
 
 
-decoder = (AnnotationDecoder.TYPE, AnnotationDecoder)
+class Annotatable201606Decoder(Annotatable201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#AnnotationRef'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Annotation201501Decoder.TYPE, Annotation201501Decoder)
+    AnnotatableDecoder = Annotatable201501Decoder
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Annotation201606Decoder.TYPE, Annotation201606Decoder)
+    AnnotatableDecoder = Annotatable201606Decoder
+AnnotationDecoder = decoder[1]

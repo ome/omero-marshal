@@ -9,19 +9,33 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotationDecoder
 from omero.model import BooleanAnnotationI
 
 
-class BooleanAnnotationDecoder(AnnotationDecoder):
+class BooleanAnnotation201501Decoder(AnnotationDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#BooleanAnnotation'
 
     OMERO_CLASS = BooleanAnnotationI
 
     def decode(self, data):
-        v = super(BooleanAnnotationDecoder, self).decode(data)
+        v = super(BooleanAnnotation201501Decoder, self).decode(data)
         v.boolValue = self.to_rtype(data.get('Value'))
         return v
 
-decoder = (BooleanAnnotationDecoder.TYPE, BooleanAnnotationDecoder)
+
+class BooleanAnnotation201606Decoder(BooleanAnnotation201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#' \
+        'BooleanAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (BooleanAnnotation201501Decoder.TYPE,
+               BooleanAnnotation201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (BooleanAnnotation201606Decoder.TYPE,
+               BooleanAnnotation201606Decoder)
+BooleanAnnotationDecoder = decoder[1]

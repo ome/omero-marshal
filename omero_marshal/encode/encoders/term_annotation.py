@@ -9,18 +9,30 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotationEncoder
 from omero.model import TermAnnotationI
 
 
-class TermAnnotationEncoder(AnnotationEncoder):
+class TermAnnotation201501Encoder(AnnotationEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#TermAnnotation'
 
     def encode(self, obj):
-        v = super(TermAnnotationEncoder, self).encode(obj)
+        v = super(TermAnnotation201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'Value', obj.termValue)
         return v
 
-encoder = (TermAnnotationI, TermAnnotationEncoder)
+
+class TermAnnotation201606Encoder(TermAnnotation201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06' \
+        '#TermAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (TermAnnotationI, TermAnnotation201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (TermAnnotationI, TermAnnotation201606Encoder)
+TermAnnotationEncoder = encoder[1]
