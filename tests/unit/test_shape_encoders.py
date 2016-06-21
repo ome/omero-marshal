@@ -282,8 +282,7 @@ class TestRoiEncoder(TestShapeEncoder):
         self.assert_roi_with_shapes(v, has_annotations=True)
 
 
-TRANSFORMATION_TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01' \
-    '#AffineTransform'
+TRANSFORMATION_TYPE = '%s#AffineTransform' % ROI_SCHEMA_URL
 
 TRANSFORMATIONS = [
     (
