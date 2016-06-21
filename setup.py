@@ -52,7 +52,7 @@ setup(
     name='omero_marshal',
     version=VERSION,
     description='OMERO Marshal',
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
