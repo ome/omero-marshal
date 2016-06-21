@@ -10,6 +10,7 @@
 #
 
 from omero_marshal import get_encoder, SCHEMA_VERSION, ROI_SCHEMA_URL
+from omero_marshal import SA_SCHEMA_URL
 import pytest
 
 
@@ -18,64 +19,55 @@ class TestShapeEncoder(object):
     def annotation_data(self):
         return {
             'Annotations': [{
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#BooleanAnnotation',
+                '@type': '%s#BooleanAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'boolean_annotation',
                 'Value': True,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#CommentAnnotation',
+                '@type': '%s#CommentAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'comment_annotation',
                 'Value': 'text_value',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#DoubleAnnotation',
+                '@type': '%s#DoubleAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'double_annotation',
                 'Value': 1.0,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#LongAnnotation',
+                '@type': '%s#LongAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'long_annotation',
                 'Value': 1L,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#MapAnnotation',
+                '@type': '%s#MapAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'map_annotation',
                 'Value': [['a', '1'], ['b', '2']],
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TagAnnotation',
+                '@type': '%s#TagAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'tag_annotation',
                 'Value': 'tag_value',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TermAnnotation',
+                '@type': '%s#TermAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'term_annotation',
                 'Value': 'term_value',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TimestampAnnotation',
+                '@type': '%s#TimestampAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'timestamp_annotation',
                 'Value': 1L,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#XmlAnnotation',
+                '@type': '%s#XmlAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'xml_annotation',
                 'Value': '<xml_value></xml_value>',
