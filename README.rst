@@ -1,6 +1,9 @@
 .. image:: https://travis-ci.org/openmicroscopy/omero-marshal.png
    :target: http://travis-ci.org/openmicroscopy/omero-marshal
 
+.. image:: https://badge.fury.io/py/omero-marshal.svg
+    :target: https://badge.fury.io/py/omero-marshal
+
 OMERO Marshal
 =============
 
