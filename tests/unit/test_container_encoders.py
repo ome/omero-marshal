@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder
+from omero_marshal import get_encoder, OME_SCHEMA_URL
 
 
 class TestProjectEncoder(object):
@@ -19,8 +19,7 @@ class TestProjectEncoder(object):
         v = encoder.encode(project)
         assert v == {
             '@id': 1L,
-            '@type':
-                'http://www.openmicroscopy.org/Schemas/OME/2015-01#Project',
+            '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'TBD#Details'}
@@ -31,24 +30,19 @@ class TestProjectEncoder(object):
         v = encoder.encode(project_with_datasets)
         assert v == {
             '@id': 1L,
-            '@type':
-                'http://www.openmicroscopy.org/Schemas/OME/2015-01#Project',
+            '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'TBD#Details'},
             'Datasets': [{
                 '@id': 1L,
-                '@type':
-                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                    '#Dataset',
+                '@type': '%s#Dataset' % OME_SCHEMA_URL,
                 'Name': 'dataset_name_1',
                 'Description': 'dataset_description_1',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@id': 2L,
-                '@type':
-                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                    '#Dataset',
+                '@type': '%s#Dataset' % OME_SCHEMA_URL,
                 'Name': 'dataset_name_2',
                 'Description': 'dataset_description_2',
                 'omero:details': {'@type': 'TBD#Details'}

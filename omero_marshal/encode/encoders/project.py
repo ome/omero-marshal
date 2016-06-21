@@ -9,16 +9,17 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import ProjectI
 
 
-class ProjectEncoder(AnnotatableEncoder):
+class Project201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Project'
 
     def encode(self, obj):
-        v = super(ProjectEncoder, self).encode(obj)
+        v = super(Project201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         if obj.isDatasetLinksLoaded() and obj.sizeOfDatasetLinks() > 0:
@@ -32,4 +33,14 @@ class ProjectEncoder(AnnotatableEncoder):
             v['Datasets'] = datasets
         return v
 
-encoder = (ProjectI, ProjectEncoder)
+
+class Project201606Encoder(Project201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Project'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (ProjectI, Project201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (ProjectI, Project201606Encoder)
+ProjectEncoder = encoder[1]

@@ -9,16 +9,17 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .. import Encoder
 from omero.model import ExperimenterI
 
 
-class ExperimenterEncoder(Encoder):
+class Experimenter201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Experimenter'
 
     def encode(self, obj):
-        v = super(ExperimenterEncoder, self).encode(obj)
+        v = super(Experimenter201501Encoder, self).encode(obj)
         if not obj.isLoaded():
             return v
         self.set_if_not_none(v, 'FirstName', obj.firstName)
@@ -29,4 +30,14 @@ class ExperimenterEncoder(Encoder):
         self.set_if_not_none(v, 'UserName', obj.omeName)
         return v
 
-encoder = (ExperimenterI, ExperimenterEncoder)
+
+class Experimenter201606Encoder(Experimenter201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Experimenter'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (ExperimenterI, Experimenter201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (ExperimenterI, Experimenter201606Encoder)
+ExperimenterEncoder = encoder[1]

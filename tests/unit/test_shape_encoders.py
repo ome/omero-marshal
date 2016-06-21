@@ -10,7 +10,7 @@
 #
 
 from omero_marshal import get_encoder, SCHEMA_VERSION, ROI_SCHEMA_URL
-from omero_marshal import SA_SCHEMA_URL
+from omero_marshal import SA_SCHEMA_URL, OME_SCHEMA_URL
 import pytest
 
 
@@ -88,8 +88,7 @@ class TestShapeEncoder(object):
             'group': {
                 '@id': 1L,
                 '@type':
-                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                    '#ExperimenterGroup',
+                    '%s#ExperimenterGroup' % OME_SCHEMA_URL,
                 'Description': 'the_description',
                 'Name': 'the_name',
                 'omero:details': {'@type': 'TBD#Details'}
@@ -97,8 +96,7 @@ class TestShapeEncoder(object):
             'owner': {
                 '@id': 1L,
                 '@type':
-                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                    '#Experimenter',
+                    '%s#Experimenter' % OME_SCHEMA_URL,
                 'Email': 'the_email',
                 'FirstName': 'the_firstName',
                 'Institution': 'the_institution',

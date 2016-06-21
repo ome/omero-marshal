@@ -9,18 +9,19 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .. import Decoder
 from omero.model import ExperimenterI
 
 
-class ExperimenterDecoder(Decoder):
+class Experimenter201501Decoder(Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Experimenter'
 
     OMERO_CLASS = ExperimenterI
 
     def decode(self, data):
-        v = super(ExperimenterDecoder, self).decode(data)
+        v = super(Experimenter201501Decoder, self).decode(data)
         v.firstName = self.to_rtype(data.get('FirstName'))
         v.middleName = self.to_rtype(data.get('MiddleName'))
         v.lastName = self.to_rtype(data.get('LastName'))
@@ -29,4 +30,14 @@ class ExperimenterDecoder(Decoder):
         v.omeName = self.to_rtype(data.get('UserName'))
         return v
 
-decoder = (ExperimenterDecoder.TYPE, ExperimenterDecoder)
+
+class Experimenter201606Decoder(Experimenter201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Experimenter'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Experimenter201501Decoder.TYPE, Experimenter201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Experimenter201606Decoder.TYPE, Experimenter201606Decoder)
+ExperimenterDecoder = decoder[1]

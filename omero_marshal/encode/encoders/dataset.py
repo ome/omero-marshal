@@ -9,18 +9,29 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import DatasetI
 
 
-class DatasetEncoder(AnnotatableEncoder):
+class Dataset201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Dataset'
 
     def encode(self, obj):
-        v = super(DatasetEncoder, self).encode(obj)
+        v = super(Dataset201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         return v
 
-encoder = (DatasetI, DatasetEncoder)
+
+class Dataset201606Encoder(Dataset201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Dataset'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (DatasetI, Dataset201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (DatasetI, Dataset201606Encoder)
+DatasetEncoder = encoder[1]
