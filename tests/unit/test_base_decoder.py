@@ -25,12 +25,19 @@ class TestBaseDecoder(object):
         if not has_annotations:
             assert not roi.annotationLinksLoaded
 
+    def assert_externalInfo(self, externalInfo):
+        assert 123 == externalInfo.entityId.val
+        assert 'test' == externalInfo.entityType.val
+        assert 'ABCDEF' == externalInfo.lsid.val
+        assert 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de' == externalInfo.uuid.val
+
     def test_base_decoder(self, roi):
         encoder = get_encoder(roi.__class__)
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(roi)
         v = decoder.decode(v)
         self.assert_roi(v)
+        self.assert_externalInfo(v.details.externalInfo)
 
     def test_base_decoder_from_string(self):
         data_as_string = """{

@@ -1,3 +1,10 @@
+## 0.3.1 (2016-06-22)
+
+Features:
+
+  - Support shape transforms (#8)
+  - Support externalinfo in details (#11)
+
 ## 0.3.0 (2016-04-27)
 
 Features:

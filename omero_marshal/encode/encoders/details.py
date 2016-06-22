@@ -28,6 +28,9 @@ class DetailsEncoder(Encoder):
         if obj.permissions is not None:
             encoder = self.ctx.get_encoder(obj.permissions.__class__)
             v['permissions'] = encoder.encode(obj.permissions)
+        if obj.externalInfo is not None:
+            encoder = self.ctx.get_encoder(obj.externalInfo.__class__)
+            v['externalInfo'] = encoder.encode(obj.externalInfo)
         return v
 
 encoder = (DetailsI, DetailsEncoder)

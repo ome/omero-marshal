@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/openmicroscopy/omero-marshal.png)](http://travis-ci.org/openmicroscopy/omero-marshal)
+.. image:: https://travis-ci.org/openmicroscopy/omero-marshal.png
+   :target: http://travis-ci.org/openmicroscopy/omero-marshal
+
+.. image:: https://badge.fury.io/py/omero-marshal.svg
+    :target: https://badge.fury.io/py/omero-marshal
 
 OMERO Marshal
 =============
@@ -16,11 +20,11 @@ Requirements
 Development Installation
 ========================
 
-1. Clone the repository
+1. Clone the repository::
 
         git clone git@github.com:openmicroscopy/omero-marshal.git
 
-2. Set up a virtualenv (http://www.pip-installer.org/) and activate it
+2. Set up a virtualenv (http://www.pip-installer.org/) and activate it::
 
         curl -O -k https://raw.github.com/pypa/virtualenv/master/virtualenv.py
         python virtualenv.py omero-marshal
@@ -31,7 +35,7 @@ Development Installation
 Running Tests
 =============
 
-Using py.test to run the unit tests:
+Using py.test to run the unit tests::
 
     	py.test tests/unit/
 

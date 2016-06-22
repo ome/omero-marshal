@@ -49,7 +49,17 @@ class TestBaseEncoder(object):
                     'canEdit': True,
                     'canLink': True,
                     'perm': 'rwrwrw'
-                }
+                },
+                'externalInfo': {
+                    '@type': 'TBD#ExternalInfo',
+                    'EntityId': 123,
+                    'EntityType': 'test',
+                    'Lsid': 'ABCDEF',
+                    'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
+                    'omero:details': {
+                        '@type': 'TBD#Details'
+                    },
+                },
             }
         }
 
@@ -79,7 +89,17 @@ class TestBaseEncoder(object):
                     'canEdit': True,
                     'canLink': True,
                     'perm': 'rwrwrw'
-                }
+                },
+                'externalInfo': {
+                    '@type': 'TBD#ExternalInfo',
+                    'EntityId': 123,
+                    'EntityType': 'test',
+                    'Lsid': 'ABCDEF',
+                    'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
+                    'omero:details': {
+                        '@type': 'TBD#Details'
+                    },
+                },
             }
         }
 
@@ -133,6 +153,23 @@ class TestDetailsEncoder(object):
         v = encoder.encode(permissions)
         assert v == self.permissions_json()
 
+    def externalInfo_json(self):
+        return {
+            '@type': 'TBD#ExternalInfo',
+            'EntityId': 123,
+            'EntityType': 'test',
+            'Lsid': 'ABCDEF',
+            'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
+            'omero:details': {
+                '@type': 'TBD#Details'
+            },
+        }
+
+    def test_externalInfo_encoder(self, externalInfo):
+        encoder = get_encoder(externalInfo.__class__)
+        v = encoder.encode(externalInfo)
+        assert v == self.externalInfo_json()
+
     def test_details_encoder(self, details):
         encoder = get_encoder(details.__class__)
         v = encoder.encode(details)
@@ -140,5 +177,6 @@ class TestDetailsEncoder(object):
             '@type': 'TBD#Details',
             'permissions': self.permissions_json(),
             'owner': self.experimenter_json(),
-            'group': self.experimenter_group_json()
+            'group': self.experimenter_group_json(),
+            'externalInfo': self.externalInfo_json(),
         }

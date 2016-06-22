@@ -12,7 +12,7 @@ from setuptools.command.test import test as TestCommand
 import multiprocessing
 assert multiprocessing  # silence flake8
 
-VERSION = '0.3.0'
+VERSION = '0.3.1'
 
 
 def get_requirements(suffix=''):
@@ -52,7 +52,7 @@ setup(
     name='omero_marshal',
     version=VERSION,
     description='OMERO Marshal',
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
