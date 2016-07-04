@@ -73,7 +73,7 @@ setup(
     zip_safe=True,
     include_package_data=True,
     platforms='any',
-    setup_requires=['flake8'],
+    setup_requires=['flake8<3.0.0'],
     install_requires=get_requirements(),
     tests_require=get_requirements('-dev'),
     entry_points="""
