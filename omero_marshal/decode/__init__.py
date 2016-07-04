@@ -34,8 +34,11 @@ class Decoder(object):
             v['Unit']
         )
 
-    def to_rtype(self, v):
-        if isinstance(v, unicode):
+    def to_rtype(self, v, force_type=None):
+        if force_type:
+            if v is not None:
+                v = force_type(v)
+        elif isinstance(v, unicode):
             v = v.encode('utf-8')
         return rtype(v)
 

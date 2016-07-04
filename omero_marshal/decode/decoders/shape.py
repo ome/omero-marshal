@@ -21,14 +21,14 @@ class ShapeDecoder(AnnotatableDecoder):
 
     def decode(self, data):
         v = super(ShapeDecoder, self).decode(data)
-        v.fillColor = self.to_rtype(data.get('FillColor'))
+        v.fillColor = self.to_rtype(data.get('FillColor'), int)
         v.fillRule = self.to_rtype(data.get('FillRule'))
         v.fontFamily = self.to_rtype(data.get('FontFamily'))
         v.fontSize = self.to_unit(data.get('FontSize'))
         v.fontStyle = self.to_rtype(data.get('FontStyle'))
         v.strokeLineCap = self.to_rtype(data.get('LineCap'))
         v.locked = self.to_rtype(data.get('Locked'))
-        v.strokeColor = self.to_rtype(data.get('StrokeColor'))
+        v.strokeColor = self.to_rtype(data.get('StrokeColor'), int)
         v.strokeDashArray = self.to_rtype(data.get('StrokeDashArray'))
         v.strokeWidth = self.to_unit(data.get('StrokeWidth'))
         v.textValue = self.to_rtype(data.get('Text'))
