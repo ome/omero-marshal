@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import EllipseI
-from omero.rtypes import RDoubleI
 
 
 class EllipseDecoder(ShapeDecoder):

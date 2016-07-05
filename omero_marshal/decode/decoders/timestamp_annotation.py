@@ -12,8 +12,6 @@
 from .annotation import AnnotationDecoder
 from omero.model import TimestampAnnotationI
 
-from omero.rtypes import RTimeI
-
 
 class TimestampAnnotationDecoder(AnnotationDecoder):
 

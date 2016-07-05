@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import LineI
-from omero.rtypes import RDoubleI
 
 
 class LineDecoder(ShapeDecoder):

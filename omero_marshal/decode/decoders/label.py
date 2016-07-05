@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import LabelI
-from omero.rtypes import RDoubleI
 
 
 class LabelDecoder(ShapeDecoder):

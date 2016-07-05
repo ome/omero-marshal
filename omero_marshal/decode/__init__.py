@@ -12,8 +12,6 @@
 import omero.model
 import omero.model.enums
 
-from omero.rtypes import rtype
-
 
 class Decoder(object):
 

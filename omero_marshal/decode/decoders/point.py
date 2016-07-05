@@ -11,7 +11,6 @@
 
 from .shape import ShapeDecoder
 from omero.model import PointI
-from omero.rtypes import RDoubleI
 
 
 class PointDecoder(ShapeDecoder):

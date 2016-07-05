@@ -10,7 +10,7 @@
 #
 
 from .shape import ShapeDecoder
-from omero.rtypes import RDoubleI
+
 
 # Handle differences in class naming between OMERO 5.1.x and 5.2.x
 try:
