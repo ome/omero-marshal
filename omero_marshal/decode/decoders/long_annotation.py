@@ -21,7 +21,7 @@ class LongAnnotationDecoder(AnnotationDecoder):
 
     def decode(self, data):
         v = super(LongAnnotationDecoder, self).decode(data)
-        v.longValue = self.to_rtype(data.get('Value'))
+        self.set_property(v, 'longValue', data.get('Value'))
         return v
 
 decoder = (LongAnnotationDecoder.TYPE, LongAnnotationDecoder)

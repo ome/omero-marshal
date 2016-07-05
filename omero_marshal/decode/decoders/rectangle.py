@@ -29,10 +29,10 @@ class RectangleDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(RectangleDecoder, self).decode(data)
-        v.x = RDoubleI(data.get('X'))
-        v.y = RDoubleI(data.get('Y'))
-        v.width = RDoubleI(data.get('Width'))
-        v.height = RDoubleI(data.get('Height'))
+        self.set_property(v, 'x', data.get('X'))
+        self.set_property(v, 'y', data.get('Y'))
+        self.set_property(v, 'width', data.get('Width'))
+        self.set_property(v, 'height', data.get('Height'))
         return v
 
 decoder = (RectangleDecoder.TYPE, RectangleDecoder)

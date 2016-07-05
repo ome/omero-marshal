@@ -21,7 +21,7 @@ class PolylineDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(PolylineDecoder, self).decode(data)
-        v.points = self.to_rtype(data.get('Points'))
+        self.set_property(v, 'points', data.get('Points'))
         return v
 
 decoder = (PolylineDecoder.TYPE, PolylineDecoder)

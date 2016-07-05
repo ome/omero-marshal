@@ -21,8 +21,8 @@ class DatasetDecoder(AnnotatableDecoder):
 
     def decode(self, data):
         v = super(DatasetDecoder, self).decode(data)
-        v.name = self.to_rtype(data.get('Name'))
-        v.description = self.to_rtype(data.get('Description'))
+        self.set_property(v, 'name', data.get('Name'))
+        self.set_property(v, 'description', data.get('Description'))
         return v
 
 decoder = (DatasetDecoder.TYPE, DatasetDecoder)

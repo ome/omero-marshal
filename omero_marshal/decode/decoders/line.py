@@ -22,10 +22,10 @@ class LineDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(LineDecoder, self).decode(data)
-        v.x1 = RDoubleI(data.get('X1'))
-        v.y1 = RDoubleI(data.get('Y1'))
-        v.x2 = RDoubleI(data.get('X2'))
-        v.y2 = RDoubleI(data.get('Y2'))
+        self.set_property(v, 'x1', data.get('X1'))
+        self.set_property(v, 'y1', data.get('Y1'))
+        self.set_property(v, 'x2', data.get('X2'))
+        self.set_property(v, 'y2', data.get('Y2'))
         return v
 
 decoder = (LineDecoder.TYPE, LineDecoder)
