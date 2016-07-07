@@ -17,29 +17,21 @@ from omero.model import PointI
 class Point201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
+    X_PROPERTY_NAME = 'cx'
+    Y_PROPERTY_NAME = 'cy'
 
     def encode(self, obj):
         v = super(Point201501Encoder, self).encode(obj)
-        self.set_if_not_none(v, 'X', self.get_x(obj))
-        self.set_if_not_none(v, 'Y', self.get_y(obj))
+        self.set_if_not_none(v, 'X', getattr(obj, self.X_PROPERTY_NAME))
+        self.set_if_not_none(v, 'Y', getattr(obj, self.Y_PROPERTY_NAME))
         return v
-
-    def get_x(self, obj):
-        return obj.cx
-
-    def get_y(self, obj):
-        return obj.cy
 
 
 class Point201606Encoder(Point201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Point'
-
-    def get_x(self, obj):
-        return obj.x
-
-    def get_y(self, obj):
-        return obj.y
+    X_PROPERTY_NAME = 'x'
+    Y_PROPERTY_NAME = 'y'
 
 
 if SCHEMA_VERSION == '2015-01':
