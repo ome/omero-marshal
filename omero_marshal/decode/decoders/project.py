@@ -21,8 +21,8 @@ class ProjectDecoder(AnnotatableDecoder):
 
     def decode(self, data):
         v = super(ProjectDecoder, self).decode(data)
-        v.name = self.to_rtype(data.get('Name'))
-        v.description = self.to_rtype(data.get('Description'))
+        self.set_property(v, 'name', data.get('Name'))
+        self.set_property(v, 'description', data.get('Description'))
         for dataset in data.get('Datasets', list()):
             dataset_decoder = self.ctx.get_decoder(dataset['@type'])
             v.linkDataset(dataset_decoder.decode(dataset))

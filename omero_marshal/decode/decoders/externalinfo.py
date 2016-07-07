@@ -21,10 +21,10 @@ class ExternalInfoDecoder(Decoder):
 
     def decode(self, data):
         v = super(ExternalInfoDecoder, self).decode(data)
-        v.entityId = self.to_rtype(data.get('EntityId'))
-        v.entityType = self.to_rtype(data.get('EntityType'))
-        v.lsid = self.to_rtype(data.get('Lsid'))
-        v.uuid = self.to_rtype(data.get('Uuid'))
+        self.set_property(v, 'entityId', data.get('EntityId'))
+        self.set_property(v, 'entityType', data.get('EntityType'))
+        self.set_property(v, 'lsid', data.get('Lsid'))
+        self.set_property(v, 'uuid', data.get('Uuid'))
         return v
 
 decoder = (ExternalInfoDecoder.TYPE, ExternalInfoDecoder)

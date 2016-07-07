@@ -21,23 +21,23 @@ class ShapeDecoder(AnnotatableDecoder):
 
     def decode(self, data):
         v = super(ShapeDecoder, self).decode(data)
-        v.fillColor = self.to_rtype(data.get('FillColor'))
-        v.fillRule = self.to_rtype(data.get('FillRule'))
-        v.fontFamily = self.to_rtype(data.get('FontFamily'))
+        self.set_property(v, 'fillColor', data.get('FillColor'))
+        self.set_property(v, 'fillRule', data.get('FillRule'))
+        self.set_property(v, 'fontFamily', data.get('FontFamily'))
         v.fontSize = self.to_unit(data.get('FontSize'))
-        v.fontStyle = self.to_rtype(data.get('FontStyle'))
-        v.strokeLineCap = self.to_rtype(data.get('LineCap'))
-        v.locked = self.to_rtype(data.get('Locked'))
-        v.strokeColor = self.to_rtype(data.get('StrokeColor'))
-        v.strokeDashArray = self.to_rtype(data.get('StrokeDashArray'))
+        self.set_property(v, 'fontStyle', data.get('FontStyle'))
+        self.set_property(v, 'strokeLineCap', data.get('LineCap'))
+        self.set_property(v, 'locked', data.get('Locked'))
+        self.set_property(v, 'strokeColor', data.get('StrokeColor'))
+        self.set_property(v, 'strokeDashArray', data.get('StrokeDashArray'))
         v.strokeWidth = self.to_unit(data.get('StrokeWidth'))
-        v.textValue = self.to_rtype(data.get('Text'))
-        v.theC = self.to_rtype(data.get('TheC'))
-        v.theT = self.to_rtype(data.get('TheT'))
-        v.theZ = self.to_rtype(data.get('TheZ'))
-        v.visibility = self.to_rtype(data.get('Visible'))
-        v.transform = self.to_rtype(
-            self.decode_transform(data.get('Transform')))
+        self.set_property(v, 'textValue', data.get('Text'))
+        self.set_property(v, 'theC', data.get('TheC'))
+        self.set_property(v, 'theT', data.get('TheT'))
+        self.set_property(v, 'theZ', data.get('TheZ'))
+        self.set_property(v, 'visibility', data.get('Visible'))
+        self.set_property(
+            v, 'transform', self.decode_transform(data.get('Transform')))
         return v
 
     @staticmethod

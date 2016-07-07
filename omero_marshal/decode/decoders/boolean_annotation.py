@@ -21,7 +21,7 @@ class BooleanAnnotationDecoder(AnnotationDecoder):
 
     def decode(self, data):
         v = super(BooleanAnnotationDecoder, self).decode(data)
-        v.boolValue = self.to_rtype(data.get('Value'))
+        self.set_property(v, 'boolValue', data.get('Value'))
         return v
 
 decoder = (BooleanAnnotationDecoder.TYPE, BooleanAnnotationDecoder)

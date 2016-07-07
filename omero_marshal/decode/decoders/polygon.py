@@ -21,7 +21,7 @@ class PolygonDecoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(PolygonDecoder, self).decode(data)
-        v.points = self.to_rtype(data.get('Points'))
+        self.set_property(v, 'points', data.get('Points'))
         return v
 
 decoder = (PolygonDecoder.TYPE, PolygonDecoder)
