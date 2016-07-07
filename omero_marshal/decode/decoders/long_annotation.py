@@ -22,7 +22,7 @@ class LongAnnotation201501Decoder(AnnotationDecoder):
 
     def decode(self, data):
         v = super(LongAnnotation201501Decoder, self).decode(data)
-        v.longValue = self.to_rtype(data.get('Value'))
+        self.set_property(v, 'longValue', data.get('Value'))
         return v
 
 

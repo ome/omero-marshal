@@ -12,7 +12,6 @@
 from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 from omero.model import LineI
-from omero.rtypes import RDoubleI
 
 
 class Line201501Decoder(ShapeDecoder):
@@ -23,10 +22,10 @@ class Line201501Decoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(Line201501Decoder, self).decode(data)
-        v.x1 = RDoubleI(data.get('X1'))
-        v.y1 = RDoubleI(data.get('Y1'))
-        v.x2 = RDoubleI(data.get('X2'))
-        v.y2 = RDoubleI(data.get('Y2'))
+        self.set_property(v, 'x1', data.get('X1'))
+        self.set_property(v, 'y1', data.get('Y1'))
+        self.set_property(v, 'x2', data.get('X2'))
+        self.set_property(v, 'y2', data.get('Y2'))
         return v
 
 

@@ -13,8 +13,6 @@ from ... import SCHEMA_VERSION
 from .annotation import AnnotationDecoder
 from omero.model import TimestampAnnotationI
 
-from omero.rtypes import RTimeI
-
 
 class TimestampAnnotation201501Decoder(AnnotationDecoder):
 
@@ -25,10 +23,7 @@ class TimestampAnnotation201501Decoder(AnnotationDecoder):
 
     def decode(self, data):
         v = super(TimestampAnnotation201501Decoder, self).decode(data)
-        time_value = data.get('Value')
-        if time_value is not None:
-            time_value = RTimeI(time_value)
-        v.timeValue = time_value
+        self.set_property(v, 'timeValue', data.get('Value'))
         return v
 
 

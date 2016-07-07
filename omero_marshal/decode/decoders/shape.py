@@ -22,30 +22,30 @@ class Shape201501Decoder(AnnotatableDecoder):
 
     def decode(self, data):
         v = super(Shape201501Decoder, self).decode(data)
-        v.fillColor = self.to_rtype(data.get('FillColor'))
-        v.fillRule = self.to_rtype(data.get('FillRule'))
-        v.fontFamily = self.to_rtype(data.get('FontFamily'))
+        self.set_property(v, 'fillColor', data.get('FillColor'))
+        self.set_property(v, 'fillRule', data.get('FillRule'))
+        self.set_property(v, 'fontFamily', data.get('FontFamily'))
         v.fontSize = self.to_unit(data.get('FontSize'))
-        v.fontStyle = self.to_rtype(data.get('FontStyle'))
-        v.locked = self.to_rtype(data.get('Locked'))
-        v.strokeColor = self.to_rtype(data.get('StrokeColor'))
-        v.strokeDashArray = self.to_rtype(data.get('StrokeDashArray'))
-        v.strokeWidth = self.to_unit(data.get('StrokeWidth'))
-        v.textValue = self.to_rtype(data.get('Text'))
-        v.theC = self.to_rtype(data.get('TheC'))
-        v.theT = self.to_rtype(data.get('TheT'))
-        v.theZ = self.to_rtype(data.get('TheZ'))
-        self.set_visibility(v, data)
+        self.set_property(v, 'fontStyle', data.get('FontStyle'))
         self.set_linecap(v, data)
-        v.transform = self.to_rtype(
-            self.decode_transform(data.get('Transform')))
+        self.set_property(v, 'locked', data.get('Locked'))
+        self.set_property(v, 'strokeColor', data.get('StrokeColor'))
+        self.set_property(v, 'strokeDashArray', data.get('StrokeDashArray'))
+        v.strokeWidth = self.to_unit(data.get('StrokeWidth'))
+        self.set_property(v, 'textValue', data.get('Text'))
+        self.set_property(v, 'theC', data.get('TheC'))
+        self.set_property(v, 'theT', data.get('TheT'))
+        self.set_property(v, 'theZ', data.get('TheZ'))
+        self.set_visibility(v, data)
+        self.set_property(
+            v, 'transform', self.decode_transform(data.get('Transform')))
         return v
 
-    def set_visibility(self, obj, data):
-        obj.visibility = self.to_rtype(data.get('Visible'))
+    def set_visibility(self, v, data):
+        self.set_property(v, 'visibility', data.get('Visible'))
 
-    def set_linecap(self, obj, data):
-        obj.strokeLineCap = self.to_rtype(data.get('LineCap'))
+    def set_linecap(self, v, data):
+        self.set_property(v, 'strokeLineCap', data.get('LineCap'))
 
     @staticmethod
     def decode_transform(transform):
@@ -65,10 +65,10 @@ class Shape201606Decoder(Shape201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Shape'
 
-    def set_visibility(self, obj, data):
+    def set_visibility(self, v, data):
         pass
 
-    def set_linecap(self, obj, value):
+    def set_linecap(self, v, data):
         pass
 
 if SCHEMA_VERSION == '2015-01':

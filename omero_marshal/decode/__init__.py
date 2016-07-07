@@ -12,8 +12,6 @@
 import omero.model
 import omero.model.enums
 
-from omero.rtypes import rtype
-
 
 class Decoder(object):
 
@@ -34,10 +32,17 @@ class Decoder(object):
             v['Unit']
         )
 
-    def to_rtype(self, v):
-        if isinstance(v, unicode):
-            v = v.encode('utf-8')
-        return rtype(v)
+    def set_property(self, target, prop, value):
+        field_info = getattr(target._field_info, prop)
+        if isinstance(value, unicode):
+            value = value.encode('utf-8')
+        setattr(
+            target,
+            prop,
+            field_info.wrapper(
+                value
+            )
+        )
 
     def decode(self, data):
         o = self.OMERO_CLASS(data.get('@id'))

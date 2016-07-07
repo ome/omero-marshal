@@ -22,8 +22,8 @@ class Roi201501Decoder(AnnotatableDecoder):
 
     def decode(self, data):
         v = super(Roi201501Decoder, self).decode(data)
-        v.name = self.to_rtype(data.get('Name'))
-        v.description = self.to_rtype(data.get('Description'))
+        self.set_property(v, 'name', data.get('Name'))
+        self.set_property(v, 'description', data.get('Description'))
         for shape in data.get('shapes', list()):
             shape_decoder = self.ctx.get_decoder(shape['@type'])
             v.addShape(shape_decoder.decode(shape))

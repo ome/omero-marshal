@@ -12,7 +12,6 @@
 from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 from omero.model import LabelI
-from omero.rtypes import RDoubleI
 
 
 class Label201501Decoder(ShapeDecoder):
@@ -23,8 +22,8 @@ class Label201501Decoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(Label201501Decoder, self).decode(data)
-        v.x = RDoubleI(data.get('X'))
-        v.y = RDoubleI(data.get('Y'))
+        self.set_property(v, 'x', data.get('X'))
+        self.set_property(v, 'y', data.get('Y'))
         return v
 
 

@@ -11,7 +11,7 @@
 
 from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
-from omero.rtypes import RDoubleI
+
 
 # Handle differences in class naming between OMERO 5.1.x and 5.2.x
 try:
@@ -30,10 +30,10 @@ class Rectangle201501Decoder(ShapeDecoder):
 
     def decode(self, data):
         v = super(Rectangle201501Decoder, self).decode(data)
-        v.x = RDoubleI(data.get('X'))
-        v.y = RDoubleI(data.get('Y'))
-        v.width = RDoubleI(data.get('Width'))
-        v.height = RDoubleI(data.get('Height'))
+        self.set_property(v, 'x', data.get('X'))
+        self.set_property(v, 'y', data.get('Y'))
+        self.set_property(v, 'width', data.get('Width'))
+        self.set_property(v, 'height', data.get('Height'))
         return v
 
 

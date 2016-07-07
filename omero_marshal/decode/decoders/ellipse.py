@@ -12,7 +12,6 @@
 from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 from omero.model import EllipseI
-from omero.rtypes import RDoubleI
 
 
 class Ellipse201501Decoder(ShapeDecoder):
@@ -20,43 +19,27 @@ class Ellipse201501Decoder(ShapeDecoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Ellipse'
 
     OMERO_CLASS = EllipseI
+    X_PROPERTY_NAME = 'cx'
+    Y_PROPERTY_NAME = 'cy'
+    RADIUSX_PROPERTY_NAME = 'rx'
+    RADIUSY_PROPERTY_NAME = 'ry'
 
     def decode(self, data):
         v = super(Ellipse201501Decoder, self).decode(data)
-        self.set_x(v, RDoubleI(data.get('X')))
-        self.set_y(v, RDoubleI(data.get('Y')))
-        self.set_radiusX(v, RDoubleI(data.get('RadiusX')))
-        self.set_radiusY(v, RDoubleI(data.get('RadiusY')))
+        self.set_property(v, self.X_PROPERTY_NAME, data.get('X'))
+        self.set_property(v, self.Y_PROPERTY_NAME, data.get('Y'))
+        self.set_property(v, self.RADIUSX_PROPERTY_NAME, data.get('RadiusX'))
+        self.set_property(v, self.RADIUSY_PROPERTY_NAME, data.get('RadiusY'))
         return v
-
-    def set_x(self, obj, value):
-        obj.cx = value
-
-    def set_y(self, obj, value):
-        obj.cy = value
-
-    def set_radiusX(self, obj, value):
-        obj.rx = value
-
-    def set_radiusY(self, obj, value):
-        obj.ry = value
 
 
 class Ellipse201606Decoder(Ellipse201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Ellipse'
-
-    def set_x(self, obj, value):
-        obj.x = value
-
-    def set_y(self, obj, value):
-        obj.y = value
-
-    def set_radiusX(self, obj, value):
-        obj.radiusX = value
-
-    def set_radiusY(self, obj, value):
-        obj.radiusY = value
+    X_PROPERTY_NAME = 'x'
+    Y_PROPERTY_NAME = 'y'
+    RADIUSX_PROPERTY_NAME = 'radiusX'
+    RADIUSY_PROPERTY_NAME = 'radiusY'
 
 
 if SCHEMA_VERSION == '2015-01':

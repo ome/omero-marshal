@@ -23,8 +23,8 @@ class ExperimenterGroup201501Decoder(Decoder):
 
     def decode(self, data):
         v = super(ExperimenterGroup201501Decoder, self).decode(data)
-        v.description = self.to_rtype(data.get('Description'))
-        v.name = self.to_rtype(data.get('Name'))
+        self.set_property(v, 'description', data.get('Description'))
+        self.set_property(v, 'name', data.get('Name'))
         return v
 
 

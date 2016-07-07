@@ -22,12 +22,12 @@ class Experimenter201501Decoder(Decoder):
 
     def decode(self, data):
         v = super(Experimenter201501Decoder, self).decode(data)
-        v.firstName = self.to_rtype(data.get('FirstName'))
-        v.middleName = self.to_rtype(data.get('MiddleName'))
-        v.lastName = self.to_rtype(data.get('LastName'))
-        v.email = self.to_rtype(data.get('Email'))
-        v.institution = self.to_rtype(data.get('Institution'))
-        v.omeName = self.to_rtype(data.get('UserName'))
+        self.set_property(v, 'firstName', data.get('FirstName'))
+        self.set_property(v, 'middleName', data.get('MiddleName'))
+        self.set_property(v, 'lastName', data.get('LastName'))
+        self.set_property(v, 'email', data.get('Email'))
+        self.set_property(v, 'institution', data.get('Institution'))
+        self.set_property(v, 'omeName', data.get('UserName'))
         return v
 
 

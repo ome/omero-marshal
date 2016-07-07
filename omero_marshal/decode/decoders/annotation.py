@@ -22,8 +22,8 @@ class Annotation201501Decoder(Decoder):
 
     def decode(self, data):
         v = super(Annotation201501Decoder, self).decode(data)
-        v.description = self.to_rtype(data.get('Description'))
-        v.ns = self.to_rtype(data.get('Namespace'))
+        self.set_property(v, 'description', data.get('Description'))
+        self.set_property(v, 'ns', data.get('Namespace'))
         return v
 
 

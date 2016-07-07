@@ -22,7 +22,7 @@ class TextAnnotation201501Decoder(AnnotationDecoder):
 
     def decode(self, data):
         v = super(TextAnnotation201501Decoder, self).decode(data)
-        v.textValue = self.to_rtype(data.get('Value'))
+        self.set_property(v, 'textValue', data.get('Value'))
         return v
 
 
