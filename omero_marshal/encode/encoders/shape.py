@@ -107,6 +107,22 @@ class Shape201606Encoder(Shape201501Encoder):
         return 'http://www.openmicroscopy.org/Schemas/OME/2016-06' \
             '#AffineTransform'
 
+    def encode_transform(self, transform):
+        if (transform.getA00() is None and transform.getA10() is None and
+                transform.getA01() is None and transform.getA11() is None and
+                transform.getA02() is None and transform.getA12() is None):
+            return None
+        print transform
+
+        return {
+            '@type': self.get_transform_type(),
+            'A00': transform.getA00().val,
+            'A10': transform.getA10().val,
+            'A01': transform.getA01().val,
+            'A11': transform.getA11().val,
+            'A02': transform.getA02().val,
+            'A12': transform.getA12().val,
+        }
 
 if SCHEMA_VERSION == '2015-01':
     encoder = (Shape, Shape201501Encoder)

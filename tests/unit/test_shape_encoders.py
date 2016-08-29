@@ -11,6 +11,7 @@
 
 from omero_marshal import get_encoder, SCHEMA_VERSION, ROI_SCHEMA_URL
 from omero_marshal import SA_SCHEMA_URL, OME_SCHEMA_URL
+from omero.rtypes import rdouble
 import pytest
 
 
@@ -294,7 +295,7 @@ class TestRoiEncoder(TestShapeEncoder):
 
 TRANSFORMATION_TYPE = '%s#AffineTransform' % ROI_SCHEMA_URL
 
-TRANSFORMATIONS = [
+TRANSFORMATIONS_201501 = [
     (
         'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
         {
@@ -411,11 +412,55 @@ TRANSFORMATIONS = [
 ]
 
 
+if SCHEMA_VERSION == "2015-01":
+    TRANSFORMATIONS = TRANSFORMATIONS_201501
+else:
+    def create_transform(a00=None, a10=None, a01=None, a11=None, a02=None,
+                         a12=None):
+        from omero.model import AffineTransformI
+        t = AffineTransformI()
+        if a00:
+            t.setA00(rdouble(a00))
+        if a10:
+            t.setA10(rdouble(a10))
+        if a01:
+            t.setA01(rdouble(a01))
+        if a11:
+            t.setA11(rdouble(a11))
+        if a02:
+            t.setA02(rdouble(a02))
+        if a12:
+            t.setA12(rdouble(a12))
+        print t
+        return t
+
+    TRANSFORMATIONS = [
+        (
+            create_transform(),
+            None
+        ),
+        (
+            create_transform(a00=1.0, a10=2.0, a01=3.0, a11=4.0, a02=5.0,
+                             a12=6.0),
+            {
+                '@type': TRANSFORMATION_TYPE,
+                'A00': 1.0,
+                'A10': 2.0,
+                'A01': 3.0,
+                'A11': 4.0,
+                'A02': 5.0,
+                'A12': 6.0,
+            }
+        ),
+    ]
+
+
 class TestTransformEncoder():
 
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
     def test_transforms(self, point, transform_s, transform_o):
         point.transform = transform_s
+        print point.transform
         encoder = get_encoder(point.__class__)
         v = encoder.encode(point)
         if not transform_o:

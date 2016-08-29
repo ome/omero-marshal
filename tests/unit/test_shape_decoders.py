@@ -119,7 +119,17 @@ class TestShapeDecoder(object):
         assert shape.theZ.val == 3
         assert shape.theT.val == 2
         assert shape.theC.val == 1
-        assert shape.transform.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
+        if SCHEMA_VERSION == '2015-01':
+            assert shape.transform.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
+        else:
+            from omero.model import AffineTransformI
+            assert shape.transform.__class__ is AffineTransformI
+            assert shape.transform.getA00().val == 1.0
+            assert shape.transform.getA10().val == 0.0
+            assert shape.transform.getA01().val == 0.0
+            assert shape.transform.getA11().val == 1.0
+            assert shape.transform.getA02().val == 0.0
+            assert shape.transform.getA12().val == 0.0
         if not has_annotations:
             assert not shape.annotationLinksLoaded
         else:
@@ -354,7 +364,8 @@ TRANSFORMATIONS = [
 ]
 
 
-class TestTransformDecoder():
+@pytest.mark.skipif(SCHEMA_VERSION != "2015-01", reason="old model")
+class TestTransform201501Decoder():
 
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
     def test_transforms(self, point, transform_s, transform_o):

@@ -12,6 +12,7 @@
 from ... import SCHEMA_VERSION
 from .annotation import AnnotatableDecoder
 from omero.model import Shape
+from omero.rtypes import rdouble
 
 
 class Shape201501Decoder(AnnotatableDecoder):
@@ -37,8 +38,7 @@ class Shape201501Decoder(AnnotatableDecoder):
         self.set_property(v, 'theT', data.get('TheT'))
         self.set_property(v, 'theZ', data.get('TheZ'))
         self.set_visibility(v, data)
-        self.set_property(
-            v, 'transform', self.decode_transform(data.get('Transform')))
+        self.set_transform(v, data)
         return v
 
     def set_visibility(self, v, data):
@@ -47,8 +47,11 @@ class Shape201501Decoder(AnnotatableDecoder):
     def set_linecap(self, v, data):
         self.set_property(v, 'strokeLineCap', data.get('LineCap'))
 
-    @staticmethod
-    def decode_transform(transform):
+    def set_transform(self, v, data):
+        self.set_property(
+            v, 'transform', self.decode_transform(data.get('Transform')))
+
+    def decode_transform(self, transform):
         if not transform:
             return 'none'
         return 'matrix(%s)' % ' '.join(map(str, [
@@ -70,6 +73,24 @@ class Shape201606Decoder(Shape201501Decoder):
 
     def set_linecap(self, v, data):
         pass
+
+    def set_transform(self, v, data):
+        v.setTransform(self.decode_transform(data.get('Transform')))
+
+    def decode_transform(self, transform):
+        from omero.model import AffineTransformI
+
+        t = AffineTransformI()
+        if not transform:
+            return t
+
+        t.setA00(rdouble(transform['A00']))
+        t.setA10(rdouble(transform['A10']))
+        t.setA01(rdouble(transform['A01']))
+        t.setA11(rdouble(transform['A11']))
+        t.setA02(rdouble(transform['A02']))
+        t.setA12(rdouble(transform['A12']))
+        return t
 
 if SCHEMA_VERSION == '2015-01':
     decoder = (Shape201501Decoder.TYPE, Shape201501Decoder)
