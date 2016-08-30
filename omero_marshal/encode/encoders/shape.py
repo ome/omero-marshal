@@ -108,11 +108,12 @@ class Shape201606Encoder(Shape201501Encoder):
             '#AffineTransform'
 
     def encode_transform(self, transform):
+        if not transform:
+            return None
         if (transform.getA00() is None and transform.getA10() is None and
                 transform.getA01() is None and transform.getA11() is None and
                 transform.getA02() is None and transform.getA12() is None):
             return None
-        print transform
 
         return {
             '@type': self.get_transform_type(),

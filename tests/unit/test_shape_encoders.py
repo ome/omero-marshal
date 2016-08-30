@@ -431,10 +431,13 @@ else:
             t.setA02(rdouble(a02))
         if a12:
             t.setA12(rdouble(a12))
-        print t
         return t
 
     TRANSFORMATIONS = [
+        (
+            None,
+            None
+        ),
         (
             create_transform(),
             None
@@ -460,7 +463,6 @@ class TestTransformEncoder():
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
     def test_transforms(self, point, transform_s, transform_o):
         point.transform = transform_s
-        print point.transform
         encoder = get_encoder(point.__class__)
         v = encoder.encode(point)
         if not transform_o:
