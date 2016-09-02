@@ -12,7 +12,7 @@
 import json
 
 from omero.model import RoiI
-from omero_marshal import get_encoder, get_decoder
+from omero_marshal import get_encoder, get_decoder, ROI_SCHEMA_URL
 
 
 class TestBaseDecoder(object):
@@ -41,11 +41,11 @@ class TestBaseDecoder(object):
 
     def test_base_decoder_from_string(self):
         data_as_string = """{
-    "@type": "http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI",
+    "@type": "%s#ROI",
     "@id": 1,
     "Name": "the_name",
     "Description": "the_description"
-}"""
+}""" % ROI_SCHEMA_URL
         data = json.loads(data_as_string)
         decoder = get_decoder(data['@type'])
         v = decoder.decode(data)

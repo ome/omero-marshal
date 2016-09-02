@@ -12,9 +12,11 @@
 import importlib
 import pkgutil
 import logging
+import re
 from encode import encoders
 from decode import decoders
-
+from distutils.version import StrictVersion
+from omero_version import omero_version
 
 logger = logging.getLogger('omero-marshal')
 
@@ -41,6 +43,33 @@ def get_decoder(t):
     except KeyError:
         logger.warn('Requested unknown decoder %s' % t, exc_info=True)
         return None
+
+VERSION_REGEXP = re.compile('^(\d+\.\d+\.\d+)')
+
+
+def get_schema_version(version):
+    m = VERSION_REGEXP.search(version)
+    if m is None:
+        raise Exception("Invalid OMERO version number: " + version)
+    v = StrictVersion(m.group(1))
+    if v >= StrictVersion('5.1.0') and v < StrictVersion('5.3.0'):
+        return '2015-01'
+    elif v == StrictVersion('5.3.0'):
+        return '2016-06'
+    else:
+        raise Exception("Unsupported OMERO version: " + version)
+
+SCHEMA_VERSION = get_schema_version(omero_version)
+BASE_URL = 'http://www.openmicroscopy.org/Schemas'
+if SCHEMA_VERSION == "2015-01":
+    ROI_NS = 'ROI'
+    SA_NS = 'SA'
+else:
+    ROI_NS = 'OME'
+    SA_NS = 'OME'
+OME_SCHEMA_URL = '%s/OME/%s' % (BASE_URL, SCHEMA_VERSION)
+ROI_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, ROI_NS, SCHEMA_VERSION)
+SA_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, SA_NS, SCHEMA_VERSION)
 
 
 class MarshallingCtx(object):

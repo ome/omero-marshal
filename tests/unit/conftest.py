@@ -28,6 +28,8 @@ except ImportError:
     # OMERO 5.2.x
     from omero.model import RectangleI
 
+from omero_marshal import SCHEMA_VERSION
+
 
 @pytest.fixture()
 def project():
@@ -243,15 +245,26 @@ def populate_shape(o, set_unit_attributes=True):
     o.locked = rbool(False)
     o.strokeColor = rint(0xffff0000)
     o.strokeDashArray = rstring('inherit')
-    o.strokeLineCap = rstring('round')
+    if SCHEMA_VERSION == '2015-01':
+        o.visibility = rbool(True)
+        o.strokeLineCap = rstring('round')
     if set_unit_attributes:
         o.strokeWidth = LengthI(4, UnitsLength.PIXEL)
     o.textValue = rstring('the_text')
     o.theC = rint(1)
     o.theT = rint(2)
     o.theZ = rint(3)
-    o.visibility = rbool(True)
-    o.transform = 'matrix(1 0 0 1 0 0)'
+    if SCHEMA_VERSION == '2015-01':
+        o.transform = 'matrix(1 0 0 1 0 0)'
+    else:
+        from omero.model import AffineTransformI
+        o.transform = AffineTransformI()
+        o.transform.setA00(rdouble(1))
+        o.transform.setA10(rdouble(0))
+        o.transform.setA01(rdouble(0))
+        o.transform.setA11(rdouble(1))
+        o.transform.setA02(rdouble(0))
+        o.transform.setA12(rdouble(0))
     return o
 
 
@@ -259,24 +272,24 @@ def populate_shape(o, set_unit_attributes=True):
 def ellipse():
     o = EllipseI()
     populate_shape(o)
-    o.cx = rdouble(1.0)
-    o.cy = rdouble(2.0)
-    o.rx = rdouble(3.0)
-    o.ry = rdouble(4.0)
+    if SCHEMA_VERSION == '2015-01':
+        o.cx = rdouble(1.0)
+        o.cy = rdouble(2.0)
+        o.rx = rdouble(3.0)
+        o.ry = rdouble(4.0)
+    else:
+        o.x = rdouble(1.0)
+        o.y = rdouble(2.0)
+        o.radiusX = rdouble(3.0)
+        o.radiusY = rdouble(4.0)
     o.id = rlong(1L)
     return o
 
 
 @pytest.fixture()
 def ellipse_with_annotations():
-    o = EllipseI()
-    populate_shape(o)
+    o = ellipse()
     add_annotations(o)
-    o.cx = rdouble(1.0)
-    o.cy = rdouble(2.0)
-    o.rx = rdouble(3.0)
-    o.ry = rdouble(4.0)
-    o.id = rlong(1L)
     return o
 
 
@@ -296,8 +309,12 @@ def rectangle():
 def point():
     o = PointI()
     populate_shape(o)
-    o.cx = rdouble(1.0)
-    o.cy = rdouble(2.0)
+    if SCHEMA_VERSION == '2015-01':
+        o.cx = rdouble(1.0)
+        o.cy = rdouble(2.0)
+    else:
+        o.x = rdouble(1.0)
+        o.y = rdouble(2.0)
     o.id = rlong(3L)
     return o
 

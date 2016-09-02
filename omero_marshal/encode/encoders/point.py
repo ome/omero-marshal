@@ -9,18 +9,33 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeEncoder
 from omero.model import PointI
 
 
-class PointEncoder(ShapeEncoder):
+class Point201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
+    X_PROPERTY_NAME = 'cx'
+    Y_PROPERTY_NAME = 'cy'
 
     def encode(self, obj):
-        v = super(PointEncoder, self).encode(obj)
-        self.set_if_not_none(v, 'X', obj.cx)
-        self.set_if_not_none(v, 'Y', obj.cy)
+        v = super(Point201501Encoder, self).encode(obj)
+        self.set_if_not_none(v, 'X', getattr(obj, self.X_PROPERTY_NAME))
+        self.set_if_not_none(v, 'Y', getattr(obj, self.Y_PROPERTY_NAME))
         return v
 
-encoder = (PointI, PointEncoder)
+
+class Point201606Encoder(Point201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Point'
+    X_PROPERTY_NAME = 'x'
+    Y_PROPERTY_NAME = 'y'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (PointI, Point201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (PointI, Point201606Encoder)
+PointEncoder = encoder[1]

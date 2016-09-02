@@ -9,17 +9,18 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotationEncoder
 from omero.model import MapAnnotationI
 
 
-class MapAnnotationEncoder(AnnotationEncoder):
+class MapAnnotation201501Encoder(AnnotationEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#MapAnnotation'
 
     def encode(self, obj):
-        v = super(MapAnnotationEncoder, self).encode(obj)
+        v = super(MapAnnotation201501Encoder, self).encode(obj)
         if obj.mapValue is None:
             return None
         self.set_if_not_none(
@@ -29,4 +30,15 @@ class MapAnnotationEncoder(AnnotationEncoder):
         )
         return v
 
-encoder = (MapAnnotationI, MapAnnotationEncoder)
+
+class MapAnnotation201606Encoder(MapAnnotation201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06' \
+        '#MapAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (MapAnnotationI, MapAnnotation201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (MapAnnotationI, MapAnnotation201606Encoder)
+MapAnnotationEncoder = encoder[1]

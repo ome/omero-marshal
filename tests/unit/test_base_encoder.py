@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder
+from omero_marshal import get_encoder, ROI_SCHEMA_URL, OME_SCHEMA_URL
 
 
 class TestBaseEncoder(object):
@@ -19,25 +19,21 @@ class TestBaseEncoder(object):
         v = encoder.encode(roi)
         assert v == {
             '@id': 1L,
-            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
+            '@type': '%s#ROI' % ROI_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
                 '@type': 'TBD#Details',
                 'group': {
                     '@id': 1L,
-                    '@type':
-                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                        '#ExperimenterGroup',
+                    '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
                     'Description': 'the_description',
                     'Name': 'the_name',
                     'omero:details': {'@type': 'TBD#Details'}
                 },
                 'owner': {
                     '@id': 1L,
-                    '@type':
-                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                        '#Experimenter',
+                    '@type': '%s#Experimenter' % OME_SCHEMA_URL,
                     'Email': 'the_email',
                     'FirstName': 'the_firstName',
                     'Institution': 'the_institution',
@@ -73,22 +69,18 @@ class TestBaseEncoder(object):
         v = encoder.encode(roi_with_unloaded_details_children)
         assert v == {
             '@id': 1L,
-            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI',
+            '@type': '%s#ROI' % ROI_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
                 '@type': 'TBD#Details',
                 'owner': {
                     '@id': 1L,
-                    '@type':
-                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                        '#Experimenter'
+                    '@type': '%s#Experimenter' % OME_SCHEMA_URL
                 },
                 'group': {
                     '@id': 1L,
-                    '@type':
-                        'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                        '#ExperimenterGroup'
+                    '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL
                 },
                 'permissions': {
                     '@type': 'TBD#Permissions',
@@ -117,9 +109,7 @@ class TestDetailsEncoder(object):
     def experimenter_json(self):
         return {
             '@id': 1L,
-            '@type':
-                'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                '#Experimenter',
+            '@type': '%s#Experimenter' % OME_SCHEMA_URL,
             'FirstName': 'the_firstName',
             'MiddleName': 'the_middleName',
             'LastName': 'the_lastName',
@@ -137,9 +127,7 @@ class TestDetailsEncoder(object):
     def experimenter_group_json(self):
         return {
             '@id': 1L,
-            '@type':
-                'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                '#ExperimenterGroup',
+            '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'TBD#Details'}

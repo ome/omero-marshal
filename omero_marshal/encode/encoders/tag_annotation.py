@@ -9,17 +9,29 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .text_annotation import TextAnnotationEncoder
 from omero.model import TagAnnotationI
 
 
-class TagAnnotationEncoder(TextAnnotationEncoder):
+class TagAnnotation201501Encoder(TextAnnotationEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#TagAnnotation'
 
     def encode(self, obj):
-        v = super(TagAnnotationEncoder, self).encode(obj)
+        v = super(TagAnnotation201501Encoder, self).encode(obj)
         return v
 
-encoder = (TagAnnotationI, TagAnnotationEncoder)
+
+class TagAnnotation201606Encoder(TagAnnotation201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06' \
+        '#TagAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (TagAnnotationI, TagAnnotation201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (TagAnnotationI, TagAnnotation201606Encoder)
+TagAnnotationEncoder = encoder[1]

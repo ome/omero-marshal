@@ -9,20 +9,31 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableDecoder
 from omero.model import DatasetI
 
 
-class DatasetDecoder(AnnotatableDecoder):
+class Dataset201501Decoder(AnnotatableDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Dataset'
 
     OMERO_CLASS = DatasetI
 
     def decode(self, data):
-        v = super(DatasetDecoder, self).decode(data)
+        v = super(Dataset201501Decoder, self).decode(data)
         self.set_property(v, 'name', data.get('Name'))
         self.set_property(v, 'description', data.get('Description'))
         return v
 
-decoder = (DatasetDecoder.TYPE, DatasetDecoder)
+
+class Dataset201606Decoder(Dataset201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Dataset'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Dataset201501Decoder.TYPE, Dataset201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Dataset201606Decoder.TYPE, Dataset201606Decoder)
+DatasetDecoder = decoder[1]

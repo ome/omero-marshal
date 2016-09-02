@@ -9,11 +9,12 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .. import Encoder
 from omero.model import Annotation
 
 
-class AnnotationEncoder(Encoder):
+class Annotation201501Encoder(Encoder):
     '''
     Annotation
         BasicAnnotation
@@ -47,18 +48,23 @@ class AnnotationEncoder(Encoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#Annotation'
 
     def encode(self, obj):
-        v = super(AnnotationEncoder, self).encode(obj)
+        v = super(Annotation201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Namespace', obj.ns)
         return v
 
 
-class AnnotatableEncoder(Encoder):
+class Annotation201606Encoder(Annotation201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Annotation'
+
+
+class Annotatable201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#AnnotationRef'
 
     def encode(self, obj):
-        v = super(AnnotatableEncoder, self).encode(obj)
+        v = super(Annotatable201501Encoder, self).encode(obj)
         if obj.isAnnotationLinksLoaded() and obj.sizeOfAnnotationLinks() > 0:
             annotations = list()
             for annotation_link in obj.copyAnnotationLinks():
@@ -71,4 +77,15 @@ class AnnotatableEncoder(Encoder):
         return v
 
 
-encoder = (Annotation, AnnotationEncoder)
+class Annotatable201606Encoder(Annotatable201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#AnnotationRef'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (Annotation, Annotation201501Encoder)
+    AnnotatableEncoder = Annotatable201501Encoder
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (Annotation, Annotation201606Encoder)
+    AnnotatableEncoder = Annotatable201606Encoder
+AnnotationEncoder = encoder[1]

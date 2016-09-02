@@ -9,20 +9,31 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 from omero.model import LabelI
 
 
-class LabelDecoder(ShapeDecoder):
+class Label201501Decoder(ShapeDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Label'
 
     OMERO_CLASS = LabelI
 
     def decode(self, data):
-        v = super(LabelDecoder, self).decode(data)
+        v = super(Label201501Decoder, self).decode(data)
         self.set_property(v, 'x', data.get('X'))
         self.set_property(v, 'y', data.get('Y'))
         return v
 
-decoder = (LabelDecoder.TYPE, LabelDecoder)
+
+class Label201606Decoder(Label201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Label'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Label201501Decoder.TYPE, Label201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Label201606Decoder.TYPE, Label201606Decoder)
+LabelDecoder = decoder[1]

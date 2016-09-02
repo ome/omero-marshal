@@ -9,17 +9,29 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .text_annotation import TextAnnotationEncoder
 from omero.model import CommentAnnotationI
 
 
-class CommentAnnotationEncoder(TextAnnotationEncoder):
+class CommentAnnotation201501Encoder(TextAnnotationEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#CommentAnnotation'
 
     def encode(self, obj):
-        v = super(CommentAnnotationEncoder, self).encode(obj)
+        v = super(CommentAnnotation201501Encoder, self).encode(obj)
         return v
 
-encoder = (CommentAnnotationI, CommentAnnotationEncoder)
+
+class CommentAnnotation201606Encoder(CommentAnnotation201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06' \
+        '#CommentAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (CommentAnnotationI, CommentAnnotation201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (CommentAnnotationI, CommentAnnotation201606Encoder)
+CommentAnnotationEncoder = encoder[1]

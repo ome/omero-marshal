@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, get_decoder
+from omero_marshal import get_encoder, get_decoder, SCHEMA_VERSION
 from omero.model.enums import UnitsLength
 from omero.rtypes import RDoubleI
 from omero.model import LengthI
@@ -103,8 +103,6 @@ class TestShapeDecoder(object):
             assert shape.strokeWidth.getValue() == 4
         else:
             assert shape.strokeWidth is None
-
-        assert shape.strokeLineCap.val == 'round'
         assert shape.textValue.val == 'the_text'
         assert shape.fontFamily.val == 'cursive'
         if has_unit_information:
@@ -114,12 +112,24 @@ class TestShapeDecoder(object):
         else:
             assert shape.fontSize is None
         assert shape.fontStyle.val == 'italic'
-        assert shape.visibility.val is True
+        if SCHEMA_VERSION == '2015-01':
+            assert shape.visibility.val is True
+            assert shape.strokeLineCap.val == 'round'
         assert shape.locked.val is False
         assert shape.theZ.val == 3
         assert shape.theT.val == 2
         assert shape.theC.val == 1
-        assert shape.transform.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
+        if SCHEMA_VERSION == '2015-01':
+            assert shape.transform.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
+        else:
+            from omero.model import AffineTransformI
+            assert shape.transform.__class__ is AffineTransformI
+            assert shape.transform.getA00().val == 1.0
+            assert shape.transform.getA10().val == 0.0
+            assert shape.transform.getA01().val == 0.0
+            assert shape.transform.getA11().val == 1.0
+            assert shape.transform.getA02().val == 0.0
+            assert shape.transform.getA12().val == 0.0
         if not has_annotations:
             assert not shape.annotationLinksLoaded
         else:
@@ -128,14 +138,24 @@ class TestShapeDecoder(object):
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse.id.val == 1L
-        assert ellipse.cx.__class__ is RDoubleI
-        assert ellipse.cx.val == 1.0
-        assert ellipse.cy.__class__ is RDoubleI
-        assert ellipse.cy.val == 2.0
-        assert ellipse.rx.__class__ is RDoubleI
-        assert ellipse.rx.val == 3.0
-        assert ellipse.ry.__class__ is RDoubleI
-        assert ellipse.ry.val == 4.0
+        if SCHEMA_VERSION == '2016-06':
+            assert ellipse.x.__class__ is RDoubleI
+            assert ellipse.x.val == 1.0
+            assert ellipse.y.__class__ is RDoubleI
+            assert ellipse.y.val == 2.0
+            assert ellipse.radiusX.__class__ is RDoubleI
+            assert ellipse.radiusX.val == 3.0
+            assert ellipse.radiusY.__class__ is RDoubleI
+            assert ellipse.radiusY.val == 4.0
+        else:
+            assert ellipse.cx.__class__ is RDoubleI
+            assert ellipse.cx.val == 1.0
+            assert ellipse.cy.__class__ is RDoubleI
+            assert ellipse.cy.val == 2.0
+            assert ellipse.rx.__class__ is RDoubleI
+            assert ellipse.rx.val == 3.0
+            assert ellipse.ry.__class__ is RDoubleI
+            assert ellipse.ry.val == 4.0
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
@@ -186,10 +206,16 @@ class TestPointDecoder(TestShapeDecoder):
         v = decoder.decode(v)
         self.assert_shape(v)
         assert v.id.val == 3L
-        assert v.cx.__class__ is RDoubleI
-        assert v.cx.val == 1.0
-        assert v.cy.__class__ is RDoubleI
-        assert v.cy.val == 2.0
+        if SCHEMA_VERSION == '2016-06':
+            assert v.x.__class__ is RDoubleI
+            assert v.x.val == 1.0
+            assert v.y.__class__ is RDoubleI
+            assert v.y.val == 2.0
+        else:
+            assert v.cx.__class__ is RDoubleI
+            assert v.cx.val == 1.0
+            assert v.cy.__class__ is RDoubleI
+            assert v.cy.val == 2.0
 
 
 class TestLabelDecoder(TestShapeDecoder):
@@ -338,7 +364,8 @@ TRANSFORMATIONS = [
 ]
 
 
-class TestTransformDecoder():
+@pytest.mark.skipif(SCHEMA_VERSION != "2015-01", reason="old model")
+class TestTransform201501Decoder():
 
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
     def test_transforms(self, point, transform_s, transform_o):

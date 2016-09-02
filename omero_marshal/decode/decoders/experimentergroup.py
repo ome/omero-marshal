@@ -9,11 +9,12 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .. import Decoder
 from omero.model import ExperimenterGroupI
 
 
-class ExperimenterGroupDecoder(Decoder):
+class ExperimenterGroup201501Decoder(Decoder):
 
     TYPE = \
         'http://www.openmicroscopy.org/Schemas/OME/2015-01#ExperimenterGroup'
@@ -21,9 +22,22 @@ class ExperimenterGroupDecoder(Decoder):
     OMERO_CLASS = ExperimenterGroupI
 
     def decode(self, data):
-        v = super(ExperimenterGroupDecoder, self).decode(data)
+        v = super(ExperimenterGroup201501Decoder, self).decode(data)
         self.set_property(v, 'description', data.get('Description'))
         self.set_property(v, 'name', data.get('Name'))
         return v
 
-decoder = (ExperimenterGroupDecoder.TYPE, ExperimenterGroupDecoder)
+
+class ExperimenterGroup201606Decoder(ExperimenterGroup201501Decoder):
+
+    TYPE = \
+        'http://www.openmicroscopy.org/Schemas/OME/2016-06#ExperimenterGroup'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (ExperimenterGroup201501Decoder.TYPE,
+               ExperimenterGroup201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (ExperimenterGroup201606Decoder.TYPE,
+               ExperimenterGroup201606Decoder)
+ExperimenterGroupDecoder = decoder[1]

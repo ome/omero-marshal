@@ -9,18 +9,19 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableDecoder
 from omero.model import RoiI
 
 
-class RoiDecoder(AnnotatableDecoder):
+class Roi201501Decoder(AnnotatableDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
 
     OMERO_CLASS = RoiI
 
     def decode(self, data):
-        v = super(RoiDecoder, self).decode(data)
+        v = super(Roi201501Decoder, self).decode(data)
         self.set_property(v, 'name', data.get('Name'))
         self.set_property(v, 'description', data.get('Description'))
         for shape in data.get('shapes', list()):
@@ -28,4 +29,14 @@ class RoiDecoder(AnnotatableDecoder):
             v.addShape(shape_decoder.decode(shape))
         return v
 
-decoder = (RoiDecoder.TYPE, RoiDecoder)
+
+class Roi201606Decoder(Roi201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#ROI'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Roi201501Decoder.TYPE, Roi201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Roi201606Decoder.TYPE, Roi201606Decoder)
+RoiDecoder = decoder[1]

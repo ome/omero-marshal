@@ -9,19 +9,32 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotationDecoder
 from omero.model import TermAnnotationI
 
 
-class TermAnnotationDecoder(AnnotationDecoder):
+class TermAnnotation201501Decoder(AnnotationDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#TermAnnotation'
 
     OMERO_CLASS = TermAnnotationI
 
     def decode(self, data):
-        v = super(TermAnnotationDecoder, self).decode(data)
+        v = super(TermAnnotation201501Decoder, self).decode(data)
         self.set_property(v, 'termValue', data.get('Value'))
         return v
 
-decoder = (TermAnnotationDecoder.TYPE, TermAnnotationDecoder)
+
+class TermAnnotation201606Decoder(TermAnnotation201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#TermAnnotation'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (TermAnnotation201501Decoder.TYPE,
+               TermAnnotation201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (TermAnnotation201606Decoder.TYPE,
+               TermAnnotation201606Decoder)
+TermAnnotationDecoder = decoder[1]

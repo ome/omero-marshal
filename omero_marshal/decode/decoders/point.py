@@ -9,20 +9,35 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 from omero.model import PointI
 
 
-class PointDecoder(ShapeDecoder):
+class Point201501Decoder(ShapeDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
 
     OMERO_CLASS = PointI
+    X_PROPERTY_NAME = 'cx'
+    Y_PROPERTY_NAME = 'cy'
 
     def decode(self, data):
-        v = super(PointDecoder, self).decode(data)
-        self.set_property(v, 'cx', data.get('X'))
-        self.set_property(v, 'cy', data.get('Y'))
+        v = super(Point201501Decoder, self).decode(data)
+        self.set_property(v, self.X_PROPERTY_NAME, data.get('X'))
+        self.set_property(v, self.Y_PROPERTY_NAME, data.get('Y'))
         return v
 
-decoder = (PointDecoder.TYPE, PointDecoder)
+
+class Point201606Decoder(Point201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Point'
+    X_PROPERTY_NAME = 'x'
+    Y_PROPERTY_NAME = 'y'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Point201501Decoder.TYPE, Point201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Point201606Decoder.TYPE, Point201606Decoder)
+PointDecoder = decoder[1]

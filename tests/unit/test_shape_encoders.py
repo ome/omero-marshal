@@ -9,7 +9,9 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder
+from omero_marshal import get_encoder, SCHEMA_VERSION, ROI_SCHEMA_URL
+from omero_marshal import SA_SCHEMA_URL, OME_SCHEMA_URL
+from omero.rtypes import rdouble
 import pytest
 
 
@@ -18,64 +20,55 @@ class TestShapeEncoder(object):
     def annotation_data(self):
         return {
             'Annotations': [{
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#BooleanAnnotation',
+                '@type': '%s#BooleanAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'boolean_annotation',
                 'Value': True,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#CommentAnnotation',
+                '@type': '%s#CommentAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'comment_annotation',
                 'Value': 'text_value',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#DoubleAnnotation',
+                '@type': '%s#DoubleAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'double_annotation',
                 'Value': 1.0,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#LongAnnotation',
+                '@type': '%s#LongAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'long_annotation',
                 'Value': 1L,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#MapAnnotation',
+                '@type': '%s#MapAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'map_annotation',
                 'Value': [['a', '1'], ['b', '2']],
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TagAnnotation',
+                '@type': '%s#TagAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'tag_annotation',
                 'Value': 'tag_value',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TermAnnotation',
+                '@type': '%s#TermAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'term_annotation',
                 'Value': 'term_value',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#TimestampAnnotation',
+                '@type': '%s#TimestampAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'timestamp_annotation',
                 'Value': 1L,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@type': 'http://www.openmicroscopy.org/Schemas/SA/2015-01'
-                         '#XmlAnnotation',
+                '@type': '%s#XmlAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'xml_annotation',
                 'Value': '<xml_value></xml_value>',
@@ -90,15 +83,13 @@ class TestShapeEncoder(object):
         assert roi['@id'] == 1L
         assert roi['Name'] == 'the_name'
         assert roi['Description'] == 'the_description'
-        assert roi['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
+        assert roi['@type'] == '%s#ROI' % ROI_SCHEMA_URL
         assert roi['omero:details'] == {
             '@type': 'TBD#Details',
             'group': {
                 '@id': 1L,
                 '@type':
-                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                    '#ExperimenterGroup',
+                    '%s#ExperimenterGroup' % OME_SCHEMA_URL,
                 'Description': 'the_description',
                 'Name': 'the_name',
                 'omero:details': {'@type': 'TBD#Details'}
@@ -106,8 +97,7 @@ class TestShapeEncoder(object):
             'owner': {
                 '@id': 1L,
                 '@type':
-                    'http://www.openmicroscopy.org/Schemas/OME/2015-01'
-                    '#Experimenter',
+                    '%s#Experimenter' % OME_SCHEMA_URL,
                 'Email': 'the_email',
                 'FirstName': 'the_firstName',
                 'Institution': 'the_institution',
@@ -151,7 +141,6 @@ class TestShapeEncoder(object):
             'Symbol': 'pixel',
             'Value': 4
         }
-        assert shape['LineCap'] == 'round'
         assert shape['Text'] == 'the_text'
         assert shape['FontFamily'] == 'cursive'
         assert shape['FontSize'] == {
@@ -161,7 +150,9 @@ class TestShapeEncoder(object):
             'Value': 12
         }
         assert shape['FontStyle'] == 'italic'
-        assert shape['Visible'] is True
+        if SCHEMA_VERSION == '2015-01':
+            assert shape['LineCap'] == 'round'
+            assert shape['Visible'] is True
         assert shape['Locked'] is False
         assert shape['TheZ'] == 3
         assert shape['TheT'] == 2
@@ -184,8 +175,7 @@ class TestShapeEncoder(object):
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
         assert ellipse['@id'] == 1L
-        assert ellipse['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Ellipse'
+        assert ellipse['@type'] == '%s#Ellipse' % ROI_SCHEMA_URL
         assert ellipse['X'] == 1.0
         assert ellipse['Y'] == 2.0
         assert ellipse['RadiusX'] == 3.0
@@ -194,8 +184,7 @@ class TestShapeEncoder(object):
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
         assert rectangle['@id'] == 2L
-        assert rectangle['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
+        assert rectangle['@type'] == '%s#Rectangle' % ROI_SCHEMA_URL
         assert rectangle['X'] == 1.0
         assert rectangle['Y'] == 2.0
         assert rectangle['Width'] == 3.0
@@ -230,8 +219,7 @@ class TestPointEncoder(TestShapeEncoder):
         v = encoder.encode(point)
         self.assert_shape(v)
         assert v['@id'] == 3L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Point'
+        assert v['@type'] == '%s#Point' % ROI_SCHEMA_URL
         assert v['X'] == 1.0
         assert v['Y'] == 2.0
 
@@ -243,8 +231,7 @@ class TestLabelEncoder(TestShapeEncoder):
         v = encoder.encode(label)
         self.assert_shape(v)
         assert v['@id'] == 7L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Label'
+        assert v['@type'] == '%s#Label' % ROI_SCHEMA_URL
         assert v['X'] == 1.0
         assert v['Y'] == 2.0
 
@@ -256,8 +243,7 @@ class TestPolylineEncoder(TestShapeEncoder):
         v = encoder.encode(polyline)
         self.assert_shape(v)
         assert v['@id'] == 4L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polyline'
+        assert v['@type'] == '%s#Polyline' % ROI_SCHEMA_URL
         assert v['Points'] == '0,0 1,2 3,5'
 
 
@@ -268,8 +254,7 @@ class TestPolygonEncoder(TestShapeEncoder):
         v = encoder.encode(polygon)
         self.assert_shape(v)
         assert v['@id'] == 5L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polygon'
+        assert v['@type'] == '%s#Polygon' % ROI_SCHEMA_URL
         assert v['Points'] == '0,0 1,2 3,5'
 
 
@@ -280,8 +265,7 @@ class TestLineEncoder(TestShapeEncoder):
         v = encoder.encode(line)
         self.assert_shape(v)
         assert v['@id'] == 6L
-        assert v['@type'] == \
-            'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Line'
+        assert v['@type'] == '%s#Line' % ROI_SCHEMA_URL
         assert v['X1'] == 0.0
         assert v['Y1'] == 0.0
         assert v['X2'] == 1.0
@@ -309,10 +293,9 @@ class TestRoiEncoder(TestShapeEncoder):
         self.assert_roi_with_shapes(v, has_annotations=True)
 
 
-TRANSFORMATION_TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01' \
-    '#AffineTransform'
+TRANSFORMATION_TYPE = '%s#AffineTransform' % ROI_SCHEMA_URL
 
-TRANSFORMATIONS = [
+TRANSFORMATIONS_201501 = [
     (
         'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
         {
@@ -427,6 +410,52 @@ TRANSFORMATIONS = [
     ),
 
 ]
+
+
+if SCHEMA_VERSION == "2015-01":
+    TRANSFORMATIONS = TRANSFORMATIONS_201501
+else:
+    def create_transform(a00=None, a10=None, a01=None, a11=None, a02=None,
+                         a12=None):
+        from omero.model import AffineTransformI
+        t = AffineTransformI()
+        if a00:
+            t.setA00(rdouble(a00))
+        if a10:
+            t.setA10(rdouble(a10))
+        if a01:
+            t.setA01(rdouble(a01))
+        if a11:
+            t.setA11(rdouble(a11))
+        if a02:
+            t.setA02(rdouble(a02))
+        if a12:
+            t.setA12(rdouble(a12))
+        return t
+
+    TRANSFORMATIONS = [
+        (
+            None,
+            None
+        ),
+        (
+            create_transform(),
+            None
+        ),
+        (
+            create_transform(a00=1.0, a10=2.0, a01=3.0, a11=4.0, a02=5.0,
+                             a12=6.0),
+            {
+                '@type': TRANSFORMATION_TYPE,
+                'A00': 1.0,
+                'A10': 2.0,
+                'A01': 3.0,
+                'A11': 4.0,
+                'A02': 5.0,
+                'A12': 6.0,
+            }
+        ),
+    ]
 
 
 class TestTransformEncoder():

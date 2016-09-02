@@ -9,6 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeDecoder
 
 
@@ -21,18 +22,28 @@ except ImportError:
     from omero.model import RectangleI
 
 
-class RectangleDecoder(ShapeDecoder):
+class Rectangle201501Decoder(ShapeDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Rectangle'
 
     OMERO_CLASS = RectangleI
 
     def decode(self, data):
-        v = super(RectangleDecoder, self).decode(data)
+        v = super(Rectangle201501Decoder, self).decode(data)
         self.set_property(v, 'x', data.get('X'))
         self.set_property(v, 'y', data.get('Y'))
         self.set_property(v, 'width', data.get('Width'))
         self.set_property(v, 'height', data.get('Height'))
         return v
 
-decoder = (RectangleDecoder.TYPE, RectangleDecoder)
+
+class Rectangle201606Decoder(Rectangle201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Rectangle'
+
+
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Rectangle201501Decoder.TYPE, Rectangle201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
+    decoder = (Rectangle201606Decoder.TYPE, Rectangle201606Decoder)
+RectangleDecoder = decoder[1]

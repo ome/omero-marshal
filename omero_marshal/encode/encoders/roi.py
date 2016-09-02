@@ -9,16 +9,17 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import RoiI
 
 
-class RoiEncoder(AnnotatableEncoder):
+class Roi201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
 
     def encode(self, obj):
-        v = super(RoiEncoder, self).encode(obj)
+        v = super(Roi201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         if obj.isShapesLoaded() and obj.sizeOfShapes() > 0:
@@ -29,4 +30,14 @@ class RoiEncoder(AnnotatableEncoder):
             v['shapes'] = shapes
         return v
 
-encoder = (RoiI, RoiEncoder)
+
+class Roi201606Encoder(Roi201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#ROI'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (RoiI, Roi201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (RoiI, Roi201606Encoder)
+RoiEncoder = encoder[1]

@@ -9,20 +9,31 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeEncoder
 from omero.model import LineI
 
 
-class LineEncoder(ShapeEncoder):
+class Line201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Line'
 
     def encode(self, obj):
-        v = super(LineEncoder, self).encode(obj)
+        v = super(Line201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'X1', obj.x1)
         self.set_if_not_none(v, 'Y1', obj.y1)
         self.set_if_not_none(v, 'X2', obj.x2)
         self.set_if_not_none(v, 'Y2', obj.y2)
         return v
 
-encoder = (LineI, LineEncoder)
+
+class Line201606Encoder(Line201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Line'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (LineI, Line201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (LineI, Line201606Encoder)
+LineEncoder = encoder[1]

@@ -9,20 +9,41 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .shape import ShapeEncoder
 from omero.model import EllipseI
 
 
-class EllipseEncoder(ShapeEncoder):
+class Ellipse201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Ellipse'
+    X_PROPERTY_NAME = 'cx'
+    Y_PROPERTY_NAME = 'cy'
+    RADIUSX_PROPERTY_NAME = 'rx'
+    RADIUSY_PROPERTY_NAME = 'ry'
 
     def encode(self, obj):
-        v = super(EllipseEncoder, self).encode(obj)
-        self.set_if_not_none(v, 'X', obj.cx)
-        self.set_if_not_none(v, 'Y', obj.cy)
-        self.set_if_not_none(v, 'RadiusX', obj.rx)
-        self.set_if_not_none(v, 'RadiusY', obj.ry)
+        v = super(Ellipse201501Encoder, self).encode(obj)
+        self.set_if_not_none(v, 'X', getattr(obj, self.X_PROPERTY_NAME))
+        self.set_if_not_none(v, 'Y', getattr(obj, self.Y_PROPERTY_NAME))
+        self.set_if_not_none(
+            v, 'RadiusX', getattr(obj, self.RADIUSX_PROPERTY_NAME))
+        self.set_if_not_none(
+            v, 'RadiusY', getattr(obj, self.RADIUSY_PROPERTY_NAME))
         return v
 
-encoder = (EllipseI, EllipseEncoder)
+
+class Ellipse201606Encoder(Ellipse201501Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Ellipse'
+    X_PROPERTY_NAME = 'x'
+    Y_PROPERTY_NAME = 'y'
+    RADIUSX_PROPERTY_NAME = 'radiusX'
+    RADIUSY_PROPERTY_NAME = 'radiusY'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (EllipseI, Ellipse201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (EllipseI, Ellipse201606Encoder)
+EllipseEncoder = encoder[1]
