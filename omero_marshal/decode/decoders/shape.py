@@ -75,7 +75,10 @@ class Shape201606Decoder(Shape201501Decoder):
         pass
 
     def set_transform(self, v, data):
-        v.setTransform(self.decode_transform(data.get('Transform')))
+        transform = data.get('Transform')
+        if transform:
+            transform_decoder = self.ctx.get_decoder(transform['@type'])
+            v.setTransform(transform_decoder.decode(transform))
 
     def decode_transform(self, transform):
         from omero.model import AffineTransformI

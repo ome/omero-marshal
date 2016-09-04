@@ -47,10 +47,6 @@ class Shape201501Encoder(AnnotatableEncoder):
     def set_visible(self, v, obj):
         self.set_if_not_none(v, 'Visible', obj.visibility)
 
-    def get_transform_type(self):
-        return 'http://www.openmicroscopy.org/Schemas/ROI/2015-01' \
-            '#AffineTransform'
-
     def encode_transform(self, transform):
         transform = unwrap(transform)
         if not transform or transform == 'none':
@@ -83,7 +79,8 @@ class Shape201501Encoder(AnnotatableEncoder):
             raise ValueError('Unknown transformation "%s"' % transform)
 
         return {
-            '@type': self.get_transform_type(),
+            '@type': 'http://www.openmicroscopy.org/Schemas/ROI/2015-01'
+                     '#AffineTransform',
             'A00': a[0],
             'A10': a[1],
             'A01': a[2],
@@ -103,10 +100,6 @@ class Shape201606Encoder(Shape201501Encoder):
     def set_visible(self, v, obj):
         pass
 
-    def get_transform_type(self):
-        return 'http://www.openmicroscopy.org/Schemas/OME/2016-06' \
-            '#AffineTransform'
-
     def encode_transform(self, transform):
         if not transform:
             return None
@@ -114,16 +107,9 @@ class Shape201606Encoder(Shape201501Encoder):
                 transform.getA01() is None and transform.getA11() is None and
                 transform.getA02() is None and transform.getA12() is None):
             return None
+        transform_encoder = self.ctx.get_encoder(transform.__class__)
+        return transform_encoder.encode(transform)
 
-        return {
-            '@type': self.get_transform_type(),
-            'A00': transform.getA00().val,
-            'A10': transform.getA10().val,
-            'A01': transform.getA01().val,
-            'A11': transform.getA11().val,
-            'A02': transform.getA02().val,
-            'A12': transform.getA12().val,
-        }
 
 if SCHEMA_VERSION == '2015-01':
     encoder = (Shape, Shape201501Encoder)
