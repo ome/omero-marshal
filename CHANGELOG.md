@@ -1,3 +1,10 @@
+## 0.4.0 (2016-09-05)
+
+Features:
+
+  - Support multiple OME schemas (#12)
+  - Use _field_info while decoding (#17)
+
 ## 0.3.1 (2016-06-22)
 
 Features:
