@@ -10,10 +10,7 @@
 #
 
 from .annotation import Encoder
-try:
-    from omero.model import AffineTransformI
-except ImportError:
-    pass
+from omero.model import AffineTransformI
 
 
 class Transform201606Encoder(Encoder):
