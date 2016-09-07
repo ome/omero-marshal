@@ -157,15 +157,7 @@ class TestShapeEncoder(object):
         assert shape['TheZ'] == 3
         assert shape['TheT'] == 2
         assert shape['TheC'] == 1
-        assert shape['Transform'] == {
-            '@type': TRANSFORMATION_TYPE,
-            'A00': 1.0,
-            'A10': 0.0,
-            'A01': 0.0,
-            'A11': 1.0,
-            'A02': 0.0,
-            'A12': 0.0,
-        }
+        self.assert_transform(shape['Transform'])
         assert shape['omero:details'] == {'@type': 'TBD#Details'}
         if not has_annotations:
             assert shape.get('annotations') is None
@@ -189,6 +181,17 @@ class TestShapeEncoder(object):
         assert rectangle['Y'] == 2.0
         assert rectangle['Width'] == 3.0
         assert rectangle['Height'] == 4.0
+
+    def assert_transform(self, transform):
+        assert transform['@type'] == TRANSFORMATION_TYPE
+        assert transform['A00'] == 1.0
+        assert transform['A10'] == 0.0
+        assert transform['A01'] == 0.0
+        assert transform['A11'] == 1.0
+        assert transform['A02'] == 0.0
+        assert transform['A12'] == 0.0
+        if SCHEMA_VERSION != '2015-01':
+            assert transform['omero:details'] == {'@type': 'TBD#Details'}
 
 
 class TestEllipseEncoder(TestShapeEncoder):
@@ -453,6 +456,7 @@ else:
                 'A11': 4.0,
                 'A02': 5.0,
                 'A12': 6.0,
+                'omero:details': {'@type': 'TBD#Details'},
             }
         ),
     ]

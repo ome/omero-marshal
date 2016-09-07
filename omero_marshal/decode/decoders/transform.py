@@ -14,15 +14,20 @@ from .annotation import Decoder
 try:
     from omero.model import AffineTransformI
 except ImportError:
-    pass
+    from omero_marshal.legacy import AffineTransformI
 from omero.rtypes import rdouble
 
 
-class Transform201606Decoder(Decoder):
+class Transform201501Decoder(Decoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#AffineTransform'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#AffineTransform'
 
     OMERO_CLASS = AffineTransformI
+
+
+class Transform201606Decoder(Transform201501Decoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#AffineTransform'
 
     def decode(self, data):
         t = super(Transform201606Decoder, self).decode(data)
@@ -35,6 +40,8 @@ class Transform201606Decoder(Decoder):
         return t
 
 
-if SCHEMA_VERSION == '2016-06':
+if SCHEMA_VERSION == '2015-01':
+    decoder = (Transform201501Decoder.TYPE, Transform201501Decoder)
+elif SCHEMA_VERSION == '2016-06':
     decoder = (Transform201606Decoder.TYPE, Transform201606Decoder)
 TransformDecoder = decoder[1]
