@@ -11,7 +11,10 @@
 
 from ... import SCHEMA_VERSION
 from .annotation import Decoder
-from omero.model import AffineTransformI
+try:
+    from omero.model import AffineTransformI
+except ImportError:
+    pass
 from omero.rtypes import rdouble
 
 

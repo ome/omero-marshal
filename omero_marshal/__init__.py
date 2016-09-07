@@ -97,22 +97,18 @@ _ctx = MarshallingCtx(ENCODERS, DECODERS)
 
 packages = pkgutil.walk_packages(encoders.__path__, encoders.__name__ + '.')
 for module_loader, name, ispkg in packages:
+    m = importlib.import_module(name)
     try:
-        m = importlib.import_module(name)
         t, encoder = m.encoder
         ENCODERS[t] = encoder(_ctx)
-    except ImportError:
-        pass
     except AttributeError:
         pass
 
 packages = pkgutil.walk_packages(decoders.__path__, decoders.__name__ + '.')
 for module_loader, name, ispkg in packages:
+    m = importlib.import_module(name)
     try:
-        m = importlib.import_module(name)
         t, decoder = m.decoder
         DECODERS[t] = decoder(_ctx)
-    except ImportError:
-        pass
     except AttributeError:
         pass
