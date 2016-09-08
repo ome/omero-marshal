@@ -50,6 +50,8 @@ class Shape201501Decoder(AnnotatableDecoder):
         self.set_property(v, 'strokeLineCap', data.get('LineCap'))
 
     def set_transform(self, v, transform):
+        # For OMERO 5.1.x and OMERO 5.2.x, the transform is stored as a string
+        # using the matrix(<a> <b> <c> <d> <e> <f>) style
         self.set_property(v, 'transform', str(transform))
 
 

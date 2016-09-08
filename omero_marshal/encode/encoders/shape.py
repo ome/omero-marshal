@@ -55,6 +55,10 @@ class Shape201501Encoder(AnnotatableEncoder):
         if not transform or transform == 'none':
             return
 
+        # For OMERO 5.1.x and OMERO 5.2.x the unwrapped transform is a string.
+        # To facilitate the encoding we construct an internal AffineTransform
+        # object and use convert_transform() to map the string representation
+        # into the fields defined by the schema.
         from omero_marshal.legacy.AffineTransformI import AffineTransformI
         t = AffineTransformI()
         t.convert_transform(transform)

@@ -11,7 +11,7 @@
 
 from omero_marshal import get_encoder, get_decoder, SCHEMA_VERSION
 from omero.model.enums import UnitsLength
-from omero.rtypes import RDoubleI
+from omero.rtypes import RDoubleI, RStringI
 from omero.model import LengthI
 
 
@@ -119,6 +119,7 @@ class TestShapeDecoder(object):
         assert shape.theT.val == 2
         assert shape.theC.val == 1
         if SCHEMA_VERSION == '2015-01':
+            assert shape.transform.__class__ is RStringI
             assert shape.transform.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
         else:
             from omero.model import AffineTransformI

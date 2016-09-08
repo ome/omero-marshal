@@ -57,7 +57,10 @@ TRANSFORMATIONS = [
 ]
 
 
-@pytest.mark.skipif(SCHEMA_VERSION != "2015-01", reason="legacy classes")
+@pytest.mark.skipif(
+    SCHEMA_VERSION != "2015-01",
+    reason="Unit tests only applicable to OMERO 5.1.x and OMERO 5.2.x"
+    " where transforms are stored as string representations.")
 class TestTransform201501Decoder():
 
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)

@@ -14,23 +14,38 @@ from omero.rtypes import unwrap
 
 
 class AffineTransformI(object):
+    """
+    Class handling OMERO 5.1 and OMERO 5.2 transform string representations.
+    Its fields and methods are directly mirroring the
+    omero.model.AffineTransform class introduced in OMERO 5.3 to reduce the
+    complexity of the transform encoders/decoders
+    """
 
+    # Set the id to -1 to differentiate the marshalled transform from objects
+    # Setting the id also allows the transform decoder to inherit the
+    # superclass decode() method
     id = -1L
+    # Set the details to None to prevent omero.details to be filled in the
+    # marhsalled transform
+    DETAILS = None
     A00 = None
     A10 = None
     A01 = None
     A11 = None
     A02 = None
     A12 = None
-    DETAILS = None
 
     def __init__(self, *args):
         pass
 
     def convert_transform(self, transform):
+        """
+        Converts a string transform representation .
+        """
         tr, args = transform[:-1].split('(')
         a = map(float, args.split(' '))
 
+        # Handle various string tranformations
         if tr == 'matrix':
             pass
         elif tr == 'translate':
@@ -62,6 +77,7 @@ class AffineTransformI(object):
         self.A12 = a[5]
 
     def __str__(self):
+        """Returns a string matrix representation of the transform"""
         return 'matrix(%s)' % ' '.join(map(str, [
             unwrap(self.A00),
             unwrap(self.A10),

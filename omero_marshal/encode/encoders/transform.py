@@ -11,9 +11,12 @@
 
 from ... import SCHEMA_VERSION
 from .annotation import Encoder
+
 try:
+    # Import transform classes introduced in OMERO 5.3.0
     from omero.model import AffineTransformI
 except ImportError:
+    # Use internal AffineTransformI classes for OMERO 5.1.x and OMERO 5.2.x
     from omero_marshal.legacy.AffineTransformI import AffineTransformI
 
 
