@@ -302,6 +302,7 @@ TRANSFORMATIONS_201501 = [
     (
         'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 1.0,
             'A10': 0.0,
@@ -318,6 +319,7 @@ TRANSFORMATIONS_201501 = [
     (
         'translate(3 4)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 1.0,
             'A10': 0.0,
@@ -330,6 +332,7 @@ TRANSFORMATIONS_201501 = [
     (
         'translate(5)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 1.0,
             'A10': 0.0,
@@ -342,6 +345,7 @@ TRANSFORMATIONS_201501 = [
     (
         'scale(1.5 2.5)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 1.5,
             'A10': 0.0,
@@ -354,6 +358,7 @@ TRANSFORMATIONS_201501 = [
     (
         'scale(1.5)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 1.5,
             'A10': 0.0,
@@ -366,6 +371,7 @@ TRANSFORMATIONS_201501 = [
     (
         'rotate(45)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 0.7071067811865476,
             'A10': 0.7071067811865475,
@@ -378,6 +384,7 @@ TRANSFORMATIONS_201501 = [
     (
         'rotate(45 50 100)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 0.7071067811865476,
             'A10': 0.7071067811865475,
@@ -390,6 +397,7 @@ TRANSFORMATIONS_201501 = [
     (
         'rotate(60)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 0.5000000000000001,
             'A10': 0.8660254037844386,
@@ -402,6 +410,7 @@ TRANSFORMATIONS_201501 = [
     (
         'rotate(60 50 100)',
         {
+            '@id': -1L,
             '@type': TRANSFORMATION_TYPE,
             'A00': 0.5000000000000001,
             'A10': 0.8660254037844386,

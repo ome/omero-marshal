@@ -254,18 +254,24 @@ def populate_shape(o, set_unit_attributes=True):
     o.theC = rint(1)
     o.theT = rint(2)
     o.theZ = rint(3)
+    o.transform = transform()
+    return o
+
+
+def transform():
     if SCHEMA_VERSION == '2015-01':
-        o.transform = 'matrix(1 0 0 1 0 0)'
+        return 'matrix(1 0 0 1 0 0)'
     else:
         from omero.model import AffineTransformI
-        o.transform = AffineTransformI()
-        o.transform.setA00(rdouble(1))
-        o.transform.setA10(rdouble(0))
-        o.transform.setA01(rdouble(0))
-        o.transform.setA11(rdouble(1))
-        o.transform.setA02(rdouble(0))
-        o.transform.setA12(rdouble(0))
-    return o
+        t = AffineTransformI()
+        t.setA00(rdouble(1))
+        t.setA10(rdouble(0))
+        t.setA01(rdouble(0))
+        t.setA11(rdouble(1))
+        t.setA02(rdouble(0))
+        t.setA12(rdouble(0))
+        t.id = rlong(8L)
+        return t
 
 
 @pytest.fixture()

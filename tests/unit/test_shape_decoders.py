@@ -322,10 +322,6 @@ TRANSFORMATIONS = [
         'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
     ),
     (
-        'none',
-        'none',
-    ),
-    (
         'translate(3 4)',
         'matrix(1.0 0.0 0.0 1.0 3.0 4.0)',
     ),
@@ -375,3 +371,11 @@ class TestTransform201501Decoder():
         v = encoder.encode(point)
         v = decoder.decode(v)
         assert v.transform.val == transform_o
+
+    def test_none(self, point):
+        encoder = get_encoder(point.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        point.transform = 'none'
+        v = encoder.encode(point)
+        v = decoder.decode(v)
+        assert v.transform is None

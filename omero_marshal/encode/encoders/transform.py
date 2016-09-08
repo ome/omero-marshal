@@ -14,12 +14,12 @@ from .annotation import Encoder
 try:
     from omero.model import AffineTransformI
 except ImportError:
-    from omero_marshal.legacy import AffineTransformI
+    from omero_marshal.legacy.AffineTransformI import AffineTransformI
 
 
 class Transform201501Encoder(Encoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#AffineTransform'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#AffineTransform'
 
     def encode(self, obj):
         v = super(Transform201501Encoder, self).encode(obj)
