@@ -21,14 +21,14 @@ except ImportError:
 from omero.rtypes import rdouble
 
 
-class Transform201501Decoder(Decoder):
+class AffineTransform201501Decoder(Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#AffineTransform'
 
     OMERO_CLASS = AffineTransformI
 
     def decode(self, data):
-        t = super(Transform201501Decoder, self).decode(data)
+        t = super(AffineTransform201501Decoder, self).decode(data)
         t.setA00(rdouble(data['A00']))
         t.setA10(rdouble(data['A10']))
         t.setA01(rdouble(data['A01']))
@@ -38,7 +38,7 @@ class Transform201501Decoder(Decoder):
         return t
 
 
-class Transform201606Decoder(Transform201501Decoder):
+class AffineTransform201606Decoder(AffineTransform201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#AffineTransform'
 
@@ -46,7 +46,7 @@ class Transform201606Decoder(Transform201501Decoder):
         return data
 
 if SCHEMA_VERSION == '2015-01':
-    decoder = (Transform201501Decoder.TYPE, Transform201501Decoder)
+    decoder = (AffineTransform201501Decoder.TYPE, AffineTransform201501Decoder)
 elif SCHEMA_VERSION == '2016-06':
-    decoder = (Transform201606Decoder.TYPE, Transform201606Decoder)
-TransformDecoder = decoder[1]
+    decoder = (AffineTransform201606Decoder.TYPE, AffineTransform201606Decoder)
+AffineTransformDecoder = decoder[1]

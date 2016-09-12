@@ -20,12 +20,12 @@ except ImportError:
     from omero_marshal.legacy.AffineTransformI import AffineTransformI
 
 
-class Transform201501Encoder(Encoder):
+class AffineTransform201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#AffineTransform'
 
     def encode(self, obj):
-        v = super(Transform201501Encoder, self).encode(obj)
+        v = super(AffineTransform201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'A00', obj.getA00())
         self.set_if_not_none(v, 'A10', obj.getA10())
         self.set_if_not_none(v, 'A01', obj.getA01())
@@ -35,13 +35,13 @@ class Transform201501Encoder(Encoder):
         return v
 
 
-class Transform201606Encoder(Transform201501Encoder):
+class AffineTransform201606Encoder(AffineTransform201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#AffineTransform'
 
 
 if SCHEMA_VERSION == '2015-01':
-    encoder = (AffineTransformI, Transform201501Encoder)
+    encoder = (AffineTransformI, AffineTransform201501Encoder)
 elif SCHEMA_VERSION == '2016-06':
-    encoder = (AffineTransformI, Transform201606Encoder)
-TransformEncoder = encoder[1]
+    encoder = (AffineTransformI, AffineTransform201606Encoder)
+AffineTransformEncoder = encoder[1]
