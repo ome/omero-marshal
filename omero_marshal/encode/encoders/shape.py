@@ -59,7 +59,7 @@ class Shape201501Encoder(AnnotatableEncoder):
         # To facilitate the encoding we construct an internal AffineTransform
         # object and use convert_transform() to map the string representation
         # into the fields defined by the schema.
-        from omero_marshal.legacy.AffineTransformI import AffineTransformI
+        from omero_marshal.legacy.affinetransform import AffineTransformI
         t = AffineTransformI()
         t.convert_transform(transform)
         return t
