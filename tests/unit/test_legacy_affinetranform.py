@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, get_decoder, SCHEMA_VERSION
+from omero_marshal.legacy.affinetransform import AffineTransformI
 import pytest
 
 
@@ -57,25 +57,10 @@ TRANSFORMATIONS = [
 ]
 
 
-@pytest.mark.skipif(
-    SCHEMA_VERSION != "2015-01",
-    reason="Unit tests only applicable to OMERO 5.1.x and OMERO 5.2.x"
-    " where transforms are stored as string representations.")
-class TestAffineTransform201501Decoder():
+class TestLegacyAffineTransform():
 
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
-    def test_transforms(self, point, transform_s, transform_o):
-        encoder = get_encoder(point.__class__)
-        decoder = get_decoder(encoder.TYPE)
-        point.transform = transform_s
-        v = encoder.encode(point)
-        v = decoder.decode(v)
-        assert v.transform.val == transform_o
-
-    def test_none(self, point):
-        encoder = get_encoder(point.__class__)
-        decoder = get_decoder(encoder.TYPE)
-        point.transform = 'none'
-        v = encoder.encode(point)
-        v = decoder.decode(v)
-        assert v.transform is None
+    def test_convert_transform(self, transform_s, transform_o):
+        t = AffineTransformI()
+        t.convert_transform(transform_s)
+        assert str(t) == transform_o
