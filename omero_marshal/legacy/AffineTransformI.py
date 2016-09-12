@@ -21,20 +21,6 @@ class AffineTransformI(object):
     complexity of the transform encoders/decoders
     """
 
-    # Set the id to -1 to differentiate the marshalled transform from objects
-    # Setting the id also allows the transform decoder to inherit the
-    # superclass decode() method
-    id = -1L
-    # Set the details to None to prevent omero.details to be filled in the
-    # marhsalled transform
-    DETAILS = None
-    A00 = None
-    A10 = None
-    A01 = None
-    A11 = None
-    A02 = None
-    A12 = None
-
     def __init__(self, *args):
         pass
 
@@ -69,56 +55,61 @@ class AffineTransformI(object):
         else:
             raise ValueError('Unknown transformation "%s"' % transform)
 
-        self.A00 = a[0]
-        self.A10 = a[1]
-        self.A01 = a[2]
-        self.A11 = a[3]
-        self.A02 = a[4]
-        self.A12 = a[5]
+        # Set the id to -1 to differentiate the marshalled transform from
+        # objects
+        # Setting the id also allows the transform decoder to inherit the
+        # superclass decode() method
+        self.id = -1L
+        self._a00 = a[0]
+        self._a10 = a[1]
+        self._a01 = a[2]
+        self._a11 = a[3]
+        self._a02 = a[4]
+        self._a12 = a[5]
 
     def __str__(self):
         """Returns a string matrix representation of the transform"""
         return 'matrix(%s)' % ' '.join(map(str, [
-            unwrap(self.A00),
-            unwrap(self.A10),
-            unwrap(self.A01),
-            unwrap(self.A11),
-            unwrap(self.A02),
-            unwrap(self.A12),
+            unwrap(self._a00),
+            unwrap(self._a10),
+            unwrap(self._a01),
+            unwrap(self._a11),
+            unwrap(self._a02),
+            unwrap(self._a12),
             ]))
 
     def getA00(self):
-        return self.A00
+        return self._a00
 
     def getA10(self):
-        return self.A10
+        return self._a10
 
     def getA01(self):
-        return self.A01
+        return self._a01
 
     def getA11(self):
-        return self.A11
+        return self._a11
 
     def getA02(self):
-        return self.A02
+        return self._a02
 
     def getA12(self):
-        return self.A12
+        return self._a12
 
     def setA00(self, value):
-        self.A00 = value
+        self._a00 = value
 
     def setA10(self, value):
-        self.A10 = value
+        self._a10 = value
 
     def setA01(self, value):
-        self.A01 = value
+        self._a01 = value
 
     def setA11(self, value):
-        self.A11 = value
+        self._a11 = value
 
     def setA02(self, value):
-        self.A02 = value
+        self._a02 = value
 
     def setA12(self, value):
-        self.A12 = value
+        self._a12 = value
