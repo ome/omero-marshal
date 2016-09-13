@@ -61,7 +61,7 @@ class Shape201501Encoder(AnnotatableEncoder):
         # into the fields defined by the schema.
         from omero_marshal.legacy.affinetransform import AffineTransformI
         t = AffineTransformI()
-        t.convert_transform(transform)
+        t.convert_svg_transform(transform)
         return t
 
 

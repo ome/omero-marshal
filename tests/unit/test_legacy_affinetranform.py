@@ -62,5 +62,5 @@ class TestLegacyAffineTransform():
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
     def test_convert_transform(self, transform_s, transform_o):
         t = AffineTransformI()
-        t.convert_transform(transform_s)
+        t.convert_svg_transform(transform_s)
         assert str(t) == transform_o

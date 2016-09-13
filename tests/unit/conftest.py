@@ -273,7 +273,7 @@ def populate_shape(o, set_unit_attributes=True):
 def identity_transform():
     t = AffineTransformI()
     if SCHEMA_VERSION == '2015-01':
-        t.convert_transform('matrix(1 0 0 1 0 0)')
+        t.convert_svg_transform('matrix(1 0 0 1 0 0)')
     else:
         t.setA00(rdouble(1))
         t.setA10(rdouble(0))
@@ -289,7 +289,7 @@ def identity_transform():
 def translation_transform():
     t = AffineTransformI()
     if SCHEMA_VERSION == '2015-01':
-        t.convert_transform('translate(3 4)')
+        t.convert_svg_transform('translate(3 4)')
     else:
         t.setA00(rdouble(1))
         t.setA10(rdouble(0))
@@ -305,7 +305,7 @@ def translation_transform():
 def rotation_transform():
     t = AffineTransformI()
     if SCHEMA_VERSION == '2015-01':
-        t.convert_transform('rotate(45 50 100)')
+        t.convert_svg_transform('rotate(45 50 100)')
     else:
         t.setA00(rdouble(0.7071067811865476))
         t.setA10(rdouble(0.7071067811865475))
@@ -321,7 +321,7 @@ def rotation_transform():
 def scale_transform():
     t = AffineTransformI()
     if SCHEMA_VERSION == '2015-01':
-        t.convert_transform('scale(1.5 2.5)')
+        t.convert_svg_transform('scale(1.5 2.5)')
     else:
         t.setA00(rdouble(1.5))
         t.setA10(rdouble(0))

@@ -22,12 +22,20 @@ class AffineTransformI(object):
     """
 
     def __init__(self, *args):
-        pass
+        self.id = -1L
+        self._svg_transform = None
+        self._a00 = None
+        self._a10 = None
+        self._a01 = None
+        self._a11 = None
+        self._a02 = None
+        self._a12 = None
 
-    def convert_transform(self, transform):
+    def convert_svg_transform(self, transform):
         """
-        Converts a string transform representation .
+        Converts a string representing a SVG transform.
         """
+
         tr, args = transform[:-1].split('(')
         a = map(float, args.split(' '))
 
@@ -59,7 +67,7 @@ class AffineTransformI(object):
         # objects
         # Setting the id also allows the transform decoder to inherit the
         # superclass decode() method
-        self.id = -1L
+        self._svg_transform = transform
         self._a00 = a[0]
         self._a10 = a[1]
         self._a01 = a[2]
