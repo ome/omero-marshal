@@ -28,6 +28,13 @@ except ImportError:
     # OMERO 5.2.x
     from omero.model import RectangleI
 
+try:
+    # Import transform classes introduced in OMERO 5.3.0
+    from omero.model import AffineTransformI
+except ImportError:
+    # Use internal AffineTransformI classes for OMERO 5.1.x and OMERO 5.2.x
+    from omero_marshal.legacy.affinetransform import AffineTransformI
+
 from omero_marshal import SCHEMA_VERSION
 
 
@@ -254,16 +261,20 @@ def populate_shape(o, set_unit_attributes=True):
     o.theC = rint(1)
     o.theT = rint(2)
     o.theZ = rint(3)
-    o.transform = transform()
+    t = identity_transform()
+    if SCHEMA_VERSION == '2015-01':
+        o.transform = str(t)
+    else:
+        o.transform = t
     return o
 
 
-def transform():
+@pytest.fixture()
+def identity_transform():
+    t = AffineTransformI()
     if SCHEMA_VERSION == '2015-01':
-        return 'matrix(1 0 0 1 0 0)'
+        t.convert_transform('matrix(1 0 0 1 0 0)')
     else:
-        from omero.model import AffineTransformI
-        t = AffineTransformI()
         t.setA00(rdouble(1))
         t.setA10(rdouble(0))
         t.setA01(rdouble(0))
@@ -271,7 +282,55 @@ def transform():
         t.setA02(rdouble(0))
         t.setA12(rdouble(0))
         t.id = rlong(8L)
-        return t
+    return t
+
+
+@pytest.fixture()
+def translation_transform():
+    t = AffineTransformI()
+    if SCHEMA_VERSION == '2015-01':
+        t.convert_transform('translate(3 4)')
+    else:
+        t.setA00(rdouble(1))
+        t.setA10(rdouble(0))
+        t.setA01(rdouble(0))
+        t.setA11(rdouble(1))
+        t.setA02(rdouble(3))
+        t.setA12(rdouble(4))
+        t.id = rlong(8L)
+    return t
+
+
+@pytest.fixture()
+def rotation_transform():
+    t = AffineTransformI()
+    if SCHEMA_VERSION == '2015-01':
+        t.convert_transform('rotate(45 50 100)')
+    else:
+        t.setA00(rdouble(0.7071067811865476))
+        t.setA10(rdouble(0.7071067811865475))
+        t.setA01(rdouble(-0.7071067811865475))
+        t.setA11(rdouble(0.7071067811865476))
+        t.setA02(rdouble(85.35533905932736))
+        t.setA12(rdouble(-6.066017177982129))
+        t.id = rlong(8L)
+    return t
+
+
+@pytest.fixture()
+def scale_transform():
+    t = AffineTransformI()
+    if SCHEMA_VERSION == '2015-01':
+        t.convert_transform('scale(1.5 2.5)')
+    else:
+        t.setA00(rdouble(1.5))
+        t.setA10(rdouble(0))
+        t.setA01(rdouble(0))
+        t.setA11(rdouble(2.5))
+        t.setA02(rdouble(0))
+        t.setA12(rdouble(0))
+        t.id = rlong(8L)
+    return t
 
 
 @pytest.fixture()
