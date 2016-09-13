@@ -52,16 +52,20 @@ class Shape201501Encoder(AnnotatableEncoder):
 
     def get_transform(self, transform):
         transform = unwrap(transform)
-        if not transform or transform == 'none':
+        if not transform :
             return
 
         # For OMERO 5.1.x and OMERO 5.2.x the unwrapped transform is a string.
         # To facilitate the encoding we construct an internal AffineTransform
-        # object and use convert_transform() to map the string representation
-        # into the fields defined by the schema.
+        # object and use convert_svg_transform() to map the SVG string
+        # representation into the fields defined by the schema.
         from omero_marshal.legacy.affinetransform import AffineTransformI
         t = AffineTransformI()
-        t.convert_svg_transform(transform)
+        try:
+            t.convert_svg_transform(transform)
+        except ValueError:
+            # Means the string is an invalid or unsupported SVG transform
+            return
         return t
 
 

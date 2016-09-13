@@ -57,7 +57,16 @@ TRANSFORMATIONS = [
 ]
 
 
+INVALID_TRANSFORMS = (
+    '', 'none', 'matrix()', 'scale()', 'translate(three)', 'skewX(1)')
+
 class TestLegacyAffineTransform():
+
+    @pytest.mark.parametrize("transform", INVALID_TRANSFORMS)
+    def test_invalid_transform(self, transform):
+        t = AffineTransformI()
+        with pytest.raises(ValueError):
+            t.convert_svg_transform(transform)
 
     @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
     def test_convert_transform(self, transform_s, transform_o):

@@ -22,6 +22,10 @@ class AffineTransformI(object):
     """
 
     def __init__(self, *args):
+        # Set the id to -1 to differentiate the marshalled transform from
+        # objects
+        # Setting the id also allows the transform decoder to inherit the
+        # superclass decode() method
         self.id = -1L
         self._svg_transform = None
         self._a00 = None
@@ -34,6 +38,9 @@ class AffineTransformI(object):
     def convert_svg_transform(self, transform):
         """
         Converts a string representing a SVG transform.
+        Raises:
+            ValueError: If transform is not a valid and supported SVG
+            transform.
         """
 
         tr, args = transform[:-1].split('(')
@@ -63,10 +70,6 @@ class AffineTransformI(object):
         else:
             raise ValueError('Unknown transformation "%s"' % transform)
 
-        # Set the id to -1 to differentiate the marshalled transform from
-        # objects
-        # Setting the id also allows the transform decoder to inherit the
-        # superclass decode() method
         self._svg_transform = transform
         self._a00 = a[0]
         self._a10 = a[1]
