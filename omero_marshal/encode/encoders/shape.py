@@ -52,7 +52,7 @@ class Shape201501Encoder(AnnotatableEncoder):
 
     def get_transform(self, transform):
         transform = unwrap(transform)
-        if not transform :
+        if not transform:
             return
 
         # For OMERO 5.1.x and OMERO 5.2.x the unwrapped transform is a string.

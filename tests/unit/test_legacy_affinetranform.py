@@ -60,6 +60,7 @@ TRANSFORMATIONS = [
 INVALID_TRANSFORMS = (
     '', 'none', 'matrix()', 'scale()', 'translate(three)', 'skewX(1)')
 
+
 class TestLegacyAffineTransform():
 
     @pytest.mark.parametrize("transform", INVALID_TRANSFORMS)
