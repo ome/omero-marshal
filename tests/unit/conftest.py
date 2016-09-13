@@ -263,7 +263,7 @@ def populate_shape(o, set_unit_attributes=True):
     o.theZ = rint(3)
     t = identity_transform()
     if SCHEMA_VERSION == '2015-01':
-        o.transform = str(t)
+        o.transform = t.get_svg_transform()
     else:
         o.transform = t
     return o

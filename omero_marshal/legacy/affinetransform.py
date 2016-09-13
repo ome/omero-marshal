@@ -86,6 +86,9 @@ class AffineTransformI(object):
             unwrap(self._a12),
             ]))
 
+    def get_svg_transform(self):
+        return self._svg_transform
+
     def getA00(self):
         return self._a00
 
