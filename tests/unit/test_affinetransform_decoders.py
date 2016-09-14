@@ -40,7 +40,7 @@ class TestIdentityTranform():
         encoder = get_encoder(point.__class__)
         decoder = get_decoder(encoder.TYPE)
         if SCHEMA_VERSION == '2015-01':
-            point.transform = identity_transform.get_svg_transform()
+            point.transform = identity_transform.svg_transform
         else:
             point.transform = identity_transform
         v = encoder.encode(point)
@@ -80,7 +80,7 @@ class TestTranslationTranform():
         encoder = get_encoder(point.__class__)
         decoder = get_decoder(encoder.TYPE)
         if SCHEMA_VERSION == '2015-01':
-            point.transform = translation_transform.get_svg_transform()
+            point.transform = translation_transform.svg_transform
         else:
             point.transform = translation_transform
         v = encoder.encode(point)
@@ -120,7 +120,7 @@ class TestRotationTranform():
         encoder = get_encoder(point.__class__)
         decoder = get_decoder(encoder.TYPE)
         if SCHEMA_VERSION == '2015-01':
-            point.transform = rotation_transform.get_svg_transform()
+            point.transform = rotation_transform.svg_transform
         else:
             point.transform = rotation_transform
         v = encoder.encode(point)
@@ -162,7 +162,7 @@ class TestScaleTranform():
         encoder = get_encoder(point.__class__)
         decoder = get_decoder(encoder.TYPE)
         if SCHEMA_VERSION == '2015-01':
-            point.transform = scale_transform.get_svg_transform()
+            point.transform = scale_transform.svg_transform
         else:
             point.transform = scale_transform
         v = encoder.encode(point)

@@ -18,7 +18,7 @@ class AffineTransformI(object):
     Class handling OMERO 5.1 and OMERO 5.2 transform string representations.
     Its fields and methods are directly mirroring the
     omero.model.AffineTransform class introduced in OMERO 5.3 to reduce the
-    complexity of the transform encoders/decoders
+    complexity of the transform encoders/decoders.
     """
 
     def __init__(self, *args):
@@ -27,7 +27,7 @@ class AffineTransformI(object):
         # Setting the id also allows the transform decoder to inherit the
         # superclass decode() method
         self.id = -1L
-        self._svg_transform = None
+        self.svg_transform = None
         self._a00 = None
         self._a10 = None
         self._a01 = None
@@ -37,7 +37,11 @@ class AffineTransformI(object):
 
     def convert_svg_transform(self, transform):
         """
-        Converts a string representing a SVG transform.
+        Converts a string representing a SVG transform into
+        AffineTransform fields.
+        See https://www.w3.org/TR/SVG/coords.html#TransformAttribute for the
+        specification of the transform strings. skewX and skewY are not
+        supported.
         Raises:
             ValueError: If transform is not a valid and supported SVG
             transform.
@@ -70,7 +74,7 @@ class AffineTransformI(object):
         else:
             raise ValueError('Unknown transformation "%s"' % transform)
 
-        self._svg_transform = transform
+        self.svg_transform = transform
         self._a00 = a[0]
         self._a10 = a[1]
         self._a01 = a[2]
@@ -89,8 +93,10 @@ class AffineTransformI(object):
             unwrap(self._a12),
             ]))
 
+    @property
     def get_svg_transform(self):
-        return self._svg_transform
+        """Retrieves the string containing the SVG transform"""
+        return self.svg_transform
 
     def getA00(self):
         return self._a00
