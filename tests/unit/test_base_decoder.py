@@ -17,6 +17,13 @@ from omero_marshal import get_encoder, get_decoder, ROI_SCHEMA_URL
 
 class TestBaseDecoder(object):
 
+    AS_STRING = """{
+    "@type": "%s#ROI",
+    "@id": 1,
+    "Name": "the_name",
+    "Description": "the_description"
+}""" % ROI_SCHEMA_URL
+
     def assert_roi(self, roi, has_annotations=False):
         assert roi.__class__ == RoiI
         assert roi.id.val == 1L
@@ -40,16 +47,17 @@ class TestBaseDecoder(object):
         self.assert_externalInfo(v.details.externalInfo)
 
     def test_base_decoder_from_string(self):
-        data_as_string = """{
-    "@type": "%s#ROI",
-    "@id": 1,
-    "Name": "the_name",
-    "Description": "the_description"
-}""" % ROI_SCHEMA_URL
-        data = json.loads(data_as_string)
+        data = json.loads(self.AS_STRING)
         decoder = get_decoder(data['@type'])
         v = decoder.decode(data)
         self.assert_roi(v)
+
+    def test_null_string(self):
+        data = json.loads(self.AS_STRING)
+        data['Description'] = None
+        decoder = get_decoder(data['@type'])
+        v = decoder.decode(data)
+        assert v.description is None
 
 
 class TestPermissionsDecoder(object):
