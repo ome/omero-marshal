@@ -27,7 +27,7 @@ class AffineTransformI(object):
         # Setting the id also allows the transform decoder to inherit the
         # superclass decode() method
         self.id = -1L
-        self.svg_transform = None
+        self._svg_transform = None
         self._a00 = None
         self._a10 = None
         self._a01 = None
@@ -74,7 +74,7 @@ class AffineTransformI(object):
         else:
             raise ValueError('Unknown transformation "%s"' % transform)
 
-        self.svg_transform = transform
+        self._svg_transform = transform
         self._a00 = a[0]
         self._a10 = a[1]
         self._a01 = a[2]
@@ -94,9 +94,9 @@ class AffineTransformI(object):
             ]))
 
     @property
-    def get_svg_transform(self):
+    def svg_transform(self):
         """Retrieves the string containing the SVG transform"""
-        return self.svg_transform
+        return self._svg_transform
 
     def getA00(self):
         return self._a00
