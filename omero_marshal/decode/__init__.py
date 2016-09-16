@@ -41,7 +41,7 @@ class Decoder(object):
             prop,
             field_info.wrapper(
                 value
-            )
+            ) if value is not None else None
         )
 
     def decode(self, data):
