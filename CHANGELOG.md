@@ -1,3 +1,9 @@
+## 0.4.1 (2016-09-16)
+
+Bugfixes:
+
+  - Fix null strings (#23)
+
 ## 0.4.0 (2016-09-05)
 
 Features:
