@@ -24,12 +24,21 @@ class Line201501Encoder(ShapeEncoder):
         self.set_if_not_none(v, 'Y1', obj.y1)
         self.set_if_not_none(v, 'X2', obj.x2)
         self.set_if_not_none(v, 'Y2', obj.y2)
+        self.set_markers(v, obj)
         return v
+
+    def set_markers(self, v, obj):
+        # Line markers have been introduced in Line objects in OMERO 5.3.0
+        pass
 
 
 class Line201606Encoder(Line201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Line'
+
+    def set_markers(self, v, obj):
+        self.set_if_not_none(v, 'MarkerStart', obj.markerStart)
+        self.set_if_not_none(v, 'MarkerEnd', obj.markerEnd)
 
 
 if SCHEMA_VERSION == '2015-01':
