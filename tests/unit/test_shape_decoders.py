@@ -250,6 +250,9 @@ class TestLineDecoder(TestShapeDecoder):
         assert v.x2.val == 1.0
         assert v.y2.__class__ is RDoubleI
         assert v.y2.val == 2.0
+        if SCHEMA_VERSION != '2015-01':
+            assert v.markerStart.val == 'Arrow'
+            assert v.markerEnd.val == 'Arrow'
 
 
 class TestPolylineDecoder(TestShapeDecoder):
@@ -262,6 +265,9 @@ class TestPolylineDecoder(TestShapeDecoder):
         self.assert_shape(v)
         assert v.id.val == 4L
         assert v.points.val == '0,0 1,2 3,5'
+        if SCHEMA_VERSION != '2015-01':
+            assert v.markerStart.val == 'Arrow'
+            assert v.markerEnd.val == 'Arrow'
 
 
 class TestPolygonDecoder(TestShapeDecoder):
