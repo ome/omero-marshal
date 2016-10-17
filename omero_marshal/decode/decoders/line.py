@@ -26,12 +26,22 @@ class Line201501Decoder(ShapeDecoder):
         self.set_property(v, 'y1', data.get('Y1'))
         self.set_property(v, 'x2', data.get('X2'))
         self.set_property(v, 'y2', data.get('Y2'))
+        self.set_markers(v, data)
         return v
+
+    def set_markers(self, v, data):
+        # Line markers have been introduced in Line objects in OMERO 5.3.0
+        pass
 
 
 class Line201606Decoder(Line201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Line'
+
+    def set_markers(self, v, data):
+        self.set_property(v, 'markerStart', data.get('MarkerStart'))
+        self.set_property(v, 'markerEnd', data.get('MarkerEnd'))
+        pass
 
 
 if SCHEMA_VERSION == '2015-01':
