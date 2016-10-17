@@ -245,6 +245,9 @@ class TestPolylineEncoder(TestShapeEncoder):
         assert v['@id'] == 4L
         assert v['@type'] == '%s#Polyline' % ROI_SCHEMA_URL
         assert v['Points'] == '0,0 1,2 3,5'
+        if SCHEMA_VERSION != '2015-01':
+            assert v['MarkerStart'] == 'Arrow'
+            assert v['MarkerEnd'] == 'Arrow'
 
 
 class TestPolygonEncoder(TestShapeEncoder):
@@ -270,6 +273,9 @@ class TestLineEncoder(TestShapeEncoder):
         assert v['Y1'] == 0.0
         assert v['X2'] == 1.0
         assert v['Y2'] == 2.0
+        if SCHEMA_VERSION != '2015-01':
+            assert v['MarkerStart'] == 'Arrow'
+            assert v['MarkerEnd'] == 'Arrow'
 
 
 class TestRoiEncoder(TestShapeEncoder):
