@@ -11,9 +11,8 @@
 
 from omero_marshal import get_encoder, get_decoder, SCHEMA_VERSION
 from omero.model.enums import UnitsLength
-from omero.rtypes import RDoubleI
+from omero.rtypes import RDoubleI, RStringI
 from omero.model import LengthI
-import pytest
 
 
 class TestShapeDecoder(object):
@@ -120,6 +119,7 @@ class TestShapeDecoder(object):
         assert shape.theT.val == 2
         assert shape.theC.val == 1
         if SCHEMA_VERSION == '2015-01':
+            assert shape.transform.__class__ is RStringI
             assert shape.transform.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
         else:
             from omero.model import AffineTransformI
@@ -314,64 +314,3 @@ class TestOptionalUnitInformation(TestShapeDecoder):
         assert v.x.val == 1.0
         assert v.y.__class__ is RDoubleI
         assert v.y.val == 2.0
-
-
-TRANSFORMATIONS = [
-    (
-        'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
-        'matrix(1.0 0.0 0.0 1.0 0.0 0.0)',
-    ),
-    (
-        'none',
-        'none',
-    ),
-    (
-        'translate(3 4)',
-        'matrix(1.0 0.0 0.0 1.0 3.0 4.0)',
-    ),
-    (
-        'translate(5)',
-        'matrix(1.0 0.0 0.0 1.0 5.0 0.0)',
-    ),
-    (
-        'scale(1.5 2.5)',
-        'matrix(1.5 0.0 0.0 2.5 0.0 0.0)',
-    ),
-    (
-        'scale(1.5)',
-        'matrix(1.5 0.0 0.0 1.5 0.0 0.0)',
-    ),
-    (
-        'rotate(45)',
-        'matrix(0.707106781187 0.707106781187 -0.707106781187 0.707106781187 '
-        '0.0 0.0)',
-    ),
-    (
-        'rotate(45 50 100)',
-        'matrix(0.707106781187 0.707106781187 -0.707106781187 0.707106781187 '
-        '85.3553390593 -6.06601717798)',
-    ),
-    (
-        'rotate(60)',
-        'matrix(0.5 0.866025403784 -0.866025403784 0.5 '
-        '0.0 0.0)',
-    ),
-    (
-        'rotate(60 50 100)',
-        'matrix(0.5 0.866025403784 -0.866025403784 0.5 '
-        '111.602540378 6.69872981078)'
-    ),
-]
-
-
-@pytest.mark.skipif(SCHEMA_VERSION != "2015-01", reason="old model")
-class TestTransform201501Decoder():
-
-    @pytest.mark.parametrize("transform_s,transform_o", TRANSFORMATIONS)
-    def test_transforms(self, point, transform_s, transform_o):
-        encoder = get_encoder(point.__class__)
-        decoder = get_decoder(encoder.TYPE)
-        point.transform = transform_s
-        v = encoder.encode(point)
-        v = decoder.decode(v)
-        assert v.transform.val == transform_o

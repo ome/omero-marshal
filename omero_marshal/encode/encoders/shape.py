@@ -13,7 +13,6 @@ from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import Shape
 from omero.rtypes import unwrap
-from math import sin, cos, radians
 
 
 class Shape201501Encoder(AnnotatableEncoder):
@@ -35,8 +34,12 @@ class Shape201501Encoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'TheC', obj.theC)
         self.set_if_not_none(v, 'TheT', obj.theT)
         self.set_if_not_none(v, 'TheZ', obj.theZ)
-        self.set_if_not_none(
-            v, 'Transform', self.encode_transform(obj.transform))
+        transform = self.get_transform(obj.transform)
+        if transform:
+            transform_encoder = self.ctx.get_encoder(transform.__class__)
+            print transform_encoder.encode(transform)
+            self.set_if_not_none(
+                v, 'Transform', transform_encoder.encode(transform))
         self.set_linecap(v, obj)
         self.set_visible(v, obj)
         return v
@@ -47,50 +50,23 @@ class Shape201501Encoder(AnnotatableEncoder):
     def set_visible(self, v, obj):
         self.set_if_not_none(v, 'Visible', obj.visibility)
 
-    def get_transform_type(self):
-        return 'http://www.openmicroscopy.org/Schemas/ROI/2015-01' \
-            '#AffineTransform'
-
-    def encode_transform(self, transform):
+    def get_transform(self, transform):
         transform = unwrap(transform)
-        if not transform or transform == 'none':
+        if not transform:
             return
 
-        tr, args = transform[:-1].split('(')
-        a = map(float, args.split(' '))
-
-        if tr == 'matrix':
-            pass
-        elif tr == 'translate':
-            a = [1.0, 0.0, 0.0, 1.0, a[0], a[1] if len(a) > 1 else 0.0]
-        elif tr == 'scale':
-            a = [a[0], 0.0, 0.0, a[-1], 0.0, 0.0]
-        elif tr == 'rotate':
-            x = a[1] if len(a) > 1 else 0.0
-            y = a[2] if len(a) > 1 else 0.0
-            rad = radians(a[0])
-            s = sin(rad)
-            c = cos(rad)
-            a = [
-                c,
-                s,
-                -s,
-                c,
-                x * (1 - c) + y * s,
-                -x * s + y * (1 - c),
-            ]
-        else:
-            raise ValueError('Unknown transformation "%s"' % transform)
-
-        return {
-            '@type': self.get_transform_type(),
-            'A00': a[0],
-            'A10': a[1],
-            'A01': a[2],
-            'A11': a[3],
-            'A02': a[4],
-            'A12': a[5],
-        }
+        # For OMERO 5.1.x and OMERO 5.2.x the unwrapped transform is a string.
+        # To facilitate the encoding we construct an internal AffineTransform
+        # object and use convert_svg_transform() to map the SVG string
+        # representation into the fields defined by the schema.
+        from omero_marshal.legacy.affinetransform import AffineTransformI
+        t = AffineTransformI()
+        try:
+            t.convert_svg_transform(transform)
+        except ValueError:
+            # Means the string is an invalid or unsupported SVG transform
+            return
+        return t
 
 
 class Shape201606Encoder(Shape201501Encoder):
@@ -103,27 +79,15 @@ class Shape201606Encoder(Shape201501Encoder):
     def set_visible(self, v, obj):
         pass
 
-    def get_transform_type(self):
-        return 'http://www.openmicroscopy.org/Schemas/OME/2016-06' \
-            '#AffineTransform'
-
-    def encode_transform(self, transform):
+    def get_transform(self, transform):
         if not transform:
             return None
         if (transform.getA00() is None and transform.getA10() is None and
                 transform.getA01() is None and transform.getA11() is None and
                 transform.getA02() is None and transform.getA12() is None):
             return None
+        return transform
 
-        return {
-            '@type': self.get_transform_type(),
-            'A00': transform.getA00().val,
-            'A10': transform.getA10().val,
-            'A01': transform.getA01().val,
-            'A11': transform.getA11().val,
-            'A02': transform.getA02().val,
-            'A12': transform.getA12().val,
-        }
 
 if SCHEMA_VERSION == '2015-01':
     encoder = (Shape, Shape201501Encoder)
