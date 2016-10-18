@@ -21,21 +21,18 @@ class Polyline201501Encoder(ShapeEncoder):
     def encode(self, obj):
         v = super(Polyline201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'Points', obj.points)
-        self.set_markers(v, obj)
         return v
-
-    def set_markers(self, v, obj):
-        # Polyline markers have been introduced in Line objects in OMERO 5.3.0
-        pass
 
 
 class Polyline201606Encoder(Polyline201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Polyline'
 
-    def set_markers(self, v, obj):
+    def encode(self, obj):
+        v = super(Polyline201606Encoder, self).encode(obj)
         self.set_if_not_none(v, 'MarkerStart', obj.markerStart)
         self.set_if_not_none(v, 'MarkerEnd', obj.markerEnd)
+        return v
 
 
 if SCHEMA_VERSION == '2015-01':
