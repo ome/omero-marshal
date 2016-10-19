@@ -31,6 +31,12 @@ class Line201606Encoder(Line201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Line'
 
+    def encode(self, obj):
+        v = super(Line201606Encoder, self).encode(obj)
+        self.set_if_not_none(v, 'MarkerStart', obj.markerStart)
+        self.set_if_not_none(v, 'MarkerEnd', obj.markerEnd)
+        return v
+
 
 if SCHEMA_VERSION == '2015-01':
     encoder = (LineI, Line201501Encoder)

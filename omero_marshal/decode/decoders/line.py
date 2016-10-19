@@ -33,6 +33,12 @@ class Line201606Decoder(Line201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Line'
 
+    def decode(self, data):
+        v = super(Line201606Decoder, self).decode(data)
+        self.set_property(v, 'markerStart', data.get('MarkerStart'))
+        self.set_property(v, 'markerEnd', data.get('MarkerEnd'))
+        return v
+
 
 if SCHEMA_VERSION == '2015-01':
     decoder = (Line201501Decoder.TYPE, Line201501Decoder)

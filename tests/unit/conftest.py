@@ -399,6 +399,9 @@ def polyline():
     o = PolylineI()
     populate_shape(o)
     o.points = rstring('0,0 1,2 3,5')
+    if SCHEMA_VERSION != '2015-01':
+        o.setMarkerStart('Arrow')
+        o.setMarkerEnd('Arrow')
     o.id = rlong(4L)
     return o
 
@@ -420,6 +423,9 @@ def line():
     o.setY1(0)
     o.setX2(1)
     o.setY2(2)
+    if SCHEMA_VERSION != '2015-01':
+        o.setMarkerStart('Arrow')
+        o.setMarkerEnd('Arrow')
     o.id = rlong(6L)
     return o
 

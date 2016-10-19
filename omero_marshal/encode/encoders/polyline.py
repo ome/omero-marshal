@@ -28,6 +28,12 @@ class Polyline201606Encoder(Polyline201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Polyline'
 
+    def encode(self, obj):
+        v = super(Polyline201606Encoder, self).encode(obj)
+        self.set_if_not_none(v, 'MarkerStart', obj.markerStart)
+        self.set_if_not_none(v, 'MarkerEnd', obj.markerEnd)
+        return v
+
 
 if SCHEMA_VERSION == '2015-01':
     encoder = (PolylineI, Polyline201501Encoder)

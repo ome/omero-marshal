@@ -30,6 +30,12 @@ class Polyline201606Decoder(Polyline201501Decoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Polyline'
 
+    def decode(self, data):
+        v = super(Polyline201606Decoder, self).decode(data)
+        self.set_property(v, 'markerStart', data.get('MarkerStart'))
+        self.set_property(v, 'markerEnd', data.get('MarkerEnd'))
+        return v
+
 
 if SCHEMA_VERSION == '2015-01':
     decoder = (Polyline201501Decoder.TYPE, Polyline201501Decoder)
