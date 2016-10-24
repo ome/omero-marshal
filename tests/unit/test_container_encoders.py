@@ -48,3 +48,41 @@ class TestProjectEncoder(object):
                 'omero:details': {'@type': 'TBD#Details'}
             }]
         }
+
+
+class TestScreenEncoder(object):
+
+    def test_screen_encoder(self, screen):
+        encoder = get_encoder(screen.__class__)
+        v = encoder.encode(screen)
+        assert v == {
+            '@id': 4L,
+            '@type': '%s#Screen' % OME_SCHEMA_URL,
+            'Name': 'the_name',
+            'Description': 'the_description',
+            'omero:details': {'@type': 'TBD#Details'}
+        }
+
+    def test_screen_with_plate_encoder(self, screen_with_plates):
+        encoder = get_encoder(screen_with_plates.__class__)
+        v = encoder.encode(screen_with_plates)
+        assert v == {
+            '@id': 4L,
+            '@type': '%s#Screen' % OME_SCHEMA_URL,
+            'Name': 'the_name',
+            'Description': 'the_description',
+            'omero:details': {'@type': 'TBD#Details'},
+            'Plates': [{
+                '@id': 5L,
+                '@type': '%s#Plate' % OME_SCHEMA_URL,
+                'Name': 'plate_name_5',
+                'Description': 'plate_description_5',
+                'omero:details': {'@type': 'TBD#Details'}
+            }, {
+                '@id': 6L,
+                '@type': '%s#Plate' % OME_SCHEMA_URL,
+                'Name': 'plate_name_6',
+                'Description': 'plate_description_6',
+                'omero:details': {'@type': 'TBD#Details'}
+            }]
+        }

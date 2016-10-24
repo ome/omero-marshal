@@ -16,7 +16,7 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
     PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
-    ExternalInfoI
+    ExternalInfoI, ScreenI, PlateI
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -56,6 +56,26 @@ def project_with_datasets(project):
         o.description = rstring('dataset_description_%d' % dataset_id)
         project.linkDataset(o)
     return project
+
+
+@pytest.fixture()
+def screen():
+    o = ScreenI()
+    o.id = rlong(4L)
+    o.name = rstring('the_name')
+    o.description = rstring('the_description')
+    return o
+
+
+@pytest.fixture()
+def screen_with_plates(screen):
+    for plate_id in range(5, 7):
+        o = PlateI()
+        o.id = rlong(plate_id)
+        o.name = rstring('plate_name_%d' % plate_id)
+        o.description = rstring('plate_description_%d' % plate_id)
+        screen.linkPlate(o)
+    return screen
 
 
 def add_annotations(o):
