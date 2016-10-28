@@ -60,6 +60,11 @@ class TestScreenEncoder(object):
             '@type': '%s#Screen' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
+            'ProtocolDescription': 'the_protocol_description',
+            'ProtocolIdentifier': 'the_protocol_identifier',
+            'ReagentSetDescription': 'the_reagent_set_description',
+            'ReagentSetIdentifier': 'the_reagent_set_identifier',
+            'Type': 'the_type',
             'omero:details': {'@type': 'TBD#Details'}
         }
 
@@ -71,18 +76,61 @@ class TestScreenEncoder(object):
             '@type': '%s#Screen' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
+            'ProtocolDescription': 'the_protocol_description',
+            'ProtocolIdentifier': 'the_protocol_identifier',
+            'ReagentSetDescription': 'the_reagent_set_description',
+            'ReagentSetIdentifier': 'the_reagent_set_identifier',
+            'Type': 'the_type',
             'omero:details': {'@type': 'TBD#Details'},
             'Plates': [{
                 '@id': 5L,
                 '@type': '%s#Plate' % OME_SCHEMA_URL,
                 'Name': 'plate_name_5',
                 'Description': 'plate_description_5',
+                'ColumnNamingConvention': 'number',
+                'RowNamingConvention': 'letter',
+                'Columns': 12,
+                'Rows': 8,
+                'DefaultSample': 'default_sample_5',
+                'ExternalIdentifier': 'external_identifier_5',
+                'Status': 'status_5',
+                'WellOriginX': {
+                    '@type': 'TBD#LengthI',
+                    'Unit': 'REFERENCEFRAME',
+                    'Symbol': 'reference frame',
+                    'Value': 0.1
+                },
+                'WellOriginY': {
+                    '@type': 'TBD#LengthI',
+                    'Unit': 'REFERENCEFRAME',
+                    'Symbol': 'reference frame',
+                    'Value': 1.1
+                },
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@id': 6L,
                 '@type': '%s#Plate' % OME_SCHEMA_URL,
                 'Name': 'plate_name_6',
                 'Description': 'plate_description_6',
+                'ColumnNamingConvention': 'number',
+                'RowNamingConvention': 'letter',
+                'Columns': 12,
+                'Rows': 8,
+                'DefaultSample': 'default_sample_6',
+                'ExternalIdentifier': 'external_identifier_6',
+                'Status': 'status_6',
+                'WellOriginX': {
+                    '@type': 'TBD#LengthI',
+                    'Unit': 'REFERENCEFRAME',
+                    'Symbol': 'reference frame',
+                    'Value': 0.1
+                },
+                'WellOriginY': {
+                    '@type': 'TBD#LengthI',
+                    'Unit': 'REFERENCEFRAME',
+                    'Symbol': 'reference frame',
+                    'Value': 1.1
+                },
                 'omero:details': {'@type': 'TBD#Details'}
             }]
         }

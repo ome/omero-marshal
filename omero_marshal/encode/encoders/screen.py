@@ -22,6 +22,11 @@ class Screen201501Encoder(AnnotatableEncoder):
         v = super(Screen201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
+        self.set_if_not_none(v, 'ProtocolDescription', obj.protocolDescription)
+        self.set_if_not_none(v, 'ProtocolIdentifier', obj.protocolIdentifier)
+        self.set_if_not_none(v, 'ReagentSetDescription', obj.reagentSetDescription)
+        self.set_if_not_none(v, 'ReagentSetIdentifier', obj.reagentSetIdentifier)
+        self.set_if_not_none(v, 'Type', obj.type)
         if obj.isPlateLinksLoaded() and obj.sizeOfPlateLinks() > 0:
             plates = list()
             for plate_link in obj.copyPlateLinks():

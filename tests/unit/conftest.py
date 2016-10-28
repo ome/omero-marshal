@@ -64,6 +64,11 @@ def screen():
     o.id = rlong(4L)
     o.name = rstring('the_name')
     o.description = rstring('the_description')
+    o.protocolDescription = rstring('the_protocol_description')
+    o.protocolIdentifier = rstring('the_protocol_identifier')
+    o.reagentSetDescription = rstring('the_reagent_set_description')
+    o.reagentSetIdentifier = rstring('the_reagent_set_identifier')
+    o.type = rstring('the_type')
     return o
 
 
@@ -74,6 +79,15 @@ def screen_with_plates(screen):
         o.id = rlong(plate_id)
         o.name = rstring('plate_name_%d' % plate_id)
         o.description = rstring('plate_description_%d' % plate_id)
+        o.columnNamingConvention = rstring('number')
+        o.rowNamingConvention = rstring('letter')
+        o.columns = rint(12)
+        o.rows = rint(8)
+        o.defaultSample = rstring('default_sample_%d' % plate_id)
+        o.externalIdentifier = rstring('external_identifier_%d' % plate_id)
+        o.status = rstring('status_%d' % plate_id)
+        o.wellOriginX = LengthI(0.1, UnitsLength.REFERENCEFRAME)
+        o.wellOriginY = LengthI(1.1, UnitsLength.REFERENCEFRAME)
         screen.linkPlate(o)
     return screen
 
