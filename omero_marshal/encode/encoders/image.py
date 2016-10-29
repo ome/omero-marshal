@@ -22,8 +22,6 @@ class ImageEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'AcquisitionDate', obj.acquisitionDate)
-        if obj.experiment is not None:
-            pass
         if obj.isPixelsLoaded():
             pixels = []
             for pix in obj.copyPixels():
