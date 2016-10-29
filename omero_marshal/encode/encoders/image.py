@@ -29,11 +29,9 @@ class ImageEncoder(AnnotatableEncoder):
             v, 'omero:format', format_encoder.encode(obj.format)
         )
         if obj.isPixelsLoaded() and obj.sizeOfPixels() > 0:
-            pixels = []
-            for pix in obj.copyPixels():
-                pixels_encoder = self.ctx.get_encoder(pix.__class__)
-                pixels.append(pixels_encoder.encode(pix))
-            v['Pixels'] = pixels
+            pixels = obj.getPrimaryPixels()
+            pixels_encoder = self.ctx.get_encoder(pixels.__class__)
+            v['Pixels'] = pixels_encoder.encode(pixels)
         return v
 
 encoder = (ImageI, ImageEncoder)
