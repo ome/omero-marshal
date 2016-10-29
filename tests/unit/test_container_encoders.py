@@ -117,7 +117,7 @@ class TestProjectEncoder(object):
                 }, {
                     '@id': 4L,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
-                    'AcquisitionDate': 2L,
+                    'AcquisitionDate': 1L,
                     'Name': 'image_name_4',
                     'omero:archived': False,
                     'Description': 'image_description_4',
