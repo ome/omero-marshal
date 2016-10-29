@@ -99,6 +99,7 @@ def create_image(image_id, with_pixels=False):
     pixels.waveStart = rint(1)
     pixels.dimensionOrder = dimension_order
     pixels.pixelsType = pixels_type
+    image.addPixels(pixels)
     return image
 
 
