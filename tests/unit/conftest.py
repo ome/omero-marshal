@@ -68,6 +68,7 @@ def create_project(with_datasets=False, with_images=False):
             image.name = rstring('image_name_%d' % image_id)
             image.partial = rbool(False)
             image.format = image_format
+            dataset.linkImage(image)
     return project
 
 
