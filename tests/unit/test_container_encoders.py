@@ -79,6 +79,7 @@ class TestProjectEncoder(object):
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
                     },
+                    'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 2L,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
@@ -93,6 +94,7 @@ class TestProjectEncoder(object):
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
                     },
+                    'omero:details': {'@type': 'TBD#Details'}
                 }]
             }, {
                 '@id': 2L,
@@ -114,6 +116,7 @@ class TestProjectEncoder(object):
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
                     },
+                    'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 4L,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
@@ -128,6 +131,7 @@ class TestProjectEncoder(object):
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
                     },
+                    'omero:details': {'@type': 'TBD#Details'}
                 }]
             }]
         }
