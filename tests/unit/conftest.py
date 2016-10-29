@@ -16,7 +16,7 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
     PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
-    ExternalInfoI, ImageI, FormatI
+    ExternalInfoI, ImageI, FormatI, PixelsI, DimensionOrderI, PixelsTypeI
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -44,8 +44,7 @@ def create_project(with_datasets=False, with_images=False):
     project.name = rstring('the_name')
     project.description = rstring('the_description')
     dataset_count = 2
-    image_format = FormatI(1L)
-    image_format.value = rstring('PNG')
+
     if not with_datasets:
         return project
     for dataset_id in range(0, dataset_count):
@@ -60,16 +59,47 @@ def create_project(with_datasets=False, with_images=False):
             continue
         for image_id in range(1, 3):
             image_id = (dataset_id * dataset_count) + image_id
-            image = ImageI()
-            image.id = rlong(image_id)
-            image.acquisitionDate = rtime(1L)
-            image.archived = rbool(False)
-            image.description = rstring('image_description_%d' % image_id)
-            image.name = rstring('image_name_%d' % image_id)
-            image.partial = rbool(False)
-            image.format = image_format
-            dataset.linkImage(image)
+            dataset.linkImage(create_image(image_id))
     return project
+
+
+def create_image(image_id, with_pixels=False):
+    image_format = FormatI(1L)
+    image_format.value = rstring('PNG')
+
+    image = ImageI()
+    image.id = rlong(image_id)
+    image.acquisitionDate = rtime(1L)
+    image.archived = rbool(False)
+    image.description = rstring('image_description_%d' % image_id)
+    image.name = rstring('image_name_%d' % image_id)
+    image.partial = rbool(False)
+    image.format = image_format
+    if not with_pixels:
+        return image
+    dimension_order = DimensionOrderI(1L)
+    dimension_order.value = rstring('XYZCT')
+    pixels_type = PixelsTypeI(1L)
+    pixels_type.value = 'bit'
+
+    pixels = PixelsI(1L)
+    pixels.methodology = rstring('methodology')
+    pixels.physicalSizeX = rdouble(1.0)
+    pixels.physicalSizeY = rdouble(2.0)
+    pixels.physicalSizeZ = rdouble(3.0)
+    pixels.sha1 = rstring('61ee8b5601a84d5154387578466c8998848ba089')
+    pixels.significantBits = rint(16)
+    pixels.sizeX = rint(1)
+    pixels.sizeY = rint(2)
+    pixels.sizeZ = rint(3)
+    pixels.sizeC = rint(4)
+    pixels.sizeT = rint(5)
+    pixels.timeIncrement = rdouble(1.0)
+    pixels.waveIncrement = rdouble(2.0)
+    pixels.waveStart = rint(1)
+    pixels.dimensionOrder = dimension_order
+    pixels.pixelsType = pixels_type
+    return image
 
 
 @pytest.fixture()
@@ -85,6 +115,16 @@ def project_with_datasets(project):
 @pytest.fixture()
 def project_with_datasets_and_images(project):
     return create_project(with_datasets=True, with_images=True)
+
+
+@pytest.fixture()
+def image():
+    return create_image(1L)
+
+
+@pytest.fixture()
+def image_pixels():
+    return create_image(1L, with_pixels=True)
 
 
 def add_annotations(o):
