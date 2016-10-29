@@ -16,7 +16,7 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
     PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
-    ExternalInfoI
+    ExternalInfoI, ImageI, FormatI
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -38,24 +38,52 @@ except ImportError:
 from omero_marshal import SCHEMA_VERSION
 
 
+def create_project(with_datasets=False, with_images=False):
+    project = ProjectI()
+    project.id = rlong(1L)
+    project.name = rstring('the_name')
+    project.description = rstring('the_description')
+    dataset_count = 2
+    image_format = FormatI(1L)
+    image_format.value = rstring('PNG')
+    if not with_datasets:
+        return project
+    for dataset_id in range(0, dataset_count):
+        dataset = DatasetI()
+        dataset.id = rlong(dataset_id + 1)
+        dataset.name = rstring('dataset_name_%d' % (dataset_id + 1))
+        dataset.description = rstring(
+            'dataset_description_%d' % (dataset_id + 1)
+        )
+        project.linkDataset(dataset)
+        if not with_images:
+            continue
+        for image_id in range(1, 3):
+            image_id = (dataset_id * dataset_count) + image_id
+            image = ImageI()
+            image.id = rlong(image_id)
+            image.acquisitionDate = rtime(1L)
+            image.archived = rbool(False)
+            image.description = rstring('image_description_%d' % image_id)
+            image.name = rstring('image_name_%d' % image_id)
+            image.partial = rbool(False)
+            image.format = image_format
+    return project
+
+
 @pytest.fixture()
 def project():
-    o = ProjectI()
-    o.id = rlong(1L)
-    o.name = rstring('the_name')
-    o.description = rstring('the_description')
-    return o
+    return create_project()
 
 
 @pytest.fixture()
 def project_with_datasets(project):
-    for dataset_id in range(1, 3):
-        o = DatasetI()
-        o.id = rlong(dataset_id)
-        o.name = rstring('dataset_name_%d' % dataset_id)
-        o.description = rstring('dataset_description_%d' % dataset_id)
-        project.linkDataset(o)
-    return project
+    return create_project(with_datasets=True)
+
+
+@pytest.fixture()
+def project_with_datasets_and_images(project):
+    return create_project(with_datasets=True, with_images=True)
 
 
 def add_annotations(o):
