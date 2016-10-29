@@ -20,9 +20,15 @@ class ImageEncoder(AnnotatableEncoder):
     def encode(self, obj):
         v = super(ImageEncoder, self).encode(obj)
         self.set_if_not_none(v, 'AcquisitionDate', obj.acquisitionDate)
+        self.set_if_not_none(v, 'omero:archived', obj.archived)
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Name', obj.name)
-        if obj.isPixelsLoaded():
+        self.set_if_not_none(v, 'omero:partial', obj.partial)
+        format_encoder = self.ctx.get_encoder(obj.format.__class__)
+        self.set_if_not_none(
+            v, 'omero:format', format_encoder.encode(obj.format)
+        )
+        if obj.isPixelsLoaded() and obj.sizeOfPixels() > 0:
             pixels = []
             for pix in obj.copyPixels():
                 pixels_encoder = self.ctx.get_encoder(pix.__class__)
