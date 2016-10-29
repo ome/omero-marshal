@@ -19,9 +19,9 @@ class ImageEncoder(AnnotatableEncoder):
 
     def encode(self, obj):
         v = super(ImageEncoder, self).encode(obj)
-        self.set_if_not_none(v, 'Name', obj.name)
-        self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'AcquisitionDate', obj.acquisitionDate)
+        self.set_if_not_none(v, 'Description', obj.description)
+        self.set_if_not_none(v, 'Name', obj.name)
         if obj.isPixelsLoaded():
             pixels = []
             for pix in obj.copyPixels():
