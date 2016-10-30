@@ -17,7 +17,8 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
     ExternalInfoI, ImageI, FormatI, PixelsI, DimensionOrderI, PixelsTypeI, \
-    TimeI
+    TimeI, ChannelI, LogicalChannelI, ContrastMethodI, IlluminationI, \
+    AcquisitionModeI, PhotometricInterpretationI
 from omero.model.enums import UnitsLength, UnitsTime
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -102,6 +103,58 @@ def create_image(image_id, with_pixels=False):
     pixels.dimensionOrder = dimension_order
     pixels.pixelsType = pixels_type
     image.addPixels(pixels)
+
+    contrast_method = ContrastMethodI(8L)
+    contrast_method.value = rstring('Fluorescence')
+    illumination = IlluminationI(1L)
+    illumination.value = rstring('Transmitted')
+    acquisition_mode = AcquisitionModeI(1L)
+    acquisition_mode.value = rstring('WideField')
+    photometric_interpretation = PhotometricInterpretationI(1L)
+    photometric_interpretation.value = rstring('RGB')
+
+    channel_1 = ChannelI(1L)
+    channel_1.alpha = rint(255)
+    channel_1.blue = rint(0)
+    channel_1.green = rint(255)
+    channel_1.red = rint(0)
+    channel_1.lookupTable = rstring('rainbow')
+    logical_channel_1 = LogicalChannelI(1L)
+    logical_channel_1.emissionWave = LengthI(509.0, UnitsLength.NANOMETER)
+    logical_channel_1.excitationWave = LengthI(488.0, UnitsLength.NANOMETER)
+    logical_channel_1.fluor = rstring('GFP')
+    logical_channel_1.name = rstring('GFP/488')
+    logical_channel_1.ndFilter = rdouble(1.0)
+    logical_channel_1.pinHoleSize = LengthI(1.0, UnitsLength.NANOMETER)
+    logical_channel_1.pockelCellSetting = rint(0)
+    logical_channel_1.samplesPerPixel = rint(2)
+    logical_channel_1.contrastMethod = contrast_method
+    logical_channel_1.illumination = illumination
+    logical_channel_1.mode = acquisition_mode
+    logical_channel_1.photometricInterpretation = photometric_interpretation
+
+    channel_2 = ChannelI(2L)
+    channel_2.alpha = rint(255)
+    channel_2.blue = rint(255)
+    channel_2.green = rint(0)
+    channel_2.red = rint(0)
+    channel_2.lookupTable = rstring('rainbow')
+    logical_channel_2 = LogicalChannelI(2L)
+    logical_channel_2.emissionWave = LengthI(470.0, UnitsLength.NANOMETER)
+    logical_channel_2.excitationWave = LengthI(405.0, UnitsLength.NANOMETER)
+    logical_channel_2.fluor = rstring('DAPI')
+    logical_channel_2.name = rstring('DAPI/405')
+    logical_channel_2.ndFilter = rdouble(1.0)
+    logical_channel_2.pinHoleSize = LengthI(2.0, UnitsLength.NANOMETER)
+    logical_channel_2.pockelCellSetting = rint(0)
+    logical_channel_2.samplesPerPixel = rint(2)
+    logical_channel_2.contrastMethod = contrast_method
+    logical_channel_2.illumination = illumination
+    logical_channel_2.mode = acquisition_mode
+    logical_channel_2.photometricInterpretation = photometric_interpretation
+
+    pixels.addChannel(channel_1)
+    pixels.addChannel(channel_2)
     return image
 
 
