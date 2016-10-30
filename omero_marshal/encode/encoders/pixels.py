@@ -35,11 +35,14 @@ class Pixels201501Encoder(Encoder):
         self.set_if_not_none(v, 'omero:waveIncrement', obj.waveIncrement)
         self.set_if_not_none(v, 'omero:waveStart', obj.waveStart)
         if obj.dimensionOrder.isLoaded():
-            encoder = self.ctx.get_encoder(obj.dimensionOrder.__class__)
-            v['DimensionOrder'] = encoder.encode(obj.dimensionOrder)['value']
+            dimension_order_encoder = \
+                self.ctx.get_encoder(obj.dimensionOrder.__class__)
+            v['DimensionOrder'] = \
+                dimension_order_encoder.encode(obj.dimensionOrder)['value']
         if obj.pixelsType.isLoaded():
-            encoder = self.ctx.get_encoder(obj.pixelsType.__class__)
-            v['Type'] = encoder.encode(obj.pixelsType)['value']
+            pixels_type_encoder = \
+                self.ctx.get_encoder(obj.pixelsType.__class__)
+            v['Type'] = pixels_type_encoder.encode(obj.pixelsType)['value']
         return v
 
 
