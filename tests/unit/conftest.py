@@ -84,9 +84,9 @@ def create_image(image_id, with_pixels=False):
 
     pixels = PixelsI(1L)
     pixels.methodology = rstring('methodology')
-    pixels.physicalSizeX = rdouble(1.0)
-    pixels.physicalSizeY = rdouble(2.0)
-    pixels.physicalSizeZ = rdouble(3.0)
+    pixels.physicalSizeX = LengthI(1.0, UnitsLength.MICROMETER)
+    pixels.physicalSizeY = LengthI(2.0, UnitsLength.MICROMETER)
+    pixels.physicalSizeZ = LengthI(3.0, UnitsLength.MICROMETER)
     pixels.sha1 = rstring('61ee8b5601a84d5154387578466c8998848ba089')
     pixels.significantBits = rint(16)
     pixels.sizeX = rint(1)

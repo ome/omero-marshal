@@ -55,9 +55,24 @@ class TestImagePixelsEncoder(object):
                 '@id': 1L,
                 '@type': '%s#Pixels' % OME_SCHEMA_URL,
                 'omero:methodology': 'methodology',
-                'PhysicalSizeX': 1.0,
-                'PhysicalSizeY': 2.0,
-                'PhysicalSizeZ': 3.0,
+                'PhysicalSizeX': {
+                    '@type': 'TBD#LengthI',
+                    'Unit': 'MICROMETER',
+                    'Symbol': 'µm',
+                    'Value': 1.0
+                },
+                'PhysicalSizeY': {
+                    '@type': 'TBD#LengthI',
+                    'Unit': 'MICROMETER',
+                    'Symbol': 'µm',
+                    'Value': 2.0
+                },
+                'PhysicalSizeZ': {
+                    '@type': 'TBD#LengthI',
+                    'Unit': 'MICROMETER',
+                    'Symbol': 'µm',
+                    'Value': 3.0
+                },
                 'omero:sha1': '61ee8b5601a84d5154387578466c8998848ba089',
                 'SignificantBits': 16,
                 'SizeX': 1,
