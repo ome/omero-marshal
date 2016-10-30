@@ -80,7 +80,12 @@ class TestImagePixelsEncoder(object):
                 'SizeZ': 3,
                 'SizeC': 4,
                 'SizeT': 5,
-                'TimeIncrement': 1.0,
+                'TimeIncrement': {
+                    '@type': 'TBD#TimeI',
+                    'Unit': 'MILLISECOND',
+                    'Symbol': 'ms',
+                    'Value': 1.0
+                },
                 'omero:waveIncrement': 2.0,
                 'omero:waveStart': 1,
                 'DimensionOrder': 'XYZCT',

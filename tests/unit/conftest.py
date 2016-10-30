@@ -16,8 +16,9 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
     PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
-    ExternalInfoI, ImageI, FormatI, PixelsI, DimensionOrderI, PixelsTypeI
-from omero.model.enums import UnitsLength
+    ExternalInfoI, ImageI, FormatI, PixelsI, DimensionOrderI, PixelsTypeI, \
+    TimeI
+from omero.model.enums import UnitsLength, UnitsTime
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
 # Handle differences in class naming between OMERO 5.1.x and 5.2.x
@@ -94,7 +95,7 @@ def create_image(image_id, with_pixels=False):
     pixels.sizeZ = rint(3)
     pixels.sizeC = rint(4)
     pixels.sizeT = rint(5)
-    pixels.timeIncrement = rdouble(1.0)
+    pixels.timeIncrement = TimeI(1.0, UnitsTime.MILLISECOND)
     pixels.waveIncrement = rdouble(2.0)
     pixels.waveStart = rint(1)
     pixels.dimensionOrder = dimension_order
