@@ -18,10 +18,10 @@ class TestImagePixelsDecoder(object):
     def assert_image(self, v):
         assert v.id.val == 1L
         assert v.acquisitionDate.val == 1L
-        assert v.archived.val == False
+        assert v.archived.val is False
         assert v.description.val == 'image_description_1'
         assert v.name.val == 'image_name_1'
-        assert v.partial.val == False
+        assert v.partial.val is False
         assert v.series.val == 0L
         assert v.format.id.val == 1L
         assert v.format.value.val == 'PNG'

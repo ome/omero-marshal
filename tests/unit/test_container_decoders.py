@@ -62,18 +62,18 @@ class TestProjectDecoder(object):
         image_1, image_2 = dataset_1.linkedImageList()
         assert image_1.id.val == 1L
         assert image_1.acquisitionDate.val == 1L
-        assert image_1.archived.val == False
+        assert image_1.archived.val is False
         assert image_1.description.val == 'image_description_1'
         assert image_1.name.val == 'image_name_1'
-        assert image_1.partial.val == False
+        assert image_1.partial.val is False
         assert image_1.format.id.val == 1L
         assert image_1.format.value.val == 'PNG'
         assert image_2.id.val == 2L
         assert image_2.acquisitionDate.val == 1L
-        assert image_2.archived.val == False
+        assert image_2.archived.val is False
         assert image_2.description.val == 'image_description_2'
         assert image_2.name.val == 'image_name_2'
-        assert image_2.partial.val == False
+        assert image_2.partial.val is False
         assert image_2.format.id.val == 1L
         assert image_2.format.value.val == 'PNG'
 
@@ -83,17 +83,17 @@ class TestProjectDecoder(object):
         image_3, image_4 = dataset_2.linkedImageList()
         assert image_3.id.val == 3L
         assert image_3.acquisitionDate.val == 1L
-        assert image_3.archived.val == False
+        assert image_3.archived.val is False
         assert image_3.description.val == 'image_description_3'
         assert image_3.name.val == 'image_name_3'
-        assert image_3.partial.val == False
+        assert image_3.partial.val is False
         assert image_3.format.id.val == 1L
         assert image_3.format.value.val == 'PNG'
         assert image_4.id.val == 4L
         assert image_4.acquisitionDate.val == 1L
-        assert image_4.archived.val == False
+        assert image_4.archived.val is False
         assert image_4.description.val == 'image_description_4'
         assert image_4.name.val == 'image_name_4'
-        assert image_4.partial.val == False
+        assert image_4.partial.val is False
         assert image_4.format.id.val == 1L
         assert image_4.format.value.val == 'PNG'
