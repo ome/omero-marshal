@@ -38,14 +38,18 @@ class Pixels201501Decoder(Decoder):
         self.set_property(v, 'waveStart', data.get('omero:waveStart'))
         dimension_order = data.get('DimensionOrder')
         if dimension_order is not None:
-            dimension_order_encoder = \
+            dimension_order_decoder = \
                 self.ctx.get_decoder(dimension_order['@type'])
-            v.dimensionOrder = dimension_order_encoder.decode(dimension_order)
+            v.dimensionOrder = dimension_order_decoder.decode(dimension_order)
         pixels_type = data.get('Type')
         if pixels_type is not None:
-            pixels_type_encoder = \
+            pixels_type_decoder = \
                 self.ctx.get_decoder(pixels_type['@type'])
-            v.pixelsType = pixels_type_encoder.decode(pixels_type)
+            v.pixelsType = pixels_type_decoder.decode(pixels_type)
+        channels = data.get('Channels', list())
+        for channel in channels:
+            channel_decoder = self.ctx.get_decoder(channel['@type'])
+            v.addChannel(channel_decoder.decode(channel))
         return v
 
 
