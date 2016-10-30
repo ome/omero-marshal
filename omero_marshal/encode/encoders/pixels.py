@@ -19,7 +19,7 @@ class Pixels201501Encoder(Encoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Pixels'
 
     def encode(self, obj):
-        v = super(PixelsEncoder, self).encode(obj)
+        v = super(Pixels201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'omero:methodology', obj.methodology)
         self.set_if_not_none(v, 'PhysicalSizeX', obj.physicalSizeX)
         self.set_if_not_none(v, 'PhysicalSizeY', obj.physicalSizeY)
@@ -43,7 +43,7 @@ class Pixels201501Encoder(Encoder):
         return v
 
 
-class Pixels201606Encoder(Encoder):
+class Pixels201606Encoder(Pixels201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Pixels'
 

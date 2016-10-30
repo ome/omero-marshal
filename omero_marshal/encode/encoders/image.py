@@ -19,12 +19,13 @@ class Image201501Encoder(AnnotatableEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Image'
 
     def encode(self, obj):
-        v = super(ImageEncoder, self).encode(obj)
+        v = super(Image201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'AcquisitionDate', obj.acquisitionDate)
         self.set_if_not_none(v, 'omero:archived', obj.archived)
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'omero:partial', obj.partial)
+        print 'Format is loaded? %s' % obj.format.isLoaded()
         if obj.format.isLoaded():
             format_encoder = self.ctx.get_encoder(obj.format.__class__)
             self.set_if_not_none(
@@ -37,7 +38,7 @@ class Image201501Encoder(AnnotatableEncoder):
         return v
 
 
-class Image201606Encoder(AnnotatableEncoder):
+class Image201606Encoder(Image201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Image'
 
