@@ -28,6 +28,9 @@ class Channel201501Encoder(Encoder):
         logical_channel = obj.logicalChannel
         if logical_channel is not None and logical_channel.isLoaded():
             self.set_if_not_none(
+                v, 'omero:LogicalChannelId', logical_channel.id
+            )
+            self.set_if_not_none(
                 v, 'EmissionWavelength', logical_channel.emissionWave
             )
             self.set_if_not_none(

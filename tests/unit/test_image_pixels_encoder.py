@@ -150,6 +150,7 @@ class TestImagePixelsEncoder(object):
                     'PockelCellSetting': 0,
                     'Red': 0,
                     'SamplesPerPixel': 2,
+                    'omero:LogicalChannelId': 1L,
                     'omero:details': {'@type': 'TBD#Details'},
                     'omero:lookupTable': 'rainbow',
                     'photometricInterpretation': {
@@ -206,6 +207,7 @@ class TestImagePixelsEncoder(object):
                     'PockelCellSetting': 0,
                     'Red': 0,
                     'SamplesPerPixel': 2,
+                    'omero:LogicalChannelId': 2L,
                     'omero:details': {'@type': 'TBD#Details'},
                     'omero:lookupTable': 'rainbow',
                     'photometricInterpretation': {
