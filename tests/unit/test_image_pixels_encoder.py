@@ -69,7 +69,8 @@ class TestImagePixelsEncoder(object):
                 'omero:waveIncrement': 2.0,
                 'omero:waveStart': 1,
                 'DimensionOrder': 'XYZCT',
-                'Type': 'bit'
+                'Type': 'bit',
+                'omero:details': {'@type': 'TBD#Details'}
             },
             'omero:details': {'@type': 'TBD#Details'}
         }
