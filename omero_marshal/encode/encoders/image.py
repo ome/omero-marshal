@@ -25,6 +25,7 @@ class Image201501Encoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'omero:partial', obj.partial)
+        self.set_if_not_none(v, 'omero:series', obj.series)
         if obj.format.isLoaded():
             format_encoder = self.ctx.get_encoder(obj.format.__class__)
             self.set_if_not_none(

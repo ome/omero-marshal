@@ -15,33 +15,30 @@ from omero.model.enums import UnitsLength, UnitsTime
 
 class TestImagePixelsDecoder(object):
 
-    def test_image_decoder(self, image):
-        encoder = get_encoder(image.__class__)
-        decoder = get_decoder(encoder.TYPE)
-        v = encoder.encode(image)
-        v = decoder.decode(v)
+    def assert_image(self, v):
         assert v.id.val == 1L
         assert v.acquisitionDate.val == 1L
         assert v.archived.val == False
         assert v.description.val == 'image_description_1'
         assert v.name.val == 'image_name_1'
         assert v.partial.val == False
+        assert v.series.val == 0L
         assert v.format.id.val == 1L
         assert v.format.value.val == 'PNG'
+
+    def test_image_decoder(self, image):
+        encoder = get_encoder(image.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(image)
+        v = decoder.decode(v)
+        self.assert_image(v)
 
     def test_image_pixels_decoder(self, image_pixels):
         encoder = get_encoder(image_pixels.__class__)
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(image_pixels)
         v = decoder.decode(v)
-        assert v.id.val == 1L
-        assert v.acquisitionDate.val == 1L
-        assert v.archived.val == False
-        assert v.description.val == 'image_description_1'
-        assert v.name.val == 'image_name_1'
-        assert v.partial.val == False
-        assert v.format.id.val == 1L
-        assert v.format.value.val == 'PNG'
+        self.assert_image(v)
 
         pixels = v.getPrimaryPixels()
         assert pixels.id.val == 1L

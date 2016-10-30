@@ -25,6 +25,7 @@ class TestImagePixelsEncoder(object):
             'omero:archived': False,
             'Description': 'image_description_1',
             'omero:partial': False,
+            'omero:series': 0L,
             'omero:format': {
                 '@id': 1L,
                 '@type': 'TBD#Format',
@@ -45,6 +46,7 @@ class TestImagePixelsEncoder(object):
             'omero:archived': False,
             'Description': 'image_description_1',
             'omero:partial': False,
+            'omero:series': 0L,
             'omero:format': {
                 '@id': 1L,
                 '@type': 'TBD#Format',

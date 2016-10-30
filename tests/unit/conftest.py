@@ -75,6 +75,7 @@ def create_image(image_id, with_pixels=False):
     image.description = rstring('image_description_%d' % image_id)
     image.name = rstring('image_name_%d' % image_id)
     image.partial = rbool(False)
+    image.series = rint(0L)
     image.format = image_format
     if not with_pixels:
         return image

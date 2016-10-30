@@ -73,6 +73,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_1',
                     'omero:partial': False,
+                    'omero:series': 0L,
                     'omero:format': {
                         '@id': 1L,
                         '@type': 'TBD#Format',
@@ -88,6 +89,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_2',
                     'omero:partial': False,
+                    'omero:series': 0L,
                     'omero:format': {
                         '@id': 1L,
                         '@type': 'TBD#Format',
@@ -110,6 +112,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_3',
                     'omero:partial': False,
+                    'omero:series': 0L,
                     'omero:format': {
                         '@id': 1L,
                         '@type': 'TBD#Format',
@@ -125,6 +128,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_4',
                     'omero:partial': False,
+                    'omero:series': 0L,
                     'omero:format': {
                         '@id': 1L,
                         '@type': 'TBD#Format',
