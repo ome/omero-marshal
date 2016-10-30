@@ -52,6 +52,8 @@ class TestImagePixelsEncoder(object):
                 'omero:details': {'@type': 'TBD#Details'},
             },
             'Pixels': {
+                '@id': 1L,
+                '@type': '%s#Pixels' % OME_SCHEMA_URL,
                 'omero:methodology': 'methodology',
                 'PhysicalSizeX': 1.0,
                 'PhysicalSizeY': 2.0,
