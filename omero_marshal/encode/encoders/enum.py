@@ -19,5 +19,5 @@ class EnumEncoder(Encoder):
 
     def encode(self, obj):
         v = super(EnumEncoder, self).encode(obj)
-        self.set_if_not_none(v, 'Value', obj.value)
+        self.set_if_not_none(v, 'value', obj.value)
         return v
