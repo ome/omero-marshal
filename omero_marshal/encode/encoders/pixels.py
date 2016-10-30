@@ -19,12 +19,26 @@ class PixelsEncoder(Encoder):
 
     def encode(self, obj):
         v = super(PixelsEncoder, self).encode(obj)
+        self.set_if_not_none(v, 'omero:methodology', obj.methodology)
+        self.set_if_not_none(v, 'PhysicalSizeX', obj.physicalSizeX)
+        self.set_if_not_none(v, 'PhysicalSizeY', obj.physicalSizeY)
+        self.set_if_not_none(v, 'PhysicalSizeZ', obj.physicalSizeZ)
+        self.set_if_not_none(v, 'omero:sha1', obj.sha1)
+        self.set_if_not_none(v, 'SignificantBits', obj.significantBits)
         self.set_if_not_none(v, 'SizeX', obj.sizeX)
         self.set_if_not_none(v, 'SizeY', obj.sizeY)
         self.set_if_not_none(v, 'SizeZ', obj.sizeZ)
         self.set_if_not_none(v, 'SizeC', obj.sizeC)
         self.set_if_not_none(v, 'SizeT', obj.sizeT)
-
+        self.set_if_not_none(v, 'TimeIncrement', obj.timeIncrement)
+        self.set_if_not_none(v, 'omero:waveIncrement', obj.waveIncrement)
+        self.set_if_not_none(v, 'omero:waveStart', obj.waveStart)
+        if obj.dimensionOrder.isLoaded():
+            encoder = self.ctx.get_encoder(obj.dimensionOrder.__class__)
+            v['DimensionOrder'] = encoder.encode(obj.dimensionOrder)['value']
+        if obj.pixelsType.isLoaded():
+            encoder = self.ctx.get_encoder(obj.pixelsType.__class__)
+            v['Type'] = encoder.encode(obj.pixelsType)['value']
         return v
 
 encoder = (PixelsI, PixelsEncoder)
