@@ -24,6 +24,9 @@ class Dataset201501Decoder(AnnotatableDecoder):
         v = super(Dataset201501Decoder, self).decode(data)
         self.set_property(v, 'name', data.get('Name'))
         self.set_property(v, 'description', data.get('Description'))
+        for image in data.get('Images', list()):
+            image_decoder = self.ctx.get_decoder(image['@type'])
+            v.linkImage(image_decoder.decode(image))
         return v
 
 
