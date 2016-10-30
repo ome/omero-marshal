@@ -70,7 +70,7 @@ class Channel201501Encoder(Encoder):
                     and photometric_interpretation.isLoaded():
                 photometric_interpretation_encoder = \
                     self.ctx.get_encoder(photometric_interpretation.__class__)
-                v['photometricInterpretation'] = \
+                v['omero:photometricInterpretation'] = \
                     photometric_interpretation_encoder.encode(
                         photometric_interpretation
                     )

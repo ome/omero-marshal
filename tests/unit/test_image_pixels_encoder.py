@@ -153,7 +153,7 @@ class TestImagePixelsEncoder(object):
                     'omero:LogicalChannelId': 1L,
                     'omero:details': {'@type': 'TBD#Details'},
                     'omero:lookupTable': 'rainbow',
-                    'photometricInterpretation': {
+                    'omero:photometricInterpretation': {
                         '@id': 1L,
                         '@type': 'TBD#PhotometricInterpretation',
                         'omero:details': {'@type': 'TBD#Details'},
@@ -210,7 +210,7 @@ class TestImagePixelsEncoder(object):
                     'omero:LogicalChannelId': 2L,
                     'omero:details': {'@type': 'TBD#Details'},
                     'omero:lookupTable': 'rainbow',
-                    'photometricInterpretation': {
+                    'omero:photometricInterpretation': {
                         '@id': 1L,
                         '@type': 'TBD#PhotometricInterpretation',
                         'omero:details': {'@type': 'TBD#Details'},
