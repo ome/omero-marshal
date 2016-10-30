@@ -66,8 +66,8 @@ class TestImagePixelsEncoder(object):
                 'SizeC': 4,
                 'SizeT': 5,
                 'TimeIncrement': 1.0,
-                'omero:WaveIncrement': 2.0,
-                'omero:WaveStart': 1,
+                'omero:waveIncrement': 2.0,
+                'omero:waveStart': 1,
                 'DimensionOrder': 'XYZCT',
                 'Type': 'bit'
             },
