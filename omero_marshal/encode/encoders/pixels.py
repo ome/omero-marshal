@@ -34,15 +34,23 @@ class Pixels201501Encoder(Encoder):
         self.set_if_not_none(v, 'TimeIncrement', obj.timeIncrement)
         self.set_if_not_none(v, 'omero:waveIncrement', obj.waveIncrement)
         self.set_if_not_none(v, 'omero:waveStart', obj.waveStart)
-        if obj.dimensionOrder.isLoaded():
+        dimension_order = obj.dimensionOrder
+        if dimension_order is not None and dimension_order.isLoaded():
             dimension_order_encoder = \
-                self.ctx.get_encoder(obj.dimensionOrder.__class__)
+                self.ctx.get_encoder(dimension_order.__class__)
             v['DimensionOrder'] = \
-                dimension_order_encoder.encode(obj.dimensionOrder)
-        if obj.pixelsType.isLoaded():
+                dimension_order_encoder.encode(dimension_order)
+        pixels_type = obj.pixelsType
+        if pixels_type is not None and pixels_type.isLoaded():
             pixels_type_encoder = \
-                self.ctx.get_encoder(obj.pixelsType.__class__)
-            v['Type'] = pixels_type_encoder.encode(obj.pixelsType)
+                self.ctx.get_encoder(pixels_type.__class__)
+            v['Type'] = pixels_type_encoder.encode(pixels_type)
+        if obj.isChannelsLoaded() and obj.sizeOfChannels() > 0:
+            channels = list()
+            for channel in obj.copyChannels():
+                channel_encoder = self.ctx.get_encoder(channel.__class__)
+                channels.append(channel_encoder.encode(channel))
+            v['Channels'] = channels
         return v
 
 
