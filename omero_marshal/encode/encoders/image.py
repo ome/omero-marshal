@@ -24,10 +24,11 @@ class ImageEncoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'omero:partial', obj.partial)
-        format_encoder = self.ctx.get_encoder(obj.format.__class__)
-        self.set_if_not_none(
-            v, 'omero:format', format_encoder.encode(obj.format)
-        )
+        if obj.format.isLoaded():
+            format_encoder = self.ctx.get_encoder(obj.format.__class__)
+            self.set_if_not_none(
+                v, 'omero:format', format_encoder.encode(obj.format)
+            )
         if obj.isPixelsLoaded() and obj.sizeOfPixels() > 0:
             pixels = obj.getPrimaryPixels()
             pixels_encoder = self.ctx.get_encoder(pixels.__class__)
