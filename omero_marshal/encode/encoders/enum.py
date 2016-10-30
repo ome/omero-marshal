@@ -18,6 +18,6 @@ class EnumEncoder(Encoder):
         super(EnumEncoder, self).__init__(ctx)
 
     def encode(self, obj):
-        v = {'@type': self.TYPE}
+        v = super(EnumEncoder, self).encode(obj)
         self.set_if_not_none(v, 'Value', obj.value)
         return v
