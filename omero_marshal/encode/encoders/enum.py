@@ -9,12 +9,15 @@
 # jason@glencoesoftware.com.
 #
 
-from .enum import EnumEncoder
-from omero.model import FormatI
+from .. import Encoder
 
 
-class FormatEncoder(EnumEncoder):
+class EnumEncoder(Encoder):
 
-    TYPE = 'TBD#Format'
+    def __init__(self, ctx):
+        super(EnumEncoder, self).__init__(ctx)
 
-encoder = (FormatI, FormatEncoder)
+    def encode(self, obj):
+        v = {'@type': self.TYPE}
+        self.set_if_not_none(v, 'Value', obj.value)
+        return v
