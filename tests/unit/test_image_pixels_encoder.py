@@ -102,6 +102,119 @@ class TestImagePixelsEncoder(object):
                     'value': 'bit',
                     'omero:details': {'@type': 'TBD#Details'}
                 },
+                'Channels': [{
+                    '@id': 1L,
+                    '@type': '%s#Channel' % OME_SCHEMA_URL,
+                    'AcquisitionMode': {
+                        '@id': 1L,
+                        '@type': 'TBD#AcquisitionMode',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'WideField'
+                    },
+                    'Alpha': 255,
+                    'Blue': 0,
+                    'ContrastMethod': {
+                        '@id': 8L,
+                        '@type': 'TBD#ContrastMethod',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'Fluorescence'
+                    },
+                    'EmissionWavelength': {
+                        '@type': 'TBD#LengthI',
+                        'Symbol': 'nm',
+                        'Unit': 'NANOMETER',
+                        'Value': 509.0
+                    },
+                    'ExcitationWavelength': {
+                        '@type': 'TBD#LengthI',
+                        'Symbol': 'nm',
+                        'Unit': 'NANOMETER',
+                        'Value': 488.0
+                    },
+                    'Fluor': 'GFP',
+                    'Green': 255,
+                    'Illumination': {
+                        '@id': 1L,
+                        '@type': 'TBD#Illumination',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'Transmitted'
+                    },
+                    'NDFilter': 1.0,
+                    'Name': 'GFP/488',
+                    'PinholeSize': {
+                        '@type': 'TBD#LengthI',
+                        'Symbol': 'nm',
+                        'Unit': 'NANOMETER',
+                        'Value': 1.0
+                    },
+                    'PockelCellSetting': 0,
+                    'Red': 0,
+                    'SamplesPerPixel': 2,
+                    'omero:details': {'@type': 'TBD#Details'},
+                    'omero:lookupTable': 'rainbow',
+                    'photometricInterpretation': {
+                        '@id': 1L,
+                        '@type': 'TBD#PhotometricInterpretation',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'RGB'
+                    }
+                }, {
+                    '@id': 2L,
+                    '@type': '%s#Channel' % OME_SCHEMA_URL,
+                    'AcquisitionMode': {
+                        '@id': 1L,
+                        '@type': 'TBD#AcquisitionMode',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'WideField'
+                    },
+                    'Alpha': 255,
+                    'Blue': 255,
+                    'ContrastMethod': {
+                        '@id': 8L,
+                        '@type': 'TBD#ContrastMethod',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'Fluorescence'
+                    },
+                    'EmissionWavelength': {
+                        '@type': 'TBD#LengthI',
+                        'Symbol': 'nm',
+                        'Unit': 'NANOMETER',
+                        'Value': 470.0
+                    },
+                    'ExcitationWavelength': {
+                        '@type': 'TBD#LengthI',
+                        'Symbol': 'nm',
+                        'Unit': 'NANOMETER',
+                        'Value': 405.0
+                    },
+                    'Fluor': 'DAPI',
+                    'Green': 0,
+                    'Illumination': {
+                        '@id': 1L,
+                        '@type': 'TBD#Illumination',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'Transmitted'
+                    },
+                    'NDFilter': 1.0,
+                    'Name': 'DAPI/405',
+                    'PinholeSize': {
+                        '@type': 'TBD#LengthI',
+                        'Symbol': 'nm',
+                        'Unit': 'NANOMETER',
+                        'Value': 2.0
+                    },
+                    'PockelCellSetting': 0,
+                    'Red': 0,
+                    'SamplesPerPixel': 2,
+                    'omero:details': {'@type': 'TBD#Details'},
+                    'omero:lookupTable': 'rainbow',
+                    'photometricInterpretation': {
+                        '@id': 1L,
+                        '@type': 'TBD#PhotometricInterpretation',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'RGB'
+                    }
+                }],
                 'omero:details': {'@type': 'TBD#Details'}
             },
             'omero:details': {'@type': 'TBD#Details'}
