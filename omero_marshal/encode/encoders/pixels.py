@@ -9,11 +9,12 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .. import Encoder
 from omero.model import PixelsI
 
 
-class PixelsEncoder(Encoder):
+class Pixels201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Pixels'
 
@@ -41,4 +42,14 @@ class PixelsEncoder(Encoder):
             v['Type'] = encoder.encode(obj.pixelsType)['value']
         return v
 
-encoder = (PixelsI, PixelsEncoder)
+
+class Pixels201606Encoder(Encoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Pixels'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (PixelsI, Pixels201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (PixelsI, Pixels201606Encoder)
+PixelsEncoder = encoder[1]

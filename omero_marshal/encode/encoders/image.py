@@ -9,11 +9,12 @@
 # jason@glencoesoftware.com.
 #
 
+from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import ImageI
 
 
-class ImageEncoder(AnnotatableEncoder):
+class Image201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Image'
 
@@ -35,4 +36,14 @@ class ImageEncoder(AnnotatableEncoder):
             v['Pixels'] = pixels_encoder.encode(pixels)
         return v
 
-encoder = (ImageI, ImageEncoder)
+
+class Image201606Encoder(AnnotatableEncoder):
+
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Image'
+
+
+if SCHEMA_VERSION == '2015-01':
+    encoder = (ImageI, Image201501Encoder)
+elif SCHEMA_VERSION == '2016-06':
+    encoder = (ImageI, Image201606Encoder)
+ImageEncoder = encoder[1]
