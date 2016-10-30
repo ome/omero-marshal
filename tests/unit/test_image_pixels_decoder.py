@@ -64,3 +64,30 @@ class TestImagePixelsDecoder(object):
         assert pixels.dimensionOrder.value.val == 'XYZCT'
         assert pixels.pixelsType.id.val == 1L
         assert pixels.pixelsType.value.val == 'bit'
+
+        channel_1, channel_2 = pixels.copyChannels()
+        assert channel_1.id.val == 1L
+        assert channel_1.alpha.val == 255
+        assert channel_1.blue.val == 0
+        assert channel_1.green.val == 255
+        assert channel_1.red.val == 0
+        assert channel_1.lookupTable.val == 'rainbow'
+        logical_channel_1 = channel_1.logicalChannel
+        assert logical_channel_1.id.val == 1L
+        assert logical_channel_1.emissionWave.getUnit() \
+            == UnitsLength.NANOMETER
+        assert logical_channel_1.emissionWave.getValue() == 509.0
+        assert logical_channel_1.excitationWave.getUnit() \
+            == UnitsLength.NANOMETER
+        assert logical_channel_1.excitationWave.getValue() == 488.0
+        assert logical_channel_1.fluor.val == 'GFP'
+        assert logical_channel_1.name.val == 'GFP/488'
+        assert logical_channel_1.ndFilter.val == 1.0
+        assert logical_channel_1.pinHoleSize.getUnit() == UnitsLength.NANOMETER
+        assert logical_channel_1.pinHoleSize.getValue() == 1.0
+        assert logical_channel_1.pockelCellSetting.val == 0
+        assert logical_channel_1.samplesPerPixel.val == 2
+        assert logical_channel_1.contrastMethod.value.val == 'Fluorescence'
+        assert logical_channel_1.illumination.value.val == 'Transmitted'
+        assert logical_channel_1.mode.value.val == 'WideField'
+        assert logical_channel_1.photometricInterpretation.value.val == 'RGB'
