@@ -38,11 +38,11 @@ class Pixels201501Encoder(Encoder):
             dimension_order_encoder = \
                 self.ctx.get_encoder(obj.dimensionOrder.__class__)
             v['DimensionOrder'] = \
-                dimension_order_encoder.encode(obj.dimensionOrder)['value']
+                dimension_order_encoder.encode(obj.dimensionOrder)
         if obj.pixelsType.isLoaded():
             pixels_type_encoder = \
                 self.ctx.get_encoder(obj.pixelsType.__class__)
-            v['Type'] = pixels_type_encoder.encode(obj.pixelsType)['value']
+            v['Type'] = pixels_type_encoder.encode(obj.pixelsType)
         return v
 
 

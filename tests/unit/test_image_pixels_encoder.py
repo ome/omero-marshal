@@ -88,8 +88,18 @@ class TestImagePixelsEncoder(object):
                 },
                 'omero:waveIncrement': 2.0,
                 'omero:waveStart': 1,
-                'DimensionOrder': 'XYZCT',
-                'Type': 'bit',
+                'DimensionOrder': {
+                    '@id': 1L,
+                    '@type': 'TBD#DimensionOrder',
+                    'value': 'XYZCT',
+                    'omero:details': {'@type': 'TBD#Details'}
+                },
+                'Type': {
+                    '@id': 1L,
+                    '@type': 'TBD#PixelsType',
+                    'value': 'bit',
+                    'omero:details': {'@type': 'TBD#Details'}
+                },
                 'omero:details': {'@type': 'TBD#Details'}
             },
             'omero:details': {'@type': 'TBD#Details'}
