@@ -27,10 +27,14 @@ class Image201501Decoder(AnnotatableDecoder):
         self.set_property(v, 'description', data.get('Description'))
         self.set_property(v, 'name', data.get('Name'))
         self.set_property(v, 'partial', data.get('omero:partial'))
-        if 'omero:format' in data:
-            _format = data['omero:format']
+        _format = data.get('omero:format')
+        if _format is not None:
             format_decoder = self.ctx.get_decoder(_format['@type'])
             v.format = format_decoder.decode(_format)
+        pixels = data.get('Pixels')
+        if pixels is not None:
+            pixels_decoder = self.ctx.get_decoder(pixels['@type'])
+            v.addPixels(pixels_decoder.decode(pixels))
         return v
 
 
