@@ -10,6 +10,7 @@
 #
 
 from omero_marshal import get_encoder, get_decoder
+from omero.model.enums import UnitsLength, UnitsTime
 
 
 class TestImagePixelsDecoder(object):
@@ -45,9 +46,12 @@ class TestImagePixelsDecoder(object):
         pixels = v.getPrimaryPixels()
         assert pixels.id.val == 1L
         assert pixels.methodology.val == 'methodology'
-        assert pixels.physicalSizeX.val == 1.0
-        assert pixels.physicalSizeY.val == 2.0
-        assert pixels.physicalSizeZ.val == 3.0
+        assert pixels.physicalSizeX.getUnit() == UnitsLength.MICROMETER
+        assert pixels.physicalSizeX.getValue() == 1.0
+        assert pixels.physicalSizeY.getUnit() == UnitsLength.MICROMETER
+        assert pixels.physicalSizeY.getValue() == 2.0
+        assert pixels.physicalSizeZ.getUnit() == UnitsLength.MICROMETER
+        assert pixels.physicalSizeZ.getValue() == 3.0
         assert pixels.sha1.val == '61ee8b5601a84d5154387578466c8998848ba089'
         assert pixels.significantBits.val == 16
         assert pixels.sizeX.val == 1
@@ -55,7 +59,8 @@ class TestImagePixelsDecoder(object):
         assert pixels.sizeZ.val == 3
         assert pixels.sizeC.val == 4
         assert pixels.sizeT.val == 5
-        assert pixels.timeIncrement.val == 1.0
+        assert pixels.timeIncrement.getUnit() == UnitsTime.MILLISECOND
+        assert pixels.timeIncrement.getValue() == 1.0
         assert pixels.waveIncrement.val == 2.0
         assert pixels.waveStart.val == 1
         assert pixels.dimensionOrder.id.val == 1L
