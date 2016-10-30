@@ -132,6 +132,7 @@ def create_image(image_id, with_pixels=False):
     logical_channel_1.illumination = illumination
     logical_channel_1.mode = acquisition_mode
     logical_channel_1.photometricInterpretation = photometric_interpretation
+    channel_1.logicalChannel = logical_channel_1
 
     channel_2 = ChannelI(2L)
     channel_2.alpha = rint(255)
@@ -152,6 +153,7 @@ def create_image(image_id, with_pixels=False):
     logical_channel_2.illumination = illumination
     logical_channel_2.mode = acquisition_mode
     logical_channel_2.photometricInterpretation = photometric_interpretation
+    channel_2.logicalChannel = logical_channel_2
 
     pixels.addChannel(channel_1)
     pixels.addChannel(channel_2)
