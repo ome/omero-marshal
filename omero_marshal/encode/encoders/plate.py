@@ -28,7 +28,7 @@ class Plate201501Encoder(AnnotatableEncoder):
                              obj.rowNamingConvention)
         self.set_if_not_none(v, 'Columns', obj.columns)
         self.set_if_not_none(v, 'Rows', obj.rows)
-        self.set_if_not_none(v, 'DefaultSample', obj.defaultSample)
+        self.set_if_not_none(v, 'FieldIndex', obj.defaultSample)
         self.set_if_not_none(v, 'ExternalIdentifier', obj.externalIdentifier)
         self.set_if_not_none(v, 'Status', obj.status)
         self.set_if_not_none(v, 'WellOriginX', obj.wellOriginX)
