@@ -76,28 +76,6 @@ class Channel201501Encoder(Encoder):
                     )
         return v
 
-"""
-    channel_1 = ChannelI(1L)
-    channel_1.alpha = rint(255)
-    channel_1.blue = rint(0)
-    channel_1.green = rint(255)
-    channel_1.red = rint(0)
-    channel_1.lookupTable = rstring('rainbow')
-    logical_channel_1 = LogicalChannelI(1L)
-    logical_channel_1.emissionWave = LengthI(509.0, UnitsLength.NANOMETER)
-    logical_channel_1.excitationWave = LengthI(488.0, UnitsLength.NANOMETER)
-    logical_channel_1.fluor = rstring('GFP')
-    logical_channel_1.name = rstring('GFP/488')
-    logical_channel_1.ndFilter = rdouble(1.0)
-    logical_channel_1.pinHoleSize = LengthI(1.0, UnitsLength.NANOMETER)
-    logical_channel_1.pockelCellSetting = rint(0)
-    logical_channel_1.samplesPerPixel = rint(2)
-    logical_channel_1.contrastMethod = contrast_method
-    logical_channel_1.illumination = illumination
-    logical_channel_1.mode = acquisition_mode
-    logical_channel_1.photometricInterpretation = photometric_interpretation
-"""
-
 
 class Channel201606Encoder(Channel201501Encoder):
 
