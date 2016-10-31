@@ -28,10 +28,7 @@ class Channel201501Decoder(Decoder):
         self.set_property(v, 'red', data.get('Red'))
         self.set_property(v, 'lookupTable', data.get('omero:lookupTable'))
 
-        logical_channel_id = data.get('omero:LogicalChannelId')
-        if logical_channel_id is None:
-            return v
-        logical_channel = LogicalChannelI(logical_channel_id)
+        logical_channel = LogicalChannelI(data.get('omero:LogicalChannelId'))
         logical_channel.emissionWave = \
             self.to_unit(data.get('EmissionWavelength'))
         logical_channel.excitationWave = \
