@@ -12,6 +12,7 @@
 from ... import SCHEMA_VERSION
 from .annotation import AnnotatableDecoder
 from omero.model import PlateI
+from omero.rtypes import rstring
 
 
 class Plate201501Decoder(AnnotatableDecoder):
@@ -31,6 +32,7 @@ class Plate201501Decoder(AnnotatableDecoder):
         self.set_property(v, 'columns', data.get('Columns'))
         self.set_property(v, 'rows', data.get('Rows'))
         # self.set_property(v, 'defaultSample', data.get('FieldIndex'))
+        v.setDefaultSample(rstring(data.get('FieldIndex')))
         self.set_property(v, 'externalIdentifier',
                           data.get('ExternalIdentifier'))
         self.set_property(v, 'status', data.get('Status'))

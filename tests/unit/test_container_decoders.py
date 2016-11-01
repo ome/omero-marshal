@@ -66,7 +66,7 @@ class TestScreenDecoder(object):
         assert plate.rowNamingConvention.val == 'letter'
         assert plate.columns.val == 12
         assert plate.rows.val == 8
-        # assert plate.defaultSample.val == 'default_sample_%d' % plate_id
+        assert plate.defaultSample.val == 'default_sample_%d' % plate_id
         assert plate.externalIdentifier.val == 'external_identifier_%d' % plate_id
         assert plate.status.val == 'status_%d' % plate_id
         assert plate.wellOriginX.__class__ is LengthI
