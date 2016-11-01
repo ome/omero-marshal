@@ -31,8 +31,7 @@ class Plate201501Decoder(AnnotatableDecoder):
                           data.get('RowNamingConvention'))
         self.set_property(v, 'columns', data.get('Columns'))
         self.set_property(v, 'rows', data.get('Rows'))
-        # self.set_property(v, 'defaultSample', data.get('FieldIndex'))
-        v.setDefaultSample(rstring(data.get('FieldIndex')))
+        self.set_property(v, 'defaultSample', data.get('FieldIndex'))
         self.set_property(v, 'externalIdentifier',
                           data.get('ExternalIdentifier'))
         self.set_property(v, 'status', data.get('Status'))

@@ -91,7 +91,7 @@ class TestScreenEncoder(object):
                 'RowNamingConvention': 'letter',
                 'Columns': 12,
                 'Rows': 8,
-                'FieldIndex': 'default_sample_5',
+                'FieldIndex': 0,
                 'ExternalIdentifier': 'external_identifier_5',
                 'Status': 'status_5',
                 'WellOriginX': {
@@ -116,7 +116,7 @@ class TestScreenEncoder(object):
                 'RowNamingConvention': 'letter',
                 'Columns': 12,
                 'Rows': 8,
-                'FieldIndex': 'default_sample_6',
+                'FieldIndex': 0,
                 'ExternalIdentifier': 'external_identifier_6',
                 'Status': 'status_6',
                 'WellOriginX': {

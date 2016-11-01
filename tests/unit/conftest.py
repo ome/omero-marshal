@@ -83,7 +83,7 @@ def screen_with_plates(screen):
         o.rowNamingConvention = rstring('letter')
         o.columns = rint(12)
         o.rows = rint(8)
-        o.defaultSample = rstring('default_sample_%d' % plate_id)
+        o.defaultSample = rint(0)
         o.externalIdentifier = rstring('external_identifier_%d' % plate_id)
         o.status = rstring('status_%d' % plate_id)
         o.wellOriginX = LengthI(0.1, UnitsLength.REFERENCEFRAME)
