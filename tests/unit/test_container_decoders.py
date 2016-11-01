@@ -10,6 +10,8 @@
 #
 
 from omero_marshal import get_encoder, get_decoder
+from omero.model import LengthI
+from omero.model.enums import UnitsLength
 
 
 class TestProjectDecoder(object):
@@ -49,6 +51,30 @@ class TestScreenDecoder(object):
     def assert_screen(self, screen):
         assert screen.name.val == 'the_name'
         assert screen.description.val == 'the_description'
+        assert screen.protocolDescription.val == 'the_protocol_description'
+        assert screen.protocolIdentifier.val == 'the_protocol_identifier'
+        assert screen.reagentSetDescription.val == 'the_reagent_set_description'
+        assert screen.reagentSetDescription.val == 'the_reagent_set_description'
+        assert screen.reagentSetIdentifier.val == 'the_reagent_set_identifier'
+        assert screen.type.val == 'the_type'
+
+    def assert_plate(self, plate, plate_id):
+        assert plate.id.val == plate_id
+        assert plate.name.val == 'plate_name_%d' % plate_id
+        assert plate.description.val == 'plate_description_%d' % plate_id
+        assert plate.columnNamingConvention.val == 'number'
+        assert plate.rowNamingConvention.val == 'letter'
+        assert plate.columns.val == 12
+        assert plate.rows.val == 8
+        # assert plate.defaultSample.val == 'default_sample_%d' % plate_id
+        assert plate.externalIdentifier.val == 'external_identifier_%d' % plate_id
+        assert plate.status.val == 'status_%d' % plate_id
+        assert plate.wellOriginX.__class__ is LengthI
+        assert plate.wellOriginX.getUnit() == UnitsLength.REFERENCEFRAME
+        assert plate.wellOriginX.getValue() == 0.1
+        assert plate.wellOriginY.__class__ is LengthI
+        assert plate.wellOriginY.getUnit() == UnitsLength.REFERENCEFRAME
+        assert plate.wellOriginY.getValue() == 1.1
 
     def test_screen_decoder(self, screen):
         encoder = get_encoder(screen.__class__)
@@ -63,14 +89,9 @@ class TestScreenDecoder(object):
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(screen_with_plates)
         v = decoder.decode(v)
+        self.assert_screen(v)
         assert v.id.val == 4L
-        assert v.name.val == 'the_name'
-        assert v.description.val == 'the_description'
         assert v.sizeOfPlateLinks() == 2
         plate_1, plate_2 = v.linkedPlateList()
-        assert plate_1.id.val == 5L
-        assert plate_1.name.val == 'plate_name_5'
-        assert plate_1.description.val == 'plate_description_5'
-        assert plate_2.id.val == 6L
-        assert plate_2.name.val == 'plate_name_6'
-        assert plate_2.description.val == 'plate_description_6'
+        self.assert_plate(plate_1, 5)
+        self.assert_plate(plate_2, 6)

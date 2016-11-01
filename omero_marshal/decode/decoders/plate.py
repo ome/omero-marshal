@@ -24,6 +24,18 @@ class Plate201501Decoder(AnnotatableDecoder):
         v = super(Plate201501Decoder, self).decode(data)
         self.set_property(v, 'name', data.get('Name'))
         self.set_property(v, 'description', data.get('Description'))
+        self.set_property(v, 'columnNamingConvention',
+                          data.get('ColumnNamingConvention'))
+        self.set_property(v, 'rowNamingConvention',
+                          data.get('RowNamingConvention'))
+        self.set_property(v, 'columns', data.get('Columns'))
+        self.set_property(v, 'rows', data.get('Rows'))
+        # self.set_property(v, 'defaultSample', data.get('FieldIndex'))
+        self.set_property(v, 'externalIdentifier',
+                          data.get('ExternalIdentifier'))
+        self.set_property(v, 'status', data.get('Status'))
+        v.wellOriginX = self.to_unit(data.get('WellOriginX'))
+        v.wellOriginY = self.to_unit(data.get('WellOriginY'))
         return v
 
 

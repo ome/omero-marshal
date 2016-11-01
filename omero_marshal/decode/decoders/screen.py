@@ -24,6 +24,15 @@ class Screen201501Decoder(AnnotatableDecoder):
         v = super(Screen201501Decoder, self).decode(data)
         self.set_property(v, 'name', data.get('Name'))
         self.set_property(v, 'description', data.get('Description'))
+        self.set_property(v, 'protocolDescription',
+                          data.get('ProtocolDescription'))
+        self.set_property(v, 'protocolIdentifier',
+                          data.get('ProtocolIdentifier'))
+        self.set_property(v, 'reagentSetDescription',
+                          data.get('ReagentSetDescription'))
+        self.set_property(v, 'reagentSetIdentifier',
+                          data.get('ReagentSetIdentifier'))
+        self.set_property(v, 'type', data.get('Type'))
         for plate in data.get('Plates', list()):
             plate_decoder = self.ctx.get_decoder(plate['@type'])
             v.linkPlate(plate_decoder.decode(plate))
