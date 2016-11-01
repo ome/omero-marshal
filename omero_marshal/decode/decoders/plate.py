@@ -12,7 +12,6 @@
 from ... import SCHEMA_VERSION
 from .annotation import AnnotatableDecoder
 from omero.model import PlateI
-from omero.rtypes import rstring
 
 
 class Plate201501Decoder(AnnotatableDecoder):
