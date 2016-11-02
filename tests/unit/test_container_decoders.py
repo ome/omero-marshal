@@ -93,5 +93,5 @@ class TestScreenDecoder(object):
         assert v.id.val == 4L
         assert v.sizeOfPlateLinks() == 2
         plate_1, plate_2 = v.linkedPlateList()
-        self.assert_plate(plate_1, 5)
-        self.assert_plate(plate_2, 6)
+        self.assert_plate(plate_1, 5L)
+        self.assert_plate(plate_2, 6L)
