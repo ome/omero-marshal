@@ -108,8 +108,10 @@ class TestScreenDecoder(object):
         assert screen.description.val == 'the_description'
         assert screen.protocolDescription.val == 'the_protocol_description'
         assert screen.protocolIdentifier.val == 'the_protocol_identifier'
-        assert screen.reagentSetDescription.val == 'the_reagent_set_description'
-        assert screen.reagentSetDescription.val == 'the_reagent_set_description'
+        assert screen.reagentSetDescription.val == \
+            'the_reagent_set_description'
+        assert screen.reagentSetDescription.val == \
+            'the_reagent_set_description'
         assert screen.reagentSetIdentifier.val == 'the_reagent_set_identifier'
         assert screen.type.val == 'the_type'
 
@@ -122,7 +124,8 @@ class TestScreenDecoder(object):
         assert plate.columns.val == 12
         assert plate.rows.val == 8
         assert plate.defaultSample.val == 0
-        assert plate.externalIdentifier.val == 'external_identifier_%d' % plate_id
+        assert plate.externalIdentifier.val == \
+            'external_identifier_%d' % plate_id
         assert plate.status.val == 'status_%d' % plate_id
         assert plate.wellOriginX.__class__ is LengthI
         assert plate.wellOriginX.getUnit() == UnitsLength.REFERENCEFRAME
