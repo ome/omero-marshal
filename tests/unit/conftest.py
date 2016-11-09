@@ -16,7 +16,7 @@ from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
     TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
     PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
     ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
-    ExternalInfoI
+    ExternalInfoI, ScreenI, PlateI
 from omero.model.enums import UnitsLength
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -56,6 +56,40 @@ def project_with_datasets(project):
         o.description = rstring('dataset_description_%d' % dataset_id)
         project.linkDataset(o)
     return project
+
+
+@pytest.fixture()
+def screen():
+    o = ScreenI()
+    o.id = rlong(4L)
+    o.name = rstring('the_name')
+    o.description = rstring('the_description')
+    o.protocolDescription = rstring('the_protocol_description')
+    o.protocolIdentifier = rstring('the_protocol_identifier')
+    o.reagentSetDescription = rstring('the_reagent_set_description')
+    o.reagentSetIdentifier = rstring('the_reagent_set_identifier')
+    o.type = rstring('the_type')
+    return o
+
+
+@pytest.fixture()
+def screen_with_plates(screen):
+    for plate_id in range(5, 7):
+        o = PlateI()
+        o.id = rlong(plate_id)
+        o.name = rstring('plate_name_%d' % plate_id)
+        o.description = rstring('plate_description_%d' % plate_id)
+        o.columnNamingConvention = rstring('number')
+        o.rowNamingConvention = rstring('letter')
+        o.columns = rint(12)
+        o.rows = rint(8)
+        o.defaultSample = rint(0)
+        o.externalIdentifier = rstring('external_identifier_%d' % plate_id)
+        o.status = rstring('status_%d' % plate_id)
+        o.wellOriginX = LengthI(0.1, UnitsLength.REFERENCEFRAME)
+        o.wellOriginY = LengthI(1.1, UnitsLength.REFERENCEFRAME)
+        screen.linkPlate(o)
+    return screen
 
 
 def add_annotations(o):
