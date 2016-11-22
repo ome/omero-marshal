@@ -11,15 +11,46 @@
 
 import pytest
 
-from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
-    DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
-    TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
-    PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
-    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
-    ExternalInfoI, ScreenI, PlateI, ImageI, FormatI, PixelsI, \
-    DimensionOrderI, PixelsTypeI, TimeI, ChannelI, LogicalChannelI, \
-    ContrastMethodI, IlluminationI, AcquisitionModeI, \
-    PhotometricInterpretationI
+from omero.model import \
+    AcquisitionModeI, \
+    BooleanAnnotationI, \
+    ChannelI, \
+    CommentAnnotationI, \
+    ContrastMethodI, \
+    DatasetI, \
+    DetailsI, \
+    DimensionOrderI, \
+    DoubleAnnotationI, \
+    EllipseI, \
+    ExperimenterI, \
+    ExperimenterGroupI, \
+    ExternalInfoI, \
+    FormatI, \
+    IlluminationI, \
+    ImageI, \
+    LabelI, \
+    LengthI, \
+    LineI, \
+    LongAnnotationI, \
+    LogicalChannelI, \
+    MapAnnotationI, \
+    NamedValue, \
+    TagAnnotationI, \
+    TermAnnotationI, \
+    TimestampAnnotationI, \
+    XmlAnnotationI, \
+    RoiI, \
+    PermissionsI, \
+    PhotometricInterpretationI, \
+    PixelsI, \
+    PixelsTypeI, \
+    PlateI, \
+    PointI, \
+    PolygonI, \
+    PolylineI, \
+    ProjectI, \
+    ScreenI, \
+    TimeI
 from omero.model.enums import UnitsLength, UnitsTime
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
