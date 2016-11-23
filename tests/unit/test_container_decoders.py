@@ -45,6 +45,61 @@ class TestProjectDecoder(object):
         assert dataset_2.name.val == 'dataset_name_2'
         assert dataset_2.description.val == 'dataset_description_2'
 
+    def test_project_with_datasets_and_images_decoder(
+            self, project_with_datasets_and_images):
+        encoder = get_encoder(project_with_datasets_and_images.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(project_with_datasets_and_images)
+        v = decoder.decode(v)
+        assert v.id.val == 1L
+        assert v.name.val == 'the_name'
+        assert v.description.val == 'the_description'
+        assert v.sizeOfDatasetLinks() == 2
+
+        dataset_1, dataset_2 = v.linkedDatasetList()
+
+        assert dataset_1.id.val == 1L
+        assert dataset_1.name.val == 'dataset_name_1'
+        assert dataset_1.description.val == 'dataset_description_1'
+        image_1, image_2 = dataset_1.linkedImageList()
+        assert image_1.id.val == 1L
+        assert image_1.acquisitionDate.val == 1L
+        assert image_1.archived.val is False
+        assert image_1.description.val == 'image_description_1'
+        assert image_1.name.val == 'image_name_1'
+        assert image_1.partial.val is False
+        assert image_1.format.id.val == 1L
+        assert image_1.format.value.val == 'PNG'
+        assert image_2.id.val == 2L
+        assert image_2.acquisitionDate.val == 1L
+        assert image_2.archived.val is False
+        assert image_2.description.val == 'image_description_2'
+        assert image_2.name.val == 'image_name_2'
+        assert image_2.partial.val is False
+        assert image_2.format.id.val == 1L
+        assert image_2.format.value.val == 'PNG'
+
+        assert dataset_2.id.val == 2L
+        assert dataset_2.name.val == 'dataset_name_2'
+        assert dataset_2.description.val == 'dataset_description_2'
+        image_3, image_4 = dataset_2.linkedImageList()
+        assert image_3.id.val == 3L
+        assert image_3.acquisitionDate.val == 1L
+        assert image_3.archived.val is False
+        assert image_3.description.val == 'image_description_3'
+        assert image_3.name.val == 'image_name_3'
+        assert image_3.partial.val is False
+        assert image_3.format.id.val == 1L
+        assert image_3.format.value.val == 'PNG'
+        assert image_4.id.val == 4L
+        assert image_4.acquisitionDate.val == 1L
+        assert image_4.archived.val is False
+        assert image_4.description.val == 'image_description_4'
+        assert image_4.name.val == 'image_name_4'
+        assert image_4.partial.val is False
+        assert image_4.format.id.val == 1L
+        assert image_4.format.value.val == 'PNG'
+
 
 class TestScreenDecoder(object):
 
@@ -53,8 +108,10 @@ class TestScreenDecoder(object):
         assert screen.description.val == 'the_description'
         assert screen.protocolDescription.val == 'the_protocol_description'
         assert screen.protocolIdentifier.val == 'the_protocol_identifier'
-        assert screen.reagentSetDescription.val == 'the_reagent_set_description'
-        assert screen.reagentSetDescription.val == 'the_reagent_set_description'
+        assert screen.reagentSetDescription.val == \
+            'the_reagent_set_description'
+        assert screen.reagentSetDescription.val == \
+            'the_reagent_set_description'
         assert screen.reagentSetIdentifier.val == 'the_reagent_set_identifier'
         assert screen.type.val == 'the_type'
 
@@ -67,7 +124,8 @@ class TestScreenDecoder(object):
         assert plate.columns.val == 12
         assert plate.rows.val == 8
         assert plate.defaultSample.val == 0
-        assert plate.externalIdentifier.val == 'external_identifier_%d' % plate_id
+        assert plate.externalIdentifier.val == \
+            'external_identifier_%d' % plate_id
         assert plate.status.val == 'status_%d' % plate_id
         assert plate.wellOriginX.__class__ is LengthI
         assert plate.wellOriginX.getUnit() == UnitsLength.REFERENCEFRAME

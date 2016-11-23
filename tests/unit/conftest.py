@@ -11,13 +11,47 @@
 
 import pytest
 
-from omero.model import BooleanAnnotationI, CommentAnnotationI, DatasetI, \
-    DoubleAnnotationI, LongAnnotationI, MapAnnotationI, TagAnnotationI, \
-    TermAnnotationI, TimestampAnnotationI, XmlAnnotationI, RoiI, EllipseI, \
-    PointI, PolylineI, PolygonI, LineI, ProjectI, ExperimenterI, \
-    ExperimenterGroupI, PermissionsI, DetailsI, LengthI, LabelI, NamedValue, \
-    ExternalInfoI, ScreenI, PlateI
-from omero.model.enums import UnitsLength
+from omero.model import \
+    AcquisitionModeI, \
+    BooleanAnnotationI, \
+    ChannelI, \
+    CommentAnnotationI, \
+    ContrastMethodI, \
+    DatasetI, \
+    DetailsI, \
+    DimensionOrderI, \
+    DoubleAnnotationI, \
+    EllipseI, \
+    ExperimenterI, \
+    ExperimenterGroupI, \
+    ExternalInfoI, \
+    FormatI, \
+    IlluminationI, \
+    ImageI, \
+    LabelI, \
+    LengthI, \
+    LineI, \
+    LongAnnotationI, \
+    LogicalChannelI, \
+    MapAnnotationI, \
+    NamedValue, \
+    TagAnnotationI, \
+    TermAnnotationI, \
+    TimestampAnnotationI, \
+    XmlAnnotationI, \
+    RoiI, \
+    PermissionsI, \
+    PhotometricInterpretationI, \
+    PixelsI, \
+    PixelsTypeI, \
+    PlateI, \
+    PointI, \
+    PolygonI, \
+    PolylineI, \
+    ProjectI, \
+    ScreenI, \
+    TimeI
+from omero.model.enums import UnitsLength, UnitsTime
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
 # Handle differences in class naming between OMERO 5.1.x and 5.2.x
@@ -38,24 +72,149 @@ except ImportError:
 from omero_marshal import SCHEMA_VERSION
 
 
+def create_project(with_datasets=False, with_images=False):
+    project = ProjectI()
+    project.id = rlong(1L)
+    project.name = rstring('the_name')
+    project.description = rstring('the_description')
+    dataset_count = 2
+
+    if not with_datasets:
+        return project
+    for dataset_id in range(0, dataset_count):
+        dataset = DatasetI()
+        dataset.id = rlong(dataset_id + 1)
+        dataset.name = rstring('dataset_name_%d' % (dataset_id + 1))
+        dataset.description = rstring(
+            'dataset_description_%d' % (dataset_id + 1)
+        )
+        project.linkDataset(dataset)
+        if not with_images:
+            continue
+        for image_id in range(1, 3):
+            image_id = (dataset_id * dataset_count) + image_id
+            dataset.linkImage(create_image(image_id))
+    return project
+
+
+def create_image(image_id, with_pixels=False):
+    image_format = FormatI(1L)
+    image_format.value = rstring('PNG')
+
+    image = ImageI()
+    image.id = rlong(image_id)
+    image.acquisitionDate = rtime(1L)
+    image.archived = rbool(False)
+    image.description = rstring('image_description_%d' % image_id)
+    image.name = rstring('image_name_%d' % image_id)
+    image.partial = rbool(False)
+    image.series = rint(0)
+    image.format = image_format
+    if not with_pixels:
+        return image
+    dimension_order = DimensionOrderI(1L)
+    dimension_order.value = rstring('XYZCT')
+    pixels_type = PixelsTypeI(1L)
+    pixels_type.value = 'bit'
+
+    pixels = PixelsI(1L)
+    pixels.methodology = rstring('methodology')
+    pixels.physicalSizeX = LengthI(1.0, UnitsLength.MICROMETER)
+    pixels.physicalSizeY = LengthI(2.0, UnitsLength.MICROMETER)
+    pixels.physicalSizeZ = LengthI(3.0, UnitsLength.MICROMETER)
+    pixels.sha1 = rstring('61ee8b5601a84d5154387578466c8998848ba089')
+    pixels.significantBits = rint(16)
+    pixels.sizeX = rint(1)
+    pixels.sizeY = rint(2)
+    pixels.sizeZ = rint(3)
+    pixels.sizeC = rint(4)
+    pixels.sizeT = rint(5)
+    pixels.timeIncrement = TimeI(1.0, UnitsTime.MILLISECOND)
+    pixels.waveIncrement = rdouble(2.0)
+    pixels.waveStart = rint(1)
+    pixels.dimensionOrder = dimension_order
+    pixels.pixelsType = pixels_type
+    image.addPixels(pixels)
+
+    contrast_method = ContrastMethodI(8L)
+    contrast_method.value = rstring('Fluorescence')
+    illumination = IlluminationI(1L)
+    illumination.value = rstring('Transmitted')
+    acquisition_mode = AcquisitionModeI(1L)
+    acquisition_mode.value = rstring('WideField')
+    photometric_interpretation = PhotometricInterpretationI(1L)
+    photometric_interpretation.value = rstring('RGB')
+
+    channel_1 = ChannelI(1L)
+    channel_1.alpha = rint(255)
+    channel_1.blue = rint(0)
+    channel_1.green = rint(255)
+    channel_1.red = rint(0)
+    channel_1.lookupTable = rstring('rainbow')
+    logical_channel_1 = LogicalChannelI(1L)
+    logical_channel_1.emissionWave = LengthI(509.0, UnitsLength.NANOMETER)
+    logical_channel_1.excitationWave = LengthI(488.0, UnitsLength.NANOMETER)
+    logical_channel_1.fluor = rstring('GFP')
+    logical_channel_1.name = rstring('GFP/488')
+    logical_channel_1.ndFilter = rdouble(1.0)
+    logical_channel_1.pinHoleSize = LengthI(1.0, UnitsLength.NANOMETER)
+    logical_channel_1.pockelCellSetting = rint(0)
+    logical_channel_1.samplesPerPixel = rint(2)
+    logical_channel_1.contrastMethod = contrast_method
+    logical_channel_1.illumination = illumination
+    logical_channel_1.mode = acquisition_mode
+    logical_channel_1.photometricInterpretation = photometric_interpretation
+    channel_1.logicalChannel = logical_channel_1
+
+    channel_2 = ChannelI(2L)
+    channel_2.alpha = rint(255)
+    channel_2.blue = rint(255)
+    channel_2.green = rint(0)
+    channel_2.red = rint(0)
+    channel_2.lookupTable = rstring('rainbow')
+    logical_channel_2 = LogicalChannelI(2L)
+    logical_channel_2.emissionWave = LengthI(470.0, UnitsLength.NANOMETER)
+    logical_channel_2.excitationWave = LengthI(405.0, UnitsLength.NANOMETER)
+    logical_channel_2.fluor = rstring('DAPI')
+    logical_channel_2.name = rstring('DAPI/405')
+    logical_channel_2.ndFilter = rdouble(1.0)
+    logical_channel_2.pinHoleSize = LengthI(2.0, UnitsLength.NANOMETER)
+    logical_channel_2.pockelCellSetting = rint(0)
+    logical_channel_2.samplesPerPixel = rint(2)
+    logical_channel_2.contrastMethod = contrast_method
+    logical_channel_2.illumination = illumination
+    logical_channel_2.mode = acquisition_mode
+    logical_channel_2.photometricInterpretation = photometric_interpretation
+    channel_2.logicalChannel = logical_channel_2
+
+    pixels.addChannel(channel_1)
+    pixels.addChannel(channel_2)
+    return image
+
+
 @pytest.fixture()
 def project():
-    o = ProjectI()
-    o.id = rlong(1L)
-    o.name = rstring('the_name')
-    o.description = rstring('the_description')
-    return o
+    return create_project()
 
 
 @pytest.fixture()
 def project_with_datasets(project):
-    for dataset_id in range(1, 3):
-        o = DatasetI()
-        o.id = rlong(dataset_id)
-        o.name = rstring('dataset_name_%d' % dataset_id)
-        o.description = rstring('dataset_description_%d' % dataset_id)
-        project.linkDataset(o)
-    return project
+    return create_project(with_datasets=True)
+
+
+@pytest.fixture()
+def project_with_datasets_and_images(project):
+    return create_project(with_datasets=True, with_images=True)
+
+
+@pytest.fixture()
+def image():
+    return create_image(1L)
+
+
+@pytest.fixture()
+def image_pixels():
+    return create_image(1L, with_pixels=True)
 
 
 @pytest.fixture()

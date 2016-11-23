@@ -28,7 +28,7 @@ before_install:
 
 script:
     - python setup.py flake8
-    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python setup.py test
+    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python setup.py test --pytest-args='-v -v'
     - python setup.py sdist install
     - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
     - pip uninstall -y omero-marshal
