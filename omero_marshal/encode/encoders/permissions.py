@@ -24,6 +24,13 @@ class PermissionsEncoder(Encoder):
         v['canDelete'] = obj.canDelete()
         v['canEdit'] = obj.canEdit()
         v['canLink'] = obj.canLink()
+        v['isWorldWrite'] = obj.isWorldWrite()
+        v['isWorldRead'] = obj.isWorldRead()
+        v['isGroupWrite'] = obj.isGroupWrite()
+        v['isGroupRead'] = obj.isGroupRead()
+        v['isGroupAnnotate'] = obj.isGroupAnnotate()
+        v['isUserWrite'] = obj.isUserWrite()
+        v['isUserRead'] = obj.isUserRead()
         return v
 
 encoder = (PermissionsI, PermissionsEncoder)
