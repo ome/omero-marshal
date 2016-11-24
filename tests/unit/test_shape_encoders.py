@@ -71,6 +71,30 @@ class TestShapeEncoder(object):
                 'Namespace': 'xml_annotation',
                 'Value': '<xml_value></xml_value>',
                 'omero:details': {'@type': 'TBD#Details'}
+            }, {
+                '@type': '%s#FileAnnotation' % SA_SCHEMA_URL,
+                'Description': 'the_description',
+                'File': {
+                    '@id': 1L,
+                    '@type': 'TBD#OriginalFile',
+                    'atime': 3L,
+                    'ctime': 5L,
+                    'hash': '1a0b045d',
+                    'hasher': {
+                        '@id': 1L,
+                        '@type': 'TBD#ChecksumAlgorithm',
+                        'omero:details': {'@type': 'TBD#Details'},
+                        'value': 'Adler-32'
+                    },
+                    'mtime': 4L,
+                    'omero:details': {'@type': 'TBD#Details'},
+                    'path': 'path',
+                    'size': 2L,
+                    'mimetype': 'application/octet-stream',
+                    'name': 'name'
+                },
+                'Namespace': 'file_annotation',
+                'omero:details': {'@type': 'TBD#Details'}
             }]
         }
 
