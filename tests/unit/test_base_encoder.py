@@ -63,6 +63,17 @@ class TestBaseEncoder(object):
             }
         }
 
+    def test_base_encoder_unloaded_details(self, roi):
+        roi.unloadDetails()
+        encoder = get_encoder(roi.__class__)
+        v = encoder.encode(roi)
+        assert v == {
+            '@id': 1L,
+            '@type': '%s#ROI' % ROI_SCHEMA_URL,
+            'Name': 'the_name',
+            'Description': 'the_description'
+        }
+
     def test_base_encoder_with_unloaded_details_children(
             self, roi_with_unloaded_details_children):
         encoder = get_encoder(roi_with_unloaded_details_children.__class__)
