@@ -49,8 +49,8 @@ class TestShapeDecoder(object):
         assert o.annotationLinksLoaded
         boolean_annotation, comment_annotation, double_annotation, \
             long_annotation, map_annotation, tag_annotation, \
-            term_annotation, timestamp_annotation, xml_annotation = \
-            [v.child for v in o.copyAnnotationLinks()]
+            term_annotation, timestamp_annotation, xml_annotation, \
+            file_annotation = [v.child for v in o.copyAnnotationLinks()]
         assert boolean_annotation.ns.val == 'boolean_annotation'
         assert boolean_annotation.description.val == 'the_description'
         assert boolean_annotation.boolValue.val
@@ -79,6 +79,19 @@ class TestShapeDecoder(object):
         assert timestamp_annotation.ns.val == 'timestamp_annotation'
         assert timestamp_annotation.description.val == 'the_description'
         assert timestamp_annotation.timeValue.val == 1L
+        assert file_annotation.ns.val == 'file_annotation'
+        assert file_annotation.description.val == 'the_description'
+        assert file_annotation.file.id.val == 1L
+        assert file_annotation.file.path.val == 'path'
+        assert file_annotation.file.size.val == 2L
+        assert file_annotation.file.atime.val == 3L
+        assert file_annotation.file.mtime.val == 4L
+        assert file_annotation.file.ctime.val == 5L
+        assert file_annotation.file.hasher.id.val == 1L
+        assert file_annotation.file.hasher.value.val == 'Adler-32'
+        assert file_annotation.file.hash.val == '1a0b045d'
+        assert file_annotation.file.mimetype.val == 'application/octet-stream'
+        assert file_annotation.file.name.val == 'name'
 
     def assert_roi(self, roi, has_annotations=False):
         assert roi.id.val == 1L

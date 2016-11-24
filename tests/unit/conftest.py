@@ -15,6 +15,7 @@ from omero.model import \
     AcquisitionModeI, \
     BooleanAnnotationI, \
     ChannelI, \
+    ChecksumAlgorithmI, \
     CommentAnnotationI, \
     ContrastMethodI, \
     DatasetI, \
@@ -25,6 +26,7 @@ from omero.model import \
     ExperimenterI, \
     ExperimenterGroupI, \
     ExternalInfoI, \
+    FileAnnotationI, \
     FormatI, \
     IlluminationI, \
     ImageI, \
@@ -33,6 +35,7 @@ from omero.model import \
     LineI, \
     LongAnnotationI, \
     LogicalChannelI, \
+    OriginalFileI, \
     MapAnnotationI, \
     NamedValue, \
     TagAnnotationI, \
@@ -325,6 +328,21 @@ def add_annotations(o):
     annotation.description = rstring('the_description')
     annotation.ns = rstring('xml_annotation')
     annotation.textValue = rstring('<xml_value></xml_value>')
+    o.linkAnnotation(annotation)
+    annotation = FileAnnotationI()
+    annotation.description = rstring('the_description')
+    annotation.ns = rstring('file_annotation')
+    annotation.file = OriginalFileI(1L)
+    annotation.file.path = rstring('path')
+    annotation.file.size = rlong(2L)
+    annotation.file.atime = rtime(3)
+    annotation.file.mtime = rtime(4)
+    annotation.file.ctime = rtime(5)
+    annotation.file.hash = rstring('1a0b045d')
+    annotation.file.hasher = ChecksumAlgorithmI(1L)
+    annotation.file.hasher.value = rstring('Adler-32')
+    annotation.file.mimetype = rstring('application/octet-stream')
+    annotation.file.name = rstring('name')
     o.linkAnnotation(annotation)
 
 
