@@ -45,7 +45,7 @@ class Encoder(object):
             obj_id = unwrap(obj.id)
             if obj_id is not None:
                 v['@id'] = obj_id
-        if hasattr(obj, 'details'):
+        if hasattr(obj, 'details') and obj.details is not None:
             encoder = self.ctx.get_encoder(obj.details.__class__)
             v['omero:details'] = encoder.encode(obj.details)
 
