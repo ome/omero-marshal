@@ -50,7 +50,8 @@ from omero.model import \
     PolylineI, \
     ProjectI, \
     ScreenI, \
-    TimeI
+    TimeI, \
+    WellI
 from omero.model.enums import UnitsLength, UnitsTime
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -248,6 +249,22 @@ def screen_with_plates(screen):
         o.wellOriginX = LengthI(0.1, UnitsLength.REFERENCEFRAME)
         o.wellOriginY = LengthI(1.1, UnitsLength.REFERENCEFRAME)
         screen.linkPlate(o)
+        for well_id in range(7, 9):
+            well = WellI()
+            well.id = rlong(well_id)
+            well.column = rint(2)
+            well.row = rint(1)
+            well.externalDescription = \
+                rstring('external_description_%d' % well_id)
+            well.externalIdentifier = \
+                rstring('external_identifier_%d' % well_id)
+            well.type = rstring('the_type')
+            well.alpha = rint(0)
+            well.red = rint(255)
+            well.green = rint(0)
+            well.blue = rint(0)
+            o.addWell(well)
+
     return screen
 
 

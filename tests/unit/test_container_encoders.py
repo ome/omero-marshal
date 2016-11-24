@@ -197,6 +197,33 @@ class TestScreenEncoder(object):
                     'Symbol': 'reference frame',
                     'Value': 1.1
                 },
+                'Wells': [{
+                    '@id': 7L,
+                    '@type': '%s#Well' % OME_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_7',
+                    'ExternalIdentifier': 'external_identifier_7',
+                    'Type': 'the_type',
+                    'Alpha': 0,
+                    'Red': 255,
+                    'Green': 0,
+                    'Blue': 0,
+                    'omero:details': {'@type': 'TBD#Details'}
+                }, {
+                    '@id': 8L,
+                    '@type': '%s#Well' % OME_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_8',
+                    'ExternalIdentifier': 'external_identifier_8',
+                    'Type': 'the_type',
+                    'Alpha': 0,
+                    'Red': 255,
+                    'Green': 0,
+                    'Blue': 0,
+                    'omero:details': {'@type': 'TBD#Details'}
+                }],
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@id': 6L,
@@ -222,6 +249,33 @@ class TestScreenEncoder(object):
                     'Symbol': 'reference frame',
                     'Value': 1.1
                 },
+                'Wells': [{
+                    '@id': 7L,
+                    '@type': '%s#Well' % OME_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_7',
+                    'ExternalIdentifier': 'external_identifier_7',
+                    'Type': 'the_type',
+                    'Alpha': 0,
+                    'Red': 255,
+                    'Green': 0,
+                    'Blue': 0,
+                    'omero:details': {'@type': 'TBD#Details'}
+                }, {
+                    '@id': 8L,
+                    '@type': '%s#Well' % OME_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_8',
+                    'ExternalIdentifier': 'external_identifier_8',
+                    'Type': 'the_type',
+                    'Alpha': 0,
+                    'Red': 255,
+                    'Green': 0,
+                    'Blue': 0,
+                    'omero:details': {'@type': 'TBD#Details'}
+                }],
                 'omero:details': {'@type': 'TBD#Details'}
             }]
         }
