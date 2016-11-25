@@ -121,6 +121,7 @@ class TestBaseEncoder(object):
                 'LastName': 'the_lastName',
                 'MiddleName': 'the_middleName',
                 'UserName': 'the_omeName',
+                'omero:owner': True,
                 'omero:details': {'@type': 'TBD#Details'}
             }],
             'omero:details': {'@type': 'TBD#Details'}

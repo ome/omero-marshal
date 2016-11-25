@@ -11,7 +11,7 @@
 
 from ... import SCHEMA_VERSION
 from .. import Decoder
-from omero.model import ExperimenterGroupI
+from omero.model import ExperimenterGroupI, GroupExperimenterMapI
 
 
 class ExperimenterGroup201501Decoder(Decoder):
@@ -28,7 +28,11 @@ class ExperimenterGroup201501Decoder(Decoder):
 
         for experimenter in data.get('Experimenters', list()):
             experimenter_decoder = self.ctx.get_decoder(experimenter['@type'])
-            v.linkExperimenter(experimenter_decoder.decode(experimenter))
+            _map = GroupExperimenterMapI()
+            _map.parent = v
+            _map.child = experimenter_decoder.decode(experimenter)
+            self.set_property(_map, 'owner', experimenter.get('omero:owner'))
+            v.addGroupExperimenterMap(_map)
         return v
 
 
