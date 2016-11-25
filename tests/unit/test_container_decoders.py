@@ -133,7 +133,9 @@ class TestScreenDecoder(object):
         assert plate.wellOriginY.__class__ is LengthI
         assert plate.wellOriginY.getUnit() == UnitsLength.REFERENCEFRAME
         assert plate.wellOriginY.getValue() == 1.1
+
         well_1, well_2 = plate.copyWells()
+
         assert well_1.id.val == 7
         assert well_1.column.val == 2
         assert well_1.row.val == 1
@@ -145,6 +147,24 @@ class TestScreenDecoder(object):
         assert well_1.green.val == 0
         assert well_1.blue.val == 0
         assert well_1.status.val == 'the_status'
+        wellsample_1, wellsample_2 = well_1.copyWellSamples()
+        assert wellsample_1.posX.__class__ is LengthI
+        assert wellsample_1.posX.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_1.posX.getValue() == 1.0
+        assert wellsample_1.posY.__class__ is LengthI
+        assert wellsample_1.posY.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_1.posY.getValue() == 2.0
+        assert wellsample_1.timepoint.val == 1L
+        assert wellsample_1.image is not None
+        assert wellsample_2.posX.__class__ is LengthI
+        assert wellsample_2.posX.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_2.posX.getValue() == 1.0
+        assert wellsample_2.posY.__class__ is LengthI
+        assert wellsample_2.posY.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_2.posY.getValue() == 2.0
+        assert wellsample_2.timepoint.val == 1L
+        assert wellsample_2.image is not None
+
         assert well_2.id.val == 8
         assert well_2.column.val == 2
         assert well_2.row.val == 1
@@ -156,6 +176,23 @@ class TestScreenDecoder(object):
         assert well_2.green.val == 0
         assert well_2.blue.val == 0
         assert well_2.status.val == 'the_status'
+        wellsample_1, wellsample_2 = well_2.copyWellSamples()
+        assert wellsample_1.posX.__class__ is LengthI
+        assert wellsample_1.posX.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_1.posX.getValue() == 1.0
+        assert wellsample_1.posY.__class__ is LengthI
+        assert wellsample_1.posY.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_1.posY.getValue() == 2.0
+        assert wellsample_1.timepoint.val == 1L
+        assert wellsample_1.image is not None
+        assert wellsample_2.posX.__class__ is LengthI
+        assert wellsample_2.posX.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_2.posX.getValue() == 1.0
+        assert wellsample_2.posY.__class__ is LengthI
+        assert wellsample_2.posY.getUnit() == UnitsLength.REFERENCEFRAME
+        assert wellsample_2.posY.getValue() == 2.0
+        assert wellsample_2.timepoint.val == 1L
+        assert wellsample_2.image is not None
 
     def test_screen_decoder(self, screen):
         encoder = get_encoder(screen.__class__)
