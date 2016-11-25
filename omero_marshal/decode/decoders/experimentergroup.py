@@ -25,6 +25,10 @@ class ExperimenterGroup201501Decoder(Decoder):
         v = super(ExperimenterGroup201501Decoder, self).decode(data)
         self.set_property(v, 'description', data.get('Description'))
         self.set_property(v, 'name', data.get('Name'))
+
+        for experimenter in data.get('Experimenters', list()):
+            experimenter_decoder = self.ctx.get_decoder(experimenter['@type'])
+            v.linkExperimenter(experimenter_decoder.decode(experimenter))
         return v
 
 
