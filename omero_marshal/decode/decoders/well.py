@@ -39,7 +39,7 @@ class Well201501Decoder(AnnotatableDecoder):
 
         for wellsample in data.get('WellSamples', list()):
             wellsample_decoder = self.ctx.get_decoder(wellsample['@type'])
-            v.linkWellSample(wellsample_decoder.decode(wellsample))
+            v.addWellSample(wellsample_decoder.decode(wellsample))
         return v
 
 

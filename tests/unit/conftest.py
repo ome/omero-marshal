@@ -51,7 +51,8 @@ from omero.model import \
     ProjectI, \
     ScreenI, \
     TimeI, \
-    WellI
+    WellI, \
+    WellSampleI
 from omero.model.enums import UnitsLength, UnitsTime
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -265,6 +266,14 @@ def screen_with_plates(screen):
             well.blue = rint(0)
             well.status = rstring('the_status')
             o.addWell(well)
+            for wellsample_id in range(9, 11):
+                wellsample = WellSampleI()
+                wellsample.id = rlong(wellsample_id)
+                wellsample.posX = LengthI(1.0, UnitsLength.REFERENCEFRAME)
+                wellsample.posY = LengthI(2.0, UnitsLength.REFERENCEFRAME)
+                wellsample.timepoint = rtime(1L)
+                wellsample.image = create_image(1L)
+                well.addWellSample(wellsample)
 
     return screen
 

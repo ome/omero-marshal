@@ -210,6 +210,75 @@ class TestScreenEncoder(object):
                     'Green': 0,
                     'Blue': 0,
                     'omero:status': 'the_status',
+                    'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 8L,
@@ -224,6 +293,75 @@ class TestScreenEncoder(object):
                     'Green': 0,
                     'Blue': 0,
                     'omero:status': 'the_status',
+                                        'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
                     'omero:details': {'@type': 'TBD#Details'}
                 }],
                 'omero:details': {'@type': 'TBD#Details'}
@@ -264,6 +402,75 @@ class TestScreenEncoder(object):
                     'Green': 0,
                     'Blue': 0,
                     'omero:status': 'the_status',
+                    'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 8L,
@@ -278,6 +485,75 @@ class TestScreenEncoder(object):
                     'Green': 0,
                     'Blue': 0,
                     'omero:status': 'the_status',
+                                        'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % OME_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
                     'omero:details': {'@type': 'TBD#Details'}
                 }],
                 'omero:details': {'@type': 'TBD#Details'}
