@@ -209,6 +209,7 @@ class TestScreenEncoder(object):
                     'Red': 255,
                     'Green': 0,
                     'Blue': 0,
+                    'omero:status': 'the_status',
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 8L,
@@ -222,6 +223,7 @@ class TestScreenEncoder(object):
                     'Red': 255,
                     'Green': 0,
                     'Blue': 0,
+                    'omero:status': 'the_status',
                     'omero:details': {'@type': 'TBD#Details'}
                 }],
                 'omero:details': {'@type': 'TBD#Details'}
@@ -261,6 +263,7 @@ class TestScreenEncoder(object):
                     'Red': 255,
                     'Green': 0,
                     'Blue': 0,
+                    'omero:status': 'the_status',
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 8L,
@@ -274,6 +277,7 @@ class TestScreenEncoder(object):
                     'Red': 255,
                     'Green': 0,
                     'Blue': 0,
+                    'omero:status': 'the_status',
                     'omero:details': {'@type': 'TBD#Details'}
                 }],
                 'omero:details': {'@type': 'TBD#Details'}

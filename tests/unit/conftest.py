@@ -263,6 +263,7 @@ def screen_with_plates(screen):
             well.red = rint(255)
             well.green = rint(0)
             well.blue = rint(0)
+            well.status = rstring('the_status')
             o.addWell(well)
 
     return screen
