@@ -156,7 +156,7 @@ class TestDetailsEncoder(object):
     def externalInfo_json(self):
         return {
             '@type': 'TBD#ExternalInfo',
-            'EntityId': 123,
+            'EntityId': 123L,
             'EntityType': 'test',
             'Lsid': 'ABCDEF',
             'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
@@ -179,4 +179,45 @@ class TestDetailsEncoder(object):
             'owner': self.experimenter_json(),
             'group': self.experimenter_group_json(),
             'externalInfo': self.externalInfo_json(),
+        }
+
+    def test_details_with_events_encoder(self, details_with_events):
+        encoder = get_encoder(details_with_events.__class__)
+        v = encoder.encode(details_with_events)
+        assert v == {
+            '@type': 'TBD#Details',
+            'permissions': self.permissions_json(),
+            'owner': self.experimenter_json(),
+            'group': self.experimenter_group_json(),
+            'externalInfo': self.externalInfo_json(),
+            'creationEvent': {
+                '@id': 1L,
+                '@type': 'TBD#Event',
+                'experimenter': self.experimenter_json(),
+                'experimenterGroup': self.experimenter_group_json(),
+                'status': 'status',
+                'time': 1L,
+                'type': {
+                    '@id': 0L,
+                    '@type': 'TBD#EventType',
+                    'value': 'Bootstrap',
+                    'omero:details': {'@type': 'TBD#Details'}
+                },
+                'omero:details': {'@type': 'TBD#Details'}
+            },
+            'updateEvent': {
+                '@id': 2L,
+                '@type': 'TBD#Event',
+                'experimenter': self.experimenter_json(),
+                'experimenterGroup': self.experimenter_group_json(),
+                'status': 'status',
+                'time': 1L,
+                'type': {
+                    '@id': 0L,
+                    '@type': 'TBD#EventType',
+                    'value': 'Bootstrap',
+                    'omero:details': {'@type': 'TBD#Details'}
+                },
+                'omero:details': {'@type': 'TBD#Details'}
+            }
         }

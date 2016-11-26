@@ -31,6 +31,12 @@ class DetailsEncoder(Encoder):
         if obj.externalInfo is not None:
             encoder = self.ctx.get_encoder(obj.externalInfo.__class__)
             v['externalInfo'] = encoder.encode(obj.externalInfo)
+        if obj.creationEvent is not None:
+            encoder = self.ctx.get_encoder(obj.creationEvent.__class__)
+            v['creationEvent'] = encoder.encode(obj.creationEvent)
+        if obj.updateEvent is not None:
+            encoder = self.ctx.get_encoder(obj.updateEvent.__class__)
+            v['updateEvent'] = encoder.encode(obj.updateEvent)
         return v
 
 encoder = (DetailsI, DetailsEncoder)
