@@ -37,6 +37,14 @@ class DetailsDecoder(Decoder):
         if externalInfo is not None:
             decoder = self.ctx.get_decoder(externalInfo['@type'])
             v.externalInfo = decoder.decode(externalInfo)
+        creationEvent = data.get('creationEvent')
+        if creationEvent is not None:
+            decoder = self.ctx.get_decoder(creationEvent['@type'])
+            v.creationEvent = decoder.decode(creationEvent)
+        updateEvent = data.get('updateEvent')
+        if updateEvent is not None:
+            decoder = self.ctx.get_decoder(updateEvent['@type'])
+            v.updateEvent = decoder.decode(updateEvent)
         return v
 
 decoder = (DetailsDecoder.TYPE, DetailsDecoder)
