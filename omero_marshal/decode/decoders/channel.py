@@ -10,11 +10,11 @@
 #
 
 from ... import SCHEMA_VERSION
-from .. import Decoder
+from .annotation import AnnotatableDecoder
 from omero.model import ChannelI, LogicalChannelI
 
 
-class Channel201501Decoder(Decoder):
+class Channel201501Decoder(AnnotatableDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Channel'
 

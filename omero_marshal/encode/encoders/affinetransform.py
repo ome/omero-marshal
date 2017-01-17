@@ -10,7 +10,7 @@
 #
 
 from ... import SCHEMA_VERSION
-from .annotation import Encoder
+from .. import Encoder
 
 try:
     # Import transform classes introduced in OMERO 5.3.0
