@@ -110,7 +110,14 @@ class TestShapeEncoder(object):
                 'canDelete': True,
                 'canEdit': True,
                 'canLink': True,
-                'perm': 'rwrwrw'
+                'perm': 'rwrwrw',
+                'isGroupAnnotate': True,
+                'isGroupRead': True,
+                'isGroupWrite': True,
+                'isUserRead': True,
+                'isUserWrite': True,
+                'isWorldRead': True,
+                'isWorldWrite': True
             },
             'externalInfo': {
                 '@type': 'TBD#ExternalInfo',

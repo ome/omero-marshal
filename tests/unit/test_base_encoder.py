@@ -48,7 +48,14 @@ class TestBaseEncoder(object):
                     'canDelete': True,
                     'canEdit': True,
                     'canLink': True,
-                    'perm': 'rwrwrw'
+                    'perm': 'rwrwrw',
+                    'isGroupAnnotate': True,
+                    'isGroupRead': True,
+                    'isGroupWrite': True,
+                    'isUserRead': True,
+                    'isUserWrite': True,
+                    'isWorldRead': True,
+                    'isWorldWrite': True
                 },
                 'externalInfo': {
                     '@type': 'TBD#ExternalInfo',
@@ -99,7 +106,14 @@ class TestBaseEncoder(object):
                     'canDelete': True,
                     'canEdit': True,
                     'canLink': True,
-                    'perm': 'rwrwrw'
+                    'perm': 'rwrwrw',
+                    'isGroupAnnotate': True,
+                    'isGroupRead': True,
+                    'isGroupWrite': True,
+                    'isUserRead': True,
+                    'isUserWrite': True,
+                    'isWorldRead': True,
+                    'isWorldWrite': True
                 },
                 'externalInfo': {
                     '@type': 'TBD#ExternalInfo',
@@ -156,7 +170,14 @@ class TestDetailsEncoder(object):
             'canAnnotate': True,
             'canDelete': True,
             'canEdit': True,
-            'canLink': True
+            'canLink': True,
+            'isGroupAnnotate': True,
+            'isGroupRead': True,
+            'isGroupWrite': True,
+            'isUserRead': True,
+            'isUserWrite': True,
+            'isWorldRead': True,
+            'isWorldWrite': True
         }
 
     def test_permissions_encoder(self, permissions):
