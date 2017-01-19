@@ -29,6 +29,10 @@ class WellSample201501Decoder(Decoder):
         if image is not None:
             image_decoder = self.ctx.get_decoder(image['@type'])
             v.image = image_decoder.decode(image)
+        plateacquisition = data.get('PlateAcquisition')
+        if plateacquisition is not None:
+            plateacq_decoder = self.ctx.get_decoder(plateacquisition['@type'])
+            v.plateAcquisition = plateacq_decoder.decode(plateacquisition)
         return v
 
 

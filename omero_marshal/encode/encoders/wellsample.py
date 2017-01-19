@@ -26,6 +26,10 @@ class WellSample201501Encoder(Encoder):
         if obj.image is not None and obj.image.isLoaded():
             image_encoder = self.ctx.get_encoder(obj.image.__class__)
             v['Image'] = image_encoder.encode(obj.image)
+
+        if obj.plateAcquisition.isLoaded():
+            encoder = self.ctx.get_encoder(obj.plateAcquisition.__class__)
+            v['PlateAcquisition'] = encoder.encode(obj.plateAcquisition)
         return v
 
 
