@@ -35,6 +35,8 @@ class Well201501Encoder(AnnotatableEncoder):
         if obj.isWellSamplesLoaded() and obj.sizeOfWellSamples() > 0:
             wellsamples = list()
             for wellsample in obj.copyWellSamples():
+                if wellsample is None:
+                    continue
                 wellsample_encoder = self.ctx.get_encoder(wellsample.__class__)
                 wellsamples.append(
                     wellsample_encoder.encode(wellsample)
