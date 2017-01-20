@@ -45,6 +45,7 @@ from omero.model import \
     PixelsI, \
     PixelsTypeI, \
     PlateI, \
+    PlateAcquisitionI, \
     PointI, \
     PolygonI, \
     PolylineI, \
@@ -266,8 +267,16 @@ def screen_with_plates(screen):
             well.blue = rint(0)
             well.status = rstring('the_status')
             o.addWell(well)
+            plateacquisition = PlateAcquisitionI()
+            plateacquisition.id = rlong(well_id)
+            plateacquisition.name = rstring('plateacquisition_name_%d' % well_id)
+            plateacquisition.description = rstring('plateacquisition_description_%d' % well_id)
+            plateacquisition.maximumFieldCount = rint(1)
+            plateacquisition.startTime = rtime(1L)
+            plateacquisition.endTime = rtime(2L)
             for wellsample_id in range(9, 11):
                 wellsample = WellSampleI()
+                wellsample.setPlateAcquisition(plateacquisition)
                 wellsample.id = rlong(wellsample_id)
                 wellsample.posX = LengthI(1.0, UnitsLength.REFERENCEFRAME)
                 wellsample.posY = LengthI(2.0, UnitsLength.REFERENCEFRAME)

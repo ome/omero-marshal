@@ -164,7 +164,18 @@ class TestScreenDecoder(object):
         assert wellsample_2.posY.getValue() == 2.0
         assert wellsample_2.timepoint.val == 1L
         assert wellsample_2.image is not None
-
+        plateacquisition_1 = wellsample_1.getPlateAcquisition()
+        plateacquisition_2 = wellsample_2.getPlateAcquisition()
+        assert plateacquisition_1.name.val == 'plateacquisition_name_%d' % 7
+        assert plateacquisition_1.description.val == 'plateacquisition_description_%d' % 7
+        assert plateacquisition_1.maximumFieldCount.val == 1
+        assert plateacquisition_1.startTime.val == 1
+        assert plateacquisition_1.endTime.val == 2
+        assert plateacquisition_2.name.val == 'plateacquisition_name_%d' % 7
+        assert plateacquisition_2.description.val == 'plateacquisition_description_%d' % 7
+        assert plateacquisition_2.maximumFieldCount.val == 1
+        assert plateacquisition_2.startTime.val == 1
+        assert plateacquisition_2.endTime.val == 2
         assert well_2.id.val == 8
         assert well_2.column.val == 2
         assert well_2.row.val == 1
@@ -193,6 +204,18 @@ class TestScreenDecoder(object):
         assert wellsample_2.posY.getValue() == 2.0
         assert wellsample_2.timepoint.val == 1L
         assert wellsample_2.image is not None
+        plateacquisition_1 = wellsample_1.getPlateAcquisition()
+        plateacquisition_2 = wellsample_2.getPlateAcquisition()
+        assert plateacquisition_1.name.val == 'plateacquisition_name_%d' % 8
+        assert plateacquisition_1.description.val == 'plateacquisition_description_%d' % 8
+        assert plateacquisition_1.maximumFieldCount.val == 1
+        assert plateacquisition_1.startTime.val == 1
+        assert plateacquisition_1.endTime.val == 2
+        assert plateacquisition_2.name.val == 'plateacquisition_name_%d' % 8
+        assert plateacquisition_2.description.val == 'plateacquisition_description_%d' % 8
+        assert plateacquisition_2.maximumFieldCount.val == 1
+        assert plateacquisition_2.startTime.val == 1
+        assert plateacquisition_2.endTime.val == 2
 
     def test_screen_decoder(self, screen):
         encoder = get_encoder(screen.__class__)
