@@ -16,7 +16,7 @@ from omero.model import PlateI
 
 class Plate201501Encoder(AnnotatableEncoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Plate'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#Plate'
 
     def encode(self, obj):
         v = super(Plate201501Encoder, self).encode(obj)

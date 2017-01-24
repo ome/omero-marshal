@@ -16,7 +16,7 @@ from omero.model import WellSampleI
 
 class WellSample201501Encoder(Encoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#WellSample'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#WellSample'
 
     def encode(self, obj):
         v = super(WellSample201501Encoder, self).encode(obj)
