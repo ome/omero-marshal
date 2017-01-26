@@ -243,6 +243,16 @@ class TestScreenEncoder(object):
                             },
                             'omero:details': {'@type': 'TBD#Details'}
                         },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10L,
@@ -275,6 +285,16 @@ class TestScreenEncoder(object):
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
                             },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
@@ -326,6 +346,16 @@ class TestScreenEncoder(object):
                             },
                             'omero:details': {'@type': 'TBD#Details'}
                         },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10L,
@@ -358,6 +388,16 @@ class TestScreenEncoder(object):
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
                             },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
@@ -435,6 +475,16 @@ class TestScreenEncoder(object):
                             },
                             'omero:details': {'@type': 'TBD#Details'}
                         },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10L,
@@ -467,6 +517,16 @@ class TestScreenEncoder(object):
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
                             },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
@@ -518,6 +578,16 @@ class TestScreenEncoder(object):
                             },
                             'omero:details': {'@type': 'TBD#Details'}
                         },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10L,
@@ -550,6 +620,16 @@ class TestScreenEncoder(object):
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
                             },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
