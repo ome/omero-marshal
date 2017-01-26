@@ -24,7 +24,9 @@ class PlateAcquisition201501Decoder(AnnotatableDecoder):
         v = super(PlateAcquisition201501Decoder, self).decode(data)
         self.set_property(v, 'name', data.get('Name'))
         self.set_property(v, 'description', data.get('Description'))
-        self.set_property(v, 'maximumFieldCount', data.get('MaximumFieldCount'))
+        self.set_property(
+            v, 'maximumFieldCount', data.get('MaximumFieldCount')
+        )
         self.set_property(v, 'startTime', data.get('StartTime'))
         self.set_property(v, 'endTime', data.get('EndTime'))
         return v
