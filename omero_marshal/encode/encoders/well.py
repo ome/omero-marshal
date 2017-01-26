@@ -12,6 +12,32 @@
 from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import WellI
+from omero.rtypes import unwrap
+
+
+def rgba_to_int(red, green, blue, alpha):
+    """
+    Returns the color as an Integer in RGBA encoding
+
+    Returns None if any of red, green or blue are None.
+    If alpha is None we use 255 by default.
+
+    :return:    Integer
+    :rtype:     int
+    """
+    red = unwrap(red)
+    green = unwrap(green)
+    blue = unwrap(blue)
+    alpha = unwrap(alpha)
+    if red is None or green is None or blue is None:
+        return None
+    if alpha is None:
+        alpha = 255
+    r = red << 24
+    g = green << 16
+    b = blue << 8
+    a = alpha << 0
+    return r+g+b+a
 
 
 class Well201501Encoder(AnnotatableEncoder):
@@ -25,11 +51,8 @@ class Well201501Encoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'ExternalDescription', obj.externalDescription)
         self.set_if_not_none(v, 'ExternalIdentifier', obj.externalIdentifier)
         self.set_if_not_none(v, 'Type', obj.type)
-        # FIXME: Color conversion required (uses integer encoded Color field)
-        self.set_if_not_none(v, 'Alpha', obj.alpha)
-        self.set_if_not_none(v, 'Red', obj.red)
-        self.set_if_not_none(v, 'Green', obj.green)
-        self.set_if_not_none(v, 'Blue', obj.blue)
+        color = rgba_to_int(obj.red, obj.green, obj.blue, obj.alpha)
+        self.set_if_not_none(v, 'Color', color)
         self.set_if_not_none(v, 'omero:status', obj.status)
 
         if obj.isWellSamplesLoaded() and obj.sizeOfWellSamples() > 0:
