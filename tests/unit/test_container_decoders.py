@@ -11,7 +11,9 @@
 
 from omero_marshal import get_encoder, get_decoder
 from omero.model import LengthI
+from omero.rtypes import rint
 from omero.model.enums import UnitsLength
+import pytest
 
 
 class TestProjectDecoder(object):
@@ -236,3 +238,37 @@ class TestScreenDecoder(object):
         plate_1, plate_2 = v.linkedPlateList()
         self.assert_plate(plate_1, 5L)
         self.assert_plate(plate_2, 6L)
+
+    @pytest.mark.parametrize("color", [(255, 0, 0, 255),
+            (255, 255, 255, 255),
+            (255, 0, 0, None),
+            (None, 0, 0, 255),
+            (None, None, None, None)])
+    def test_well_color_decoder(self, color, well):
+        """Test different combinations of r, g, b, a."""
+        well.red = rint(color[0])
+        well.green = rint(color[1])
+        well.blue = rint(color[2])
+        well.alpha = rint(color[3])
+        encoder = get_encoder(well.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(well)
+        v = decoder.decode(v)
+        # If red is None, all are None
+        if color[0] is None:
+            assert v.red is None
+            assert v.green is None
+            assert v.blue is None
+            assert v.alpha is None
+        elif color[3] is None:
+            # alpha None -> 255 by default
+            assert v.red.val == color[0]
+            assert v.green.val == color[1]
+            assert v.blue.val == color[2]
+            assert v.alpha.val == 255
+        else:
+            # Otherwise, all preserved
+            assert v.red.val == color[0]
+            assert v.green.val == color[1]
+            assert v.blue.val == color[2]
+            assert v.alpha.val == color[3]

@@ -235,6 +235,16 @@ def screen():
 
 
 @pytest.fixture()
+def well():
+    """Basic Well for testing Color. Full test of Well below."""
+    well = WellI()
+    well.id = rlong(1)
+    well.column = rint(0)
+    well.row = rint(0)
+    return well
+
+
+@pytest.fixture()
 def screen_with_plates(screen):
     for plate_id in range(5, 7):
         o = PlateI()
