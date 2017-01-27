@@ -16,7 +16,7 @@ from omero.model import ScreenI
 
 class Screen201501Decoder(AnnotatableDecoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Screen'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#Screen'
 
     OMERO_CLASS = ScreenI
 

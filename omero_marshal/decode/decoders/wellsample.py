@@ -16,7 +16,7 @@ from omero.model import WellSampleI
 
 class WellSample201501Decoder(Decoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#WellSample'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#WellSample'
 
     OMERO_CLASS = WellSampleI
 

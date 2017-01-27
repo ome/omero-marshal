@@ -16,7 +16,7 @@ from omero.model import PlateI
 
 class Plate201501Decoder(AnnotatableDecoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Plate'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#Plate'
 
     OMERO_CLASS = PlateI
 
