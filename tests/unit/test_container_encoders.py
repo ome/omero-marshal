@@ -286,7 +286,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 7L,
-                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            '@type': '%s#PlateAcquisition' % OME_SCHEMA_URL,
                             'Description': 'plateacquisition_description_7',
                             'EndTime': 2L,
                             'MaximumFieldCount': 1,
@@ -342,7 +342,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 8L,
-                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            '@type': '%s#PlateAcquisition' % OME_SCHEMA_URL,
                             'Description': 'plateacquisition_description_8',
                             'EndTime': 2L,
                             'MaximumFieldCount': 1,
@@ -386,7 +386,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 8L,
-                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            '@type': '%s#PlateAcquisition' % OME_SCHEMA_URL,
                             'Description': 'plateacquisition_description_8',
                             'EndTime': 2L,
                             'MaximumFieldCount': 1,
@@ -468,7 +468,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 7L,
-                            '@type': 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PlateAcquisition',
+                            '@type': '%s#PlateAcquisition' % OME_SCHEMA_URL,
                             'Description': 'plateacquisition_description_7',
                             'EndTime': 2L,
                             'MaximumFieldCount': 1,
