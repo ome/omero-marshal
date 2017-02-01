@@ -169,12 +169,14 @@ class TestScreenDecoder(object):
         plateacquisition_1 = wellsample_1.getPlateAcquisition()
         plateacquisition_2 = wellsample_2.getPlateAcquisition()
         assert plateacquisition_1.name.val == 'plateacquisition_name_%d' % 7
-        assert plateacquisition_1.description.val == 'plateacquisition_description_%d' % 7
+        assert (plateacquisition_1.description.val ==
+                'plateacquisition_description_%d' % 7)
         assert plateacquisition_1.maximumFieldCount.val == 1
         assert plateacquisition_1.startTime.val == 1
         assert plateacquisition_1.endTime.val == 2
         assert plateacquisition_2.name.val == 'plateacquisition_name_%d' % 7
-        assert plateacquisition_2.description.val == 'plateacquisition_description_%d' % 7
+        assert (plateacquisition_2.description.val ==
+                'plateacquisition_description_%d' % 7)
         assert plateacquisition_2.maximumFieldCount.val == 1
         assert plateacquisition_2.startTime.val == 1
         assert plateacquisition_2.endTime.val == 2
@@ -209,12 +211,14 @@ class TestScreenDecoder(object):
         plateacquisition_1 = wellsample_1.getPlateAcquisition()
         plateacquisition_2 = wellsample_2.getPlateAcquisition()
         assert plateacquisition_1.name.val == 'plateacquisition_name_%d' % 8
-        assert plateacquisition_1.description.val == 'plateacquisition_description_%d' % 8
+        assert (plateacquisition_1.description.val ==
+                'plateacquisition_description_%d' % 8)
         assert plateacquisition_1.maximumFieldCount.val == 1
         assert plateacquisition_1.startTime.val == 1
         assert plateacquisition_1.endTime.val == 2
         assert plateacquisition_2.name.val == 'plateacquisition_name_%d' % 8
-        assert plateacquisition_2.description.val == 'plateacquisition_description_%d' % 8
+        assert (plateacquisition_2.description.val ==
+                'plateacquisition_description_%d' % 8)
         assert plateacquisition_2.maximumFieldCount.val == 1
         assert plateacquisition_2.startTime.val == 1
         assert plateacquisition_2.endTime.val == 2

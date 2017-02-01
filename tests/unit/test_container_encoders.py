@@ -307,7 +307,7 @@ class TestScreenEncoder(object):
                     'Type': 'the_type',
                     'Color': -16777216,
                     'omero:status': 'the_status',
-                                        'WellSamples': [{
+                    'WellSamples': [{
                         '@id': 9L,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -533,7 +533,7 @@ class TestScreenEncoder(object):
                     'Type': 'the_type',
                     'Color': -16777216,
                     'omero:status': 'the_status',
-                                        'WellSamples': [{
+                    'WellSamples': [{
                         '@id': 9L,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
