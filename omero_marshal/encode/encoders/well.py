@@ -37,7 +37,10 @@ def rgba_to_int(red, green, blue, alpha):
     g = green << 16
     b = blue << 8
     a = alpha << 0
-    return r+g+b+a
+    rgba_int = r+g+b+a
+    if (rgba_int > (2**31-1)):       # convert to signed 32-bit int
+        rgba_int = rgba_int - 2**32
+    return rgba_int
 
 
 class Well201501Encoder(AnnotatableEncoder):

@@ -239,11 +239,20 @@ class TestScreenDecoder(object):
         self.assert_plate(plate_1, 5L)
         self.assert_plate(plate_2, 6L)
 
-    @pytest.mark.parametrize("color", [(255, 0, 0, 255),
-            (255, 255, 255, 255),
-            (255, 0, 0, None),
-            (None, 0, 0, 255),
-            (None, None, None, None)])
+    @pytest.mark.parametrize("color", [
+        (255, 0, 0, 255, -16776961),     # Red
+        (0, 255, 0, 255, 16711935),      # Green
+        (0, 0, 255, 255, 65535),         # Blue
+        (0, 255, 255, 255, 16777215),    # Cyan
+        (255, 0, 255, 255, -16711681),   # Magenta
+        (255, 255, 0, 255, -65281),      # Yellow
+        (0, 0, 0, 255, 255),             # Black
+        (255, 255, 255, 255, -1),        # White
+        (0, 0, 0, 127, 127),             # Transparent black
+        (127, 127, 127, 127, 2139062143),  # Grey
+        (255, 0, 0, None, -16776961),    # Red (no alpha)
+        (None, 0, 0, None, None),        # red None
+        (None, None, None, None, None)])  # None
     def test_well_color_decoder(self, color, well):
         """Test different combinations of r, g, b, a."""
         well.red = rint(color[0])
@@ -253,6 +262,8 @@ class TestScreenDecoder(object):
         encoder = get_encoder(well.__class__)
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(well)
+        # Check we get the expected Integer
+        assert v.get('Color') == color[4]
         v = decoder.decode(v)
         # If red is None, all are None
         if color[0] is None:
