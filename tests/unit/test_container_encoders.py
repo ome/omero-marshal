@@ -205,7 +205,7 @@ class TestScreenEncoder(object):
                     'ExternalDescription': 'external_description_7',
                     'ExternalIdentifier': 'external_identifier_7',
                     'Type': 'the_type',
-                    'Color': 4278190080,
+                    'Color': -16777216,
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9L,
@@ -305,9 +305,9 @@ class TestScreenEncoder(object):
                     'ExternalDescription': 'external_description_8',
                     'ExternalIdentifier': 'external_identifier_8',
                     'Type': 'the_type',
-                    'Color': 4278190080,
+                    'Color': -16777216,
                     'omero:status': 'the_status',
-                                        'WellSamples': [{
+                    'WellSamples': [{
                         '@id': 9L,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -431,7 +431,7 @@ class TestScreenEncoder(object):
                     'ExternalDescription': 'external_description_7',
                     'ExternalIdentifier': 'external_identifier_7',
                     'Type': 'the_type',
-                    'Color': 4278190080,
+                    'Color': -16777216,
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9L,
@@ -531,9 +531,9 @@ class TestScreenEncoder(object):
                     'ExternalDescription': 'external_description_8',
                     'ExternalIdentifier': 'external_identifier_8',
                     'Type': 'the_type',
-                    'Color': 4278190080,
+                    'Color': -16777216,
                     'omero:status': 'the_status',
-                                        'WellSamples': [{
+                    'WellSamples': [{
                         '@id': 9L,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {

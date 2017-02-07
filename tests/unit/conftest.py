@@ -279,8 +279,10 @@ def screen_with_plates(screen):
             o.addWell(well)
             plateacquisition = PlateAcquisitionI()
             plateacquisition.id = rlong(well_id)
-            plateacquisition.name = rstring('plateacquisition_name_%d' % well_id)
-            plateacquisition.description = rstring('plateacquisition_description_%d' % well_id)
+            plateacquisition.name = rstring(
+                'plateacquisition_name_%d' % well_id)
+            plateacquisition.description = rstring(
+                'plateacquisition_description_%d' % well_id)
             plateacquisition.maximumFieldCount = rint(1)
             plateacquisition.startTime = rtime(1L)
             plateacquisition.endTime = rtime(2L)
