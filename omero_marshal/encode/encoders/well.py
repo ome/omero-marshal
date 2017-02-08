@@ -12,7 +12,6 @@
 from ... import SCHEMA_VERSION
 from .annotation import AnnotatableEncoder
 from omero.model import WellI
-from omero.rtypes import unwrap
 
 
 class Well201501Encoder(AnnotatableEncoder):
