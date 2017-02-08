@@ -14,17 +14,6 @@ from .annotation import AnnotatableDecoder
 from omero.model import WellI
 
 
-def int_to_rgba(rgba_int):
-    """Converts a color Integer into r, g, b, a tuple."""
-    if rgba_int is None:
-        return None, None, None, None
-    alpha = rgba_int % 256
-    blue = rgba_int / 256 % 256
-    green = rgba_int / 256 / 256 % 256
-    red = rgba_int / 256 / 256 / 256 % 256
-    return (red, green, blue, alpha)
-
-
 class Well201501Decoder(AnnotatableDecoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#Well'
@@ -43,7 +32,7 @@ class Well201501Decoder(AnnotatableDecoder):
         )
         self.set_property(v, 'type', data.get('Type'))
         color = data.get('Color')
-        red, green, blue, alpha = int_to_rgba(color)
+        red, green, blue, alpha = self.int_to_rgba(color)
         self.set_property(v, 'red', red)
         self.set_property(v, 'green', green)
         self.set_property(v, 'blue', blue)
