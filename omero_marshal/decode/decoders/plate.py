@@ -16,7 +16,7 @@ from omero.model import PlateI
 
 class Plate201501Decoder(AnnotatableDecoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Plate'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#Plate'
 
     OMERO_CLASS = PlateI
 
@@ -36,6 +36,10 @@ class Plate201501Decoder(AnnotatableDecoder):
         self.set_property(v, 'status', data.get('Status'))
         v.wellOriginX = self.to_unit(data.get('WellOriginX'))
         v.wellOriginY = self.to_unit(data.get('WellOriginY'))
+
+        for well in data.get('Wells', list()):
+            well_decoder = self.ctx.get_decoder(well['@type'])
+            v.addWell(well_decoder.decode(well))
         return v
 
 

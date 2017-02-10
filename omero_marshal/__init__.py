@@ -64,12 +64,15 @@ BASE_URL = 'http://www.openmicroscopy.org/Schemas'
 if SCHEMA_VERSION == "2015-01":
     ROI_NS = 'ROI'
     SA_NS = 'SA'
+    SPW_NS = 'SPW'
 else:
     ROI_NS = 'OME'
     SA_NS = 'OME'
+    SPW_NS = 'OME'
 OME_SCHEMA_URL = '%s/OME/%s' % (BASE_URL, SCHEMA_VERSION)
 ROI_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, ROI_NS, SCHEMA_VERSION)
 SA_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, SA_NS, SCHEMA_VERSION)
+SPW_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, SPW_NS, SCHEMA_VERSION)
 
 
 class MarshallingCtx(object):

@@ -45,12 +45,15 @@ from omero.model import \
     PixelsI, \
     PixelsTypeI, \
     PlateI, \
+    PlateAcquisitionI, \
     PointI, \
     PolygonI, \
     PolylineI, \
     ProjectI, \
     ScreenI, \
-    TimeI
+    TimeI, \
+    WellI, \
+    WellSampleI
 from omero.model.enums import UnitsLength, UnitsTime
 from omero.rtypes import rlong, rint, rstring, rdouble, rbool, rtime
 
@@ -232,6 +235,16 @@ def screen():
 
 
 @pytest.fixture()
+def well():
+    """Basic Well for testing Color. Full test of Well below."""
+    well = WellI()
+    well.id = rlong(1)
+    well.column = rint(0)
+    well.row = rint(0)
+    return well
+
+
+@pytest.fixture()
 def screen_with_plates(screen):
     for plate_id in range(5, 7):
         o = PlateI()
@@ -248,6 +261,41 @@ def screen_with_plates(screen):
         o.wellOriginX = LengthI(0.1, UnitsLength.REFERENCEFRAME)
         o.wellOriginY = LengthI(1.1, UnitsLength.REFERENCEFRAME)
         screen.linkPlate(o)
+        for well_id in range(7, 9):
+            well = WellI()
+            well.id = rlong(well_id)
+            well.column = rint(2)
+            well.row = rint(1)
+            well.externalDescription = \
+                rstring('external_description_%d' % well_id)
+            well.externalIdentifier = \
+                rstring('external_identifier_%d' % well_id)
+            well.type = rstring('the_type')
+            well.alpha = rint(0)
+            well.red = rint(255)
+            well.green = rint(0)
+            well.blue = rint(0)
+            well.status = rstring('the_status')
+            o.addWell(well)
+            plateacquisition = PlateAcquisitionI()
+            plateacquisition.id = rlong(well_id)
+            plateacquisition.name = rstring(
+                'plateacquisition_name_%d' % well_id)
+            plateacquisition.description = rstring(
+                'plateacquisition_description_%d' % well_id)
+            plateacquisition.maximumFieldCount = rint(1)
+            plateacquisition.startTime = rtime(1L)
+            plateacquisition.endTime = rtime(2L)
+            for wellsample_id in range(9, 11):
+                wellsample = WellSampleI()
+                wellsample.setPlateAcquisition(plateacquisition)
+                wellsample.id = rlong(wellsample_id)
+                wellsample.posX = LengthI(1.0, UnitsLength.REFERENCEFRAME)
+                wellsample.posY = LengthI(2.0, UnitsLength.REFERENCEFRAME)
+                wellsample.timepoint = rtime(1L)
+                wellsample.image = create_image(1L)
+                well.addWellSample(wellsample)
+
     return screen
 
 

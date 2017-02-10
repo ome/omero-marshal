@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, OME_SCHEMA_URL
+from omero_marshal import get_encoder, OME_SCHEMA_URL, SPW_SCHEMA_URL
 
 
 class TestProjectEncoder(object):
@@ -148,7 +148,7 @@ class TestScreenEncoder(object):
         v = encoder.encode(screen)
         assert v == {
             '@id': 4L,
-            '@type': '%s#Screen' % OME_SCHEMA_URL,
+            '@type': '%s#Screen' % SPW_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'ProtocolDescription': 'the_protocol_description',
@@ -164,7 +164,7 @@ class TestScreenEncoder(object):
         v = encoder.encode(screen_with_plates)
         assert v == {
             '@id': 4L,
-            '@type': '%s#Screen' % OME_SCHEMA_URL,
+            '@type': '%s#Screen' % SPW_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'ProtocolDescription': 'the_protocol_description',
@@ -175,7 +175,7 @@ class TestScreenEncoder(object):
             'omero:details': {'@type': 'TBD#Details'},
             'Plates': [{
                 '@id': 5L,
-                '@type': '%s#Plate' % OME_SCHEMA_URL,
+                '@type': '%s#Plate' % SPW_SCHEMA_URL,
                 'Name': 'plate_name_5',
                 'Description': 'plate_description_5',
                 'ColumnNamingConvention': 'number',
@@ -197,10 +197,211 @@ class TestScreenEncoder(object):
                     'Symbol': 'reference frame',
                     'Value': 1.1
                 },
+                'Wells': [{
+                    '@id': 7L,
+                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_7',
+                    'ExternalIdentifier': 'external_identifier_7',
+                    'Type': 'the_type',
+                    'Color': -16777216,
+                    'omero:status': 'the_status',
+                    'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
+                    'omero:details': {'@type': 'TBD#Details'}
+                }, {
+                    '@id': 8L,
+                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_8',
+                    'ExternalIdentifier': 'external_identifier_8',
+                    'Type': 'the_type',
+                    'Color': -16777216,
+                    'omero:status': 'the_status',
+                    'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
+                    'omero:details': {'@type': 'TBD#Details'}
+                }],
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@id': 6L,
-                '@type': '%s#Plate' % OME_SCHEMA_URL,
+                '@type': '%s#Plate' % SPW_SCHEMA_URL,
                 'Name': 'plate_name_6',
                 'Description': 'plate_description_6',
                 'ColumnNamingConvention': 'number',
@@ -222,6 +423,207 @@ class TestScreenEncoder(object):
                     'Symbol': 'reference frame',
                     'Value': 1.1
                 },
+                'Wells': [{
+                    '@id': 7L,
+                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_7',
+                    'ExternalIdentifier': 'external_identifier_7',
+                    'Type': 'the_type',
+                    'Color': -16777216,
+                    'omero:status': 'the_status',
+                    'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 7L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_7',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_7',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
+                    'omero:details': {'@type': 'TBD#Details'}
+                }, {
+                    '@id': 8L,
+                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    'Column': 2,
+                    'Row': 1,
+                    'ExternalDescription': 'external_description_8',
+                    'ExternalIdentifier': 'external_identifier_8',
+                    'Type': 'the_type',
+                    'Color': -16777216,
+                    'omero:status': 'the_status',
+                    'WellSamples': [{
+                        '@id': 9L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }, {
+                        '@id': 10L,
+                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        'PositionX': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 1.0
+                        },
+                        'PositionY': {
+                            '@type': 'TBD#LengthI',
+                            'Unit': 'REFERENCEFRAME',
+                            'Symbol': 'reference frame',
+                            'Value': 2.0
+                        },
+                        'Timepoint': 1L,
+                        'Image': {
+                            '@id': 1L,
+                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            'AcquisitionDate': 1L,
+                            'Name': 'image_name_1',
+                            'omero:archived': False,
+                            'Description': 'image_description_1',
+                            'omero:partial': False,
+                            'omero:series': 0,
+                            'omero:format': {
+                                '@id': 1L,
+                                '@type': 'TBD#Format',
+                                'value': 'PNG',
+                                'omero:details': {'@type': 'TBD#Details'},
+                            },
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'PlateAcquisition': {
+                            '@id': 8L,
+                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            'Description': 'plateacquisition_description_8',
+                            'EndTime': 2L,
+                            'MaximumFieldCount': 1,
+                            'Name': 'plateacquisition_name_8',
+                            'StartTime': 1L,
+                            'omero:details': {'@type': 'TBD#Details'}
+                        },
+                        'omero:details': {'@type': 'TBD#Details'}
+                    }],
+                    'omero:details': {'@type': 'TBD#Details'}
+                }],
                 'omero:details': {'@type': 'TBD#Details'}
             }]
         }
