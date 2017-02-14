@@ -111,8 +111,7 @@ class TestImagePixelsEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
-                    'Alpha': 255,
-                    'Blue': 0,
+                    'Color': 16711935,
                     'ContrastMethod': {
                         '@id': 8L,
                         '@type': 'TBD#ContrastMethod',
@@ -132,7 +131,6 @@ class TestImagePixelsEncoder(object):
                         'Value': 488.0
                     },
                     'Fluor': 'GFP',
-                    'Green': 255,
                     'Illumination': {
                         '@id': 1L,
                         '@type': 'TBD#Illumination',
@@ -148,7 +146,6 @@ class TestImagePixelsEncoder(object):
                         'Value': 1.0
                     },
                     'PockelCellSetting': 0,
-                    'Red': 0,
                     'SamplesPerPixel': 2,
                     'omero:LogicalChannelId': 1L,
                     'omero:details': {'@type': 'TBD#Details'},
@@ -168,8 +165,7 @@ class TestImagePixelsEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
-                    'Alpha': 255,
-                    'Blue': 255,
+                    'Color': 65535,
                     'ContrastMethod': {
                         '@id': 8L,
                         '@type': 'TBD#ContrastMethod',
@@ -189,7 +185,6 @@ class TestImagePixelsEncoder(object):
                         'Value': 405.0
                     },
                     'Fluor': 'DAPI',
-                    'Green': 0,
                     'Illumination': {
                         '@id': 1L,
                         '@type': 'TBD#Illumination',
@@ -205,7 +200,6 @@ class TestImagePixelsEncoder(object):
                         'Value': 2.0
                     },
                     'PockelCellSetting': 0,
-                    'Red': 0,
                     'SamplesPerPixel': 2,
                     'omero:LogicalChannelId': 2L,
                     'omero:details': {'@type': 'TBD#Details'},
