@@ -22,10 +22,12 @@ class Channel201501Decoder(AnnotatableDecoder):
 
     def decode(self, data):
         v = super(Channel201501Decoder, self).decode(data)
-        self.set_property(v, 'alpha', data.get('Alpha'))
-        self.set_property(v, 'blue', data.get('Blue'))
-        self.set_property(v, 'green', data.get('Green'))
-        self.set_property(v, 'red', data.get('Red'))
+        color = data.get('Color')
+        red, green, blue, alpha = self.int_to_rgba(color)
+        self.set_property(v, 'red', red)
+        self.set_property(v, 'green', green)
+        self.set_property(v, 'blue', blue)
+        self.set_property(v, 'alpha', alpha)
         self.set_property(v, 'lookupTable', data.get('omero:lookupTable'))
 
         logical_channel = LogicalChannelI(data.get('omero:LogicalChannelId'))
