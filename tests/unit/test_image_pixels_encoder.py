@@ -111,7 +111,7 @@ class TestImagePixelsEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
-                    'Color': 16711935,
+                    'Color': -1,
                     'ContrastMethod': {
                         '@id': 8L,
                         '@type': 'TBD#ContrastMethod',
@@ -165,7 +165,7 @@ class TestImagePixelsEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
-                    'Color': 65535,
+                    'Color': -16711681,
                     'ContrastMethod': {
                         '@id': 8L,
                         '@type': 'TBD#ContrastMethod',

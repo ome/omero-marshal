@@ -68,9 +68,9 @@ class TestImagePixelsDecoder(object):
         channel_1, channel_2 = pixels.copyChannels()
         assert channel_1.id.val == 1L
         assert channel_1.alpha.val == 255
-        assert channel_1.blue.val == 0
+        assert channel_1.blue.val == 255
         assert channel_1.green.val == 255
-        assert channel_1.red.val == 0
+        assert channel_1.red.val == 255
         assert channel_1.lookupTable.val == 'rainbow'
         logical_channel_1 = channel_1.logicalChannel
         assert logical_channel_1.id.val == 1L
@@ -96,7 +96,7 @@ class TestImagePixelsDecoder(object):
         assert channel_2.alpha.val == 255
         assert channel_2.blue.val == 255
         assert channel_2.green.val == 0
-        assert channel_2.red.val == 0
+        assert channel_2.red.val == 255
         assert channel_2.lookupTable.val == 'rainbow'
         logical_channel_2 = channel_2.logicalChannel
         assert logical_channel_2.id.val == 2L
