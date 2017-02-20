@@ -20,10 +20,8 @@ class Channel201501Encoder(AnnotatableEncoder):
 
     def encode(self, obj):
         v = super(Channel201501Encoder, self).encode(obj)
-        self.set_if_not_none(v, 'Alpha', obj.alpha)
-        self.set_if_not_none(v, 'Blue', obj.blue)
-        self.set_if_not_none(v, 'Green', obj.green)
-        self.set_if_not_none(v, 'Red', obj.red)
+        color = self.rgba_to_int(obj.red, obj.green, obj.blue, obj.alpha)
+        self.set_if_not_none(v, 'Color', color)
         self.set_if_not_none(v, 'omero:lookupTable', obj.lookupTable)
         logical_channel = obj.logicalChannel
         if logical_channel is not None and logical_channel.isLoaded():
