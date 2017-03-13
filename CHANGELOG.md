@@ -1,3 +1,18 @@
+## 0.5.0 (2017-03-13)
+
+Features:
+
+  - Migrate transforms encoder/decoders (#20)
+  - Support Line/Polyline markers (#25)
+  - Support Screens and Plates(#26)
+  - Support Images, Pixels and Channels (#27, #32, #36)
+  - Add convenience fields to encoded Permissions (#30)
+  - Support Well/WellSample/Image hierarchy (#31)
+
+Bugfixes:
+
+  - Handle unloaded details (#28)
+
 ## 0.4.1 (2016-09-16)
 
 Bugfixes:
