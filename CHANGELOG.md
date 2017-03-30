@@ -1,3 +1,9 @@
+## 0.5.1 (2017-03-30)
+
+Bugfixes:
+
+  - Fix stringent OMERO version check (#38)
+
 ## 0.5.0 (2017-03-13)
 
 Features:
