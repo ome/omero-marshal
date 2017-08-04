@@ -1,26 +1,19 @@
 language: python
-
+dist: trusty
 # This (sudo: false) is needed to "run on container-based infrastructure" on
 # which cache: is available
 # http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
-
-addons:
-  apt:
-    packages:
-     - zeroc-ice34
+sudo: required
 
 env:
-  global:
-    - ICE=Ice-3.5.1-b1-ubuntu1204-amd64
   matrix:
     - OMERO_VERSION=5.1
     - OMERO_VERSION=5.2
     - OMERO_VERSION=5.3
 
 before_install:
-  - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz -O /tmp/${ICE}.tar.xz
-  - tar -xvf /tmp/${ICE}.tar.xz -C /tmp
+  - export PATH=/usr/bin/:$PATH
+  - sudo apt-get install -y zeroc-ice35
   - pip install omego
   - omego download --ice 3.5 --release ${OMERO_VERSION} py
   - rm OMERO.py*.zip
