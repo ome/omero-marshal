@@ -22,9 +22,9 @@ before_install:
 script:
     - python setup.py flake8
     - PYTHONPATH=/tmp/OMERO.py/lib/python python setup.py test --pytest-args='-v -v'
-    - sudo python setup.py sdist install
+    - sudo python setup.py sdist install --record files.txt
     - PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
-    - pip uninstall -y omero-marshal
+    - cat files.txt | xargs sudo rm -rf
     - python setup.py bdist_egg
     - easy_install dist/*.egg
     - PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
