@@ -1,18 +1,11 @@
 language: python
-
+dist: trusty
 # This (sudo: false) is needed to "run on container-based infrastructure" on
 # which cache: is available
 # http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
-
-addons:
-  apt:
-    packages:
-     - zeroc-ice34
+sudo: required
 
 env:
-  global:
-    - ICE=Ice-3.5.1-b1-ubuntu1204-amd64
   matrix:
     - OMERO_VERSION=5.1
     - OMERO_VERSION=5.2
@@ -20,8 +13,13 @@ env:
     - OMERO_VERSION=5.4.0-m2
 
 before_install:
-  - wget http://downloads.openmicroscopy.org/ice/experimental/${ICE}.tar.xz -O /tmp/${ICE}.tar.xz
-  - tar -xvf /tmp/${ICE}.tar.xz -C /tmp
+  # The installation of the python dependencies must be done in that level for now
+  # otherwise they are not available in the containers,
+  # see https://github.com/travis-ci/travis-ci/issues/8048
+  # Changing the value for sudo will also need to be reviewed at the same time
+  # This will need to be reviewed when the issue above is fixed
+  - export PATH=/usr/bin/:$PATH
+  - sudo apt-get install -y zeroc-ice35
   - pip install omego
   - omego download --ice 3.5 --release ${OMERO_VERSION} py
   - rm OMERO.py*.zip
@@ -29,10 +27,10 @@ before_install:
 
 script:
     - python setup.py flake8
-    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python setup.py test --pytest-args='-v -v'
-    - python setup.py sdist install
-    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
-    - pip uninstall -y omero-marshal
-    - python setup.py bdist
+    - PYTHONPATH=/tmp/OMERO.py/lib/python python setup.py test --pytest-args='-v -v'
+    - sudo python setup.py sdist install --record files.txt
+    - PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
+    - cat files.txt | xargs sudo rm -rf
+    - sudo python setup.py bdist_egg
     - easy_install dist/*.egg
-    - LD_LIBRARY_PATH=/tmp/${ICE}/lib PYTHONPATH=/tmp/${ICE}/python:/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
+    - PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
