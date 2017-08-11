@@ -320,3 +320,14 @@ class TestOptionalUnitInformation(TestShapeDecoder):
         assert v.x.val == 1.0
         assert v.y.__class__ is RDoubleI
         assert v.y.val == 2.0
+
+
+class TestMaskDecoder(TestShapeDecoder):
+
+    def test_decoder(self, mask):
+        encoder = get_encoder(mask.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(mask)
+        v = decoder.decode(v)
+        self.assert_shape(v)
+        assert v.id.val == 8L

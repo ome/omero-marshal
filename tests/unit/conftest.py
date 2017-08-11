@@ -34,6 +34,7 @@ from omero.model import \
     LongAnnotationI, \
     LogicalChannelI, \
     MapAnnotationI, \
+    MaskI, \
     NamedValue, \
     TagAnnotationI, \
     TermAnnotationI, \
@@ -678,4 +679,16 @@ def opt_unit_label():
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
     o.id = rlong(7L)
+    return o
+
+
+@pytest.fixture()
+def mask():
+    o = MaskI()
+    populate_shape(o)
+    o.x = rdouble(0.0)
+    o.y = rdouble(0.0)
+    o.width = rdouble(1.0)
+    o.height = rdouble(2.0)
+    o.id = rlong(8L)
     return o
