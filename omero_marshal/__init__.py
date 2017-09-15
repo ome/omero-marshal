@@ -60,7 +60,7 @@ def get_schema_version(version):
         raise Exception("Unsupported OMERO version: " + version)
 
 SCHEMA_VERSION = get_schema_version(omero_version)
-BASE_URL = 'http://www.openmicroscopy.org/Schemas'
+BASE_URL = 'https://www.openmicroscopy.org/Schemas'
 if SCHEMA_VERSION == "2015-01":
     ROI_NS = 'ROI'
     SA_NS = 'SA'
