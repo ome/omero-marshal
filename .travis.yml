@@ -10,7 +10,7 @@ env:
     - OMERO_VERSION=5.1
     - OMERO_VERSION=5.2
     - OMERO_VERSION=5.3
-    - OMERO_VERSION=5.4.0-m2
+    - OMERO_VERSION=5.4
 
 before_install:
   # The installation of the python dependencies must be done in that level for now
