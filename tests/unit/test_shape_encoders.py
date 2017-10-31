@@ -305,3 +305,17 @@ class TestRoiEncoder(TestShapeEncoder):
         encoder = get_encoder(roi_with_shapes_and_annotations.__class__)
         v = encoder.encode(roi_with_shapes_and_annotations)
         self.assert_roi_with_shapes(v, has_annotations=True)
+
+
+class TestMaskEncoder(TestShapeEncoder):
+
+    def test_encoder(self, mask):
+        encoder = get_encoder(mask.__class__)
+        v = encoder.encode(mask)
+        self.assert_shape(v)
+        assert v['@id'] == 8L
+        assert v['@type'] == '%s#Mask' % ROI_SCHEMA_URL
+        assert v['X'] == 0.0
+        assert v['Y'] == 0.0
+        assert v['Width'] == 1.0
+        assert v['Height'] == 2.0
