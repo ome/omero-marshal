@@ -1,3 +1,15 @@
+## 0.5.2 (2017-11-06)
+
+Features:
+
+  - Support for Masks (#44)
+
+Bugfixes:
+
+  - Test with latest OMERO 5.4.x (#43, #47)
+  - Update Travis build to use Trusty and latest Ice 3.5.x (#42)
+  - Test with latest OMERO 5.3.x (#41)
+
 ## 0.5.1 (2017-03-30)
 
 Bugfixes:
