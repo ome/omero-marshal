@@ -48,6 +48,6 @@ licensed under the terms of the GNU General Public License (GPL) v2 or later.
 Reference
 =========
 
-* http://www.openmicroscopy.org/Schemas/Documentation/Generated/OME-2015-01/ome.html
-* http://www.openmicroscopy.org/site/support/omero5.1/developers/Model/Units.html
-* https://www.openmicroscopy.org/site/support/omero5.1/developers/Model/KeyValuePairs.html
+* https://www.openmicroscopy.org/Schemas/Documentation/Generated/OME-2015-01/ome.html
+* https://docs.openmicroscopy.org/latest/omero/developers/Model/Units.html
+* https://docs.openmicroscopy.org/latest/omero/developers/Model/KeyValuePairs.html
