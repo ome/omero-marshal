@@ -19,4 +19,5 @@ class FormatDecoder(EnumDecoder):
 
     OMERO_CLASS = FormatI
 
+
 decoder = (FormatDecoder.TYPE, FormatDecoder)

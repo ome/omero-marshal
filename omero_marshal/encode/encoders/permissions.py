@@ -33,4 +33,5 @@ class PermissionsEncoder(Encoder):
         v['isUserRead'] = obj.isUserRead()
         return v
 
+
 encoder = (PermissionsI, PermissionsEncoder)

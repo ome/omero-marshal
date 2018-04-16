@@ -19,4 +19,5 @@ class PixelsTypeDecoder(EnumDecoder):
 
     OMERO_CLASS = PixelsTypeI
 
+
 decoder = (PixelsTypeDecoder.TYPE, PixelsTypeDecoder)

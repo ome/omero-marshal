@@ -19,4 +19,5 @@ class ContrastMethodDecoder(EnumDecoder):
 
     OMERO_CLASS = ContrastMethodI
 
+
 decoder = (ContrastMethodDecoder.TYPE, ContrastMethodDecoder)

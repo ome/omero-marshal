@@ -27,4 +27,5 @@ class ExternalInfoDecoder(Decoder):
         self.set_property(v, 'uuid', data.get('Uuid'))
         return v
 
+
 decoder = (ExternalInfoDecoder.TYPE, ExternalInfoDecoder)

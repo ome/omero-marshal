@@ -39,4 +39,5 @@ class DetailsDecoder(Decoder):
             v.externalInfo = decoder.decode(externalInfo)
         return v
 
+
 decoder = (DetailsDecoder.TYPE, DetailsDecoder)

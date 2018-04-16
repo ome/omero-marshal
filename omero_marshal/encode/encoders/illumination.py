@@ -17,4 +17,5 @@ class IlluminationEncoder(EnumEncoder):
 
     TYPE = 'TBD#Illumination'
 
+
 encoder = (IlluminationI, IlluminationEncoder)

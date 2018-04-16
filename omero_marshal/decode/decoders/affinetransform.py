@@ -45,6 +45,7 @@ class AffineTransform201606Decoder(AffineTransform201501Decoder):
     def set_transform(self, data):
         return data
 
+
 if SCHEMA_VERSION == '2015-01':
     decoder = (AffineTransform201501Decoder.TYPE, AffineTransform201501Decoder)
 elif SCHEMA_VERSION == '2016-06':
