@@ -24,9 +24,10 @@ before_install:
   - omego download --ice 3.5 --release ${OMERO_VERSION} py
   - rm OMERO.py*.zip
   - mv OMERO.py* /tmp/OMERO.py
+  - pip install flake8
+  - flake8 .
 
 script:
-    - python setup.py flake8
     - PYTHONPATH=/tmp/OMERO.py/lib/python python setup.py test --pytest-args='-v -v'
     - sudo python setup.py sdist install --record files.txt
     - PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
