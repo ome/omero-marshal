@@ -1,8 +1,9 @@
 .. image:: https://travis-ci.org/openmicroscopy/omero-marshal.png
    :target: http://travis-ci.org/openmicroscopy/omero-marshal
 
-.. image:: https://badge.fury.io/py/omero-marshal.svg
-    :target: https://badge.fury.io/py/omero-marshal
+.. image:: https://img.shields.io/pypi/v/nine.svg
+   :alt: PyPI
+   :target: https://pypi.org/project/omero-marshal/
 
 OMERO Marshal
 =============
@@ -14,7 +15,7 @@ encodings.
 Requirements
 ============
 
-* OMERO.py 5.1.x, 5.2.x
+* OMERO.py 5.1.x, 5.2.x, 5.3.x, 5.4.x
 * Python 2.6+
 
 Development Installation
