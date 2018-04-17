@@ -1,7 +1,7 @@
 .. image:: https://travis-ci.org/openmicroscopy/omero-marshal.png
    :target: http://travis-ci.org/openmicroscopy/omero-marshal
 
-.. image:: https://img.shields.io/pypi/v/nine.svg
+.. image:: https://img.shields.io/pypi/v/omero-marshal.svg
    :alt: PyPI
    :target: https://pypi.org/project/omero-marshal/
 
