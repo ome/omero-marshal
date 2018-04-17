@@ -17,4 +17,5 @@ class DimensionOrderEncoder(EnumEncoder):
 
     TYPE = 'TBD#DimensionOrder'
 
+
 encoder = (DimensionOrderI, DimensionOrderEncoder)

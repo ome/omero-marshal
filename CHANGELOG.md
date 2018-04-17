@@ -1,3 +1,9 @@
+## 0.5.3 (2018-04-17)
+
+Bugfix:
+
+  - Fix installation on CentOS following PyPI TLSv1.0 and TLSv1.1 deprecation (#50)
+
 ## 0.5.2 (2017-11-06)
 
 Features:

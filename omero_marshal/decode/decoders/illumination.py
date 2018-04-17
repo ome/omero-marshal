@@ -19,6 +19,7 @@ class IlluminationDecoder(EnumDecoder):
 
     OMERO_CLASS = IlluminationI
 
+
 decoder = (
     IlluminationDecoder.TYPE, IlluminationDecoder
 )

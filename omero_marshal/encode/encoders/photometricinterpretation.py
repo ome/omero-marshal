@@ -17,4 +17,5 @@ class PhotometricInterpretationEncoder(EnumEncoder):
 
     TYPE = 'TBD#PhotometricInterpretation'
 
+
 encoder = (PhotometricInterpretationI, PhotometricInterpretationEncoder)

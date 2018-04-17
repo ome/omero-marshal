@@ -17,4 +17,5 @@ class AcquisitionModeEncoder(EnumEncoder):
 
     TYPE = 'TBD#AcquisitionMode'
 
+
 encoder = (AcquisitionModeI, AcquisitionModeEncoder)

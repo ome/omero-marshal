@@ -17,4 +17,5 @@ class FormatEncoder(EnumEncoder):
 
     TYPE = 'TBD#Format'
 
+
 encoder = (FormatI, FormatEncoder)

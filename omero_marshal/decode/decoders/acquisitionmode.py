@@ -19,6 +19,7 @@ class AcquisitionModeDecoder(EnumDecoder):
 
     OMERO_CLASS = AcquisitionModeI
 
+
 decoder = (
     AcquisitionModeDecoder.TYPE, AcquisitionModeDecoder
 )

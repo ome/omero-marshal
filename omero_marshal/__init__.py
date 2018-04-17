@@ -44,6 +44,7 @@ def get_decoder(t):
         logger.warn('Requested unknown decoder %s' % t, exc_info=True)
         return None
 
+
 VERSION_REGEXP = re.compile('^(\d+\.\d+\.\d+)')
 
 
@@ -58,6 +59,7 @@ def get_schema_version(version):
         return '2016-06'
     else:
         raise Exception("Unsupported OMERO version: " + version)
+
 
 SCHEMA_VERSION = get_schema_version(omero_version)
 BASE_URL = 'http://www.openmicroscopy.org/Schemas'

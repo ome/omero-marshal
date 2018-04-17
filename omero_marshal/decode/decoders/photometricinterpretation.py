@@ -19,6 +19,7 @@ class PhotometricInterpretationDecoder(EnumDecoder):
 
     OMERO_CLASS = PhotometricInterpretationI
 
+
 decoder = (
     PhotometricInterpretationDecoder.TYPE, PhotometricInterpretationDecoder
 )

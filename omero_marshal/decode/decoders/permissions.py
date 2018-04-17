@@ -28,4 +28,5 @@ class PermissionsDecoder(Decoder):
         ]
         return o
 
+
 decoder = (PermissionsDecoder.TYPE, PermissionsDecoder)

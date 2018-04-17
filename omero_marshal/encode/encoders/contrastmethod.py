@@ -17,4 +17,5 @@ class ContrastMethodEncoder(EnumEncoder):
 
     TYPE = 'TBD#ContrastMethod'
 
+
 encoder = (ContrastMethodI, ContrastMethodEncoder)

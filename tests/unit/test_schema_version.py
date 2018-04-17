@@ -22,6 +22,7 @@ class SchemaFixture(object):
         self.omero_version = omero_version
         self.schema_version = schema_version
 
+
 SFS = (SchemaFixture("5.1.0-ice35-b40", "2015-01"),
        SchemaFixture("5.2.0-ice35-b12", "2015-01"),
        SchemaFixture("5.2.4-ice35-b23", "2015-01"),

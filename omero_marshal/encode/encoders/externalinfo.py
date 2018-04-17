@@ -27,4 +27,5 @@ class ExternalInfoEncoder(Encoder):
         self.set_if_not_none(v, 'Uuid', obj.uuid)
         return v
 
+
 encoder = (ExternalInfoI, ExternalInfoEncoder)

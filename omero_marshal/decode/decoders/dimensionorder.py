@@ -19,4 +19,5 @@ class DimensionOrderDecoder(EnumDecoder):
 
     OMERO_CLASS = DimensionOrderI
 
+
 decoder = (DimensionOrderDecoder.TYPE, DimensionOrderDecoder)

@@ -33,4 +33,5 @@ class DetailsEncoder(Encoder):
             v['externalInfo'] = encoder.encode(obj.externalInfo)
         return v
 
+
 encoder = (DetailsI, DetailsEncoder)

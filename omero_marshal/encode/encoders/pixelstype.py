@@ -17,4 +17,5 @@ class PixelsTypeEncoder(EnumEncoder):
 
     TYPE = 'TBD#PixelsType'
 
+
 encoder = (PixelsTypeI, PixelsTypeEncoder)
