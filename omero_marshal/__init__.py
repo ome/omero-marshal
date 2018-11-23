@@ -45,7 +45,7 @@ def get_decoder(t):
         return None
 
 
-VERSION_REGEXP = re.compile('^(\d+\.\d+\.\d+)')
+VERSION_REGEXP = re.compile(r'^(\d+\.\d+\.\d+)')
 
 
 def get_schema_version(version):
@@ -55,7 +55,7 @@ def get_schema_version(version):
     v = StrictVersion(m.group(1))
     if v >= StrictVersion('5.1.0') and v < StrictVersion('5.3.0'):
         return '2015-01'
-    elif v >= StrictVersion('5.3.0') and v < StrictVersion('5.5.0'):
+    elif v >= StrictVersion('5.3.0') and v < StrictVersion('6.0.0'):
         return '2016-06'
     else:
         raise Exception("Unsupported OMERO version: " + version)

@@ -29,7 +29,8 @@ SFS = (SchemaFixture("5.1.0-ice35-b40", "2015-01"),
        SchemaFixture("5.3.0-m2-ice35-b20", "2016-06"),
        SchemaFixture("5.3.0-ice36-b59", "2016-06"),
        SchemaFixture("5.3.1-ice36-SNAPSHOT", "2016-06"),
-       SchemaFixture("5.4.0-ice36-SNAPSHOT", "2016-06"))
+       SchemaFixture("5.4.0-ice36-SNAPSHOT", "2016-06"),
+       SchemaFixture("5.5.0-ice36-SNAPSHOT", "2016-06"))
 
 
 @pytest.mark.parametrize("f", SFS, ids=[x.omero_version for x in SFS])
