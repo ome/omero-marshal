@@ -1,5 +1,4 @@
 language: python
-dist: trusty
 # This (sudo: false) is needed to "run on container-based infrastructure" on
 # which cache: is available
 # http://docs.travis-ci.com/user/workers/container-based-infrastructure/
@@ -7,7 +6,6 @@ sudo: required
 
 env:
   matrix:
-    - OMERO_VERSION=5.1
     - OMERO_VERSION=5.2
     - OMERO_VERSION=5.3
     - OMERO_VERSION=5.4
@@ -19,9 +17,17 @@ before_install:
   # Changing the value for sudo will also need to be reviewed at the same time
   # This will need to be reviewed when the issue above is fixed
   - export PATH=/usr/bin/:$PATH
-  - sudo apt-get install -y zeroc-ice35
+  - sudo apt-get -y install python-dev build-essential
+  - sudo apt-get -y install db5.3-util
+  - sudo apt-get -y install libssl-dev libbz2-dev libmcpp-dev libdb++-dev libdb-dev
+
+  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5E6DA83306132997
+  - sudo apt-add-repository "deb http://zeroc.com/download/apt/ubuntu`lsb_release -rs` stable main"
+  - sudo apt-get update
+  - sudo apt-get -y install zeroc-ice-all-runtime
+  - sudo pip install -U "zeroc-ice<3.7"
   - pip install omego
-  - omego download --ice 3.5 --release ${OMERO_VERSION} py
+  - omego download --ice 3.6 --release ${OMERO_VERSION} py
   - rm OMERO.py*.zip
   - mv OMERO.py* /tmp/OMERO.py
   - pip install flake8
