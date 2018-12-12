@@ -15,7 +15,7 @@ encodings.
 Requirements
 ============
 
-* OMERO.py 5.1.x, 5.2.x, 5.3.x, 5.4.x
+* OMERO.py 5.2.x, 5.3.x, 5.4.x
 * Python 2.6+
 
 Development Installation
