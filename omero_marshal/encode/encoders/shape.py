@@ -37,7 +37,6 @@ class Shape201501Encoder(AnnotatableEncoder):
         transform = self.get_transform(obj.transform)
         if transform:
             transform_encoder = self.ctx.get_encoder(transform.__class__)
-            print transform_encoder.encode(transform)
             self.set_if_not_none(
                 v, 'Transform', transform_encoder.encode(transform))
         self.set_linecap(v, obj)
