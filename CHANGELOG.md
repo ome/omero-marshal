@@ -1,3 +1,9 @@
+## 0.6.0 (2018-12-)
+
+Bugfixes:
+  - Remove support for 5.1.x
+  - Update Travis build to use Xenial and Ice 3.6.x (#53)
+
 ## 0.5.4 (2018-11-23)
 
 Bugfixes:
