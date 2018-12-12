@@ -16,6 +16,7 @@ VERSION = '0.5.5.dev1'
 
 
 def get_requirements(suffix=''):
+    rv = []
     with open('requirements%s.txt' % suffix) as f:
         rv = f.read().splitlines()
     return rv
@@ -74,6 +75,11 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=get_requirements(),
+    extras_require={
+        ':python_version=="2.7"': [
+            'importlib>=1.0.1'
+        ]
+    },
     tests_require=get_requirements('-dev'),
     entry_points="""
     # -*- Entry points: -*-
