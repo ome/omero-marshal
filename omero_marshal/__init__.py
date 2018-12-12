@@ -53,7 +53,7 @@ def get_schema_version(version):
     if m is None:
         raise Exception("Invalid OMERO version number: " + version)
     v = StrictVersion(m.group(1))
-    if v >= StrictVersion('5.1.0') and v < StrictVersion('5.3.0'):
+    if v >= StrictVersion('5.2.0'):
         return '2015-01'
     elif v >= StrictVersion('5.3.0') and v < StrictVersion('6.0.0'):
         return '2016-06'
