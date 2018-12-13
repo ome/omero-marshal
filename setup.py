@@ -75,11 +75,6 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=get_requirements(),
-    extras_require={
-        ':python_version=="2.7"': [
-            'importlib>=1.0.1'
-        ]
-    },
     tests_require=get_requirements('-dev'),
     entry_points="""
     # -*- Entry points: -*-
