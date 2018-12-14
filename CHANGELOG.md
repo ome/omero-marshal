@@ -3,6 +3,8 @@
 Bugfixes:
   - Remove support for 5.1.x (#56)
   - Update Travis build to use Xenial and Ice 3.6.x (#53)
+  - Remove support for Python 2.6
+  - Add support for Python 3
 
 ## 0.5.4 (2018-11-23)
 
