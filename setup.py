@@ -16,6 +16,7 @@ VERSION = '0.5.5.dev1'
 
 
 def get_requirements(suffix=''):
+    rv = []
     with open('requirements%s.txt' % suffix) as f:
         rv = f.read().splitlines()
     return rv
