@@ -16,7 +16,7 @@ Requirements
 ============
 
 * OMERO.py 5.2.x, 5.3.x, 5.4.x
-* Python 2.7
+* Python 2.7+
 
 Development Installation
 ========================
