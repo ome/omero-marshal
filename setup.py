@@ -61,7 +61,6 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],  # Get strings from
         # http://pypi.python.org/pypi?%3Aaction=list_classifiers
