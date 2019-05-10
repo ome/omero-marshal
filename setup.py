@@ -68,7 +68,7 @@ setup(
     keywords='',
     author='The Open Microscopy Team, Glencoe Software, Inc.',
     author_email='ome-devel@lists.openmicroscopy.org.uk',
-    url='https://github.com/openmicroscopy/omero-marshal',
+    url='https://github.com/ome/omero-marshal',
     license='GPLv2+',
     packages=find_packages(),
     zip_safe=True,

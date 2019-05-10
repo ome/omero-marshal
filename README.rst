@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/openmicroscopy/omero-marshal.png
-   :target: http://travis-ci.org/openmicroscopy/omero-marshal
+.. image:: https://travis-ci.org/ome/omero-marshal.png
+   :target: https://travis-ci.org/ome/omero-marshal
 
 .. image:: https://img.shields.io/pypi/v/omero-marshal.svg
    :alt: PyPI
@@ -23,7 +23,7 @@ Development Installation
 
 1. Clone the repository::
 
-        git clone git@github.com:openmicroscopy/omero-marshal.git
+        git clone git@github.com:ome/omero-marshal.git
 
 2. Set up a virtualenv (http://www.pip-installer.org/) and activate it::
 
