@@ -1,5 +1,8 @@
 ## 0.6.0 (2018-12-)
 
+Features:
+  - Add support for OMERO 5.5 (#59)
+
 Bugfixes:
   - Remove support for 5.1.x (#56)
   - Update Travis build to use Xenial and Ice 3.6.x (#53)
