@@ -12,6 +12,7 @@ env:
     - OMERO_VERSION=5.2
     - OMERO_VERSION=5.3
     - OMERO_VERSION=5.4
+    - OMERO_VERSION=5.5
 
 before_install:
   # The installation of the python dependencies must be done in that level for now
@@ -40,3 +41,10 @@ script:
     - sudo python setup.py bdist_egg
     - easy_install dist/*.egg
     - PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
+
+deploy:
+  provider: pypi
+  user: $PYPI_USER
+  password: $PYPI_PASSWORD
+  on:
+    tags: true

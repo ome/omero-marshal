@@ -1,4 +1,7 @@
-## 0.6.0 (2018-12-)
+## 0.6.0 (2019-06-14)
+
+Features:
+  - Add support for OMERO 5.5 (#59)
 
 Bugfixes:
   - Remove support for 5.1.x (#56)
