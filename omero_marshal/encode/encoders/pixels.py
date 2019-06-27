@@ -12,18 +12,24 @@
 from ... import SCHEMA_VERSION
 from .. import Encoder
 from omero.model import PixelsI
+from omero.model.enums import UnitsLength
 
 
 class Pixels201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Pixels'
 
+    def set_pixel_size(self, v, key, value):
+        if (value.getValue() != float('inf') and value.getValue() is not None
+                and value.getUnit() != UnitsLength.PIXEL):
+            self.set_if_not_none(v, key, value)
+
     def encode(self, obj):
         v = super(Pixels201501Encoder, self).encode(obj)
         self.set_if_not_none(v, 'omero:methodology', obj.methodology)
-        self.set_if_not_none(v, 'PhysicalSizeX', obj.physicalSizeX)
-        self.set_if_not_none(v, 'PhysicalSizeY', obj.physicalSizeY)
-        self.set_if_not_none(v, 'PhysicalSizeZ', obj.physicalSizeZ)
+        self.set_pixel_size(v, 'PhysicalSizeX', obj.physicalSizeX)
+        self.set_pixel_size(v, 'PhysicalSizeY', obj.physicalSizeY)
+        self.set_pixel_size(v, 'PhysicalSizeZ', obj.physicalSizeZ)
         self.set_if_not_none(v, 'omero:sha1', obj.sha1)
         self.set_if_not_none(v, 'SignificantBits', obj.significantBits)
         self.set_if_not_none(v, 'SizeX', obj.sizeX)
