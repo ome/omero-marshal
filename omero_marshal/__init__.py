@@ -45,7 +45,7 @@ def get_decoder(t):
         return None
 
 
-VERSION_REGEXP = re.compile(r'^(\d+\.\d+\.\d+)')
+VERSION_REGEXP = re.compile(r'^(\d+\.\d+)\.(a|b|dev)?\d+')
 
 
 def get_schema_version(version):
