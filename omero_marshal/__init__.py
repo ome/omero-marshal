@@ -13,8 +13,8 @@ import importlib
 import pkgutil
 import logging
 import re
-from encode import encoders
-from decode import decoders
+from .encode import encoders
+from .decode import decoders
 from distutils.version import StrictVersion
 from omero_version import omero_version
 
