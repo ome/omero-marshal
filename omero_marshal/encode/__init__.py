@@ -9,6 +9,9 @@
 # jason@glencoesoftware.com.
 #
 
+
+# Needed to avoid import errors when this is the first import
+import omero.all  # noqa
 from omero import RType
 from omero_model_UnitBase import UnitBase
 from omero.rtypes import unwrap
