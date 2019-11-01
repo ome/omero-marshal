@@ -9,10 +9,9 @@
 # jason@glencoesoftware.com.
 #
 
+import sys
 import omero.model
 import omero.model.enums
-from past.builtins import basestring
-
 
 class Decoder(object):
 
@@ -35,9 +34,12 @@ class Decoder(object):
 
     def set_property(self, target, prop, value):
         field_info = getattr(target._field_info, prop)
-        # When would we NOT want to do this?
-        if isinstance(value, basestring):
-            value = value.encode('utf-8')
+        if sys.version[0] == '3':
+            if isinstance(value, str):
+                value = value.encode('utf-8')
+        else:
+            if isinstance(value, unicode):
+                value = value.encode('utf-8')
         setattr(
             target,
             prop,
