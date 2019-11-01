@@ -39,7 +39,7 @@ class Decoder(object):
             try:
                 if isinstance(value, unicode):
                     value = value.encode('utf-8')
-            except:
+            except NameError:
                 pass
         setattr(
             target,
