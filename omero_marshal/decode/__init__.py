@@ -13,6 +13,7 @@ import sys
 import omero.model
 import omero.model.enums
 
+
 class Decoder(object):
 
     TYPE = ''
@@ -34,12 +35,12 @@ class Decoder(object):
 
     def set_property(self, target, prop, value):
         field_info = getattr(target._field_info, prop)
-        if sys.version[0] == '3':
-            if isinstance(value, str):
-                value = value.encode('utf-8')
-        else:
-            if isinstance(value, unicode):
-                value = value.encode('utf-8')
+        if sys.version[0] == '2':
+            try:
+                if isinstance(value, unicode):
+                    value = value.encode('utf-8')
+            except:
+                pass
         setattr(
             target,
             prop,
