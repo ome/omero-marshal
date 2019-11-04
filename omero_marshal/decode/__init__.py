@@ -9,9 +9,10 @@
 # jason@glencoesoftware.com.
 #
 
-import sys
 import omero.model
 import omero.model.enums
+
+import sys
 
 
 class Decoder(object):
