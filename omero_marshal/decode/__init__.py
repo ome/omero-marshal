@@ -12,6 +12,8 @@
 import omero.model
 import omero.model.enums
 
+import sys
+
 
 class Decoder(object):
 
@@ -34,8 +36,12 @@ class Decoder(object):
 
     def set_property(self, target, prop, value):
         field_info = getattr(target._field_info, prop)
-        if isinstance(value, unicode):
-            value = value.encode('utf-8')
+        if sys.version[0] == '2':
+            try:
+                if isinstance(value, unicode):
+                    value = value.encode('utf-8')
+            except NameError:
+                pass
         setattr(
             target,
             prop,
