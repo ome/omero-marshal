@@ -1,3 +1,21 @@
+## 0.6.3 (2019-11-06)
+
+Bugfixes:
+
+  - Always encode string in Decoder.set_property() [#65](https://github.com/ome/omero-marhsal/pull/65)
+
+## 0.6.2 (2019-10-25)
+
+Bugfixes:
+
+  - Fix relative imports on Python 3 [#63](https://github.com/ome/omero-marhsal/pull/63)
+
+## 0.6.1 (2019-08-21)
+
+Bugfixes:
+
+  - Use major.minor for version detection:  [#61](https://github.com/ome/omero-marhsal/pull/61)
+
 ## 0.6.0 (2019-06-14)
 
 Features:
