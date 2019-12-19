@@ -5,7 +5,7 @@ dist: xenial
 # which cache: is available
 # http://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: required
-python: 2.7
+python: 3.6
 
 env:
   matrix:
