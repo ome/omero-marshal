@@ -61,6 +61,7 @@ setup(
         'or later (GPLv2+)',
         'Natural Language :: English',
         'Operating System :: OS Independent',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],  # Get strings from
@@ -76,7 +77,6 @@ setup(
     platforms='any',
     install_requires=get_requirements(),
     tests_require=get_requirements('-dev'),
-    python_requires='>=3',
     entry_points="""
     # -*- Entry points: -*-
     """,
