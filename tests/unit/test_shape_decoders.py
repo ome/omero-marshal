@@ -18,7 +18,7 @@ from omero.model import LengthI
 class TestShapeDecoder(object):
 
     def assert_experimenter(self, experimenter):
-        assert experimenter.id.val == 1L
+        assert experimenter.id.val == 1
         assert experimenter.email.val == 'the_email'
         assert experimenter.firstName.val == 'the_firstName'
         assert experimenter.lastName.val == 'the_lastName'
@@ -26,7 +26,7 @@ class TestShapeDecoder(object):
         assert experimenter.omeName.val == 'the_omeName'
 
     def assert_experimenter_group(self, experimenter_group):
-        assert experimenter_group.id.val == 1L
+        assert experimenter_group.id.val == 1
         assert experimenter_group.name.val == 'the_name'
         assert experimenter_group.description.val == 'the_description'
 
@@ -62,7 +62,7 @@ class TestShapeDecoder(object):
         assert double_annotation.doubleValue.val == 1.0
         assert long_annotation.ns.val == 'long_annotation'
         assert long_annotation.description.val == 'the_description'
-        assert long_annotation.longValue.val == 1L
+        assert long_annotation.longValue.val == 1
         assert map_annotation.ns.val == 'map_annotation'
         assert map_annotation.description.val == 'the_description'
         map_value_a, map_value_b = map_annotation.getMapValue()
@@ -78,10 +78,10 @@ class TestShapeDecoder(object):
         assert term_annotation.termValue.val == 'term_value'
         assert timestamp_annotation.ns.val == 'timestamp_annotation'
         assert timestamp_annotation.description.val == 'the_description'
-        assert timestamp_annotation.timeValue.val == 1L
+        assert timestamp_annotation.timeValue.val == 1
 
     def assert_roi(self, roi, has_annotations=False):
-        assert roi.id.val == 1L
+        assert roi.id.val == 1
         assert roi.description.val == 'the_description'
         assert roi.name.val == 'the_name'
         if not has_annotations:
@@ -137,7 +137,7 @@ class TestShapeDecoder(object):
 
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
-        assert ellipse.id.val == 1L
+        assert ellipse.id.val == 1
         if SCHEMA_VERSION == '2016-06':
             assert ellipse.x.__class__ is RDoubleI
             assert ellipse.x.val == 1.0
@@ -159,7 +159,7 @@ class TestShapeDecoder(object):
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
-        assert rectangle.id.val == 2L
+        assert rectangle.id.val == 2
         assert rectangle.x.__class__ is RDoubleI
         assert rectangle.x.val == 1.0
         assert rectangle.y.__class__ is RDoubleI
@@ -205,7 +205,7 @@ class TestPointDecoder(TestShapeDecoder):
         v = encoder.encode(point)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 3L
+        assert v.id.val == 3
         if SCHEMA_VERSION == '2016-06':
             assert v.x.__class__ is RDoubleI
             assert v.x.val == 1.0
@@ -226,7 +226,7 @@ class TestLabelDecoder(TestShapeDecoder):
         v = encoder.encode(label)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 7L
+        assert v.id.val == 7
         assert v.x.__class__ is RDoubleI
         assert v.x.val == 1.0
         assert v.y.__class__ is RDoubleI
@@ -241,7 +241,7 @@ class TestLineDecoder(TestShapeDecoder):
         v = encoder.encode(line)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 6L
+        assert v.id.val == 6
         assert v.x1.__class__ is RDoubleI
         assert v.x1.val == 0.0
         assert v.y1.__class__ is RDoubleI
@@ -263,7 +263,7 @@ class TestPolylineDecoder(TestShapeDecoder):
         v = encoder.encode(polyline)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 4L
+        assert v.id.val == 4
         assert v.points.val == '0,0 1,2 3,5'
         if SCHEMA_VERSION != '2015-01':
             assert v.markerStart.val == 'Arrow'
@@ -278,7 +278,7 @@ class TestPolygonDecoder(TestShapeDecoder):
         v = encoder.encode(polygon)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 5L
+        assert v.id.val == 5
         assert v.points.val == '0,0 1,2 3,5'
 
 
@@ -315,7 +315,7 @@ class TestOptionalUnitInformation(TestShapeDecoder):
         v = encoder.encode(opt_unit_label)
         v = decoder.decode(v)
         self.assert_shape(v, has_unit_information=False)
-        assert v.id.val == 7L
+        assert v.id.val == 7
         assert v.x.__class__ is RDoubleI
         assert v.x.val == 1.0
         assert v.y.__class__ is RDoubleI
@@ -330,4 +330,4 @@ class TestMaskDecoder(TestShapeDecoder):
         v = encoder.encode(mask)
         v = decoder.decode(v)
         self.assert_shape(v)
-        assert v.id.val == 8L
+        assert v.id.val == 8

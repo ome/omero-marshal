@@ -49,7 +49,7 @@ class TestIdentityTranform():
         if SCHEMA_VERSION == '2015-01':
             assert t.val == 'matrix(1.0 0.0 0.0 1.0 0.0 0.0)'
         else:
-            assert t.id.val == 8L
+            assert t.id.val == 8
             self.assert_identity_transform(t)
 
 
@@ -89,7 +89,7 @@ class TestTranslationTranform():
         if SCHEMA_VERSION == '2015-01':
             assert t.val == 'matrix(1.0 0.0 0.0 1.0 3.0 4.0)'
         else:
-            assert t.id.val == 8L
+            assert t.id.val == 8
             self.assert_translation_transform(t)
 
 
@@ -131,7 +131,7 @@ class TestRotationTranform():
                 'matrix(0.707106781187 0.707106781187 -0.707106781187 '
                 '0.707106781187 85.3553390593 -6.06601717798)')
         else:
-            assert t.id.val == 8L
+            assert t.id.val == 8
             self.assert_rotation_transform(t)
 
 
@@ -171,5 +171,5 @@ class TestScaleTranform():
         if SCHEMA_VERSION == '2015-01':
             assert t.val == 'matrix(1.5 0.0 0.0 2.5 0.0 0.0)'
         else:
-            assert t.id.val == 8L
+            assert t.id.val == 8
             self.assert_scale_transform(t)

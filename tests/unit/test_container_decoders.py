@@ -35,15 +35,15 @@ class TestProjectDecoder(object):
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(project_with_datasets)
         v = decoder.decode(v)
-        assert v.id.val == 1L
+        assert v.id.val == 1
         assert v.name.val == 'the_name'
         assert v.description.val == 'the_description'
         assert v.sizeOfDatasetLinks() == 2
         dataset_1, dataset_2 = v.linkedDatasetList()
-        assert dataset_1.id.val == 1L
+        assert dataset_1.id.val == 1
         assert dataset_1.name.val == 'dataset_name_1'
         assert dataset_1.description.val == 'dataset_description_1'
-        assert dataset_2.id.val == 2L
+        assert dataset_2.id.val == 2
         assert dataset_2.name.val == 'dataset_name_2'
         assert dataset_2.description.val == 'dataset_description_2'
 
@@ -53,53 +53,53 @@ class TestProjectDecoder(object):
         decoder = get_decoder(encoder.TYPE)
         v = encoder.encode(project_with_datasets_and_images)
         v = decoder.decode(v)
-        assert v.id.val == 1L
+        assert v.id.val == 1
         assert v.name.val == 'the_name'
         assert v.description.val == 'the_description'
         assert v.sizeOfDatasetLinks() == 2
 
         dataset_1, dataset_2 = v.linkedDatasetList()
 
-        assert dataset_1.id.val == 1L
+        assert dataset_1.id.val == 1
         assert dataset_1.name.val == 'dataset_name_1'
         assert dataset_1.description.val == 'dataset_description_1'
         image_1, image_2 = dataset_1.linkedImageList()
-        assert image_1.id.val == 1L
-        assert image_1.acquisitionDate.val == 1L
+        assert image_1.id.val == 1
+        assert image_1.acquisitionDate.val == 1
         assert image_1.archived.val is False
         assert image_1.description.val == 'image_description_1'
         assert image_1.name.val == 'image_name_1'
         assert image_1.partial.val is False
-        assert image_1.format.id.val == 1L
+        assert image_1.format.id.val == 1
         assert image_1.format.value.val == 'PNG'
-        assert image_2.id.val == 2L
-        assert image_2.acquisitionDate.val == 1L
+        assert image_2.id.val == 2
+        assert image_2.acquisitionDate.val == 1
         assert image_2.archived.val is False
         assert image_2.description.val == 'image_description_2'
         assert image_2.name.val == 'image_name_2'
         assert image_2.partial.val is False
-        assert image_2.format.id.val == 1L
+        assert image_2.format.id.val == 1
         assert image_2.format.value.val == 'PNG'
 
-        assert dataset_2.id.val == 2L
+        assert dataset_2.id.val == 2
         assert dataset_2.name.val == 'dataset_name_2'
         assert dataset_2.description.val == 'dataset_description_2'
         image_3, image_4 = dataset_2.linkedImageList()
-        assert image_3.id.val == 3L
-        assert image_3.acquisitionDate.val == 1L
+        assert image_3.id.val == 3
+        assert image_3.acquisitionDate.val == 1
         assert image_3.archived.val is False
         assert image_3.description.val == 'image_description_3'
         assert image_3.name.val == 'image_name_3'
         assert image_3.partial.val is False
-        assert image_3.format.id.val == 1L
+        assert image_3.format.id.val == 1
         assert image_3.format.value.val == 'PNG'
-        assert image_4.id.val == 4L
-        assert image_4.acquisitionDate.val == 1L
+        assert image_4.id.val == 4
+        assert image_4.acquisitionDate.val == 1
         assert image_4.archived.val is False
         assert image_4.description.val == 'image_description_4'
         assert image_4.name.val == 'image_name_4'
         assert image_4.partial.val is False
-        assert image_4.format.id.val == 1L
+        assert image_4.format.id.val == 1
         assert image_4.format.value.val == 'PNG'
 
 
@@ -156,7 +156,7 @@ class TestScreenDecoder(object):
         assert wellsample_1.posY.__class__ is LengthI
         assert wellsample_1.posY.getUnit() == UnitsLength.REFERENCEFRAME
         assert wellsample_1.posY.getValue() == 2.0
-        assert wellsample_1.timepoint.val == 1L
+        assert wellsample_1.timepoint.val == 1
         assert wellsample_1.image is not None
         assert wellsample_2.posX.__class__ is LengthI
         assert wellsample_2.posX.getUnit() == UnitsLength.REFERENCEFRAME
@@ -164,7 +164,7 @@ class TestScreenDecoder(object):
         assert wellsample_2.posY.__class__ is LengthI
         assert wellsample_2.posY.getUnit() == UnitsLength.REFERENCEFRAME
         assert wellsample_2.posY.getValue() == 2.0
-        assert wellsample_2.timepoint.val == 1L
+        assert wellsample_2.timepoint.val == 1
         assert wellsample_2.image is not None
         plateacquisition_1 = wellsample_1.getPlateAcquisition()
         plateacquisition_2 = wellsample_2.getPlateAcquisition()
@@ -198,7 +198,7 @@ class TestScreenDecoder(object):
         assert wellsample_1.posY.__class__ is LengthI
         assert wellsample_1.posY.getUnit() == UnitsLength.REFERENCEFRAME
         assert wellsample_1.posY.getValue() == 2.0
-        assert wellsample_1.timepoint.val == 1L
+        assert wellsample_1.timepoint.val == 1
         assert wellsample_1.image is not None
         assert wellsample_2.posX.__class__ is LengthI
         assert wellsample_2.posX.getUnit() == UnitsLength.REFERENCEFRAME
@@ -206,7 +206,7 @@ class TestScreenDecoder(object):
         assert wellsample_2.posY.__class__ is LengthI
         assert wellsample_2.posY.getUnit() == UnitsLength.REFERENCEFRAME
         assert wellsample_2.posY.getValue() == 2.0
-        assert wellsample_2.timepoint.val == 1L
+        assert wellsample_2.timepoint.val == 1
         assert wellsample_2.image is not None
         plateacquisition_1 = wellsample_1.getPlateAcquisition()
         plateacquisition_2 = wellsample_2.getPlateAcquisition()
@@ -237,11 +237,11 @@ class TestScreenDecoder(object):
         v = encoder.encode(screen_with_plates)
         v = decoder.decode(v)
         self.assert_screen(v)
-        assert v.id.val == 4L
+        assert v.id.val == 4
         assert v.sizeOfPlateLinks() == 2
         plate_1, plate_2 = v.linkedPlateList()
-        self.assert_plate(plate_1, 5L)
-        self.assert_plate(plate_2, 6L)
+        self.assert_plate(plate_1, 5)
+        self.assert_plate(plate_2, 6)
 
     @pytest.mark.parametrize("color", [
         (255, 0, 0, 255, -16776961),     # Red

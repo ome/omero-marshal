@@ -78,7 +78,7 @@ from omero_marshal import SCHEMA_VERSION
 
 def create_project(with_datasets=False, with_images=False):
     project = ProjectI()
-    project.id = rlong(1L)
+    project.id = rlong(1)
     project.name = rstring('the_name')
     project.description = rstring('the_description')
     dataset_count = 2
@@ -102,12 +102,12 @@ def create_project(with_datasets=False, with_images=False):
 
 
 def create_image(image_id, with_pixels=False):
-    image_format = FormatI(1L)
+    image_format = FormatI(1)
     image_format.value = rstring('PNG')
 
     image = ImageI()
     image.id = rlong(image_id)
-    image.acquisitionDate = rtime(1L)
+    image.acquisitionDate = rtime(1)
     image.archived = rbool(False)
     image.description = rstring('image_description_%d' % image_id)
     image.name = rstring('image_name_%d' % image_id)
@@ -116,12 +116,12 @@ def create_image(image_id, with_pixels=False):
     image.format = image_format
     if not with_pixels:
         return image
-    dimension_order = DimensionOrderI(1L)
+    dimension_order = DimensionOrderI(1)
     dimension_order.value = rstring('XYZCT')
-    pixels_type = PixelsTypeI(1L)
+    pixels_type = PixelsTypeI(1)
     pixels_type.value = 'bit'
 
-    pixels = PixelsI(1L)
+    pixels = PixelsI(1)
     pixels.methodology = rstring('methodology')
     pixels.physicalSizeX = LengthI(1.0, UnitsLength.MICROMETER)
     pixels.physicalSizeY = LengthI(2.0, UnitsLength.MICROMETER)
@@ -140,22 +140,22 @@ def create_image(image_id, with_pixels=False):
     pixels.pixelsType = pixels_type
     image.addPixels(pixels)
 
-    contrast_method = ContrastMethodI(8L)
+    contrast_method = ContrastMethodI(8)
     contrast_method.value = rstring('Fluorescence')
-    illumination = IlluminationI(1L)
+    illumination = IlluminationI(1)
     illumination.value = rstring('Transmitted')
-    acquisition_mode = AcquisitionModeI(1L)
+    acquisition_mode = AcquisitionModeI(1)
     acquisition_mode.value = rstring('WideField')
-    photometric_interpretation = PhotometricInterpretationI(1L)
+    photometric_interpretation = PhotometricInterpretationI(1)
     photometric_interpretation.value = rstring('RGB')
 
-    channel_1 = ChannelI(1L)
+    channel_1 = ChannelI(1)
     channel_1.alpha = rint(255)
     channel_1.blue = rint(255)
     channel_1.green = rint(255)
     channel_1.red = rint(255)
     channel_1.lookupTable = rstring('rainbow')
-    logical_channel_1 = LogicalChannelI(1L)
+    logical_channel_1 = LogicalChannelI(1)
     logical_channel_1.emissionWave = LengthI(509.0, UnitsLength.NANOMETER)
     logical_channel_1.excitationWave = LengthI(488.0, UnitsLength.NANOMETER)
     logical_channel_1.fluor = rstring('GFP')
@@ -170,13 +170,13 @@ def create_image(image_id, with_pixels=False):
     logical_channel_1.photometricInterpretation = photometric_interpretation
     channel_1.logicalChannel = logical_channel_1
 
-    channel_2 = ChannelI(2L)
+    channel_2 = ChannelI(2)
     channel_2.alpha = rint(255)
     channel_2.blue = rint(255)
     channel_2.green = rint(0)
     channel_2.red = rint(255)
     channel_2.lookupTable = rstring('rainbow')
-    logical_channel_2 = LogicalChannelI(2L)
+    logical_channel_2 = LogicalChannelI(2)
     logical_channel_2.emissionWave = LengthI(470.0, UnitsLength.NANOMETER)
     logical_channel_2.excitationWave = LengthI(405.0, UnitsLength.NANOMETER)
     logical_channel_2.fluor = rstring('DAPI')
@@ -213,18 +213,18 @@ def project_with_datasets_and_images(project):
 
 @pytest.fixture()
 def image():
-    return create_image(1L)
+    return create_image(1)
 
 
 @pytest.fixture()
 def image_pixels():
-    return create_image(1L, with_pixels=True)
+    return create_image(1, with_pixels=True)
 
 
 @pytest.fixture()
 def screen():
     o = ScreenI()
-    o.id = rlong(4L)
+    o.id = rlong(4)
     o.name = rstring('the_name')
     o.description = rstring('the_description')
     o.protocolDescription = rstring('the_protocol_description')
@@ -285,16 +285,16 @@ def screen_with_plates(screen):
             plateacquisition.description = rstring(
                 'plateacquisition_description_%d' % well_id)
             plateacquisition.maximumFieldCount = rint(1)
-            plateacquisition.startTime = rtime(1L)
-            plateacquisition.endTime = rtime(2L)
+            plateacquisition.startTime = rtime(1)
+            plateacquisition.endTime = rtime(2)
             for wellsample_id in range(9, 11):
                 wellsample = WellSampleI()
                 wellsample.setPlateAcquisition(plateacquisition)
                 wellsample.id = rlong(wellsample_id)
                 wellsample.posX = LengthI(1.0, UnitsLength.REFERENCEFRAME)
                 wellsample.posY = LengthI(2.0, UnitsLength.REFERENCEFRAME)
-                wellsample.timepoint = rtime(1L)
-                wellsample.image = create_image(1L)
+                wellsample.timepoint = rtime(1)
+                wellsample.image = create_image(1)
                 well.addWellSample(wellsample)
 
     return screen
@@ -348,7 +348,7 @@ def add_annotations(o):
     annotation = LongAnnotationI()
     annotation.description = rstring('the_description')
     annotation.ns = rstring('long_annotation')
-    annotation.longValue = rlong(1L)
+    annotation.longValue = rlong(1)
     o.linkAnnotation(annotation)
     annotation = MapAnnotationI()
     annotation.description = rstring('the_description')
@@ -380,7 +380,7 @@ def add_annotations(o):
 @pytest.fixture()
 def experimenter():
     o = ExperimenterI()
-    o.id = rlong(1L)
+    o.id = rlong(1)
     o.email = rstring('the_email')
     o.firstName = rstring('the_firstName')
     o.institution = rstring('the_institution')
@@ -393,7 +393,7 @@ def experimenter():
 @pytest.fixture()
 def experimenter_group():
     o = ExperimenterGroupI()
-    o.id = rlong(1L)
+    o.id = rlong(1)
     o.name = rstring('the_name')
     o.description = rstring('the_description')
     return o
@@ -408,7 +408,7 @@ def permissions():
 @pytest.fixture()
 def externalInfo():
     o = ExternalInfoI()
-    o.entityId = rlong(123L)
+    o.entityId = rlong(123)
     o.entityType = rstring('test')
     o.lsid = rstring('ABCDEF')
     o.uuid = rstring('f90a1fd5-275c-4d14-82b3-87b5ef0f07de')
@@ -452,7 +452,7 @@ def details(experimenter, experimenter_group, permissions, externalInfo):
 @pytest.fixture()
 def roi(experimenter, experimenter_group, permissions, externalInfo):
     o = RoiI()
-    o.id = rlong(1L)
+    o.id = rlong(1)
     o.name = rstring('the_name')
     o.description = rstring('the_description')
     o.details.owner = experimenter
@@ -464,8 +464,8 @@ def roi(experimenter, experimenter_group, permissions, externalInfo):
 
 @pytest.fixture()
 def roi_with_unloaded_details_children(roi):
-    roi.details.owner = ExperimenterI(1L, False)
-    roi.details.group = ExperimenterGroupI(1L, False)
+    roi.details.owner = ExperimenterI(1, False)
+    roi.details.group = ExperimenterGroupI(1, False)
     return roi
 
 
@@ -523,7 +523,7 @@ def identity_transform():
         t.setA11(rdouble(1))
         t.setA02(rdouble(0))
         t.setA12(rdouble(0))
-        t.id = rlong(8L)
+        t.id = rlong(8)
     return t
 
 
@@ -539,7 +539,7 @@ def translation_transform():
         t.setA11(rdouble(1))
         t.setA02(rdouble(3))
         t.setA12(rdouble(4))
-        t.id = rlong(8L)
+        t.id = rlong(8)
     return t
 
 
@@ -555,7 +555,7 @@ def rotation_transform():
         t.setA11(rdouble(0.7071067811865476))
         t.setA02(rdouble(85.35533905932736))
         t.setA12(rdouble(-6.066017177982129))
-        t.id = rlong(8L)
+        t.id = rlong(8)
     return t
 
 
@@ -571,7 +571,7 @@ def scale_transform():
         t.setA11(rdouble(2.5))
         t.setA02(rdouble(0))
         t.setA12(rdouble(0))
-        t.id = rlong(8L)
+        t.id = rlong(8)
     return t
 
 
@@ -589,7 +589,7 @@ def ellipse():
         o.y = rdouble(2.0)
         o.radiusX = rdouble(3.0)
         o.radiusY = rdouble(4.0)
-    o.id = rlong(1L)
+    o.id = rlong(1)
     return o
 
 
@@ -608,7 +608,7 @@ def rectangle():
     o.y = rdouble(2.0)
     o.width = rdouble(3.0)
     o.height = rdouble(4.0)
-    o.id = rlong(2L)
+    o.id = rlong(2)
     return o
 
 
@@ -622,7 +622,7 @@ def point():
     else:
         o.x = rdouble(1.0)
         o.y = rdouble(2.0)
-    o.id = rlong(3L)
+    o.id = rlong(3)
     return o
 
 
@@ -632,7 +632,7 @@ def label():
     populate_shape(o)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
-    o.id = rlong(7L)
+    o.id = rlong(7)
     return o
 
 
@@ -644,7 +644,7 @@ def polyline():
     if SCHEMA_VERSION != '2015-01':
         o.setMarkerStart('Arrow')
         o.setMarkerEnd('Arrow')
-    o.id = rlong(4L)
+    o.id = rlong(4)
     return o
 
 
@@ -653,7 +653,7 @@ def polygon():
     o = PolygonI()
     populate_shape(o)
     o.points = rstring('0,0 1,2 3,5')
-    o.id = rlong(5L)
+    o.id = rlong(5)
     return o
 
 
@@ -668,7 +668,7 @@ def line():
     if SCHEMA_VERSION != '2015-01':
         o.setMarkerStart('Arrow')
         o.setMarkerEnd('Arrow')
-    o.id = rlong(6L)
+    o.id = rlong(6)
     return o
 
 
@@ -678,7 +678,7 @@ def opt_unit_label():
     populate_shape(o, False)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
-    o.id = rlong(7L)
+    o.id = rlong(7)
     return o
 
 
@@ -690,5 +690,5 @@ def mask():
     o.y = rdouble(0.0)
     o.width = rdouble(1.0)
     o.height = rdouble(2.0)
-    o.id = rlong(8L)
+    o.id = rlong(8)
     return o
