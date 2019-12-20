@@ -22,7 +22,7 @@ class TestImagePixelsDecoder(object):
         assert v.description.val == 'image_description_1'
         assert v.name.val == 'image_name_1'
         assert v.partial.val is False
-        assert v.series.val == 0L
+        assert v.series.val == 0
         assert v.format.id.val == 1
         assert v.format.value.val == 'PNG'
 

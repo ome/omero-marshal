@@ -73,7 +73,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_1',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
                         '@id': 1,
                         '@type': 'TBD#Format',
@@ -89,7 +89,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_2',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
                         '@id': 1,
                         '@type': 'TBD#Format',
@@ -112,7 +112,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_3',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
                         '@id': 1,
                         '@type': 'TBD#Format',
@@ -128,7 +128,7 @@ class TestProjectEncoder(object):
                     'omero:archived': False,
                     'Description': 'image_description_4',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
                         '@id': 1,
                         '@type': 'TBD#Format',
@@ -252,7 +252,7 @@ class TestScreenEncoder(object):
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -352,7 +352,7 @@ class TestScreenEncoder(object):
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -478,7 +478,7 @@ class TestScreenEncoder(object):
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -578,7 +578,7 @@ class TestScreenEncoder(object):
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
