@@ -48,7 +48,7 @@ class AffineTransformI(object):
         """
 
         tr, args = transform[:-1].split('(')
-        a = map(float, args.split(' '))
+        a = [float(arg) for arg in args.split(' ')]
 
         # Handle various string tranformations
         if tr == 'matrix':
