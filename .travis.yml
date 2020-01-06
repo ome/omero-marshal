@@ -32,6 +32,7 @@ before_install:
   # - mv OMERO.py* /tmp/OMERO.py
   - pip3 install omero-py==5.6.dev9
   - pip3 install flake8
+  - pip3 install -U setuptools
   - flake8 .
 
 script:
