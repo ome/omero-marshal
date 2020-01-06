@@ -37,9 +37,9 @@ before_install:
 
 script:
     - python3 setup.py test --pytest-args='-v -v'
-    - sudo python3 setup.py sdist install --record files.txt
+    - python3 setup.py sdist install --record files.txt
     - python3 -c 'import omero.clients; import omero_marshal.encode'
-    - cat files.txt | xargs sudo rm -rf
-    - sudo python3 setup.py bdist_egg
+    - cat files.txt | xargs rm -rf
+    - python3 setup.py bdist_egg
     - easy_install dist/*.egg
     - python3 -c 'import omero.clients; import omero_marshal.encode'
