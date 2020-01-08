@@ -18,16 +18,16 @@ class TestImagePixelsEncoder(object):
         encoder = get_encoder(image.__class__)
         v = encoder.encode(image)
         assert v == {
-            '@id': 1L,
+            '@id': 1,
             '@type': '%s#Image' % OME_SCHEMA_URL,
-            'AcquisitionDate': 1L,
+            'AcquisitionDate': 1,
             'Name': 'image_name_1',
             'omero:archived': False,
             'Description': 'image_description_1',
             'omero:partial': False,
             'omero:series': 0,
             'omero:format': {
-                '@id': 1L,
+                '@id': 1,
                 '@type': 'TBD#Format',
                 'value': 'PNG',
                 'omero:details': {'@type': 'TBD#Details'},
@@ -39,22 +39,22 @@ class TestImagePixelsEncoder(object):
         encoder = get_encoder(image_pixels.__class__)
         v = encoder.encode(image_pixels)
         assert v == {
-            '@id': 1L,
+            '@id': 1,
             '@type': '%s#Image' % OME_SCHEMA_URL,
-            'AcquisitionDate': 1L,
+            'AcquisitionDate': 1,
             'Name': 'image_name_1',
             'omero:archived': False,
             'Description': 'image_description_1',
             'omero:partial': False,
             'omero:series': 0,
             'omero:format': {
-                '@id': 1L,
+                '@id': 1,
                 '@type': 'TBD#Format',
                 'value': 'PNG',
                 'omero:details': {'@type': 'TBD#Details'},
             },
             'Pixels': {
-                '@id': 1L,
+                '@id': 1,
                 '@type': '%s#Pixels' % OME_SCHEMA_URL,
                 'omero:methodology': 'methodology',
                 'PhysicalSizeX': {
@@ -91,29 +91,29 @@ class TestImagePixelsEncoder(object):
                 'omero:waveIncrement': 2.0,
                 'omero:waveStart': 1,
                 'DimensionOrder': {
-                    '@id': 1L,
+                    '@id': 1,
                     '@type': 'TBD#DimensionOrder',
                     'value': 'XYZCT',
                     'omero:details': {'@type': 'TBD#Details'}
                 },
                 'Type': {
-                    '@id': 1L,
+                    '@id': 1,
                     '@type': 'TBD#PixelsType',
                     'value': 'bit',
                     'omero:details': {'@type': 'TBD#Details'}
                 },
                 'Channels': [{
-                    '@id': 1L,
+                    '@id': 1,
                     '@type': '%s#Channel' % OME_SCHEMA_URL,
                     'AcquisitionMode': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#AcquisitionMode',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
                     'Color': -1,
                     'ContrastMethod': {
-                        '@id': 8L,
+                        '@id': 8,
                         '@type': 'TBD#ContrastMethod',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Fluorescence'
@@ -132,7 +132,7 @@ class TestImagePixelsEncoder(object):
                     },
                     'Fluor': 'GFP',
                     'Illumination': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#Illumination',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Transmitted'
@@ -147,27 +147,27 @@ class TestImagePixelsEncoder(object):
                     },
                     'PockelCellSetting': 0,
                     'SamplesPerPixel': 2,
-                    'omero:LogicalChannelId': 1L,
+                    'omero:LogicalChannelId': 1,
                     'omero:details': {'@type': 'TBD#Details'},
                     'omero:lookupTable': 'rainbow',
                     'omero:photometricInterpretation': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#PhotometricInterpretation',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'RGB'
                     }
                 }, {
-                    '@id': 2L,
+                    '@id': 2,
                     '@type': '%s#Channel' % OME_SCHEMA_URL,
                     'AcquisitionMode': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#AcquisitionMode',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
                     'Color': -16711681,
                     'ContrastMethod': {
-                        '@id': 8L,
+                        '@id': 8,
                         '@type': 'TBD#ContrastMethod',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Fluorescence'
@@ -186,7 +186,7 @@ class TestImagePixelsEncoder(object):
                     },
                     'Fluor': 'DAPI',
                     'Illumination': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#Illumination',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Transmitted'
@@ -201,11 +201,11 @@ class TestImagePixelsEncoder(object):
                     },
                     'PockelCellSetting': 0,
                     'SamplesPerPixel': 2,
-                    'omero:LogicalChannelId': 2L,
+                    'omero:LogicalChannelId': 2,
                     'omero:details': {'@type': 'TBD#Details'},
                     'omero:lookupTable': 'rainbow',
                     'omero:photometricInterpretation': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#PhotometricInterpretation',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'RGB'

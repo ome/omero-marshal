@@ -26,7 +26,7 @@ class AffineTransformI(object):
         # objects
         # Setting the id also allows the transform decoder to inherit the
         # superclass decode() method
-        self.id = -1L
+        self.id = -1
         self._svg_transform = None
         self._a00 = None
         self._a10 = None
@@ -48,7 +48,7 @@ class AffineTransformI(object):
         """
 
         tr, args = transform[:-1].split('(')
-        a = map(float, args.split(' '))
+        a = [float(arg) for arg in args.split(' ')]
 
         # Handle various string tranformations
         if tr == 'matrix':

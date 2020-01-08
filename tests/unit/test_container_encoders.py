@@ -18,7 +18,7 @@ class TestProjectEncoder(object):
         encoder = get_encoder(project.__class__)
         v = encoder.encode(project)
         assert v == {
-            '@id': 1L,
+            '@id': 1,
             '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
@@ -29,19 +29,19 @@ class TestProjectEncoder(object):
         encoder = get_encoder(project_with_datasets.__class__)
         v = encoder.encode(project_with_datasets)
         assert v == {
-            '@id': 1L,
+            '@id': 1,
             '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'TBD#Details'},
             'Datasets': [{
-                '@id': 1L,
+                '@id': 1,
                 '@type': '%s#Dataset' % OME_SCHEMA_URL,
                 'Name': 'dataset_name_1',
                 'Description': 'dataset_description_1',
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@id': 2L,
+                '@id': 2,
                 '@type': '%s#Dataset' % OME_SCHEMA_URL,
                 'Name': 'dataset_name_2',
                 'Description': 'dataset_description_2',
@@ -54,44 +54,44 @@ class TestProjectEncoder(object):
         encoder = get_encoder(project_with_datasets_and_images.__class__)
         v = encoder.encode(project_with_datasets_and_images)
         assert v == {
-            '@id': 1L,
+            '@id': 1,
             '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'TBD#Details'},
             'Datasets': [{
-                '@id': 1L,
+                '@id': 1,
                 '@type': '%s#Dataset' % OME_SCHEMA_URL,
                 'Name': 'dataset_name_1',
                 'Description': 'dataset_description_1',
                 'omero:details': {'@type': 'TBD#Details'},
                 'Images': [{
-                    '@id': 1L,
+                    '@id': 1,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
-                    'AcquisitionDate': 1L,
+                    'AcquisitionDate': 1,
                     'Name': 'image_name_1',
                     'omero:archived': False,
                     'Description': 'image_description_1',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#Format',
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
                     },
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
-                    '@id': 2L,
+                    '@id': 2,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
-                    'AcquisitionDate': 1L,
+                    'AcquisitionDate': 1,
                     'Name': 'image_name_2',
                     'omero:archived': False,
                     'Description': 'image_description_2',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#Format',
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
@@ -99,38 +99,38 @@ class TestProjectEncoder(object):
                     'omero:details': {'@type': 'TBD#Details'}
                 }]
             }, {
-                '@id': 2L,
+                '@id': 2,
                 '@type': '%s#Dataset' % OME_SCHEMA_URL,
                 'Name': 'dataset_name_2',
                 'Description': 'dataset_description_2',
                 'omero:details': {'@type': 'TBD#Details'},
                 'Images': [{
-                    '@id': 3L,
+                    '@id': 3,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
-                    'AcquisitionDate': 1L,
+                    'AcquisitionDate': 1,
                     'Name': 'image_name_3',
                     'omero:archived': False,
                     'Description': 'image_description_3',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#Format',
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
                     },
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
-                    '@id': 4L,
+                    '@id': 4,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
-                    'AcquisitionDate': 1L,
+                    'AcquisitionDate': 1,
                     'Name': 'image_name_4',
                     'omero:archived': False,
                     'Description': 'image_description_4',
                     'omero:partial': False,
-                    'omero:series': 0L,
+                    'omero:series': 0,
                     'omero:format': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#Format',
                         'value': 'PNG',
                         'omero:details': {'@type': 'TBD#Details'},
@@ -147,7 +147,7 @@ class TestScreenEncoder(object):
         encoder = get_encoder(screen.__class__)
         v = encoder.encode(screen)
         assert v == {
-            '@id': 4L,
+            '@id': 4,
             '@type': '%s#Screen' % SPW_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
@@ -163,7 +163,7 @@ class TestScreenEncoder(object):
         encoder = get_encoder(screen_with_plates.__class__)
         v = encoder.encode(screen_with_plates)
         assert v == {
-            '@id': 4L,
+            '@id': 4,
             '@type': '%s#Screen' % SPW_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
@@ -174,7 +174,7 @@ class TestScreenEncoder(object):
             'Type': 'the_type',
             'omero:details': {'@type': 'TBD#Details'},
             'Plates': [{
-                '@id': 5L,
+                '@id': 5,
                 '@type': '%s#Plate' % SPW_SCHEMA_URL,
                 'Name': 'plate_name_5',
                 'Description': 'plate_description_5',
@@ -198,7 +198,7 @@ class TestScreenEncoder(object):
                     'Value': 1.1
                 },
                 'Wells': [{
-                    '@id': 7L,
+                    '@id': 7,
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
                     'Row': 1,
@@ -208,7 +208,7 @@ class TestScreenEncoder(object):
                     'Color': -16777216,
                     'omero:status': 'the_status',
                     'WellSamples': [{
-                        '@id': 9L,
+                        '@id': 9,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -222,18 +222,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -241,18 +241,18 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 7L,
+                            '@id': 7,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_7',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_7',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -266,18 +266,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -285,20 +285,20 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 7L,
+                            '@id': 7,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_7',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_7',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }],
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
-                    '@id': 8L,
+                    '@id': 8,
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
                     'Row': 1,
@@ -308,7 +308,7 @@ class TestScreenEncoder(object):
                     'Color': -16777216,
                     'omero:status': 'the_status',
                     'WellSamples': [{
-                        '@id': 9L,
+                        '@id': 9,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -322,18 +322,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -341,18 +341,18 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 8L,
+                            '@id': 8,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_8',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_8',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -366,18 +366,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -385,13 +385,13 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 8L,
+                            '@id': 8,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_8',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_8',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
@@ -400,7 +400,7 @@ class TestScreenEncoder(object):
                 }],
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
-                '@id': 6L,
+                '@id': 6,
                 '@type': '%s#Plate' % SPW_SCHEMA_URL,
                 'Name': 'plate_name_6',
                 'Description': 'plate_description_6',
@@ -424,7 +424,7 @@ class TestScreenEncoder(object):
                     'Value': 1.1
                 },
                 'Wells': [{
-                    '@id': 7L,
+                    '@id': 7,
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
                     'Row': 1,
@@ -434,7 +434,7 @@ class TestScreenEncoder(object):
                     'Color': -16777216,
                     'omero:status': 'the_status',
                     'WellSamples': [{
-                        '@id': 9L,
+                        '@id': 9,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -448,18 +448,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -467,18 +467,18 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 7L,
+                            '@id': 7,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_7',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_7',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -492,18 +492,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -511,20 +511,20 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 7L,
+                            '@id': 7,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_7',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_7',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }],
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
-                    '@id': 8L,
+                    '@id': 8,
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
                     'Row': 1,
@@ -534,7 +534,7 @@ class TestScreenEncoder(object):
                     'Color': -16777216,
                     'omero:status': 'the_status',
                     'WellSamples': [{
-                        '@id': 9L,
+                        '@id': 9,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -548,18 +548,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -567,18 +567,18 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 8L,
+                            '@id': 8,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_8',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_8',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
-                        '@id': 10L,
+                        '@id': 10,
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -592,18 +592,18 @@ class TestScreenEncoder(object):
                             'Symbol': 'reference frame',
                             'Value': 2.0
                         },
-                        'Timepoint': 1L,
+                        'Timepoint': 1,
                         'Image': {
-                            '@id': 1L,
+                            '@id': 1,
                             '@type': '%s#Image' % OME_SCHEMA_URL,
-                            'AcquisitionDate': 1L,
+                            'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
                             'Description': 'image_description_1',
                             'omero:partial': False,
                             'omero:series': 0,
                             'omero:format': {
-                                '@id': 1L,
+                                '@id': 1,
                                 '@type': 'TBD#Format',
                                 'value': 'PNG',
                                 'omero:details': {'@type': 'TBD#Details'},
@@ -611,13 +611,13 @@ class TestScreenEncoder(object):
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'PlateAcquisition': {
-                            '@id': 8L,
+                            '@id': 8,
                             '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
                             'Description': 'plateacquisition_description_8',
-                            'EndTime': 2L,
+                            'EndTime': 2,
                             'MaximumFieldCount': 1,
                             'Name': 'plateacquisition_name_8',
-                            'StartTime': 1L,
+                            'StartTime': 1,
                             'omero:details': {'@type': 'TBD#Details'}
                         },
                         'omero:details': {'@type': 'TBD#Details'}

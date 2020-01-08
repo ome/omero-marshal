@@ -39,7 +39,7 @@ class TestShapeEncoder(object):
                 '@type': '%s#LongAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'long_annotation',
-                'Value': 1L,
+                'Value': 1,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@type': '%s#MapAnnotation' % SA_SCHEMA_URL,
@@ -63,7 +63,7 @@ class TestShapeEncoder(object):
                 '@type': '%s#TimestampAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'timestamp_annotation',
-                'Value': 1L,
+                'Value': 1,
                 'omero:details': {'@type': 'TBD#Details'}
             }, {
                 '@type': '%s#XmlAnnotation' % SA_SCHEMA_URL,
@@ -78,14 +78,14 @@ class TestShapeEncoder(object):
         assert v['Annotations'] == self.annotation_data()['Annotations']
 
     def assert_roi(self, roi, has_annotations=False):
-        assert roi['@id'] == 1L
+        assert roi['@id'] == 1
         assert roi['Name'] == 'the_name'
         assert roi['Description'] == 'the_description'
         assert roi['@type'] == '%s#ROI' % ROI_SCHEMA_URL
         assert roi['omero:details'] == {
             '@type': 'TBD#Details',
             'group': {
-                '@id': 1L,
+                '@id': 1,
                 '@type':
                     '%s#ExperimenterGroup' % OME_SCHEMA_URL,
                 'Description': 'the_description',
@@ -93,7 +93,7 @@ class TestShapeEncoder(object):
                 'omero:details': {'@type': 'TBD#Details'}
             },
             'owner': {
-                '@id': 1L,
+                '@id': 1,
                 '@type':
                     '%s#Experimenter' % OME_SCHEMA_URL,
                 'Email': 'the_email',
@@ -171,7 +171,7 @@ class TestShapeEncoder(object):
 
     def assert_ellipse(self, ellipse, has_annotations=False):
         self.assert_shape(ellipse, has_annotations=has_annotations)
-        assert ellipse['@id'] == 1L
+        assert ellipse['@id'] == 1
         assert ellipse['@type'] == '%s#Ellipse' % ROI_SCHEMA_URL
         assert ellipse['X'] == 1.0
         assert ellipse['Y'] == 2.0
@@ -180,7 +180,7 @@ class TestShapeEncoder(object):
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
-        assert rectangle['@id'] == 2L
+        assert rectangle['@id'] == 2
         assert rectangle['@type'] == '%s#Rectangle' % ROI_SCHEMA_URL
         assert rectangle['X'] == 1.0
         assert rectangle['Y'] == 2.0
@@ -226,7 +226,7 @@ class TestPointEncoder(TestShapeEncoder):
         encoder = get_encoder(point.__class__)
         v = encoder.encode(point)
         self.assert_shape(v)
-        assert v['@id'] == 3L
+        assert v['@id'] == 3
         assert v['@type'] == '%s#Point' % ROI_SCHEMA_URL
         assert v['X'] == 1.0
         assert v['Y'] == 2.0
@@ -238,7 +238,7 @@ class TestLabelEncoder(TestShapeEncoder):
         encoder = get_encoder(label.__class__)
         v = encoder.encode(label)
         self.assert_shape(v)
-        assert v['@id'] == 7L
+        assert v['@id'] == 7
         assert v['@type'] == '%s#Label' % ROI_SCHEMA_URL
         assert v['X'] == 1.0
         assert v['Y'] == 2.0
@@ -250,7 +250,7 @@ class TestPolylineEncoder(TestShapeEncoder):
         encoder = get_encoder(polyline.__class__)
         v = encoder.encode(polyline)
         self.assert_shape(v)
-        assert v['@id'] == 4L
+        assert v['@id'] == 4
         assert v['@type'] == '%s#Polyline' % ROI_SCHEMA_URL
         assert v['Points'] == '0,0 1,2 3,5'
         if SCHEMA_VERSION != '2015-01':
@@ -264,7 +264,7 @@ class TestPolygonEncoder(TestShapeEncoder):
         encoder = get_encoder(polygon.__class__)
         v = encoder.encode(polygon)
         self.assert_shape(v)
-        assert v['@id'] == 5L
+        assert v['@id'] == 5
         assert v['@type'] == '%s#Polygon' % ROI_SCHEMA_URL
         assert v['Points'] == '0,0 1,2 3,5'
 
@@ -275,7 +275,7 @@ class TestLineEncoder(TestShapeEncoder):
         encoder = get_encoder(line.__class__)
         v = encoder.encode(line)
         self.assert_shape(v)
-        assert v['@id'] == 6L
+        assert v['@id'] == 6
         assert v['@type'] == '%s#Line' % ROI_SCHEMA_URL
         assert v['X1'] == 0.0
         assert v['Y1'] == 0.0
@@ -313,7 +313,7 @@ class TestMaskEncoder(TestShapeEncoder):
         encoder = get_encoder(mask.__class__)
         v = encoder.encode(mask)
         self.assert_shape(v)
-        assert v['@id'] == 8L
+        assert v['@id'] == 8
         assert v['@type'] == '%s#Mask' % ROI_SCHEMA_URL
         assert v['X'] == 0.0
         assert v['Y'] == 0.0

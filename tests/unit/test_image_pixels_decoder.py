@@ -16,14 +16,14 @@ from omero.model.enums import UnitsLength, UnitsTime
 class TestImagePixelsDecoder(object):
 
     def assert_image(self, v):
-        assert v.id.val == 1L
-        assert v.acquisitionDate.val == 1L
+        assert v.id.val == 1
+        assert v.acquisitionDate.val == 1
         assert v.archived.val is False
         assert v.description.val == 'image_description_1'
         assert v.name.val == 'image_name_1'
         assert v.partial.val is False
-        assert v.series.val == 0L
-        assert v.format.id.val == 1L
+        assert v.series.val == 0
+        assert v.format.id.val == 1
         assert v.format.value.val == 'PNG'
 
     def test_image_decoder(self, image):
@@ -41,7 +41,7 @@ class TestImagePixelsDecoder(object):
         self.assert_image(v)
 
         pixels = v.getPrimaryPixels()
-        assert pixels.id.val == 1L
+        assert pixels.id.val == 1
         assert pixels.methodology.val == 'methodology'
         assert pixels.physicalSizeX.getUnit() == UnitsLength.MICROMETER
         assert pixels.physicalSizeX.getValue() == 1.0
@@ -60,20 +60,20 @@ class TestImagePixelsDecoder(object):
         assert pixels.timeIncrement.getValue() == 1.0
         assert pixels.waveIncrement.val == 2.0
         assert pixels.waveStart.val == 1
-        assert pixels.dimensionOrder.id.val == 1L
+        assert pixels.dimensionOrder.id.val == 1
         assert pixels.dimensionOrder.value.val == 'XYZCT'
-        assert pixels.pixelsType.id.val == 1L
+        assert pixels.pixelsType.id.val == 1
         assert pixels.pixelsType.value.val == 'bit'
 
         channel_1, channel_2 = pixels.copyChannels()
-        assert channel_1.id.val == 1L
+        assert channel_1.id.val == 1
         assert channel_1.alpha.val == 255
         assert channel_1.blue.val == 255
         assert channel_1.green.val == 255
         assert channel_1.red.val == 255
         assert channel_1.lookupTable.val == 'rainbow'
         logical_channel_1 = channel_1.logicalChannel
-        assert logical_channel_1.id.val == 1L
+        assert logical_channel_1.id.val == 1
         assert logical_channel_1.emissionWave.getUnit() \
             == UnitsLength.NANOMETER
         assert logical_channel_1.emissionWave.getValue() == 509.0
@@ -92,14 +92,14 @@ class TestImagePixelsDecoder(object):
         assert logical_channel_1.mode.value.val == 'WideField'
         assert logical_channel_1.photometricInterpretation.value.val == 'RGB'
 
-        assert channel_2.id.val == 2L
+        assert channel_2.id.val == 2
         assert channel_2.alpha.val == 255
         assert channel_2.blue.val == 255
         assert channel_2.green.val == 0
         assert channel_2.red.val == 255
         assert channel_2.lookupTable.val == 'rainbow'
         logical_channel_2 = channel_2.logicalChannel
-        assert logical_channel_2.id.val == 2L
+        assert logical_channel_2.id.val == 2
         assert logical_channel_2.emissionWave.getUnit() \
             == UnitsLength.NANOMETER
         assert logical_channel_2.emissionWave.getValue() == 470.0
