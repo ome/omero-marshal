@@ -9,6 +9,8 @@
 # jason@glencoesoftware.com.
 #
 
+# Needed to avoid import errors when this is the first import
+import omero.all  # noqa
 import omero.model
 import omero.model.enums
 
