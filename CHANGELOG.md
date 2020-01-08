@@ -1,3 +1,13 @@
+## 0.7.dev1 (2020-01-08)
+
+Breaking changes:
+
+ - Restrict omero-marshal to Python 3 only - [#66](https://github.com/ome/omero-marhsal/pull/66)
+
+Bugfixes:
+
+ - Fix import ordering issues - [#64](https://github.com/ome/omero-marhsal/pull/64)
+
 ## 0.6.3 (2019-11-06)
 
 Bugfixes:
