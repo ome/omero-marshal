@@ -1,24 +1,31 @@
 ---
 language: python
-jobs:
-    include:
-        - name: "OMERO 5.2"
-          env: OMERO_VERSION=5.2
-          python: 2.7
-          script: .travis/python2
-        - name: "OMERO 5.3"
-          env: OMERO_VERSION=5.3
-          python: 2.7
-          script: .travis/python2
-        - name: "OMERO 5.4"
-          env: OMERO_VERSION=5.4
-          python: 2.7
-          script: .travis/python2
-        - name: "OMERO 5.5"
-          env: OMERO_VERSION=5.5
-          python: 2.7
-          script: .travis/python2
-        - name: "OMERO 5.6"
-          env: OMERO_VERSION=5.6
-          python: 3.6
-          script: .travis/python3
+dist: xenial
+# This (sudo: false) is needed to "run on container-based infrastructure" on
+# which cache: is available
+# http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: required
+python: 3.6
+
+env:
+  matrix:
+    - OMERO_VERSION=5.2
+    - OMERO_VERSION=5.3
+    - OMERO_VERSION=5.4
+    - OMERO_VERSION=5.5
+    - OMERO_VERSION=5.6
+
+before_install:
+  - pip3 install omero-py
+  - pip3 install flake8
+  - pip3 install -U setuptools
+  - flake8 .
+
+script:
+  - python3 setup.py test --pytest-args='-v -v'
+  - python3 setup.py sdist install --record files.txt
+  - python3 -c 'import omero.clients; import omero_marshal.encode'
+  - cat files.txt | xargs rm -rf
+  - python3 setup.py bdist_egg
+  - easy_install dist/*.egg
+  - python3 -c 'import omero.clients; import omero_marshal.encode'
