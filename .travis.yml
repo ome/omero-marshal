@@ -19,9 +19,10 @@ script:
   - easy_install dist/*.egg
   - python3 -c 'import omero.clients; import omero_marshal.encode'
 
-provider: pypi
-user: $PYPI_USER
-password: $PYPI_PASSWORD
-distributions: sdist bdist_wheel
-on:
+deploy:
+  provider: pypi
+  user: $PYPI_USER
+  password: $PYPI_PASSWORD
+  distributions: sdist bdist_wheel
+  on:
     tags: true
