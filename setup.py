@@ -12,7 +12,7 @@ from setuptools.command.test import test as TestCommand
 import multiprocessing
 assert multiprocessing  # silence flake8
 
-VERSION = '0.7.dev1'
+VERSION = '0.7.0'
 
 
 def get_requirements(suffix=''):
@@ -61,7 +61,6 @@ setup(
         'or later (GPLv2+)',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],  # Get strings from
@@ -75,6 +74,7 @@ setup(
     zip_safe=True,
     include_package_data=True,
     platforms='any',
+    python_requires='>=3',
     install_requires=get_requirements(),
     tests_require=get_requirements('-dev'),
     entry_points="""
