@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -x
+
+# The installation of the python dependencies must be done in that level for now
+# otherwise they are not available in the containers,
+# see https://github.com/travis-ci/travis-ci/issues/8048
+# Changing the value for sudo will also need to be reviewed at the same time
+# This will need to be reviewed when the issue above is fixed
+export PATH=/usr/bin/:$PATH
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 5E6DA83306132997
+sudo apt-add-repository "deb http://zeroc.com/download/apt/ubuntu`lsb_release -rs` stable main"
+sudo apt-get update
+sudo apt-get -y install zeroc-ice-all-runtime
+sudo pip install -U https://github.com/ome/zeroc-ice-py-ubuntu1604/releases/download/0.1.0/zeroc_ice-3.6.4-cp27-cp27mu-linux_x86_64.whl
+pip install omego
+omego download --ice 3.6 --release ${OMERO_VERSION} py
+rm OMERO.py*.zip
+mv OMERO.py* /tmp/OMERO.py
+pip install flake8
+flake8 .
+
+# Script
+PYTHONPATH=/tmp/OMERO.py/lib/python python setup.py test --pytest-args='-v -v'
+sudo python setup.py sdist install --record files.txt
+PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
+cat files.txt | xargs sudo rm -rf
+sudo python setup.py bdist_egg
+easy_install dist/*.egg
+PYTHONPATH=/tmp/OMERO.py/lib/python python -c 'import omero.clients; import omero_marshal.encode'
