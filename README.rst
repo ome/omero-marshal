@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/ome/omero-marshal.png
-   :target: https://travis-ci.org/ome/omero-marshal
+.. image:: https://github.com/ome/omero-marshal/workflows/Tox/badge.svg
+    :target: https://github.com/ome/omero-marshal/actions
 
 .. image:: https://img.shields.io/pypi/v/omero-marshal.svg
    :alt: PyPI
