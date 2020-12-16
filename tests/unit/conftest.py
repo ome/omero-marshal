@@ -484,7 +484,7 @@ def roi_with_shapes_and_annotations(roi, ellipse, rectangle):
     return roi
 
 
-def populate_shape(o, set_unit_attributes=True):
+def populate_shape(o, transform, set_unit_attributes=True):
     o.fillColor = rint(0xffffffff)
     o.fillRule = rstring('solid')
     o.fontFamily = rstring('cursive')
@@ -503,11 +503,10 @@ def populate_shape(o, set_unit_attributes=True):
     o.theC = rint(1)
     o.theT = rint(2)
     o.theZ = rint(3)
-    t = identity_transform()
     if SCHEMA_VERSION == '2015-01':
-        o.transform = t.svg_transform
+        o.transform = transform.svg_transform
     else:
-        o.transform = t
+        o.transform = transform
     return o
 
 
@@ -576,9 +575,9 @@ def scale_transform():
 
 
 @pytest.fixture()
-def ellipse():
+def ellipse(identity_transform):
     o = EllipseI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     if SCHEMA_VERSION == '2015-01':
         o.cx = rdouble(1.0)
         o.cy = rdouble(2.0)
@@ -594,16 +593,16 @@ def ellipse():
 
 
 @pytest.fixture()
-def ellipse_with_annotations():
-    o = ellipse()
+def ellipse_with_annotations(ellipse):
+    o = ellipse
     add_annotations(o)
     return o
 
 
 @pytest.fixture()
-def rectangle():
+def rectangle(identity_transform):
     o = RectangleI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
     o.width = rdouble(3.0)
@@ -613,9 +612,9 @@ def rectangle():
 
 
 @pytest.fixture()
-def point():
+def point(identity_transform):
     o = PointI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     if SCHEMA_VERSION == '2015-01':
         o.cx = rdouble(1.0)
         o.cy = rdouble(2.0)
@@ -627,9 +626,9 @@ def point():
 
 
 @pytest.fixture()
-def label():
+def label(identity_transform):
     o = LabelI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
     o.id = rlong(7)
@@ -637,9 +636,9 @@ def label():
 
 
 @pytest.fixture()
-def polyline():
+def polyline(identity_transform):
     o = PolylineI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     o.points = rstring('0,0 1,2 3,5')
     if SCHEMA_VERSION != '2015-01':
         o.setMarkerStart('Arrow')
@@ -649,18 +648,18 @@ def polyline():
 
 
 @pytest.fixture()
-def polygon():
+def polygon(identity_transform):
     o = PolygonI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     o.points = rstring('0,0 1,2 3,5')
     o.id = rlong(5)
     return o
 
 
 @pytest.fixture()
-def line():
+def line(identity_transform):
     o = LineI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     o.setX1(0)
     o.setY1(0)
     o.setX2(1)
@@ -673,9 +672,9 @@ def line():
 
 
 @pytest.fixture()
-def opt_unit_label():
+def opt_unit_label(identity_transform):
     o = LabelI()
-    populate_shape(o, False)
+    populate_shape(o, identity_transform, False)
     o.x = rdouble(1.0)
     o.y = rdouble(2.0)
     o.id = rlong(7)
@@ -683,9 +682,9 @@ def opt_unit_label():
 
 
 @pytest.fixture()
-def mask():
+def mask(identity_transform):
     o = MaskI()
-    populate_shape(o)
+    populate_shape(o, identity_transform)
     o.x = rdouble(0.0)
     o.y = rdouble(0.0)
     o.width = rdouble(1.0)
