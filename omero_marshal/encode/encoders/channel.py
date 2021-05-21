@@ -23,7 +23,7 @@ class Channel201501Encoder(AnnotatableEncoder):
         color = self.rgba_to_int(obj.red, obj.green, obj.blue, obj.alpha)
         self.set_if_not_none(v, 'Color', color)
         self.set_if_not_none(v, 'omero:lookupTable', obj.lookupTable)
-        self.set_if_not_none(v, 'pixels', obj.pixels.id)
+        self.set_if_id_not_none(v, 'pixels', obj.pixels)
         logical_channel = obj.logicalChannel
         if logical_channel is not None and logical_channel.isLoaded():
             self.set_if_not_none(

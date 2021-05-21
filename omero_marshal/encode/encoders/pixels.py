@@ -34,7 +34,7 @@ class Pixels201501Encoder(Encoder):
         self.set_if_not_none(v, 'TimeIncrement', obj.timeIncrement)
         self.set_if_not_none(v, 'omero:waveIncrement', obj.waveIncrement)
         self.set_if_not_none(v, 'omero:waveStart', obj.waveStart)
-        self.set_if_not_none(v, 'image', obj.image.id)
+        self.set_if_id_not_none(v, 'image', obj.image)
         dimension_order = obj.dimensionOrder
         if dimension_order is not None and dimension_order.isLoaded():
             dimension_order_encoder = \

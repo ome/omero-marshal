@@ -34,7 +34,7 @@ class Shape201501Encoder(AnnotatableEncoder):
         self.set_if_not_none(v, 'TheC', obj.theC)
         self.set_if_not_none(v, 'TheT', obj.theT)
         self.set_if_not_none(v, 'TheZ', obj.theZ)
-        self.set_if_not_none(v, 'roi', obj.roi.id)
+        self.set_if_id_not_none(v, 'roi', obj.roi)
         transform = self.get_transform(obj.transform)
         if transform:
             transform_encoder = self.ctx.get_encoder(transform.__class__)

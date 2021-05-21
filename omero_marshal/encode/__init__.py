@@ -34,6 +34,14 @@ class Encoder(object):
         else:
             v[key] = value
 
+    def set_if_id_not_none(self, v, key, value):
+        if value is None:
+            return
+        if not hasattr(value, 'id') or value.id is None:
+            return
+        else:
+            v[key] = value.id.val
+
     def encode_unit(self, v, key, value):
         v[key] = {
             '@type': 'TBD#%s' % value.__class__.__name__,

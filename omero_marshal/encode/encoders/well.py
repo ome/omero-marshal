@@ -28,7 +28,7 @@ class Well201501Encoder(AnnotatableEncoder):
         color = self.rgba_to_int(obj.red, obj.green, obj.blue, obj.alpha)
         self.set_if_not_none(v, 'Color', color)
         self.set_if_not_none(v, 'omero:status', obj.status)
-        self.set_if_not_none(v, 'plate', obj.plate.id)
+        self.set_if_id_not_none(v, 'plate', obj.plate)
 
         if obj.isWellSamplesLoaded() and obj.sizeOfWellSamples() > 0:
             wellsamples = list()
