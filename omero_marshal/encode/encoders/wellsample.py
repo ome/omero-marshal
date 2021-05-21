@@ -23,6 +23,7 @@ class WellSample201501Encoder(Encoder):
         self.set_if_not_none(v, 'PositionX', obj.posX)
         self.set_if_not_none(v, 'PositionY', obj.posY)
         self.set_if_not_none(v, 'Timepoint', obj.timepoint)
+        self.set_if_not_none(v, 'well', obj.well.id)
         if obj.image is not None and obj.image.isLoaded():
             image_encoder = self.ctx.get_encoder(obj.image.__class__)
             v['Image'] = image_encoder.encode(obj.image)
