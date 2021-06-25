@@ -135,7 +135,7 @@ class TestShapeEncoder(object):
         else:
             self.assert_annotations(roi)
 
-    def assert_shape(self, shape, has_annotations=False):
+    def assert_shape(self, shape, has_annotations=False, has_roi=False):
         assert shape['FillColor'] == 0xffffffff
         assert shape['FillRule'] == 'solid'
         assert shape['StrokeColor'] == 0xffff0000
@@ -168,32 +168,30 @@ class TestShapeEncoder(object):
             assert shape.get('annotations') is None
         else:
             self.assert_annotations(shape)
+        if has_roi:
+            assert shape['roi'] == {
+                '@id': 1,
+                '@type': '%s#ROI' % ROI_SCHEMA_URL
+            }
 
-    def assert_ellipse(self, ellipse, has_annotations=False):
-        self.assert_shape(ellipse, has_annotations=has_annotations)
+    def assert_ellipse(self, ellipse, has_annotations=False, has_roi=False):
+        self.assert_shape(ellipse, has_annotations=has_annotations,
+                          has_roi=has_roi)
         assert ellipse['@id'] == 1
         assert ellipse['@type'] == '%s#Ellipse' % ROI_SCHEMA_URL
         assert ellipse['X'] == 1.0
         assert ellipse['Y'] == 2.0
         assert ellipse['RadiusX'] == 3.0
         assert ellipse['RadiusY'] == 4.0
-        assert ellipse['roi'] == {
-            '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL
-        }
 
-    def assert_rectangle(self, rectangle):
-        self.assert_shape(rectangle)
+    def assert_rectangle(self, rectangle, has_roi=False):
+        self.assert_shape(rectangle, has_roi=has_roi)
         assert rectangle['@id'] == 2
         assert rectangle['@type'] == '%s#Rectangle' % ROI_SCHEMA_URL
         assert rectangle['X'] == 1.0
         assert rectangle['Y'] == 2.0
         assert rectangle['Width'] == 3.0
         assert rectangle['Height'] == 4.0
-        assert rectangle['roi'] == {
-            '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL
-        }
 
     def assert_transform(self, transform):
         assert transform['@type'] == '%s#AffineTransform' % ROI_SCHEMA_URL
@@ -300,8 +298,8 @@ class TestRoiEncoder(TestShapeEncoder):
         self.assert_roi(v, has_annotations=has_annotations)
         assert len(v['shapes']) == 2
         ellipse, rectangle = v['shapes']
-        self.assert_ellipse(ellipse)
-        self.assert_rectangle(rectangle)
+        self.assert_ellipse(ellipse, has_roi=True)
+        self.assert_rectangle(rectangle, has_roi=True)
 
     def test_roi_with_shapes(self, roi_with_shapes):
         encoder = get_encoder(roi_with_shapes.__class__)
