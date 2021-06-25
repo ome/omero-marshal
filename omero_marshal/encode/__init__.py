@@ -40,7 +40,11 @@ class Encoder(object):
         if not hasattr(value, 'id') or value.id is None:
             return
         else:
-            v[key] = value.id.val
+            from omero_marshal import get_encoder
+            encoder = get_encoder(value.__class__)
+            v[key] = {'@id': value.id.val}
+            if encoder is not None:
+                v[key]['@type'] = encoder.TYPE
 
     def encode_unit(self, v, key, value):
         v[key] = {
