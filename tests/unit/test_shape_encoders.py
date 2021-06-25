@@ -177,7 +177,10 @@ class TestShapeEncoder(object):
         assert ellipse['Y'] == 2.0
         assert ellipse['RadiusX'] == 3.0
         assert ellipse['RadiusY'] == 4.0
-        assert ellipse['roi'] == {'@id': 1, '@type': '%s#ROI' % ROI_SCHEMA_URL}
+        assert ellipse['roi'] == {
+            '@id': 1,
+            '@type': '%s#ROI' % ROI_SCHEMA_URL
+        }
 
     def assert_rectangle(self, rectangle):
         self.assert_shape(rectangle)
@@ -187,7 +190,10 @@ class TestShapeEncoder(object):
         assert rectangle['Y'] == 2.0
         assert rectangle['Width'] == 3.0
         assert rectangle['Height'] == 4.0
-        assert rectangle['roi'] == {'@id': 1, '@type': '%s#ROI' % ROI_SCHEMA_URL}
+        assert rectangle['roi'] == {
+            '@id': 1,
+            '@type': '%s#ROI' % ROI_SCHEMA_URL
+        }
 
     def assert_transform(self, transform):
         assert transform['@type'] == '%s#AffineTransform' % ROI_SCHEMA_URL
