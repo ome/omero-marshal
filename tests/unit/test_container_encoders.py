@@ -207,10 +207,16 @@ class TestScreenEncoder(object):
                     'Type': 'the_type',
                     'Color': -16777216,
                     'omero:status': 'the_status',
-                    'plate': 5,
+                    'plate': {
+                        '@id': 5,
+                        '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                    },
                     'WellSamples': [{
                         '@id': 9,
-                        'well': 7,
+                        'well': {
+                            '@id': 7,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -255,7 +261,10 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10,
-                        'well': 7,
+                        'well': {
+                            '@id': 7,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -302,7 +311,10 @@ class TestScreenEncoder(object):
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 8,
-                    'plate': 5,
+                    'plate': {
+                        '@id': 5,
+                        '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                    },
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
                     'Row': 1,
@@ -313,7 +325,10 @@ class TestScreenEncoder(object):
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9,
-                        'well': 8,
+                        'well': {
+                            '@id': 8,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -358,7 +373,10 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10,
-                        'well': 8,
+                        'well': {
+                            '@id': 8,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -431,7 +449,10 @@ class TestScreenEncoder(object):
                 },
                 'Wells': [{
                     '@id': 7,
-                    'plate': 6,
+                    'plate': {
+                        '@id': 6,
+                        '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                    },
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
                     'Row': 1,
@@ -442,7 +463,10 @@ class TestScreenEncoder(object):
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9,
-                        'well': 7,
+                        'well': {
+                            '@id': 7,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -487,7 +511,10 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10,
-                        'well': 7,
+                        'well': {
+                            '@id': 7,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -534,7 +561,10 @@ class TestScreenEncoder(object):
                     'omero:details': {'@type': 'TBD#Details'}
                 }, {
                     '@id': 8,
-                    'plate': 6,
+                    'plate': {
+                        '@id': 6,
+                        '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                    },
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
                     'Row': 1,
@@ -545,7 +575,10 @@ class TestScreenEncoder(object):
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9,
-                        'well': 8,
+                        'well': {
+                            '@id': 8,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',
@@ -590,7 +623,10 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'TBD#Details'}
                     }, {
                         '@id': 10,
-                        'well': 8,
+                        'well': {
+                            '@id': 8,
+                            '@type': '%s#Well' % SPW_SCHEMA_URL,
+                        },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
                             '@type': 'TBD#LengthI',

@@ -57,7 +57,10 @@ class TestImagePixelsEncoder(object):
                 '@id': 1,
                 '@type': '%s#Pixels' % OME_SCHEMA_URL,
                 'omero:methodology': 'methodology',
-                'image': 1,
+                'image': {
+                    '@id': 1,
+                    '@type': '%s#Image' % OME_SCHEMA_URL,
+                },
                 'PhysicalSizeX': {
                     '@type': 'TBD#LengthI',
                     'Unit': 'MICROMETER',
@@ -106,7 +109,10 @@ class TestImagePixelsEncoder(object):
                 'Channels': [{
                     '@id': 1,
                     '@type': '%s#Channel' % OME_SCHEMA_URL,
-                    'pixels': 1,
+                    'pixels': {
+                        '@id': 1,
+                        '@type': '%s#Pixels' % OME_SCHEMA_URL,
+                    },
                     'AcquisitionMode': {
                         '@id': 1,
                         '@type': 'TBD#AcquisitionMode',
@@ -161,7 +167,10 @@ class TestImagePixelsEncoder(object):
                 }, {
                     '@id': 2,
                     '@type': '%s#Channel' % OME_SCHEMA_URL,
-                    'pixels': 1,
+                    'pixels': {
+                        '@id': 1,
+                        '@type': '%s#Pixels' % OME_SCHEMA_URL,
+                    },
                     'AcquisitionMode': {
                         '@id': 1,
                         '@type': 'TBD#AcquisitionMode',
