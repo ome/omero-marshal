@@ -60,6 +60,7 @@ class TestImagePixelsEncoder(object):
                 'image': {
                     '@id': 1,
                     '@type': '%s#Image' % OME_SCHEMA_URL,
+                    'omero:loaded': False,
                 },
                 'PhysicalSizeX': {
                     '@type': 'TBD#LengthI',
@@ -112,6 +113,7 @@ class TestImagePixelsEncoder(object):
                     'pixels': {
                         '@id': 1,
                         '@type': '%s#Pixels' % OME_SCHEMA_URL,
+                        'omero:loaded': False,
                     },
                     'AcquisitionMode': {
                         '@id': 1,
@@ -170,6 +172,7 @@ class TestImagePixelsEncoder(object):
                     'pixels': {
                         '@id': 1,
                         '@type': '%s#Pixels' % OME_SCHEMA_URL,
+                        'omero:loaded': False,
                     },
                     'AcquisitionMode': {
                         '@id': 1,

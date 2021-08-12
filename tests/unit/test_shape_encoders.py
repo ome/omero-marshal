@@ -171,7 +171,8 @@ class TestShapeEncoder(object):
         if has_roi:
             assert shape['roi'] == {
                 '@id': 1,
-                '@type': '%s#ROI' % ROI_SCHEMA_URL
+                '@type': '%s#ROI' % ROI_SCHEMA_URL,
+                'omero:loaded': False,
             }
 
     def assert_ellipse(self, ellipse, has_annotations=False, has_roi=False):

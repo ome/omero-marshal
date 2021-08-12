@@ -162,7 +162,7 @@ class TestScreenEncoder(object):
     def test_screen_with_plate_encoder(self, screen_with_plates):
         encoder = get_encoder(screen_with_plates.__class__)
         v = encoder.encode(screen_with_plates)
-        assert v == {
+        expected = {
             '@id': 4,
             '@type': '%s#Screen' % SPW_SCHEMA_URL,
             'Name': 'the_name',
@@ -210,12 +210,14 @@ class TestScreenEncoder(object):
                     'plate': {
                         '@id': 5,
                         '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                        'omero:loaded': False,
                     },
                     'WellSamples': [{
                         '@id': 9,
                         'well': {
                             '@id': 7,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -264,6 +266,7 @@ class TestScreenEncoder(object):
                         'well': {
                             '@id': 7,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -314,6 +317,7 @@ class TestScreenEncoder(object):
                     'plate': {
                         '@id': 5,
                         '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                        'omero:loaded': False,
                     },
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
@@ -328,6 +332,7 @@ class TestScreenEncoder(object):
                         'well': {
                             '@id': 8,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -376,6 +381,7 @@ class TestScreenEncoder(object):
                         'well': {
                             '@id': 8,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -452,6 +458,7 @@ class TestScreenEncoder(object):
                     'plate': {
                         '@id': 6,
                         '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                        'omero:loaded': False,
                     },
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
@@ -466,6 +473,7 @@ class TestScreenEncoder(object):
                         'well': {
                             '@id': 7,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -514,6 +522,7 @@ class TestScreenEncoder(object):
                         'well': {
                             '@id': 7,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -564,6 +573,7 @@ class TestScreenEncoder(object):
                     'plate': {
                         '@id': 6,
                         '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                        'omero:loaded': False,
                     },
                     '@type': '%s#Well' % SPW_SCHEMA_URL,
                     'Column': 2,
@@ -578,6 +588,7 @@ class TestScreenEncoder(object):
                         'well': {
                             '@id': 8,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -626,6 +637,7 @@ class TestScreenEncoder(object):
                         'well': {
                             '@id': 8,
                             '@type': '%s#Well' % SPW_SCHEMA_URL,
+                            'omero:loaded': False,
                         },
                         '@type': '%s#WellSample' % SPW_SCHEMA_URL,
                         'PositionX': {
@@ -675,3 +687,5 @@ class TestScreenEncoder(object):
                 'omero:details': {'@type': 'TBD#Details'}
             }]
         }
+
+        assert expected == v

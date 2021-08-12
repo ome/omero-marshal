@@ -42,7 +42,10 @@ class Encoder(object):
         else:
             from omero_marshal import get_encoder
             encoder = get_encoder(value.__class__)
-            v[key] = {'@id': value.id.val}
+            v[key] = {
+                '@id': value.id.val,
+                'omero:loaded': False
+            }
             if encoder is not None:
                 v[key]['@type'] = encoder.TYPE
 
