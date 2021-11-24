@@ -16,7 +16,8 @@ from omero.model import ObjectiveSettingsI
 
 class ObjectiveSettings201501Encoder(Encoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#ObjectiveSettings'
+    TYPE = ('http://www.openmicroscopy.org/Schemas/OME/2015-01#'
+            'ObjectiveSettings')
 
     def encode(self, obj):
         v = super(ObjectiveSettings201501Encoder, self).encode(obj)
@@ -26,13 +27,14 @@ class ObjectiveSettings201501Encoder(Encoder):
         self.set_if_not_none(v, 'RefractiveIndex', obj.refractiveIndex)
         if obj.objective and obj.objective.isLoaded():
             objective_encoder = self.ctx.get_encoder(obj.objective.__class__)
-            v['objective'] = objective_encoder.encode(obj.objective)
+            v['Objective'] = objective_encoder.encode(obj.objective)
         return v
 
 
 class ObjectiveSettings201606Encoder(ObjectiveSettings201501Encoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#ObjectiveSettings'
+    TYPE = ('http://www.openmicroscopy.org/Schemas/OME/2016-06#'
+            'ObjectiveSettings')
 
 
 if SCHEMA_VERSION == '2015-01':

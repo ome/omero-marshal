@@ -27,13 +27,13 @@ class Objective201501Encoder(Encoder):
         self.set_if_not_none(v, 'LotNumber', obj.lotNumber)
         self.set_if_not_none(v, 'Manufacturer', obj.manufacturer)
         self.set_if_not_none(v, 'Model', obj.model)
-        self.set_if_not_none(v, 'NominalMagnification', obj.nominalMagnification)
+        self.set_if_not_none(v, 'NominalMagnification',
+                             obj.nominalMagnification)
         self.set_if_not_none(v, 'SerialNumber', obj.serialNumber)
-        self.set_if_not_none(v, 'WorkingDistance', obj.workingDistance) # units
+        self.set_if_not_none(v, 'WorkingDistance', obj.workingDistance)
         # enums
         for attr in ["Correction", "Immersion"]:
             enum_value = getattr(obj, attr.lower())
-            print(attr, enum_value)
             if enum_value is not None:
                 enum_encoder = self.ctx.get_encoder(enum_value.__class__)
                 v[attr] = enum_encoder.encode(enum_value)
