@@ -1,3 +1,8 @@
+## 0.8.0 (2022-10-26)
+
+ - Test the build of wheel. No longer test the build of egg  - [#74](https://github.com/ome/omero-marshal/pull/74)
+ - Remove the usage of set-output in GitHub action - [#73](https://github.com/ome/omero-marshal/pull/73)
+ 
 ## 0.7.0 (2020-01-10)
 
 Breaking changes:
