@@ -15,7 +15,7 @@ import logging
 import re
 from .encode import encoders
 from .decode import decoders
-from distutils.version import StrictVersion
+from packaging.version import Version
 from omero_version import omero_version
 
 logger = logging.getLogger('omero-marshal')
@@ -52,10 +52,10 @@ def get_schema_version(version):
     m = VERSION_REGEXP.search(version)
     if m is None:
         raise Exception("Invalid OMERO version number: " + version)
-    v = StrictVersion(m.group(1))
-    if v >= StrictVersion('5.1.0') and v < StrictVersion('5.3.0'):
+    v = Version(m.group(1))
+    if v >= Version('5.1.0') and v < Version('5.3.0'):
         return '2015-01'
-    elif v >= StrictVersion('5.3.0') and v < StrictVersion('6.0.0'):
+    elif v >= Version('5.3.0') and v < Version('6.0.0'):
         return '2016-06'
     else:
         raise Exception("Unsupported OMERO version: " + version)
