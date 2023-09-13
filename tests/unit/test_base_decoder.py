@@ -59,6 +59,38 @@ class TestBaseDecoder(object):
         v = decoder.decode(data)
         assert v.description is None
 
+    def test_details_decoder(self, details):
+        encoder = get_encoder(details.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(details)
+        v = decoder.decode(v)
+        assert v.owner is not None
+        assert v.group is not None
+        assert v.permissions is not None
+        assert v.externalInfo is not None
+
+    def test_details_with_events_decoder(self, details_with_events):
+        encoder = get_encoder(details_with_events.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(details_with_events)
+        v = decoder.decode(v)
+        assert v.owner is not None
+        assert v.group is not None
+        assert v.permissions is not None
+        assert v.externalInfo is not None
+        assert v.creationEvent is not None
+        assert v.creationEvent.id.val == 1L
+        assert v.creationEvent.status.val == 'status'
+        assert v.creationEvent.time.val == 1L
+        assert v.creationEvent.type.id.val == 0L
+        assert v.creationEvent.type.value.val == 'Bootstrap'
+        assert v.updateEvent is not None
+        assert v.updateEvent.id.val == 2L
+        assert v.updateEvent.status.val == 'status'
+        assert v.updateEvent.time.val == 1L
+        assert v.updateEvent.type.id.val == 0L
+        assert v.updateEvent.type.value.val == 'Bootstrap'
+
 
 class TestPermissionsDecoder(object):
 

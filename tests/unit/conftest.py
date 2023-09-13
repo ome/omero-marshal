@@ -25,6 +25,8 @@ from omero.model import \
     ExperimenterI, \
     ExperimenterGroupI, \
     ExternalInfoI, \
+    EventI, \
+    EventTypeI, \
     FormatI, \
     IlluminationI, \
     ImageI, \
@@ -447,6 +449,25 @@ def details(experimenter, experimenter_group, permissions, externalInfo):
     o.permissions = permissions
     o.externalInfo = externalInfo
     return o
+
+
+@pytest.fixture()
+def details_with_events(details, experimenter, experimenter_group):
+    details.creationEvent = EventI(1L)
+    details.creationEvent.status = rstring('status')
+    details.creationEvent.time = rtime(1L)
+    details.creationEvent.experimenter = experimenter
+    details.creationEvent.experimenterGroup = experimenter_group
+    details.creationEvent.type = EventTypeI(0L)
+    details.creationEvent.type.value = rstring('Bootstrap')
+    details.updateEvent = EventI(2L)
+    details.updateEvent.status = rstring('status')
+    details.updateEvent.time = rtime(1L)
+    details.updateEvent.experimenter = experimenter
+    details.updateEvent.experimenterGroup = experimenter_group
+    details.updateEvent.type = EventTypeI(0L)
+    details.updateEvent.type.value = rstring('Bootstrap')
+    return details
 
 
 @pytest.fixture()
