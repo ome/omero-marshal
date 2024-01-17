@@ -44,8 +44,4 @@ Repository = "https://github.com/ome/omero-marshal"
 Changelog = "https://github.com/ome/omero-marshal/blob/master/CHANGELOG.md"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
 include-package-data = true
-
-[tools.setuptools.packages.find]
-where = ["src"]
