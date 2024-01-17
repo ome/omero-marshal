@@ -81,13 +81,13 @@ class TestShapeDecoder(object):
         assert timestamp_annotation.timeValue.val == 1
         assert file_annotation.ns.val == 'file_annotation'
         assert file_annotation.description.val == 'the_description'
-        assert file_annotation.file.id.val == 1L
+        assert file_annotation.file.id.val == 1
         assert file_annotation.file.path.val == 'path'
-        assert file_annotation.file.size.val == 2L
-        assert file_annotation.file.atime.val == 3L
-        assert file_annotation.file.mtime.val == 4L
-        assert file_annotation.file.ctime.val == 5L
-        assert file_annotation.file.hasher.id.val == 1L
+        assert file_annotation.file.size.val == 2
+        assert file_annotation.file.atime.val == 3
+        assert file_annotation.file.mtime.val == 4
+        assert file_annotation.file.ctime.val == 5
+        assert file_annotation.file.hasher.id.val == 1
         assert file_annotation.file.hasher.value.val == 'Adler-32'
         assert file_annotation.file.hash.val == '1a0b045d'
         assert file_annotation.file.mimetype.val == 'application/octet-stream'

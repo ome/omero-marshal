@@ -75,21 +75,21 @@ class TestShapeEncoder(object):
                 '@type': '%s#FileAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'File': {
-                    '@id': 1L,
+                    '@id': 1,
                     '@type': 'TBD#OriginalFile',
-                    'atime': 3L,
-                    'ctime': 5L,
+                    'atime': 3,
+                    'ctime': 5,
                     'hash': '1a0b045d',
                     'hasher': {
-                        '@id': 1L,
+                        '@id': 1,
                         '@type': 'TBD#ChecksumAlgorithm',
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Adler-32'
                     },
-                    'mtime': 4L,
+                    'mtime': 4,
                     'omero:details': {'@type': 'TBD#Details'},
                     'path': 'path',
-                    'size': 2L,
+                    'size': 2,
                     'mimetype': 'application/octet-stream',
                     'name': 'name'
                 },
