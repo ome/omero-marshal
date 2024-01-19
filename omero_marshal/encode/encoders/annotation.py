@@ -68,7 +68,7 @@ class Annotatable201501Encoder(Encoder):
         if obj.isAnnotationLinksLoaded() and obj.sizeOfAnnotationLinks() > 0:
             annotations = list()
             for annotation_link in obj.copyAnnotationLinks():
-                annotation = annotation_link.child
+                annotation = annotation_link.getChild()
                 annotation_encoder = self.ctx.get_encoder(annotation.__class__)
                 annotations.append(
                     annotation_encoder.encode(annotation)
