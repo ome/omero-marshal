@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 import multiprocessing
 assert multiprocessing  # silence flake8
 
-VERSION = '0.8.1.dev0'
+VERSION = '0.9.0'
 
 
 def get_requirements(suffix=''):
