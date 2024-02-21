@@ -1,3 +1,18 @@
+## 0.9.0 (2024-02-21)
+
+Features:
+
+ - Support file annotations - [#78](https://github.com/ome/omero-marshal/pull/78)
+ - Add support for Python 3.11 - [#79](https://github.com/ome/omero-marshal/pull/79)
+
+Breaking changes:
+
+ - Drop support for Python 3.7 - [#77](https://github.com/ome/omero-marshal/pull/77)
+
+Bugfixes:
+
+ - Various build fixes - [#76](https://github.com/ome/omero-marshal/pull/76), [#75](https://github.com/ome/omero-marshal/pull/75), etc.
+
 ## 0.8.0 (2022-10-26)
 
  - Test the build of wheel. No longer test the build of egg  - [#74](https://github.com/ome/omero-marshal/pull/74)
