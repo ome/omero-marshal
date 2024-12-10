@@ -19,8 +19,8 @@ class CommentAnnotation201501Encoder(TextAnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#CommentAnnotation'
 
-    def encode(self, obj):
-        v = super(CommentAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(CommentAnnotation201501Encoder, self).encode(obj, include_context)
         return v
 
 

@@ -17,20 +17,20 @@ class DetailsEncoder(Encoder):
 
     TYPE = 'TBD#Details'
 
-    def encode(self, obj):
-        v = super(DetailsEncoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(DetailsEncoder, self).encode(obj, include_context)
         if obj.owner is not None:
             encoder = self.ctx.get_encoder(obj.owner.__class__)
-            v['owner'] = encoder.encode(obj.owner)
+            v['owner'] = encoder.encode(obj.owner, False)
         if obj.group is not None:
             encoder = self.ctx.get_encoder(obj.group.__class__)
-            v['group'] = encoder.encode(obj.group)
+            v['group'] = encoder.encode(obj.group, False)
         if obj.permissions is not None:
             encoder = self.ctx.get_encoder(obj.permissions.__class__)
-            v['permissions'] = encoder.encode(obj.permissions)
+            v['permissions'] = encoder.encode(obj.permissions, False)
         if obj.externalInfo is not None:
             encoder = self.ctx.get_encoder(obj.externalInfo.__class__)
-            v['externalInfo'] = encoder.encode(obj.externalInfo)
+            v['externalInfo'] = encoder.encode(obj.externalInfo, False)
         return v
 
 

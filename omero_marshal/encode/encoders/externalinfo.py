@@ -17,8 +17,8 @@ class ExternalInfoEncoder(Encoder):
 
     TYPE = 'TBD#ExternalInfo'
 
-    def encode(self, obj):
-        v = super(ExternalInfoEncoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(ExternalInfoEncoder, self).encode(obj, include_context)
         if not obj.isLoaded():
             return v
         self.set_if_not_none(v, 'EntityId', obj.entityId)

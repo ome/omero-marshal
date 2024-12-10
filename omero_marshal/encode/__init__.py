@@ -44,21 +44,22 @@ class Encoder(object):
             'Value': value.getValue()
         }
 
-    def encode(self, obj):
-        v = {
-            '@context': {
+    def encode(self, obj, include_context=None):
+
+        v = {'@type': self.TYPE}
+        if include_context is None or include_context:
+            v['@context'] = {
                 "ome": OME_CONTEXT,
                 "omero": OMERO_CONTEXT,
-            },
-            '@type': self.TYPE
-        }
+            }
+
         if hasattr(obj, 'id'):
             obj_id = unwrap(obj.id)
             if obj_id is not None:
                 v['@id'] = obj_id
         if hasattr(obj, 'details') and obj.details is not None:
             encoder = self.ctx.get_encoder(obj.details.__class__)
-            v['omero:details'] = encoder.encode(obj.details)
+            v['omero:details'] = encoder.encode(obj.details, False)
 
         return v
 

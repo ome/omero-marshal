@@ -47,8 +47,8 @@ class Annotation201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#Annotation'
 
-    def encode(self, obj):
-        v = super(Annotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Annotation201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Namespace', obj.ns)
         return v
@@ -63,15 +63,15 @@ class Annotatable201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01#AnnotationRef'
 
-    def encode(self, obj):
-        v = super(Annotatable201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Annotatable201501Encoder, self).encode(obj, include_context)
         if obj.isAnnotationLinksLoaded() and obj.sizeOfAnnotationLinks() > 0:
             annotations = list()
             for annotation_link in obj.copyAnnotationLinks():
                 annotation = annotation_link.child
                 annotation_encoder = self.ctx.get_encoder(annotation.__class__)
                 annotations.append(
-                    annotation_encoder.encode(annotation)
+                    annotation_encoder.encode(annotation, False)
                 )
             v['Annotations'] = annotations
         return v

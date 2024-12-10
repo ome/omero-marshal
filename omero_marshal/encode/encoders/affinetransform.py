@@ -24,8 +24,8 @@ class AffineTransform201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#AffineTransform'
 
-    def encode(self, obj):
-        v = super(AffineTransform201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(AffineTransform201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'A00', obj.getA00())
         self.set_if_not_none(v, 'A10', obj.getA10())
         self.set_if_not_none(v, 'A01', obj.getA01())

@@ -19,8 +19,8 @@ class ExperimenterGroup201501Encoder(Encoder):
     TYPE = \
         'http://www.openmicroscopy.org/Schemas/OME/2015-01#ExperimenterGroup'
 
-    def encode(self, obj):
-        v = super(ExperimenterGroup201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(ExperimenterGroup201501Encoder, self).encode(obj, include_context)
         if not obj.isLoaded():
             return v
         self.set_if_not_none(v, 'Description', obj.description)

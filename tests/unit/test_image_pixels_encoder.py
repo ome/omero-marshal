@@ -17,7 +17,7 @@ class TestImagePixelsEncoder(object):
 
     def test_image_encoder(self, image):
         encoder = get_encoder(image.__class__)
-        v = encoder.encode(image)
+        v = encoder.encode(image, True)
         assert v == {
             '@context': {
                 "ome": OME_CONTEXT,
@@ -42,8 +42,12 @@ class TestImagePixelsEncoder(object):
 
     def test_image_pixels_encoder(self, image_pixels):
         encoder = get_encoder(image_pixels.__class__)
-        v = encoder.encode(image_pixels)
+        v = encoder.encode(image_pixels, True)
         assert v == {
+            '@context': {
+                "ome": OME_CONTEXT,
+                "omero": OMERO_CONTEXT,
+            },
             '@id': 1,
             '@type': '%s#Image' % OME_SCHEMA_URL,
             'AcquisitionDate': 1,

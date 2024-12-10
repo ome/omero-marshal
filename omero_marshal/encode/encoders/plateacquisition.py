@@ -18,8 +18,8 @@ class PlateAcquisition201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#PlateAcquisition'
 
-    def encode(self, obj):
-        v = super(PlateAcquisition201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(PlateAcquisition201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'MaximumFieldCount', obj.maximumFieldCount)

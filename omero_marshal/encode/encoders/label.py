@@ -18,8 +18,8 @@ class Label201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Label'
 
-    def encode(self, obj):
-        v = super(Label201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Label201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'X', obj.x)
         self.set_if_not_none(v, 'Y', obj.y)
         return v

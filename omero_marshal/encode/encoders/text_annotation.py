@@ -19,8 +19,8 @@ class TextAnnotation201501Encoder(AnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#TextAnnotation'
 
-    def encode(self, obj):
-        v = super(TextAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(TextAnnotation201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Value', obj.textValue)
         return v
 

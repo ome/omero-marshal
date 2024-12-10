@@ -19,8 +19,8 @@ class TagAnnotation201501Encoder(TextAnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#TagAnnotation'
 
-    def encode(self, obj):
-        v = super(TagAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(TagAnnotation201501Encoder, self).encode(obj, include_context)
         return v
 
 

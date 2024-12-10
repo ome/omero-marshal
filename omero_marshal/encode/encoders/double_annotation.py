@@ -19,8 +19,8 @@ class DoubleAnnotation201501Encoder(AnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#DoubleAnnotation'
 
-    def encode(self, obj):
-        v = super(DoubleAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(DoubleAnnotation201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Value', obj.doubleValue)
         return v
 

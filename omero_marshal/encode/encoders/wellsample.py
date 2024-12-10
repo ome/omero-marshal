@@ -18,19 +18,19 @@ class WellSample201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#WellSample'
 
-    def encode(self, obj):
-        v = super(WellSample201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(WellSample201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'PositionX', obj.posX)
         self.set_if_not_none(v, 'PositionY', obj.posY)
         self.set_if_not_none(v, 'Timepoint', obj.timepoint)
         if obj.image is not None and obj.image.isLoaded():
             image_encoder = self.ctx.get_encoder(obj.image.__class__)
-            v['Image'] = image_encoder.encode(obj.image)
+            v['Image'] = image_encoder.encode(obj.image, False)
 
         if obj.plateAcquisition is not None \
                 and obj.plateAcquisition.isLoaded():
             encoder = self.ctx.get_encoder(obj.plateAcquisition.__class__)
-            v['PlateAcquisition'] = encoder.encode(obj.plateAcquisition)
+            v['PlateAcquisition'] = encoder.encode(obj.plateAcquisition, False)
         return v
 
 

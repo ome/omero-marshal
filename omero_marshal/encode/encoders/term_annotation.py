@@ -19,8 +19,8 @@ class TermAnnotation201501Encoder(AnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#TermAnnotation'
 
-    def encode(self, obj):
-        v = super(TermAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(TermAnnotation201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Value', obj.termValue)
         return v
 
