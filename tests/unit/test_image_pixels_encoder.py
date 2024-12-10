@@ -93,13 +93,13 @@ class TestImagePixelsEncoder(object):
                 'omero:waveStart': 1,
                 'DimensionOrder': {
                     '@id': 1,
-                    '@type': 'TBD#DimensionOrder',
+                    '@type': '%s#DimensionOrder' % OME_SCHEMA_URL,
                     'value': 'XYZCT',
                     'omero:details': {'@type': 'TBD#Details'}
                 },
                 'Type': {
                     '@id': 1,
-                    '@type': 'TBD#PixelsType',
+                    '@type': '%s#PixelType' % OME_SCHEMA_URL,
                     'value': 'bit',
                     'omero:details': {'@type': 'TBD#Details'}
                 },
@@ -108,14 +108,14 @@ class TestImagePixelsEncoder(object):
                     '@type': '%s#Channel' % OME_SCHEMA_URL,
                     'AcquisitionMode': {
                         '@id': 1,
-                        '@type': 'TBD#AcquisitionMode',
+                        '@type': '%s#AcquisitionMode' % OME_SCHEMA_URL,
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
                     'Color': -1,
                     'ContrastMethod': {
                         '@id': 8,
-                        '@type': 'TBD#ContrastMethod',
+                        '@type': '%s#ContrastMethod' % OME_SCHEMA_URL,
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Fluorescence'
                     },
@@ -134,7 +134,7 @@ class TestImagePixelsEncoder(object):
                     'Fluor': 'GFP',
                     'Illumination': {
                         '@id': 1,
-                        '@type': 'TBD#Illumination',
+                        '@type': '%s#IlluminationType' % OME_SCHEMA_URL,
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Transmitted'
                     },
@@ -162,14 +162,14 @@ class TestImagePixelsEncoder(object):
                     '@type': '%s#Channel' % OME_SCHEMA_URL,
                     'AcquisitionMode': {
                         '@id': 1,
-                        '@type': 'TBD#AcquisitionMode',
+                        '@type': '%s#AcquisitionMode' % OME_SCHEMA_URL,
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'WideField'
                     },
                     'Color': -16711681,
                     'ContrastMethod': {
                         '@id': 8,
-                        '@type': 'TBD#ContrastMethod',
+                        '@type': '%s#ContrastMethod' % OME_SCHEMA_URL,
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Fluorescence'
                     },
@@ -188,7 +188,7 @@ class TestImagePixelsEncoder(object):
                     'Fluor': 'DAPI',
                     'Illumination': {
                         '@id': 1,
-                        '@type': 'TBD#Illumination',
+                        '@type': '%s#IlluminationType' % OME_SCHEMA_URL,
                         'omero:details': {'@type': 'TBD#Details'},
                         'value': 'Transmitted'
                     },
