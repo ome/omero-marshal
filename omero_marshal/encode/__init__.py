@@ -37,12 +37,16 @@ class Encoder(object):
             v[key] = value
 
     def encode_unit(self, v, key, value):
-        v[key] = {
-            '@type': 'TBD#%s' % value.__class__.__name__,
-            'Unit': value.getUnit().name,
-            'Symbol': value.getSymbol(),
-            'Value': value.getValue()
-        }
+        k = value.__class__.__name__
+        if k in ("LengthI", "TimeI"):
+            v[key] = {
+                '@type': 'omero:%s' % k,
+                'Unit': value.getUnit().name,
+                'Symbol': value.getSymbol(),
+                'Value': value.getValue()
+            }
+        else:
+            raise Exception("unhandled unit: %s" % k)
 
     def encode(self, obj, include_context=None):
 

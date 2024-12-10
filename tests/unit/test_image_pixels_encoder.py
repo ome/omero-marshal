@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, OME_SCHEMA_URL
+from omero_marshal import get_encoder
 
 class TestImagePixelsEncoder(object):
 
@@ -19,7 +19,7 @@ class TestImagePixelsEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#Image' % OME_SCHEMA_URL,
+            '@type': 'Image',
             'AcquisitionDate': 1,
             'Name': 'image_name_1',
             'omero:archived': False,
@@ -41,7 +41,7 @@ class TestImagePixelsEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#Image' % OME_SCHEMA_URL,
+            '@type': 'Image',
             'AcquisitionDate': 1,
             'Name': 'image_name_1',
             'omero:archived': False,
@@ -56,7 +56,7 @@ class TestImagePixelsEncoder(object):
             },
             'Pixels': {
                 '@id': 1,
-                '@type': '%s#Pixels' % OME_SCHEMA_URL,
+                '@type': 'Pixels',
                 'omero:methodology': 'methodology',
                 'PhysicalSizeX': {
                     '@type': 'omero:LengthI',
@@ -93,29 +93,29 @@ class TestImagePixelsEncoder(object):
                 'omero:waveStart': 1,
                 'DimensionOrder': {
                     '@id': 1,
-                    '@type': '%s#DimensionOrder' % OME_SCHEMA_URL,
+                    '@type': 'DimensionOrder',
                     'value': 'XYZCT',
                     'omero:details': {'@type': 'omero:Details'}
                 },
                 'Type': {
                     '@id': 1,
-                    '@type': '%s#PixelType' % OME_SCHEMA_URL,
+                    '@type': 'PixelType',
                     'value': 'bit',
                     'omero:details': {'@type': 'omero:Details'}
                 },
                 'Channels': [{
                     '@id': 1,
-                    '@type': '%s#Channel' % OME_SCHEMA_URL,
+                    '@type': 'Channel',
                     'AcquisitionMode': {
                         '@id': 1,
-                        '@type': '%s#AcquisitionMode' % OME_SCHEMA_URL,
+                        '@type': 'AcquisitionMode',
                         'omero:details': {'@type': 'omero:Details'},
                         'value': 'WideField'
                     },
                     'Color': -1,
                     'ContrastMethod': {
                         '@id': 8,
-                        '@type': '%s#ContrastMethod' % OME_SCHEMA_URL,
+                        '@type': 'ContrastMethod',
                         'omero:details': {'@type': 'omero:Details'},
                         'value': 'Fluorescence'
                     },
@@ -134,7 +134,7 @@ class TestImagePixelsEncoder(object):
                     'Fluor': 'GFP',
                     'Illumination': {
                         '@id': 1,
-                        '@type': '%s#IlluminationType' % OME_SCHEMA_URL,
+                        '@type': 'IlluminationType',
                         'omero:details': {'@type': 'omero:Details'},
                         'value': 'Transmitted'
                     },
@@ -159,17 +159,17 @@ class TestImagePixelsEncoder(object):
                     }
                 }, {
                     '@id': 2,
-                    '@type': '%s#Channel' % OME_SCHEMA_URL,
+                    '@type': 'Channel',
                     'AcquisitionMode': {
                         '@id': 1,
-                        '@type': '%s#AcquisitionMode' % OME_SCHEMA_URL,
+                        '@type': 'AcquisitionMode',
                         'omero:details': {'@type': 'omero:Details'},
                         'value': 'WideField'
                     },
                     'Color': -16711681,
                     'ContrastMethod': {
                         '@id': 8,
-                        '@type': '%s#ContrastMethod' % OME_SCHEMA_URL,
+                        '@type': 'ContrastMethod',
                         'omero:details': {'@type': 'omero:Details'},
                         'value': 'Fluorescence'
                     },
@@ -188,7 +188,7 @@ class TestImagePixelsEncoder(object):
                     'Fluor': 'DAPI',
                     'Illumination': {
                         '@id': 1,
-                        '@type': '%s#IlluminationType' % OME_SCHEMA_URL,
+                        '@type': 'IlluminationType',
                         'omero:details': {'@type': 'omero:Details'},
                         'value': 'Transmitted'
                     },

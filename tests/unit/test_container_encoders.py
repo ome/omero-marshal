@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, OME_SCHEMA_URL, SPW_SCHEMA_URL
+from omero_marshal import get_encoder
 
 
 class TestProjectEncoder(object):
@@ -20,7 +20,7 @@ class TestProjectEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#Project' % OME_SCHEMA_URL,
+            '@type': 'Project',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'omero:Details'}
@@ -32,19 +32,19 @@ class TestProjectEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#Project' % OME_SCHEMA_URL,
+            '@type': 'Project',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'omero:Details'},
             'Datasets': [{
                 '@id': 1,
-                '@type': '%s#Dataset' % OME_SCHEMA_URL,
+                '@type': 'Dataset',
                 'Name': 'dataset_name_1',
                 'Description': 'dataset_description_1',
                 'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@id': 2,
-                '@type': '%s#Dataset' % OME_SCHEMA_URL,
+                '@type': 'Dataset',
                 'Name': 'dataset_name_2',
                 'Description': 'dataset_description_2',
                 'omero:details': {'@type': 'omero:Details'}
@@ -58,19 +58,19 @@ class TestProjectEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#Project' % OME_SCHEMA_URL,
+            '@type': 'Project',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'omero:Details'},
             'Datasets': [{
                 '@id': 1,
-                '@type': '%s#Dataset' % OME_SCHEMA_URL,
+                '@type': 'Dataset',
                 'Name': 'dataset_name_1',
                 'Description': 'dataset_description_1',
                 'omero:details': {'@type': 'omero:Details'},
                 'Images': [{
                     '@id': 1,
-                    '@type': '%s#Image' % OME_SCHEMA_URL,
+                    '@type': 'Image',
                     'AcquisitionDate': 1,
                     'Name': 'image_name_1',
                     'omero:archived': False,
@@ -86,7 +86,7 @@ class TestProjectEncoder(object):
                     'omero:details': {'@type': 'omero:Details'}
                 }, {
                     '@id': 2,
-                    '@type': '%s#Image' % OME_SCHEMA_URL,
+                    '@type': 'Image',
                     'AcquisitionDate': 1,
                     'Name': 'image_name_2',
                     'omero:archived': False,
@@ -103,13 +103,13 @@ class TestProjectEncoder(object):
                 }]
             }, {
                 '@id': 2,
-                '@type': '%s#Dataset' % OME_SCHEMA_URL,
+                '@type': 'Dataset',
                 'Name': 'dataset_name_2',
                 'Description': 'dataset_description_2',
                 'omero:details': {'@type': 'omero:Details'},
                 'Images': [{
                     '@id': 3,
-                    '@type': '%s#Image' % OME_SCHEMA_URL,
+                    '@type': 'Image',
                     'AcquisitionDate': 1,
                     'Name': 'image_name_3',
                     'omero:archived': False,
@@ -125,7 +125,7 @@ class TestProjectEncoder(object):
                     'omero:details': {'@type': 'omero:Details'}
                 }, {
                     '@id': 4,
-                    '@type': '%s#Image' % OME_SCHEMA_URL,
+                    '@type': 'Image',
                     'AcquisitionDate': 1,
                     'Name': 'image_name_4',
                     'omero:archived': False,
@@ -152,7 +152,7 @@ class TestScreenEncoder(object):
         assert v == {
             **contexts,
             '@id': 4,
-            '@type': '%s#Screen' % SPW_SCHEMA_URL,
+            '@type': 'Screen',
             'Name': 'the_name',
             'Description': 'the_description',
             'ProtocolDescription': 'the_protocol_description',
@@ -169,7 +169,7 @@ class TestScreenEncoder(object):
         assert v == {
             **contexts,
             '@id': 4,
-            '@type': '%s#Screen' % SPW_SCHEMA_URL,
+            '@type': 'Screen',
             'Name': 'the_name',
             'Description': 'the_description',
             'ProtocolDescription': 'the_protocol_description',
@@ -180,7 +180,7 @@ class TestScreenEncoder(object):
             'omero:details': {'@type': 'omero:Details'},
             'Plates': [{
                 '@id': 5,
-                '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                '@type': 'Plate',
                 'Name': 'plate_name_5',
                 'Description': 'plate_description_5',
                 'ColumnNamingConvention': 'number',
@@ -204,7 +204,7 @@ class TestScreenEncoder(object):
                 },
                 'Wells': [{
                     '@id': 7,
-                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    '@type': 'Well',
                     'Column': 2,
                     'Row': 1,
                     'ExternalDescription': 'external_description_7',
@@ -214,7 +214,7 @@ class TestScreenEncoder(object):
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -230,7 +230,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -247,7 +247,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 7,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_7',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,
@@ -258,7 +258,7 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'omero:Details'}
                     }, {
                         '@id': 10,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -274,7 +274,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -291,7 +291,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 7,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_7',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,
@@ -304,7 +304,7 @@ class TestScreenEncoder(object):
                     'omero:details': {'@type': 'omero:Details'}
                 }, {
                     '@id': 8,
-                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    '@type': 'Well',
                     'Column': 2,
                     'Row': 1,
                     'ExternalDescription': 'external_description_8',
@@ -314,7 +314,7 @@ class TestScreenEncoder(object):
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -330,7 +330,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -347,7 +347,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 8,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_8',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,
@@ -358,7 +358,7 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'omero:Details'}
                     }, {
                         '@id': 10,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -374,7 +374,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -391,7 +391,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 8,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_8',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,
@@ -406,7 +406,7 @@ class TestScreenEncoder(object):
                 'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@id': 6,
-                '@type': '%s#Plate' % SPW_SCHEMA_URL,
+                '@type': 'Plate',
                 'Name': 'plate_name_6',
                 'Description': 'plate_description_6',
                 'ColumnNamingConvention': 'number',
@@ -430,7 +430,7 @@ class TestScreenEncoder(object):
                 },
                 'Wells': [{
                     '@id': 7,
-                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    '@type': 'Well',
                     'Column': 2,
                     'Row': 1,
                     'ExternalDescription': 'external_description_7',
@@ -440,7 +440,7 @@ class TestScreenEncoder(object):
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -456,7 +456,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -473,7 +473,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 7,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_7',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,
@@ -484,7 +484,7 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'omero:Details'}
                     }, {
                         '@id': 10,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -500,7 +500,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -517,7 +517,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 7,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_7',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,
@@ -530,7 +530,7 @@ class TestScreenEncoder(object):
                     'omero:details': {'@type': 'omero:Details'}
                 }, {
                     '@id': 8,
-                    '@type': '%s#Well' % SPW_SCHEMA_URL,
+                    '@type': 'Well',
                     'Column': 2,
                     'Row': 1,
                     'ExternalDescription': 'external_description_8',
@@ -540,7 +540,7 @@ class TestScreenEncoder(object):
                     'omero:status': 'the_status',
                     'WellSamples': [{
                         '@id': 9,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -556,7 +556,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -573,7 +573,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 8,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_8',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,
@@ -584,7 +584,7 @@ class TestScreenEncoder(object):
                         'omero:details': {'@type': 'omero:Details'}
                     }, {
                         '@id': 10,
-                        '@type': '%s#WellSample' % SPW_SCHEMA_URL,
+                        '@type': 'WellSample',
                         'PositionX': {
                             '@type': 'omero:LengthI',
                             'Unit': 'REFERENCEFRAME',
@@ -600,7 +600,7 @@ class TestScreenEncoder(object):
                         'Timepoint': 1,
                         'Image': {
                             '@id': 1,
-                            '@type': '%s#Image' % OME_SCHEMA_URL,
+                            '@type': 'Image',
                             'AcquisitionDate': 1,
                             'Name': 'image_name_1',
                             'omero:archived': False,
@@ -617,7 +617,7 @@ class TestScreenEncoder(object):
                         },
                         'PlateAcquisition': {
                             '@id': 8,
-                            '@type': '%s#PlateAcquisition' % SPW_SCHEMA_URL,
+                            '@type': 'PlateAcquisition',
                             'Description': 'plateacquisition_description_8',
                             'EndTime': 2,
                             'MaximumFieldCount': 1,

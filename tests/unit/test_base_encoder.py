@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, ROI_SCHEMA_URL, OME_SCHEMA_URL
+from omero_marshal import get_encoder
 
 
 class TestBaseEncoder(object):
@@ -20,21 +20,21 @@ class TestBaseEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL,
+            '@type': 'ROI',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
                 '@type': 'omero:Details',
                 'group': {
                     '@id': 1,
-                    '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
+                    '@type': 'ExperimenterGroup',
                     'Description': 'the_description',
                     'Name': 'the_name',
                     'omero:details': {'@type': 'omero:Details'}
                 },
                 'owner': {
                     '@id': 1,
-                    '@type': '%s#Experimenter' % OME_SCHEMA_URL,
+                    '@type': 'Experimenter',
                     'Email': 'the_email',
                     'FirstName': 'the_firstName',
                     'Institution': 'the_institution',
@@ -78,7 +78,7 @@ class TestBaseEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL,
+            '@type': 'ROI',
             'Name': 'the_name',
             'Description': 'the_description'
         }
@@ -90,18 +90,18 @@ class TestBaseEncoder(object):
         assert v == {
             **contexts,
             '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL,
+            '@type': 'ROI',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
                 '@type': 'omero:Details',
                 'owner': {
                     '@id': 1,
-                    '@type': '%s#Experimenter' % OME_SCHEMA_URL
+                    '@type': 'Experimenter'
                 },
                 'group': {
                     '@id': 1,
-                    '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL
+                    '@type': 'ExperimenterGroup'
                 },
                 'permissions': {
                     '@type': 'omero:Permissions',
@@ -138,7 +138,7 @@ class TestDetailsEncoder(object):
         return {
             **contexts,
             '@id': 1,
-            '@type': '%s#Experimenter' % OME_SCHEMA_URL,
+            '@type': 'Experimenter',
             'FirstName': 'the_firstName',
             'MiddleName': 'the_middleName',
             'LastName': 'the_lastName',
@@ -157,7 +157,7 @@ class TestDetailsEncoder(object):
         return {
             **contexts,
             '@id': 1,
-            '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
+            '@type': 'ExperimenterGroup',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {'@type': 'omero:Details'}

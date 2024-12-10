@@ -30,6 +30,8 @@ class Decoder(object):
         if v is None:
             return None
         unit = v['@type'][v['@type'].rfind('#') + 1:]
+        if unit.startswith("omero:"):
+            unit = unit[6:]
         unit = getattr(omero.model, unit)
         return unit(
             float(v['Value']),
