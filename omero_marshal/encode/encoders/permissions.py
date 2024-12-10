@@ -15,7 +15,7 @@ from omero.model import PermissionsI
 
 class PermissionsEncoder(Encoder):
 
-    TYPE = 'TBD#Permissions'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#Permissions'
 
     def encode(self, obj, include_context=None):
         # Never include contexts on these objects

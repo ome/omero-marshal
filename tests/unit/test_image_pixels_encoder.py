@@ -28,11 +28,11 @@ class TestImagePixelsEncoder(object):
             'omero:series': 0,
             'omero:format': {
                 '@id': 1,
-                '@type': 'TBD#Format',
+                '@type': 'omero:Format',
                 'value': 'PNG',
-                'omero:details': {'@type': 'TBD#Details'},
+                'omero:details': {'@type': 'omero:Details'},
             },
-            'omero:details': {'@type': 'TBD#Details'}
+            'omero:details': {'@type': 'omero:Details'}
         }
 
     def test_image_pixels_encoder(self, image_pixels, contexts):
@@ -50,28 +50,28 @@ class TestImagePixelsEncoder(object):
             'omero:series': 0,
             'omero:format': {
                 '@id': 1,
-                '@type': 'TBD#Format',
+                '@type': 'omero:Format',
                 'value': 'PNG',
-                'omero:details': {'@type': 'TBD#Details'},
+                'omero:details': {'@type': 'omero:Details'},
             },
             'Pixels': {
                 '@id': 1,
                 '@type': '%s#Pixels' % OME_SCHEMA_URL,
                 'omero:methodology': 'methodology',
                 'PhysicalSizeX': {
-                    '@type': 'TBD#LengthI',
+                    '@type': 'omero:LengthI',
                     'Unit': 'MICROMETER',
                     'Symbol': 'µm',
                     'Value': 1.0
                 },
                 'PhysicalSizeY': {
-                    '@type': 'TBD#LengthI',
+                    '@type': 'omero:LengthI',
                     'Unit': 'MICROMETER',
                     'Symbol': 'µm',
                     'Value': 2.0
                 },
                 'PhysicalSizeZ': {
-                    '@type': 'TBD#LengthI',
+                    '@type': 'omero:LengthI',
                     'Unit': 'MICROMETER',
                     'Symbol': 'µm',
                     'Value': 3.0
@@ -84,7 +84,7 @@ class TestImagePixelsEncoder(object):
                 'SizeC': 4,
                 'SizeT': 5,
                 'TimeIncrement': {
-                    '@type': 'TBD#TimeI',
+                    '@type': 'omero:TimeI',
                     'Unit': 'MILLISECOND',
                     'Symbol': 'ms',
                     'Value': 1.0
@@ -95,13 +95,13 @@ class TestImagePixelsEncoder(object):
                     '@id': 1,
                     '@type': '%s#DimensionOrder' % OME_SCHEMA_URL,
                     'value': 'XYZCT',
-                    'omero:details': {'@type': 'TBD#Details'}
+                    'omero:details': {'@type': 'omero:Details'}
                 },
                 'Type': {
                     '@id': 1,
                     '@type': '%s#PixelType' % OME_SCHEMA_URL,
                     'value': 'bit',
-                    'omero:details': {'@type': 'TBD#Details'}
+                    'omero:details': {'@type': 'omero:Details'}
                 },
                 'Channels': [{
                     '@id': 1,
@@ -109,24 +109,24 @@ class TestImagePixelsEncoder(object):
                     'AcquisitionMode': {
                         '@id': 1,
                         '@type': '%s#AcquisitionMode' % OME_SCHEMA_URL,
-                        'omero:details': {'@type': 'TBD#Details'},
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'WideField'
                     },
                     'Color': -1,
                     'ContrastMethod': {
                         '@id': 8,
                         '@type': '%s#ContrastMethod' % OME_SCHEMA_URL,
-                        'omero:details': {'@type': 'TBD#Details'},
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'Fluorescence'
                     },
                     'EmissionWavelength': {
-                        '@type': 'TBD#LengthI',
+                        '@type': 'omero:LengthI',
                         'Symbol': 'nm',
                         'Unit': 'NANOMETER',
                         'Value': 509.0
                     },
                     'ExcitationWavelength': {
-                        '@type': 'TBD#LengthI',
+                        '@type': 'omero:LengthI',
                         'Symbol': 'nm',
                         'Unit': 'NANOMETER',
                         'Value': 488.0
@@ -135,13 +135,13 @@ class TestImagePixelsEncoder(object):
                     'Illumination': {
                         '@id': 1,
                         '@type': '%s#IlluminationType' % OME_SCHEMA_URL,
-                        'omero:details': {'@type': 'TBD#Details'},
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'Transmitted'
                     },
                     'NDFilter': 1.0,
                     'Name': 'GFP/488',
                     'PinholeSize': {
-                        '@type': 'TBD#LengthI',
+                        '@type': 'omero:LengthI',
                         'Symbol': 'nm',
                         'Unit': 'NANOMETER',
                         'Value': 1.0
@@ -149,12 +149,12 @@ class TestImagePixelsEncoder(object):
                     'PockelCellSetting': 0,
                     'SamplesPerPixel': 2,
                     'omero:LogicalChannelId': 1,
-                    'omero:details': {'@type': 'TBD#Details'},
+                    'omero:details': {'@type': 'omero:Details'},
                     'omero:lookupTable': 'rainbow',
                     'omero:photometricInterpretation': {
                         '@id': 1,
-                        '@type': 'TBD#PhotometricInterpretation',
-                        'omero:details': {'@type': 'TBD#Details'},
+                        '@type': 'omero:PhotometricInterpretation',
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'RGB'
                     }
                 }, {
@@ -163,24 +163,24 @@ class TestImagePixelsEncoder(object):
                     'AcquisitionMode': {
                         '@id': 1,
                         '@type': '%s#AcquisitionMode' % OME_SCHEMA_URL,
-                        'omero:details': {'@type': 'TBD#Details'},
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'WideField'
                     },
                     'Color': -16711681,
                     'ContrastMethod': {
                         '@id': 8,
                         '@type': '%s#ContrastMethod' % OME_SCHEMA_URL,
-                        'omero:details': {'@type': 'TBD#Details'},
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'Fluorescence'
                     },
                     'EmissionWavelength': {
-                        '@type': 'TBD#LengthI',
+                        '@type': 'omero:LengthI',
                         'Symbol': 'nm',
                         'Unit': 'NANOMETER',
                         'Value': 470.0
                     },
                     'ExcitationWavelength': {
-                        '@type': 'TBD#LengthI',
+                        '@type': 'omero:LengthI',
                         'Symbol': 'nm',
                         'Unit': 'NANOMETER',
                         'Value': 405.0
@@ -189,13 +189,13 @@ class TestImagePixelsEncoder(object):
                     'Illumination': {
                         '@id': 1,
                         '@type': '%s#IlluminationType' % OME_SCHEMA_URL,
-                        'omero:details': {'@type': 'TBD#Details'},
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'Transmitted'
                     },
                     'NDFilter': 1.0,
                     'Name': 'DAPI/405',
                     'PinholeSize': {
-                        '@type': 'TBD#LengthI',
+                        '@type': 'omero:LengthI',
                         'Symbol': 'nm',
                         'Unit': 'NANOMETER',
                         'Value': 2.0
@@ -203,16 +203,16 @@ class TestImagePixelsEncoder(object):
                     'PockelCellSetting': 0,
                     'SamplesPerPixel': 2,
                     'omero:LogicalChannelId': 2,
-                    'omero:details': {'@type': 'TBD#Details'},
+                    'omero:details': {'@type': 'omero:Details'},
                     'omero:lookupTable': 'rainbow',
                     'omero:photometricInterpretation': {
                         '@id': 1,
-                        '@type': 'TBD#PhotometricInterpretation',
-                        'omero:details': {'@type': 'TBD#Details'},
+                        '@type': 'omero:PhotometricInterpretation',
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'RGB'
                     }
                 }],
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             },
-            'omero:details': {'@type': 'TBD#Details'}
+            'omero:details': {'@type': 'omero:Details'}
         }

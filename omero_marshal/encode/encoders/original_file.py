@@ -15,7 +15,7 @@ from omero.model import OriginalFileI
 
 class OriginalFileEncoder(Encoder):
 
-    TYPE = 'TBD#OriginalFile'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#OriginalFile'
 
     def encode(self, obj, include_context=None):
         v = super(OriginalFileEncoder, self).encode(obj, include_context)

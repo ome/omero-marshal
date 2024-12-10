@@ -24,13 +24,13 @@ class TestBaseEncoder(object):
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
-                '@type': 'TBD#Details',
+                '@type': 'omero:Details',
                 'group': {
                     '@id': 1,
                     '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
                     'Description': 'the_description',
                     'Name': 'the_name',
-                    'omero:details': {'@type': 'TBD#Details'}
+                    'omero:details': {'@type': 'omero:Details'}
                 },
                 'owner': {
                     '@id': 1,
@@ -41,10 +41,10 @@ class TestBaseEncoder(object):
                     'LastName': 'the_lastName',
                     'MiddleName': 'the_middleName',
                     'UserName': 'the_omeName',
-                    'omero:details': {'@type': 'TBD#Details'}
+                    'omero:details': {'@type': 'omero:Details'}
                 },
                 'permissions': {
-                    '@type': 'TBD#Permissions',
+                    '@type': 'omero:Permissions',
                     'canAnnotate': True,
                     'canDelete': True,
                     'canEdit': True,
@@ -59,13 +59,13 @@ class TestBaseEncoder(object):
                     'isWorldWrite': True
                 },
                 'externalInfo': {
-                    '@type': 'TBD#ExternalInfo',
+                    '@type': 'omero:ExternalInfo',
                     'EntityId': 123,
                     'EntityType': 'test',
                     'Lsid': 'ABCDEF',
                     'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
                     'omero:details': {
-                        '@type': 'TBD#Details'
+                        '@type': 'omero:Details'
                     },
                 },
             }
@@ -94,7 +94,7 @@ class TestBaseEncoder(object):
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
-                '@type': 'TBD#Details',
+                '@type': 'omero:Details',
                 'owner': {
                     '@id': 1,
                     '@type': '%s#Experimenter' % OME_SCHEMA_URL
@@ -104,7 +104,7 @@ class TestBaseEncoder(object):
                     '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL
                 },
                 'permissions': {
-                    '@type': 'TBD#Permissions',
+                    '@type': 'omero:Permissions',
                     'canAnnotate': True,
                     'canDelete': True,
                     'canEdit': True,
@@ -119,13 +119,13 @@ class TestBaseEncoder(object):
                     'isWorldWrite': True
                 },
                 'externalInfo': {
-                    '@type': 'TBD#ExternalInfo',
+                    '@type': 'omero:ExternalInfo',
                     'EntityId': 123,
                     'EntityType': 'test',
                     'Lsid': 'ABCDEF',
                     'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
                     'omero:details': {
-                        '@type': 'TBD#Details'
+                        '@type': 'omero:Details'
                     },
                 },
             }
@@ -145,7 +145,7 @@ class TestDetailsEncoder(object):
             'Email': 'the_email',
             'Institution': 'the_institution',
             'UserName': 'the_omeName',
-            'omero:details': {'@type': 'TBD#Details'}
+            'omero:details': {'@type': 'omero:Details'}
         }
 
     def test_experimenter_encoder(self, experimenter, contexts):
@@ -160,7 +160,7 @@ class TestDetailsEncoder(object):
             '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description',
-            'omero:details': {'@type': 'TBD#Details'}
+            'omero:details': {'@type': 'omero:Details'}
         }
 
     def test_experimenter_group_encoder(self, experimenter_group, contexts):
@@ -170,7 +170,7 @@ class TestDetailsEncoder(object):
 
     def permissions_json(self):
         return {
-            '@type': 'TBD#Permissions',
+            '@type': 'omero:Permissions',
             'perm': 'rwrwrw',
             'canAnnotate': True,
             'canDelete': True,
@@ -192,13 +192,13 @@ class TestDetailsEncoder(object):
 
     def externalInfo_json(self):
         return {
-            '@type': 'TBD#ExternalInfo',
+            '@type': 'omero:ExternalInfo',
             'EntityId': 123,
             'EntityType': 'test',
             'Lsid': 'ABCDEF',
             'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
             'omero:details': {
-                '@type': 'TBD#Details'
+                '@type': 'omero:Details'
             },
         }
 
@@ -211,7 +211,7 @@ class TestDetailsEncoder(object):
         encoder = get_encoder(details.__class__)
         v = encoder.encode(details)
         assert v == {
-            '@type': 'TBD#Details',
+            '@type': 'omero:Details',
             'permissions': self.permissions_json(),
             'owner': self.experimenter_json({}),
             'group': self.experimenter_group_json({}),

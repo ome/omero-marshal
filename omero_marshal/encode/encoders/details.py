@@ -15,7 +15,7 @@ from omero.model import DetailsI
 
 class DetailsEncoder(Encoder):
 
-    TYPE = 'TBD#Details'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#Details'
 
     def encode(self, obj, include_context=None):
         # Never include contexts on these objects

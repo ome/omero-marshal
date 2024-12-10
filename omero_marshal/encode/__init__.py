@@ -9,8 +9,8 @@
 # jason@glencoesoftware.com.
 #
 
-OME_CONTEXT = "https://gist.githubusercontent.com/stefanches7/5b3402331d901bb3c3384bac047c4ac2/raw/cd45da585bfa630a56ef55670d2b5da2be50ff76/context.ld.json"
-OMERO_CONTEXT = "TODO"
+BASE_CONTEXT = "http://www.openmicroscopy.org/Schemas/OME/2016-06#"
+OMERO_CONTEXT = "http://www.openmicroscopy.org/Schemas/OMERO/2016-06#"
 
 # Needed to avoid import errors when this is the first import
 import omero.all  # noqa
@@ -46,10 +46,16 @@ class Encoder(object):
 
     def encode(self, obj, include_context=None):
 
-        v = {'@type': self.TYPE}
+        if self.TYPE.startswith(BASE_CONTEXT):
+            v = {'@type': self.TYPE.split('#')[-1]}
+        elif self.TYPE.startswith(OMERO_CONTEXT):
+            v = {'@type': "omero:" + self.TYPE.split('#')[-1]}
+        else:
+            raise Exception("unknown prefix: %s" % self.TYPE)
+
         if include_context is None or include_context:
             v['@context'] = {
-                "ome": OME_CONTEXT,
+                "@base": BASE_CONTEXT,
                 "omero": OMERO_CONTEXT,
             }
 

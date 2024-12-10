@@ -15,7 +15,7 @@ from omero.model import OriginalFileI
 
 class OriginalFileDecoder(Decoder):
 
-    TYPE = 'TBD#OriginalFile'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#OriginalFile'
 
     OMERO_CLASS = OriginalFileI
 

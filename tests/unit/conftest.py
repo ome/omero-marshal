@@ -11,7 +11,7 @@
 
 import pytest
 
-from omero_marshal.encode import OME_CONTEXT, OMERO_CONTEXT
+from omero_marshal.encode import BASE_CONTEXT, OMERO_CONTEXT
 
 from omero.model import \
     AcquisitionModeI, \
@@ -716,7 +716,7 @@ def mask(identity_transform):
 def contexts():
     return {
         '@context': {
-            "ome": OME_CONTEXT,
+            "@base": BASE_CONTEXT,
             "omero": OMERO_CONTEXT,
         }
     }

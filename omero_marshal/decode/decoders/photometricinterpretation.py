@@ -15,7 +15,7 @@ from omero.model import PhotometricInterpretationI
 
 class PhotometricInterpretationDecoder(EnumDecoder):
 
-    TYPE = 'TBD#PhotometricInterpretation'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#PhotometricInterpretation'
 
     OMERO_CLASS = PhotometricInterpretationI
 

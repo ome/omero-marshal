@@ -22,79 +22,79 @@ class TestShapeEncoder(object):
                 'Description': 'the_description',
                 'Namespace': 'boolean_annotation',
                 'Value': True,
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#CommentAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'comment_annotation',
                 'Value': 'text_value',
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#DoubleAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'double_annotation',
                 'Value': 1.0,
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#LongAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'long_annotation',
                 'Value': 1,
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#MapAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'map_annotation',
                 'Value': [['a', '1'], ['b', '2']],
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#TagAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'tag_annotation',
                 'Value': 'tag_value',
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#TermAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'term_annotation',
                 'Value': 'term_value',
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#TimestampAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'timestamp_annotation',
                 'Value': 1,
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#XmlAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'Namespace': 'xml_annotation',
                 'Value': '<xml_value></xml_value>',
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }, {
                 '@type': '%s#FileAnnotation' % SA_SCHEMA_URL,
                 'Description': 'the_description',
                 'File': {
                     '@id': 1,
-                    '@type': 'TBD#OriginalFile',
+                    '@type': 'omero:OriginalFile',
                     'atime': 3,
                     'ctime': 5,
                     'hash': '1a0b045d',
                     'hasher': {
                         '@id': 1,
-                        '@type': 'TBD#ChecksumAlgorithm',
-                        'omero:details': {'@type': 'TBD#Details'},
+                        '@type': 'omero:ChecksumAlgorithm',
+                        'omero:details': {'@type': 'omero:Details'},
                         'value': 'Adler-32'
                     },
                     'mtime': 4,
-                    'omero:details': {'@type': 'TBD#Details'},
+                    'omero:details': {'@type': 'omero:Details'},
                     'path': 'path',
                     'size': 2,
                     'mimetype': 'application/octet-stream',
                     'name': 'name'
                 },
                 'Namespace': 'file_annotation',
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             }]
         }
 
@@ -107,14 +107,14 @@ class TestShapeEncoder(object):
         assert roi['Description'] == 'the_description'
         assert roi['@type'] == '%s#ROI' % ROI_SCHEMA_URL
         assert roi['omero:details'] == {
-            '@type': 'TBD#Details',
+            '@type': 'omero:Details',
             'group': {
                 '@id': 1,
                 '@type':
                     '%s#ExperimenterGroup' % OME_SCHEMA_URL,
                 'Description': 'the_description',
                 'Name': 'the_name',
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             },
             'owner': {
                 '@id': 1,
@@ -126,10 +126,10 @@ class TestShapeEncoder(object):
                 'LastName': 'the_lastName',
                 'MiddleName': 'the_middleName',
                 'UserName': 'the_omeName',
-                'omero:details': {'@type': 'TBD#Details'}
+                'omero:details': {'@type': 'omero:Details'}
             },
             'permissions': {
-                '@type': 'TBD#Permissions',
+                '@type': 'omero:Permissions',
                 'canAnnotate': True,
                 'canDelete': True,
                 'canEdit': True,
@@ -144,13 +144,13 @@ class TestShapeEncoder(object):
                 'isWorldWrite': True
             },
             'externalInfo': {
-                '@type': 'TBD#ExternalInfo',
+                '@type': 'omero:ExternalInfo',
                 'EntityId': 123,
                 'EntityType': 'test',
                 'Lsid': 'ABCDEF',
                 'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
                 'omero:details': {
-                    '@type': 'TBD#Details'
+                    '@type': 'omero:Details'
                 },
             },
         }
@@ -165,7 +165,7 @@ class TestShapeEncoder(object):
         assert shape['StrokeColor'] == 0xffff0000
         assert shape['StrokeDashArray'] == 'inherit'
         assert shape['StrokeWidth'] == {
-            '@type': 'TBD#LengthI',
+            '@type': 'omero:LengthI',
             'Unit': 'PIXEL',
             'Symbol': 'pixel',
             'Value': 4
@@ -173,7 +173,7 @@ class TestShapeEncoder(object):
         assert shape['Text'] == 'the_text'
         assert shape['FontFamily'] == 'cursive'
         assert shape['FontSize'] == {
-            '@type': 'TBD#LengthI',
+            '@type': 'omero:LengthI',
             'Unit': 'POINT',
             'Symbol': 'pt',
             'Value': 12
@@ -187,7 +187,7 @@ class TestShapeEncoder(object):
         assert shape['TheT'] == 2
         assert shape['TheC'] == 1
         self.assert_transform(shape['Transform'])
-        assert shape['omero:details'] == {'@type': 'TBD#Details'}
+        assert shape['omero:details'] == {'@type': 'omero:Details'}
         if not has_annotations:
             assert shape.get('annotations') is None
         else:
@@ -220,7 +220,7 @@ class TestShapeEncoder(object):
         assert transform['A02'] == 0.0
         assert transform['A12'] == 0.0
         if SCHEMA_VERSION != '2015-01':
-            assert transform['omero:details'] == {'@type': 'TBD#Details'}
+            assert transform['omero:details'] == {'@type': 'omero:Details'}
 
 
 class TestEllipseEncoder(TestShapeEncoder):

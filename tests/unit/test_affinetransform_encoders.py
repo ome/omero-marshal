@@ -189,5 +189,5 @@ class TestAffineTransformEncoder():
             if SCHEMA_VERSION == '2015-01':
                 transform_o['@id'] = -1
             else:
-                transform_o['omero:details'] = {'@type': 'TBD#Details'}
+                transform_o['omero:details'] = {'@type': 'omero:Details'}
             assert v['Transform'] == transform_o
