@@ -10,6 +10,7 @@
 #
 
 from omero_marshal import get_encoder, OME_SCHEMA_URL
+from omero_marshal.encode import OME_CONTEXT, OMERO_CONTEXT
 
 
 class TestImagePixelsEncoder(object):
@@ -18,6 +19,10 @@ class TestImagePixelsEncoder(object):
         encoder = get_encoder(image.__class__)
         v = encoder.encode(image)
         assert v == {
+            '@context': {
+                "ome": OME_CONTEXT,
+                "omero": OMERO_CONTEXT,
+            },
             '@id': 1,
             '@type': '%s#Image' % OME_SCHEMA_URL,
             'AcquisitionDate': 1,
