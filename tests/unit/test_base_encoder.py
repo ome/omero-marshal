@@ -14,10 +14,11 @@ from omero_marshal import get_encoder, ROI_SCHEMA_URL, OME_SCHEMA_URL
 
 class TestBaseEncoder(object):
 
-    def test_base_encoder(self, roi):
+    def test_base_encoder_roi(self, roi, contexts):
         encoder = get_encoder(roi.__class__)
         v = encoder.encode(roi)
         assert v == {
+            **contexts,
             '@id': 1,
             '@type': '%s#ROI' % ROI_SCHEMA_URL,
             'Name': 'the_name',
@@ -70,22 +71,24 @@ class TestBaseEncoder(object):
             }
         }
 
-    def test_base_encoder_unloaded_details(self, roi):
+    def test_base_encoder_roi_unloaded_details(self, roi, contexts):
         roi.unloadDetails()
         encoder = get_encoder(roi.__class__)
         v = encoder.encode(roi)
         assert v == {
+            **contexts,
             '@id': 1,
             '@type': '%s#ROI' % ROI_SCHEMA_URL,
             'Name': 'the_name',
             'Description': 'the_description'
         }
 
-    def test_base_encoder_with_unloaded_details_children(
-            self, roi_with_unloaded_details_children):
+    def test_base_encoder_roi_with_unloaded_details_children(
+            self, roi_with_unloaded_details_children, contexts):
         encoder = get_encoder(roi_with_unloaded_details_children.__class__)
         v = encoder.encode(roi_with_unloaded_details_children)
         assert v == {
+            **contexts,
             '@id': 1,
             '@type': '%s#ROI' % ROI_SCHEMA_URL,
             'Name': 'the_name',
@@ -131,8 +134,9 @@ class TestBaseEncoder(object):
 
 class TestDetailsEncoder(object):
 
-    def experimenter_json(self):
+    def experimenter_json(self, contexts):
         return {
+            **contexts,
             '@id': 1,
             '@type': '%s#Experimenter' % OME_SCHEMA_URL,
             'FirstName': 'the_firstName',
@@ -144,13 +148,14 @@ class TestDetailsEncoder(object):
             'omero:details': {'@type': 'TBD#Details'}
         }
 
-    def test_experimenter_encoder(self, experimenter):
+    def test_experimenter_encoder(self, experimenter, contexts):
         encoder = get_encoder(experimenter.__class__)
         v = encoder.encode(experimenter)
-        assert v == self.experimenter_json()
+        assert v == self.experimenter_json(contexts)
 
-    def experimenter_group_json(self):
+    def experimenter_group_json(self, contexts):
         return {
+            **contexts,
             '@id': 1,
             '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
             'Name': 'the_name',
@@ -158,10 +163,10 @@ class TestDetailsEncoder(object):
             'omero:details': {'@type': 'TBD#Details'}
         }
 
-    def test_experimenter_group_encoder(self, experimenter_group):
+    def test_experimenter_group_encoder(self, experimenter_group, contexts):
         encoder = get_encoder(experimenter_group.__class__)
         v = encoder.encode(experimenter_group)
-        assert v == self.experimenter_group_json()
+        assert v == self.experimenter_group_json(contexts)
 
     def permissions_json(self):
         return {
@@ -202,13 +207,13 @@ class TestDetailsEncoder(object):
         v = encoder.encode(externalInfo)
         assert v == self.externalInfo_json()
 
-    def test_details_encoder(self, details):
+    def test_details_encoder(self, details, contexts):
         encoder = get_encoder(details.__class__)
         v = encoder.encode(details)
         assert v == {
             '@type': 'TBD#Details',
             'permissions': self.permissions_json(),
-            'owner': self.experimenter_json(),
-            'group': self.experimenter_group_json(),
+            'owner': self.experimenter_json({}),
+            'group': self.experimenter_group_json({}),
             'externalInfo': self.externalInfo_json(),
         }

@@ -14,10 +14,11 @@ from omero_marshal import get_encoder, OME_SCHEMA_URL, SPW_SCHEMA_URL
 
 class TestProjectEncoder(object):
 
-    def test_project_encoder(self, project):
+    def test_project_encoder(self, project, contexts):
         encoder = get_encoder(project.__class__)
         v = encoder.encode(project)
         assert v == {
+            **contexts,
             '@id': 1,
             '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
@@ -25,10 +26,11 @@ class TestProjectEncoder(object):
             'omero:details': {'@type': 'TBD#Details'}
         }
 
-    def test_project_with_datasets_encoder(self, project_with_datasets):
+    def test_project_with_datasets_encoder(self, project_with_datasets, contexts):
         encoder = get_encoder(project_with_datasets.__class__)
         v = encoder.encode(project_with_datasets)
         assert v == {
+            **contexts,
             '@id': 1,
             '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
@@ -50,10 +52,11 @@ class TestProjectEncoder(object):
         }
 
     def test_project_with_datasets_and_images_encoder(
-            self, project_with_datasets_and_images):
+            self, project_with_datasets_and_images, contexts):
         encoder = get_encoder(project_with_datasets_and_images.__class__)
         v = encoder.encode(project_with_datasets_and_images)
         assert v == {
+            **contexts,
             '@id': 1,
             '@type': '%s#Project' % OME_SCHEMA_URL,
             'Name': 'the_name',
@@ -143,10 +146,11 @@ class TestProjectEncoder(object):
 
 class TestScreenEncoder(object):
 
-    def test_screen_encoder(self, screen):
+    def test_screen_encoder(self, screen, contexts):
         encoder = get_encoder(screen.__class__)
         v = encoder.encode(screen)
         assert v == {
+            **contexts,
             '@id': 4,
             '@type': '%s#Screen' % SPW_SCHEMA_URL,
             'Name': 'the_name',
@@ -159,10 +163,11 @@ class TestScreenEncoder(object):
             'omero:details': {'@type': 'TBD#Details'}
         }
 
-    def test_screen_with_plate_encoder(self, screen_with_plates):
+    def test_screen_with_plate_encoder(self, screen_with_plates, contexts):
         encoder = get_encoder(screen_with_plates.__class__)
         v = encoder.encode(screen_with_plates)
         assert v == {
+            **contexts,
             '@id': 4,
             '@type': '%s#Screen' % SPW_SCHEMA_URL,
             'Name': 'the_name',
