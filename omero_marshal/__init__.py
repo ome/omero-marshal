@@ -77,6 +77,7 @@ ROI_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, ROI_NS, SCHEMA_VERSION)
 SA_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, SA_NS, SCHEMA_VERSION)
 SPW_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, SPW_NS, SCHEMA_VERSION)
 
+
 def get_full_type(t):
     if t.startswith("http"):
         return t
@@ -85,12 +86,12 @@ def get_full_type(t):
     else:
         return '%s/OME/%s#%s' % (BASE_URL, SCHEMA_VERSION, t)
 
+
 class MarshallingCtx(object):
 
     def __init__(self, encoders, decoders):
         self.encoders = encoders
         self.decoders = decoders
-
 
     def get_encoder(self, t):
         try:

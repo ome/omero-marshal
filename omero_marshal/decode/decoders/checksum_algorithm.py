@@ -15,7 +15,8 @@ from omero.model import ChecksumAlgorithmI
 
 class ChecksumAlgorithmDecoder(EnumDecoder):
 
-    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#ChecksumAlgorithm'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#' \
+        'ChecksumAlgorithm'
 
     OMERO_CLASS = ChecksumAlgorithmI
 

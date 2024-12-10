@@ -26,7 +26,8 @@ class TestProjectEncoder(object):
             'omero:details': {'@type': 'omero:Details'}
         }
 
-    def test_project_with_datasets_encoder(self, project_with_datasets, contexts):
+    def test_project_with_datasets_encoder(
+            self, project_with_datasets, contexts):
         encoder = get_encoder(project_with_datasets.__class__)
         v = encoder.encode(project_with_datasets)
         assert v == {

@@ -20,7 +20,8 @@ class FileAnnotation201501Encoder(AnnotationEncoder):
         '#FileAnnotation'
 
     def encode(self, obj, include_context=None):
-        v = super(FileAnnotation201501Encoder, self).encode(obj, include_context)
+        v = super(FileAnnotation201501Encoder, self).encode(
+            obj, include_context)
         if obj.file is not None and obj.file.isLoaded():
             original_file_encoder = \
                     self.ctx.get_encoder(obj.file.__class__)

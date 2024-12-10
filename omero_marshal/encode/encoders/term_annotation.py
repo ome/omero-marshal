@@ -20,7 +20,8 @@ class TermAnnotation201501Encoder(AnnotationEncoder):
         '#TermAnnotation'
 
     def encode(self, obj, include_context=None):
-        v = super(TermAnnotation201501Encoder, self).encode(obj, include_context)
+        v = super(TermAnnotation201501Encoder, self).encode(
+                obj, include_context)
         self.set_if_not_none(v, 'Value', obj.termValue)
         return v
 

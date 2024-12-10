@@ -20,7 +20,8 @@ class XmlAnnotation201501Encoder(TextAnnotationEncoder):
         '#XmlAnnotation'
 
     def encode(self, obj, include_context=None):
-        v = super(XmlAnnotation201501Encoder, self).encode(obj, include_context)
+        v = super(XmlAnnotation201501Encoder, self).encode(
+                obj, include_context)
         return v
 
 

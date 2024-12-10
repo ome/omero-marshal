@@ -9,14 +9,15 @@
 # jason@glencoesoftware.com.
 #
 
-BASE_CONTEXT = "http://www.openmicroscopy.org/Schemas/OME/2016-06#"
-OMERO_CONTEXT = "http://www.openmicroscopy.org/Schemas/OMERO/2016-06#"
-
 # Needed to avoid import errors when this is the first import
 import omero.all  # noqa
 from omero import RType
 from omero_model_UnitBase import UnitBase
 from omero.rtypes import unwrap
+
+
+BASE_CONTEXT = "http://www.openmicroscopy.org/Schemas/OME/2016-06#"
+OMERO_CONTEXT = "http://www.openmicroscopy.org/Schemas/OMERO/2016-06#"
 
 
 class Encoder(object):

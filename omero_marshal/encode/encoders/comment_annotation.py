@@ -20,7 +20,8 @@ class CommentAnnotation201501Encoder(TextAnnotationEncoder):
         '#CommentAnnotation'
 
     def encode(self, obj, include_context=None):
-        v = super(CommentAnnotation201501Encoder, self).encode(obj, include_context)
+        v = super(CommentAnnotation201501Encoder, self).encode(
+                obj, include_context)
         return v
 
 

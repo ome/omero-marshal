@@ -20,7 +20,8 @@ class BooleanAnnotation201501Encoder(AnnotationEncoder):
         '#BooleanAnnotation'
 
     def encode(self, obj, include_context=None):
-        v = super(BooleanAnnotation201501Encoder, self).encode(obj, include_context)
+        v = super(BooleanAnnotation201501Encoder, self).encode(
+                obj, include_context)
         self.set_if_not_none(v, 'Value', obj.boolValue)
         return v
 

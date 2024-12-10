@@ -11,6 +11,7 @@
 
 from omero_marshal import get_encoder
 
+
 class TestImagePixelsEncoder(object):
 
     def test_image_encoder(self, image, contexts):

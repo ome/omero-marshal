@@ -712,6 +712,7 @@ def mask(identity_transform):
     o.id = rlong(8)
     return o
 
+
 @pytest.fixture()
 def contexts():
     return {

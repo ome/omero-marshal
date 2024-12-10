@@ -20,7 +20,8 @@ class TagAnnotation201501Encoder(TextAnnotationEncoder):
         '#TagAnnotation'
 
     def encode(self, obj, include_context=None):
-        v = super(TagAnnotation201501Encoder, self).encode(obj, include_context)
+        v = super(TagAnnotation201501Encoder, self).encode(
+                obj, include_context)
         return v
 
 
