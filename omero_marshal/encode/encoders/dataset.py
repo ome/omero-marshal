@@ -18,8 +18,8 @@ class Dataset201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Dataset'
 
-    def encode(self, obj):
-        v = super(Dataset201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Dataset201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         if obj.isImageLinksLoaded() and obj.sizeOfImageLinks() > 0:
@@ -28,7 +28,7 @@ class Dataset201501Encoder(AnnotatableEncoder):
                 image = image_link.child
                 image_encoder = self.ctx.get_encoder(image.__class__)
                 images.append(
-                    image_encoder.encode(image)
+                    image_encoder.encode(image, False)
                 )
             v['Images'] = images
         return v

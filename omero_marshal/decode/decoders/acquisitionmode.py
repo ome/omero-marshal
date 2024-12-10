@@ -15,7 +15,7 @@ from omero.model import AcquisitionModeI
 
 class AcquisitionModeDecoder(EnumDecoder):
 
-    TYPE = 'TBD#AcquisitionMode'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#AcquisitionMode'
 
     OMERO_CLASS = AcquisitionModeI
 

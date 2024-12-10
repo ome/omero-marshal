@@ -18,8 +18,8 @@ class Channel201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Channel'
 
-    def encode(self, obj):
-        v = super(Channel201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Channel201501Encoder, self).encode(obj, include_context)
         color = self.rgba_to_int(obj.red, obj.green, obj.blue, obj.alpha)
         self.set_if_not_none(v, 'Color', color)
         self.set_if_not_none(v, 'omero:lookupTable', obj.lookupTable)
@@ -49,19 +49,19 @@ class Channel201501Encoder(AnnotatableEncoder):
                 contrast_method_encoder = \
                     self.ctx.get_encoder(contrast_method.__class__)
                 v['ContrastMethod'] = \
-                    contrast_method_encoder.encode(contrast_method)
+                    contrast_method_encoder.encode(contrast_method, False)
             illumination = logical_channel.illumination
             if illumination is not None and illumination.isLoaded():
                 illumination_encoder = \
                     self.ctx.get_encoder(illumination.__class__)
                 v['Illumination'] = \
-                    illumination_encoder.encode(illumination)
+                    illumination_encoder.encode(illumination, False)
             acquisition_mode = logical_channel.mode
             if acquisition_mode is not None and acquisition_mode.isLoaded():
                 acquisition_mode_encoder = \
                     self.ctx.get_encoder(acquisition_mode.__class__)
                 v['AcquisitionMode'] = \
-                    acquisition_mode_encoder.encode(acquisition_mode)
+                    acquisition_mode_encoder.encode(acquisition_mode, False)
             photometric_interpretation = \
                 logical_channel.photometricInterpretation
             if photometric_interpretation is not None \
@@ -70,7 +70,7 @@ class Channel201501Encoder(AnnotatableEncoder):
                     self.ctx.get_encoder(photometric_interpretation.__class__)
                 v['omero:photometricInterpretation'] = \
                     photometric_interpretation_encoder.encode(
-                        photometric_interpretation
+                        photometric_interpretation, False
                     )
         return v
 

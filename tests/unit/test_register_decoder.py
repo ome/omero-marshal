@@ -9,11 +9,11 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_decoder, ROI_SCHEMA_URL
+from omero_marshal import get_decoder
 
 
 class TestRegisterDecoder(object):
 
     def test_roi_decoder_registered(self):
-        decoder = get_decoder('%s#ROI' % ROI_SCHEMA_URL)
+        decoder = get_decoder('ROI')
         assert decoder is not None

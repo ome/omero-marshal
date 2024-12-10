@@ -15,7 +15,7 @@ from omero.model import DimensionOrderI
 
 class DimensionOrderEncoder(EnumEncoder):
 
-    TYPE = 'TBD#DimensionOrder'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#DimensionOrder'
 
 
 encoder = (DimensionOrderI, DimensionOrderEncoder)

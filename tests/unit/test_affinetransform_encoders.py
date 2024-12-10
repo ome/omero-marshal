@@ -9,7 +9,7 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, SCHEMA_VERSION, ROI_SCHEMA_URL
+from omero_marshal import get_encoder, SCHEMA_VERSION
 from omero.rtypes import rdouble
 
 try:
@@ -33,7 +33,7 @@ def create_affine_transform(a00, a10, a01, a11, a02, a12):
     return t
 
 
-TRANSFORMATION_TYPE = '%s#AffineTransform' % ROI_SCHEMA_URL
+TRANSFORMATION_TYPE = 'AffineTransform'
 
 TRANSFORMATIONS = [
     (
@@ -189,5 +189,5 @@ class TestAffineTransformEncoder():
             if SCHEMA_VERSION == '2015-01':
                 transform_o['@id'] = -1
             else:
-                transform_o['omero:details'] = {'@type': 'TBD#Details'}
+                transform_o['omero:details'] = {'@type': 'omero:Details'}
             assert v['Transform'] == transform_o

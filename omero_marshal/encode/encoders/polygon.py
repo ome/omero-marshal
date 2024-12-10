@@ -18,8 +18,8 @@ class Polygon201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Polygon'
 
-    def encode(self, obj):
-        v = super(Polygon201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Polygon201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Points', obj.points)
         return v
 

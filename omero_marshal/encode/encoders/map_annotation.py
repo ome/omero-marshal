@@ -19,8 +19,9 @@ class MapAnnotation201501Encoder(AnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#MapAnnotation'
 
-    def encode(self, obj):
-        v = super(MapAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(MapAnnotation201501Encoder, self).encode(
+                obj, include_context)
         if obj.mapValue is None:
             return None
         self.set_if_not_none(

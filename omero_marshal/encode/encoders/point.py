@@ -20,8 +20,8 @@ class Point201501Encoder(ShapeEncoder):
     X_PROPERTY_NAME = 'cx'
     Y_PROPERTY_NAME = 'cy'
 
-    def encode(self, obj):
-        v = super(Point201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Point201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'X', getattr(obj, self.X_PROPERTY_NAME))
         self.set_if_not_none(v, 'Y', getattr(obj, self.Y_PROPERTY_NAME))
         return v
