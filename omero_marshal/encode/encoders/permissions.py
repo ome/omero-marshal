@@ -18,7 +18,8 @@ class PermissionsEncoder(Encoder):
     TYPE = 'TBD#Permissions'
 
     def encode(self, obj, include_context=None):
-        v = super(PermissionsEncoder, self).encode(obj, include_context)
+        # Never include contexts on these objects
+        v = super(PermissionsEncoder, self).encode(obj, False)
         v['perm'] = str(obj)
         v['canAnnotate'] = obj.canAnnotate()
         v['canDelete'] = obj.canDelete()

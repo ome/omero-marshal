@@ -18,7 +18,8 @@ class DetailsEncoder(Encoder):
     TYPE = 'TBD#Details'
 
     def encode(self, obj, include_context=None):
-        v = super(DetailsEncoder, self).encode(obj, include_context)
+        # Never include contexts on these objects
+        v = super(DetailsEncoder, self).encode(obj, False)
         if obj.owner is not None:
             encoder = self.ctx.get_encoder(obj.owner.__class__)
             v['owner'] = encoder.encode(obj.owner, False)

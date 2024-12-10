@@ -18,7 +18,8 @@ class ExternalInfoEncoder(Encoder):
     TYPE = 'TBD#ExternalInfo'
 
     def encode(self, obj, include_context=None):
-        v = super(ExternalInfoEncoder, self).encode(obj, include_context)
+        # Never include contexts for these objects
+        v = super(ExternalInfoEncoder, self).encode(obj, False)
         if not obj.isLoaded():
             return v
         self.set_if_not_none(v, 'EntityId', obj.entityId)
