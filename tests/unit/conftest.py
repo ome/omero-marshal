@@ -717,7 +717,7 @@ def mask(identity_transform):
 def contexts():
     return {
         '@context': {
-            "@base": BASE_CONTEXT,
+            "@vocab": BASE_CONTEXT,
             "omero": OMERO_CONTEXT,
         }
     }

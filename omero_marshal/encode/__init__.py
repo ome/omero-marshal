@@ -60,7 +60,7 @@ class Encoder(object):
 
         if include_context is None or include_context:
             v['@context'] = {
-                "@base": BASE_CONTEXT,
+                "@vocab": BASE_CONTEXT,
                 "omero": OMERO_CONTEXT,
             }
 
