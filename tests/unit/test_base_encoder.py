@@ -128,6 +128,30 @@ class TestBaseEncoder(object):
             }
         }
 
+    def test_experimentergroup_with_experimenter(
+            self, experimenter_group_with_experimenter):
+        encoder = get_encoder(experimenter_group_with_experimenter.__class__)
+        v = encoder.encode(experimenter_group_with_experimenter)
+        assert v == {
+            '@id': 1L,
+            '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
+            'Description': 'the_description',
+            'Name': 'the_name',
+            'Experimenters': [{
+                '@id': 1L,
+                '@type': '%s#Experimenter' % OME_SCHEMA_URL,
+                'Email': 'the_email',
+                'FirstName': 'the_firstName',
+                'Institution': 'the_institution',
+                'LastName': 'the_lastName',
+                'MiddleName': 'the_middleName',
+                'UserName': 'the_omeName',
+                'omero:owner': True,
+                'omero:details': {'@type': 'TBD#Details'}
+            }],
+            'omero:details': {'@type': 'TBD#Details'}
+        }
+
 
 class TestDetailsEncoder(object):
 
