@@ -18,8 +18,8 @@ class Well201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#Well'
 
-    def encode(self, obj):
-        v = super(Well201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Well201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Column', obj.column)
         self.set_if_not_none(v, 'Row', obj.row)
         self.set_if_not_none(v, 'ExternalDescription', obj.externalDescription)
@@ -36,7 +36,7 @@ class Well201501Encoder(AnnotatableEncoder):
                     continue
                 wellsample_encoder = self.ctx.get_encoder(wellsample.__class__)
                 wellsamples.append(
-                    wellsample_encoder.encode(wellsample)
+                    wellsample_encoder.encode(wellsample, False)
                 )
             v['WellSamples'] = wellsamples
         return v

@@ -15,7 +15,7 @@ from omero.model import FormatI
 
 class FormatDecoder(EnumDecoder):
 
-    TYPE = 'TBD#Format'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#Format'
 
     OMERO_CLASS = FormatI
 

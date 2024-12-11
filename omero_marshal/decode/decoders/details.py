@@ -15,7 +15,7 @@ from omero.model import DetailsI
 
 class DetailsDecoder(Decoder):
 
-    TYPE = 'TBD#Details'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#Details'
 
     OMERO_CLASS = DetailsI
 

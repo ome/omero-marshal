@@ -15,7 +15,7 @@ from omero.model import ContrastMethodI
 
 class ContrastMethodEncoder(EnumEncoder):
 
-    TYPE = 'TBD#ContrastMethod'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#ContrastMethod'
 
 
 encoder = (ContrastMethodI, ContrastMethodEncoder)

@@ -15,10 +15,10 @@ from omero.model import OriginalFileI
 
 class OriginalFileEncoder(Encoder):
 
-    TYPE = 'TBD#OriginalFile'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#OriginalFile'
 
-    def encode(self, obj):
-        v = super(OriginalFileEncoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(OriginalFileEncoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'path', obj.path)
         self.set_if_not_none(v, 'size', obj.size)
         self.set_if_not_none(v, 'atime', obj.atime)
@@ -31,7 +31,7 @@ class OriginalFileEncoder(Encoder):
             checksum_algorithm_encoder = \
                 self.ctx.get_encoder(obj.hasher.__class__)
             v['hasher'] = \
-                checksum_algorithm_encoder.encode(obj.hasher)
+                checksum_algorithm_encoder.encode(obj.hasher, False)
         return v
 
 

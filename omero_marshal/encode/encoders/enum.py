@@ -17,7 +17,7 @@ class EnumEncoder(Encoder):
     def __init__(self, ctx):
         super(EnumEncoder, self).__init__(ctx)
 
-    def encode(self, obj):
-        v = super(EnumEncoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(EnumEncoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'value', obj.value)
         return v

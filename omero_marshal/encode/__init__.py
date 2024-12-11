@@ -9,12 +9,15 @@
 # jason@glencoesoftware.com.
 #
 
-
 # Needed to avoid import errors when this is the first import
 import omero.all  # noqa
 from omero import RType
 from omero_model_UnitBase import UnitBase
 from omero.rtypes import unwrap
+
+
+BASE_CONTEXT = "http://www.openmicroscopy.org/Schemas/OME/2016-06#"
+OMERO_CONTEXT = "http://www.openmicroscopy.org/Schemas/OMERO/2016-06#"
 
 
 class Encoder(object):
@@ -35,22 +38,39 @@ class Encoder(object):
             v[key] = value
 
     def encode_unit(self, v, key, value):
-        v[key] = {
-            '@type': 'TBD#%s' % value.__class__.__name__,
-            'Unit': value.getUnit().name,
-            'Symbol': value.getSymbol(),
-            'Value': value.getValue()
-        }
+        k = value.__class__.__name__
+        if k in ("LengthI", "TimeI"):
+            v[key] = {
+                '@type': 'omero:%s' % k,
+                'Unit': value.getUnit().name,
+                'Symbol': value.getSymbol(),
+                'Value': value.getValue()
+            }
+        else:
+            raise Exception("unhandled unit: %s" % k)
 
-    def encode(self, obj):
-        v = {'@type': self.TYPE}
+    def encode(self, obj, include_context=None):
+
+        if self.TYPE.startswith(BASE_CONTEXT):
+            v = {'@type': self.TYPE.split('#')[-1]}
+        elif self.TYPE.startswith(OMERO_CONTEXT):
+            v = {'@type': "omero:" + self.TYPE.split('#')[-1]}
+        else:
+            raise Exception("unknown prefix: %s" % self.TYPE)
+
+        if include_context is None or include_context:
+            v['@context'] = {
+                "@vocab": BASE_CONTEXT,
+                "omero": OMERO_CONTEXT,
+            }
+
         if hasattr(obj, 'id'):
             obj_id = unwrap(obj.id)
             if obj_id is not None:
                 v['@id'] = obj_id
         if hasattr(obj, 'details') and obj.details is not None:
             encoder = self.ctx.get_encoder(obj.details.__class__)
-            v['omero:details'] = encoder.encode(obj.details)
+            v['omero:details'] = encoder.encode(obj.details, False)
 
         return v
 

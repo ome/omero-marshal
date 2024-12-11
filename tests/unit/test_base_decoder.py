@@ -12,17 +12,17 @@
 import json
 
 from omero.model import RoiI
-from omero_marshal import get_encoder, get_decoder, ROI_SCHEMA_URL
+from omero_marshal import get_encoder, get_decoder
 
 
 class TestBaseDecoder(object):
 
     AS_STRING = """{
-    "@type": "%s#ROI",
+    "@type": "ROI",
     "@id": 1,
     "Name": "the_name",
     "Description": "the_description"
-}""" % ROI_SCHEMA_URL
+}"""
 
     def assert_roi(self, roi, has_annotations=False):
         assert roi.__class__ == RoiI

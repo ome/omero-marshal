@@ -18,15 +18,15 @@ class Roi201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#ROI'
 
-    def encode(self, obj):
-        v = super(Roi201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Roi201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         if obj.isShapesLoaded() and obj.sizeOfShapes() > 0:
             shapes = list()
             for shape in obj.copyShapes():
                 shape_encoder = self.ctx.get_encoder(shape.__class__)
-                shapes.append(shape_encoder.encode(shape))
+                shapes.append(shape_encoder.encode(shape, False))
             v['shapes'] = shapes
         return v
 

@@ -19,8 +19,9 @@ class TimestampAnnotation201501Encoder(AnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#TimestampAnnotation'
 
-    def encode(self, obj):
-        v = super(TimestampAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(TimestampAnnotation201501Encoder, self).encode(
+                obj, include_context)
         self.set_if_not_none(v, 'Value', obj.timeValue)
         return v
 

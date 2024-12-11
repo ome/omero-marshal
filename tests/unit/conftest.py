@@ -11,6 +11,8 @@
 
 import pytest
 
+from omero_marshal.encode import BASE_CONTEXT, OMERO_CONTEXT
+
 from omero.model import \
     AcquisitionModeI, \
     BooleanAnnotationI, \
@@ -709,3 +711,13 @@ def mask(identity_transform):
     o.height = rdouble(2.0)
     o.id = rlong(8)
     return o
+
+
+@pytest.fixture()
+def contexts():
+    return {
+        '@context': {
+            "@vocab": BASE_CONTEXT,
+            "omero": OMERO_CONTEXT,
+        }
+    }

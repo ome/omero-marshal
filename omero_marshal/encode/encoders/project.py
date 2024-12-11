@@ -18,8 +18,8 @@ class Project201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Project'
 
-    def encode(self, obj):
-        v = super(Project201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Project201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         if obj.isDatasetLinksLoaded() and obj.sizeOfDatasetLinks() > 0:
@@ -28,7 +28,7 @@ class Project201501Encoder(AnnotatableEncoder):
                 dataset = dataset_link.child
                 dataset_encoder = self.ctx.get_encoder(dataset.__class__)
                 datasets.append(
-                    dataset_encoder.encode(dataset)
+                    dataset_encoder.encode(dataset, False)
                 )
             v['Datasets'] = datasets
         return v

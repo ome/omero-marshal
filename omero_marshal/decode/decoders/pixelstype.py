@@ -15,7 +15,7 @@ from omero.model import PixelsTypeI
 
 class PixelsTypeDecoder(EnumDecoder):
 
-    TYPE = 'TBD#PixelsType'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#PixelType'
 
     OMERO_CLASS = PixelsTypeI
 

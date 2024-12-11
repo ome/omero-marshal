@@ -19,8 +19,9 @@ class XmlAnnotation201501Encoder(TextAnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#XmlAnnotation'
 
-    def encode(self, obj):
-        v = super(XmlAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(XmlAnnotation201501Encoder, self).encode(
+                obj, include_context)
         return v
 
 
