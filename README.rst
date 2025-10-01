@@ -24,21 +24,26 @@ Development Installation
 1. Clone the repository::
 
         git clone git@github.com:ome/omero-marshal.git
+        cd omero-marshal
 
-2. Set up a virtualenv (http://www.pip-installer.org/) and activate it::
+2. For development, create a virtual environment and install the dependencies::
 
-        curl -O -k https://raw.github.com/pypa/virtualenv/master/virtualenv.py
-        python virtualenv.py omero-marshal
-        source omero-marshal/bin/activate
-        pip install -r requirements.txt
+        python3 -m venv omero-marshal-venv
+        source omero-marshal-venv/bin/activate
         pip install -r requirements-dev.txt
+        pip install -e .
 
 Running Tests
 =============
 
 Using py.test to run the unit tests::
 
-    	py.test tests/unit/
+    	pytest tests/unit/
+
+
+You may also use tox: 
+
+        tox
 
 License
 =======
