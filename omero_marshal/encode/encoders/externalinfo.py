@@ -15,10 +15,11 @@ from omero.model import ExternalInfoI
 
 class ExternalInfoEncoder(Encoder):
 
-    TYPE = 'TBD#ExternalInfo'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#ExternalInfo'
 
-    def encode(self, obj):
-        v = super(ExternalInfoEncoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        # Never include contexts for these objects
+        v = super(ExternalInfoEncoder, self).encode(obj, False)
         if not obj.isLoaded():
             return v
         self.set_if_not_none(v, 'EntityId', obj.entityId)

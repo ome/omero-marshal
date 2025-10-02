@@ -18,8 +18,8 @@ class Mask201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Mask'
 
-    def encode(self, obj):
-        v = super(Mask201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Mask201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'X', obj.x)
         self.set_if_not_none(v, 'Y', obj.y)
         self.set_if_not_none(v, 'Width', obj.width)

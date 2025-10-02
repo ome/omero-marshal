@@ -38,6 +38,7 @@ def get_encoder(t):
 
 
 def get_decoder(t):
+    t = get_full_type(t)
     try:
         return DECODERS[t]
     except KeyError:
@@ -77,6 +78,15 @@ SA_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, SA_NS, SCHEMA_VERSION)
 SPW_SCHEMA_URL = '%s/%s/%s' % (BASE_URL, SPW_NS, SCHEMA_VERSION)
 
 
+def get_full_type(t):
+    if t.startswith("http"):
+        return t
+    elif t.startswith("omero:"):
+        return '%s/OMERO/%s#%s' % (BASE_URL, SCHEMA_VERSION, t[6:])
+    else:
+        return '%s/OME/%s#%s' % (BASE_URL, SCHEMA_VERSION, t)
+
+
 class MarshallingCtx(object):
 
     def __init__(self, encoders, decoders):
@@ -91,6 +101,7 @@ class MarshallingCtx(object):
             return None
 
     def get_decoder(self, t):
+        t = get_full_type(t)
         try:
             return self.decoders[t]
         except KeyError:

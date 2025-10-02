@@ -18,8 +18,8 @@ class Line201501Encoder(ShapeEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Line'
 
-    def encode(self, obj):
-        v = super(Line201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Line201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'X1', obj.x1)
         self.set_if_not_none(v, 'Y1', obj.y1)
         self.set_if_not_none(v, 'X2', obj.x2)
@@ -31,8 +31,8 @@ class Line201606Encoder(Line201501Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#Line'
 
-    def encode(self, obj):
-        v = super(Line201606Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Line201606Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'MarkerStart', obj.markerStart)
         self.set_if_not_none(v, 'MarkerEnd', obj.markerEnd)
         return v

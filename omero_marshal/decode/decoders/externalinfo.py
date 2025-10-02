@@ -15,7 +15,7 @@ from omero.model import ExternalInfoI
 
 class ExternalInfoDecoder(Decoder):
 
-    TYPE = 'TBD#ExternalInfo'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#ExternalInfo'
 
     OMERO_CLASS = ExternalInfoI
 

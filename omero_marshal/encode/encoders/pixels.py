@@ -18,8 +18,8 @@ class Pixels201501Encoder(Encoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2015-01#Pixels'
 
-    def encode(self, obj):
-        v = super(Pixels201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Pixels201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'omero:methodology', obj.methodology)
         self.set_if_not_none(v, 'PhysicalSizeX', obj.physicalSizeX)
         self.set_if_not_none(v, 'PhysicalSizeY', obj.physicalSizeY)
@@ -39,17 +39,17 @@ class Pixels201501Encoder(Encoder):
             dimension_order_encoder = \
                 self.ctx.get_encoder(dimension_order.__class__)
             v['DimensionOrder'] = \
-                dimension_order_encoder.encode(dimension_order)
+                dimension_order_encoder.encode(dimension_order, False)
         pixels_type = obj.pixelsType
         if pixels_type is not None and pixels_type.isLoaded():
             pixels_type_encoder = \
                 self.ctx.get_encoder(pixels_type.__class__)
-            v['Type'] = pixels_type_encoder.encode(pixels_type)
+            v['Type'] = pixels_type_encoder.encode(pixels_type, False)
         if obj.isChannelsLoaded() and obj.sizeOfChannels() > 0:
             channels = list()
             for channel in obj.copyChannels():
                 channel_encoder = self.ctx.get_encoder(channel.__class__)
-                channels.append(channel_encoder.encode(channel))
+                channels.append(channel_encoder.encode(channel, False))
             v['Channels'] = channels
         return v
 

@@ -19,8 +19,8 @@ class Shape201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/ROI/2015-01#Shape'
 
-    def encode(self, obj):
-        v = super(Shape201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Shape201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'FillColor', obj.fillColor)
         self.set_if_not_none(v, 'FillRule', obj.fillRule)
         self.set_if_not_none(v, 'FontFamily', obj.fontFamily)
@@ -38,7 +38,7 @@ class Shape201501Encoder(AnnotatableEncoder):
         if transform:
             transform_encoder = self.ctx.get_encoder(transform.__class__)
             self.set_if_not_none(
-                v, 'Transform', transform_encoder.encode(transform))
+                v, 'Transform', transform_encoder.encode(transform, False))
         self.set_linecap(v, obj)
         self.set_visible(v, obj)
         return v

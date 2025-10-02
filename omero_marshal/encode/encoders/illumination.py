@@ -15,7 +15,7 @@ from omero.model import IlluminationI
 
 class IlluminationEncoder(EnumEncoder):
 
-    TYPE = 'TBD#Illumination'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OME/2016-06#IlluminationType'
 
 
 encoder = (IlluminationI, IlluminationEncoder)

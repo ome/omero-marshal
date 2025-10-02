@@ -22,8 +22,8 @@ class Ellipse201501Encoder(ShapeEncoder):
     RADIUSX_PROPERTY_NAME = 'rx'
     RADIUSY_PROPERTY_NAME = 'ry'
 
-    def encode(self, obj):
-        v = super(Ellipse201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Ellipse201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'X', getattr(obj, self.X_PROPERTY_NAME))
         self.set_if_not_none(v, 'Y', getattr(obj, self.Y_PROPERTY_NAME))
         self.set_if_not_none(

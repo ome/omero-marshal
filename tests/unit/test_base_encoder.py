@@ -9,41 +9,42 @@
 # jason@glencoesoftware.com.
 #
 
-from omero_marshal import get_encoder, ROI_SCHEMA_URL, OME_SCHEMA_URL
+from omero_marshal import get_encoder
 
 
 class TestBaseEncoder(object):
 
-    def test_base_encoder(self, roi):
+    def test_base_encoder_roi(self, roi, contexts):
         encoder = get_encoder(roi.__class__)
         v = encoder.encode(roi)
         assert v == {
+            **contexts,
             '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL,
+            '@type': 'ROI',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
-                '@type': 'TBD#Details',
+                '@type': 'omero:Details',
                 'group': {
                     '@id': 1,
-                    '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
+                    '@type': 'ExperimenterGroup',
                     'Description': 'the_description',
                     'Name': 'the_name',
-                    'omero:details': {'@type': 'TBD#Details'}
+                    'omero:details': {'@type': 'omero:Details'}
                 },
                 'owner': {
                     '@id': 1,
-                    '@type': '%s#Experimenter' % OME_SCHEMA_URL,
+                    '@type': 'Experimenter',
                     'Email': 'the_email',
                     'FirstName': 'the_firstName',
                     'Institution': 'the_institution',
                     'LastName': 'the_lastName',
                     'MiddleName': 'the_middleName',
                     'UserName': 'the_omeName',
-                    'omero:details': {'@type': 'TBD#Details'}
+                    'omero:details': {'@type': 'omero:Details'}
                 },
                 'permissions': {
-                    '@type': 'TBD#Permissions',
+                    '@type': 'omero:Permissions',
                     'canAnnotate': True,
                     'canDelete': True,
                     'canEdit': True,
@@ -58,50 +59,52 @@ class TestBaseEncoder(object):
                     'isWorldWrite': True
                 },
                 'externalInfo': {
-                    '@type': 'TBD#ExternalInfo',
+                    '@type': 'omero:ExternalInfo',
                     'EntityId': 123,
                     'EntityType': 'test',
                     'Lsid': 'ABCDEF',
                     'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
                     'omero:details': {
-                        '@type': 'TBD#Details'
+                        '@type': 'omero:Details'
                     },
                 },
             }
         }
 
-    def test_base_encoder_unloaded_details(self, roi):
+    def test_base_encoder_roi_unloaded_details(self, roi, contexts):
         roi.unloadDetails()
         encoder = get_encoder(roi.__class__)
         v = encoder.encode(roi)
         assert v == {
+            **contexts,
             '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL,
+            '@type': 'ROI',
             'Name': 'the_name',
             'Description': 'the_description'
         }
 
-    def test_base_encoder_with_unloaded_details_children(
-            self, roi_with_unloaded_details_children):
+    def test_base_encoder_roi_with_unloaded_details_children(
+            self, roi_with_unloaded_details_children, contexts):
         encoder = get_encoder(roi_with_unloaded_details_children.__class__)
         v = encoder.encode(roi_with_unloaded_details_children)
         assert v == {
+            **contexts,
             '@id': 1,
-            '@type': '%s#ROI' % ROI_SCHEMA_URL,
+            '@type': 'ROI',
             'Name': 'the_name',
             'Description': 'the_description',
             'omero:details': {
-                '@type': 'TBD#Details',
+                '@type': 'omero:Details',
                 'owner': {
                     '@id': 1,
-                    '@type': '%s#Experimenter' % OME_SCHEMA_URL
+                    '@type': 'Experimenter'
                 },
                 'group': {
                     '@id': 1,
-                    '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL
+                    '@type': 'ExperimenterGroup'
                 },
                 'permissions': {
-                    '@type': 'TBD#Permissions',
+                    '@type': 'omero:Permissions',
                     'canAnnotate': True,
                     'canDelete': True,
                     'canEdit': True,
@@ -116,13 +119,13 @@ class TestBaseEncoder(object):
                     'isWorldWrite': True
                 },
                 'externalInfo': {
-                    '@type': 'TBD#ExternalInfo',
+                    '@type': 'omero:ExternalInfo',
                     'EntityId': 123,
                     'EntityType': 'test',
                     'Lsid': 'ABCDEF',
                     'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
                     'omero:details': {
-                        '@type': 'TBD#Details'
+                        '@type': 'omero:Details'
                     },
                 },
             }
@@ -131,41 +134,43 @@ class TestBaseEncoder(object):
 
 class TestDetailsEncoder(object):
 
-    def experimenter_json(self):
+    def experimenter_json(self, contexts):
         return {
+            **contexts,
             '@id': 1,
-            '@type': '%s#Experimenter' % OME_SCHEMA_URL,
+            '@type': 'Experimenter',
             'FirstName': 'the_firstName',
             'MiddleName': 'the_middleName',
             'LastName': 'the_lastName',
             'Email': 'the_email',
             'Institution': 'the_institution',
             'UserName': 'the_omeName',
-            'omero:details': {'@type': 'TBD#Details'}
+            'omero:details': {'@type': 'omero:Details'}
         }
 
-    def test_experimenter_encoder(self, experimenter):
+    def test_experimenter_encoder(self, experimenter, contexts):
         encoder = get_encoder(experimenter.__class__)
         v = encoder.encode(experimenter)
-        assert v == self.experimenter_json()
+        assert v == self.experimenter_json(contexts)
 
-    def experimenter_group_json(self):
+    def experimenter_group_json(self, contexts):
         return {
+            **contexts,
             '@id': 1,
-            '@type': '%s#ExperimenterGroup' % OME_SCHEMA_URL,
+            '@type': 'ExperimenterGroup',
             'Name': 'the_name',
             'Description': 'the_description',
-            'omero:details': {'@type': 'TBD#Details'}
+            'omero:details': {'@type': 'omero:Details'}
         }
 
-    def test_experimenter_group_encoder(self, experimenter_group):
+    def test_experimenter_group_encoder(self, experimenter_group, contexts):
         encoder = get_encoder(experimenter_group.__class__)
         v = encoder.encode(experimenter_group)
-        assert v == self.experimenter_group_json()
+        assert v == self.experimenter_group_json(contexts)
 
     def permissions_json(self):
         return {
-            '@type': 'TBD#Permissions',
+            '@type': 'omero:Permissions',
             'perm': 'rwrwrw',
             'canAnnotate': True,
             'canDelete': True,
@@ -187,13 +192,13 @@ class TestDetailsEncoder(object):
 
     def externalInfo_json(self):
         return {
-            '@type': 'TBD#ExternalInfo',
+            '@type': 'omero:ExternalInfo',
             'EntityId': 123,
             'EntityType': 'test',
             'Lsid': 'ABCDEF',
             'Uuid': 'f90a1fd5-275c-4d14-82b3-87b5ef0f07de',
             'omero:details': {
-                '@type': 'TBD#Details'
+                '@type': 'omero:Details'
             },
         }
 
@@ -202,13 +207,13 @@ class TestDetailsEncoder(object):
         v = encoder.encode(externalInfo)
         assert v == self.externalInfo_json()
 
-    def test_details_encoder(self, details):
+    def test_details_encoder(self, details, contexts):
         encoder = get_encoder(details.__class__)
         v = encoder.encode(details)
         assert v == {
-            '@type': 'TBD#Details',
+            '@type': 'omero:Details',
             'permissions': self.permissions_json(),
-            'owner': self.experimenter_json(),
-            'group': self.experimenter_group_json(),
+            'owner': self.experimenter_json({}),
+            'group': self.experimenter_group_json({}),
             'externalInfo': self.externalInfo_json(),
         }

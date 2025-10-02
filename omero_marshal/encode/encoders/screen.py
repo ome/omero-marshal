@@ -18,8 +18,8 @@ class Screen201501Encoder(AnnotatableEncoder):
 
     TYPE = 'http://www.openmicroscopy.org/Schemas/SPW/2015-01#Screen'
 
-    def encode(self, obj):
-        v = super(Screen201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(Screen201501Encoder, self).encode(obj, include_context)
         self.set_if_not_none(v, 'Name', obj.name)
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'ProtocolDescription', obj.protocolDescription)
@@ -35,7 +35,7 @@ class Screen201501Encoder(AnnotatableEncoder):
                 plate = plate_link.child
                 plate_encoder = self.ctx.get_encoder(plate.__class__)
                 plates.append(
-                    plate_encoder.encode(plate)
+                    plate_encoder.encode(plate, False)
                 )
             v['Plates'] = plates
         return v

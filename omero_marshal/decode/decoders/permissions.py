@@ -15,7 +15,7 @@ from omero.model import PermissionsI
 
 class PermissionsDecoder(Decoder):
 
-    TYPE = 'TBD#Permissions'
+    TYPE = 'http://www.openmicroscopy.org/Schemas/OMERO/2016-06#Permissions'
 
     OMERO_CLASS = PermissionsI
 

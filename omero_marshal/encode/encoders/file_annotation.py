@@ -19,12 +19,13 @@ class FileAnnotation201501Encoder(AnnotationEncoder):
     TYPE = 'http://www.openmicroscopy.org/Schemas/SA/2015-01' \
         '#FileAnnotation'
 
-    def encode(self, obj):
-        v = super(FileAnnotation201501Encoder, self).encode(obj)
+    def encode(self, obj, include_context=None):
+        v = super(FileAnnotation201501Encoder, self).encode(
+            obj, include_context)
         if obj.file is not None and obj.file.isLoaded():
             original_file_encoder = \
                     self.ctx.get_encoder(obj.file.__class__)
-            v['File'] = original_file_encoder.encode(obj.file)
+            v['File'] = original_file_encoder.encode(obj.file, False)
         return v
 
 
