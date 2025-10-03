@@ -25,8 +25,9 @@ class Roi201501Encoder(AnnotatableEncoder):
         if obj.isShapesLoaded() and obj.sizeOfShapes() > 0:
             shapes = list()
             for shape in obj.copyShapes():
-                shape_encoder = self.ctx.get_encoder(shape.__class__)
-                shapes.append(shape_encoder.encode(shape))
+                if shape is not None:
+                    shape_encoder = self.ctx.get_encoder(shape.__class__)
+                    shapes.append(shape_encoder.encode(shape))
             v['shapes'] = shapes
         return v
 
