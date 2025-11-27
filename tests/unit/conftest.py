@@ -488,9 +488,12 @@ def roi_with_unloaded_details_children(roi):
 
 
 @pytest.fixture()
-def roi_with_shapes(roi, ellipse, rectangle):
+def roi_with_shapes(roi, ellipse, rectangle, point):
+    roi.addShape(point)
     roi.addShape(ellipse)
     roi.addShape(rectangle)
+    # Test handle of None from roi.copyShapes()
+    roi.setShape(0, None)
     return roi
 
 
