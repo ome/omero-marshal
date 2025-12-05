@@ -59,6 +59,15 @@ class TestBaseDecoder(object):
         v = decoder.decode(data)
         assert v.description is None
 
+    def test_experimentergroup_with_experimenter(
+            self, experimenter_group_with_experimenter):
+        encoder = get_encoder(experimenter_group_with_experimenter.__class__)
+        decoder = get_decoder(encoder.TYPE)
+        v = encoder.encode(experimenter_group_with_experimenter)
+        v = decoder.decode(v)
+        _map, = v.copyGroupExperimenterMap()
+        assert _map.owner.val is True
+
 
 class TestPermissionsDecoder(object):
 

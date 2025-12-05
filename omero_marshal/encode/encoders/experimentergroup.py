@@ -25,6 +25,23 @@ class ExperimenterGroup201501Encoder(Encoder):
             return v
         self.set_if_not_none(v, 'Description', obj.description)
         self.set_if_not_none(v, 'Name', obj.name)
+
+        if obj.isGroupExperimenterMapLoaded() \
+                and obj.sizeOfGroupExperimenterMap() > 0:
+            experimenters = list()
+            for group_experimenter_map in obj.copyGroupExperimenterMap():
+                experimenter = group_experimenter_map.child
+                experimenter_encoder = self.ctx.get_encoder(
+                    experimenter.__class__
+                )
+                experimenter_data = experimenter_encoder.encode(experimenter)
+                self.set_if_not_none(
+                    experimenter_data,
+                    'omero:owner',
+                    group_experimenter_map.owner
+                )
+                experimenters.append(experimenter_data)
+            v['Experimenters'] = experimenters
         return v
 
 
