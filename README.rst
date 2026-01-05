@@ -16,7 +16,7 @@ Requirements
 ============
 
 * OMERO.py 5.6 or newer
-* Python 3.6 or newer
+* Python 3.10 or newer
 
 Development Installation
 ========================
@@ -55,5 +55,5 @@ Reference
 =========
 
 * https://www.openmicroscopy.org/Schemas/Documentation/Generated/OME-2015-01/ome.html
-* https://docs.openmicroscopy.org/latest/omero/developers/Model/Units.html
-* https://docs.openmicroscopy.org/latest/omero/developers/Model/KeyValuePairs.html
+* https://omero.readthedocs.io/en/stable/developers/Model/Units.html
+* https://omero.readthedocs.io/en/stable/developers/Model/KeyValuePairs.html
