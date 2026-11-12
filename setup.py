@@ -29,7 +29,7 @@ def read(fname):
 
 
 setup(
-    name='omero_marshal',
+    name='omero-marshal',
     version=VERSION,
     description='OMERO Marshal',
     long_description=read('README.rst'),
