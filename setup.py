@@ -53,7 +53,7 @@ setup(
     zip_safe=True,
     include_package_data=True,
     platforms='any',
-    python_requires='>=3',
+    python_requires='>=3.11',
     install_requires=get_requirements(),
     tests_require=get_requirements('-dev'),
     entry_points="""
