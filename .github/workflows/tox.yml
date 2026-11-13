@@ -1,5 +1,5 @@
 ---
-name: Tox
+name: Build
 on:
   push:
   pull_request:
@@ -7,17 +7,20 @@ on:
 jobs:
   test:
     name: Run tox tests
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
         python-version:
-          - '3.10'
           - '3.11'
           - '3.12'
-    runs-on: ubuntu-22.04
+          - '3.13'
+          - '3.14'
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -29,3 +32,27 @@ jobs:
           echo "py=$py" >> $GITHUB_OUTPUT
       - name: Run tests
         run: tox -e py${{ steps.toxtarget.outputs.py }}
+  release:
+    name: Build and publish Python distribution to PyPI
+    if: startsWith(github.ref, 'refs/tags')
+    permissions:
+      contents: write
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python -mpip install build
+          python -m build
+      - name: Publish distribution to PyPI
+        uses:  pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_PASSWORD }}
+      - name: Create a GitHub release
+        run: gh release create --generate-notes "${GITHUB_REF#refs/tags/}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

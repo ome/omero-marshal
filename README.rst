@@ -16,14 +16,14 @@ Requirements
 ============
 
 * OMERO.py 5.6 or newer
-* Python 3.10 or newer
+* Python 3.11 or newer
 
 Development Installation
 ========================
 
 1. Clone the repository::
 
-        git clone git@github.com:ome/omero-marshal.git
+        git clone https://github.com/ome/omero-marshal
         cd omero-marshal
 
 2. For development, create a virtual environment and install the dependencies::
